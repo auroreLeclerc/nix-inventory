@@ -1,5 +1,6 @@
-__pycache__/
-result/
+__pycache__
+result
+.git
 
 .vscode/*
 !.vscode/settings.json

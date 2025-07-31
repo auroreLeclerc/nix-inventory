@@ -1,0 +1,7 @@
+keys:
+  - &exelo age190gw0h7sxru7vqsvy6ra3eh25txe3hn44uksc8qnxhhn5klhedrsu3m4yj
+creation_rules:
+  - path_regex: modules/core/secrets/[^/]+\.(yml|json)$
+    key_groups:
+    - age:
+      - *exelo
