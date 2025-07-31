@@ -348,7 +348,7 @@
 			userAgent = "Mozilla/5.0 (Linux; x86_64) 🏳️‍⚧️/6.6.6";
 			opts = [ "--user-agent" ''"${userAgent}"'' ];
 			foldersorter = pkgs.writeShellScriptBin "foldersorter" (builtins.readFile ./foldersorter.sh);
-			downloadsort = ''
+			downloadsort = builtins.toFile "downloadsort.sh" ''
 				#!/usr/bin/env bash
 				${foldersorter} ~/Téléchargements
 			'';
