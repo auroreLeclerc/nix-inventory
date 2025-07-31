@@ -38,9 +38,10 @@
 				# };
 				"redhat.telemetry.enabled" = false;
 				"sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
-				"python.languageServer" = "Pyright";
-  			# "python.languageServer" = "Jedi";
+  			# "python.languageServer" = "Jedy";
+  			"python.languageServer" = "Pylance";
 				"shellcheck.customArgs" = [ "external-sources=true" ];
+				"git.autofetch" = true;
 			};
 		};
 	};
