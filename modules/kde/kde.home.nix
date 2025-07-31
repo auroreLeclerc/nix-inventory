@@ -348,7 +348,7 @@
 			userAgent = "Mozilla/5.0 (Linux; x86_64) 🏳️‍⚧️/6.6.6";
 			opts = [ "--user-agent" ''"${userAgent}"'' ];
 			foldersorter = pkgs.writeShellScriptBin "foldersorter" (builtins.readFile ./foldersorter.sh);
-			downloadsort = builtins.toFile "downloadsort.sh" ''
+			downloadsort = pkgs.writeShellScriptBin "downloadsort" ''
 				#!/usr/bin/env bash
 				${foldersorter} ~/Téléchargements
 			'';
@@ -373,7 +373,7 @@
 				target = ".config/autostart/org.kde.kteatime.desktop";
 			};
 			foldersorter = {
-				source = downloadsort;
+				source = "${downloadsort}/bin/downloadsort";
 				target = ".config/plasma-workspace/env/downloadsort.sh";
 			};
 			discord = lib.mkIf (builtins.elem unstablePkgs.discord osConfig.environment.systemPackages) {
