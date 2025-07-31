@@ -49,7 +49,7 @@
 						home-manager.backupFileExtension = "backup";
 						home-manager.sharedModules = [
 							inputs.plasma-manager.homeManagerModules.plasma-manager
-							inputs.catppuccin.homeManagerModules.catppuccin
+							inputs.catppuccin.homeModules.catppuccin
 							inputs.nix-flatpak.homeManagerModules.nix-flatpak
 							./modules/core/core.home.nix
 						];

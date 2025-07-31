@@ -14,9 +14,9 @@ Inventaire de mes configurations NixOS personnelles
 
 ## Appliquer une configuration:
 ```bash
-sudo nixos-rebuild switch --flake .#exelo --upgrade-all --impure
+sudo nixos-rebuild switch --flake github:auroreLeclerc/nix-inventory/#exelo --upgrade-all --impure
 ```
 ## Construire une image live-boot:
 ```bash
-nix build .#nixosConfigurations.live-boot.config.system.build.isoImage
+nix build github:auroreLeclerc/nix-inventory/#nixosConfigurations.live-boot.config.system.build.isoImage
 ```
