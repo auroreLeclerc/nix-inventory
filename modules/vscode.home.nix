@@ -42,6 +42,7 @@
   			"python.languageServer" = "Pylance";
 				"shellcheck.customArgs" = [ "external-sources=true" ];
 				"git.autofetch" = true;
+				"git.enableSmartCommit" = true;
 				"git.confirmSync" = false;
 			};
 		};
