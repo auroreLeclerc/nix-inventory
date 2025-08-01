@@ -1,4 +1,4 @@
-{ pkgs, unstablePkgs, inputs, lib, ... }:
+{ pkgs, inputs, lib, ... }:
 let
 	motd = pkgs.writeShellScriptBin "motd" (builtins.readFile ./motd.sh);
 in
@@ -30,8 +30,8 @@ in
 		];
 		fonts.packages = (with pkgs; [ noto-fonts noto-fonts-color-emoji liberation_ttf roboto ubuntu_font_family ]);
 		environment.systemPackages = (with pkgs; [
-			nano nanorc wget openssl curl age htop parted jq fastfetch cowsay unstablePkgs.lolcat p7zip unzip unrar file
-		]) ++ [ motd ]; # TODO: remove lolcat from unstable in 25.11
+			nano nanorc wget openssl curl age htop parted jq fastfetch cowsay lolcat p7zip unzip unrar file
+		]) ++ [ motd ];
 		programs.zsh.enable = true;
 	};
 }

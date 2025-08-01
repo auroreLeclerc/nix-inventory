@@ -6,8 +6,6 @@
 		profiles.default = {
 			extensions = with pkgs.vscode-extensions; [
 				ms-ceintl.vscode-language-pack-fr
-				catppuccin.catppuccin-vsc-icons
-				catppuccin.catppuccin-vsc # FIXME: 25.11 ?
 				ms-python.python
 				ms-python.debugpy
 				ms-python.pylint
@@ -25,9 +23,7 @@
 				"window.autoDetectColorScheme" = true;
 				"workbench.preferredLightColorTheme" = "Catppuccin Latte";
 				"workbench.preferredDarkColorTheme" = "Catppuccin Mocha";
-				# "workbench.iconTheme" = "Catppuccin Mocha"; # TODO:
-				"catppuccin.accentColor" = "red";
-				"editor.tabSize" = 4;
+				"editor.tabSize" = 2;
 				# "nix.serverPath" = "nixd";
 				"nix.serverPath" = "nil";
 				"nix.enableLanguageServer" = true;
@@ -38,8 +34,7 @@
 				# };
 				"redhat.telemetry.enabled" = false;
 				"sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
-  			# "python.languageServer" = "Jedy";
-  			"python.languageServer" = "Pylance";
+				"python.languageServer" = "Jedi";
 				"shellcheck.customArgs" = [ "external-sources=true" ];
 				"git.autofetch" = true;
 				"git.enableSmartCommit" = true;
@@ -47,7 +42,9 @@
 			};
 		};
 	};
-	# catppuccin.vscode.enable = true; TODO: 25.11
-	home.packages = (with pkgs; [ nodejs nixfmt-rfc-style nixd typescript python3 graphviz ])
-	;
+	catppuccin.vscode.profiles.default = {
+		enable = true;
+		icons.enable = false;
+	};
+	home.packages = (with pkgs; [ nodejs nixfmt-rfc-style nixd typescript python3 graphviz ]);
 }

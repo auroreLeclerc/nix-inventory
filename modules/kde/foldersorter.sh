@@ -3,6 +3,7 @@
 # 'https://doc.ubuntu-fr.org/dossier_magique'
 
 if [ -z "$1" ]; then
+	echo "No instructions"
 	echo "$0 /path/to/directory"
 	exit 1
 fi

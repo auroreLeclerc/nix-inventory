@@ -1,6 +1,11 @@
 { pkgs, lib, osConfig, unstablePkgs, myLibs, ... }:
 {
 	config = {
+		catppuccin = {
+			enable = false; # no global enable
+			flavor = "mocha";
+			accent = "mauve";
+		};
 		home = {
 			stateVersion = osConfig.system.stateVersion;
 			packages = with pkgs; [ nerd-fonts.meslo-lg ];
