@@ -1,8 +1,5 @@
 { pkgs, unstablePkgs, ... }:
 {
-	imports = [
-		./android-studio.nix
-	];
 	config = {
 		environment.systemPackages = 
 			(with pkgs.kdePackages; [ kdenlive	]) ++

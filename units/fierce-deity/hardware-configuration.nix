@@ -2,6 +2,7 @@
 # and may be overwritten by future invocations.  Please make changes
 # to /etc/nixos/configuration.nix instead.
 { config, lib, modulesPath, ... }:
+
 {
 	imports = [ (modulesPath + "/installer/scan/not-detected.nix") ];
 
@@ -11,18 +12,20 @@
 	boot.extraModulePackages = [ ];
 
 	fileSystems."/" = {
-		device = "/dev/disk/by-uuid/382bf17c-c748-44c4-8d3a-7d1a285ac5a5";
+		device = "/dev/disk/by-uuid/c5da878a-7edb-43d9-9b0e-3cd3c5eedaaf";
 		fsType = "ext4";
 	};
 
+	boot.initrd.luks.devices."luks-a9f364e5-9001-4a2a-88d1-ee36356ea91d".device = "/dev/disk/by-uuid/a9f364e5-9001-4a2a-88d1-ee36356ea91d";
+
 	fileSystems."/boot" = {
-		device = "/dev/disk/by-uuid/2E04-9CB6";
+		device = "/dev/disk/by-uuid/B8B7-B686";
 		fsType = "vfat";
 		options = [ "fmask=0077" "dmask=0077" ];
 	};
 
-	fileSystems."/home" = {
-		device = "/dev/disk/by-uuid/be4157bb-f8b4-4d81-908c-d035a9f4c0ba";
+	fileSystems."/run/media/dawn/odolwa" = {
+		device = "/dev/disk/by-uuid/012227f2-9ca9-4b8d-9755-408e9e4b2889";
 		fsType = "ext4";
 	};
 

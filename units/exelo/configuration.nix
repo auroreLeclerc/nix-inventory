@@ -8,6 +8,7 @@
 	imports = [
 		../../modules/kde/kde.nix
 		../../modules/workstation.nix
+		../../modules/android-studio.nix
 		../../modules/gaming/gaming.nix
 		../../modules/virtualbox.nix
 		inputs.nixos-hardware.nixosModules.framework-13-7040-amd
