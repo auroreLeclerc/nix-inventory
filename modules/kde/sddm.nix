@@ -3,7 +3,7 @@
 	services = {
 		displayManager.sddm = {
 			enable = true;
-			package = lib.mkForce pkgs.kdePackages.sddm; # TODO: libsForQt5.sddm is default in 25.05
+			# package = lib.mkForce pkgs.kdePackages.sddm; # TODO: libsForQt5.sddm is default in 25.05
 			wayland.enable = true;
 			autoNumlock = true;
 		};
@@ -13,7 +13,7 @@
 		 		layout = "fr";
 		 		variant = "azerty";
 			};
-			excludePackages = [ pkgs.xterm  ];
+			excludePackages = [ pkgs.xterm ];
 		};
 	};
 	catppuccin = {

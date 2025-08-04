@@ -1,4 +1,4 @@
-{ unstablePkgs, pkgs, lib, ... }:
+{ unstablePkgs, pkgs, lib, config, ... }:
 {
 	programs.steam = {
 		enable = true;
@@ -11,11 +11,11 @@
 	;
 	hardware = {
 		xpadneo.enable = true;
-		# amdgpu.amdvlk = { # [gamescope] [Error] vulkan: vkAllocateDescriptorSets failed
-		# 		enable = true;
-		# 		support32Bit.enable = true;
-		# 	};
-		graphics = {
+		amdgpu.amdvlk = lib.mkIf (config.networking.hostName != "exelo") { #TODO: check gamescope support
+			enable = true;
+			support32Bit.enable = true;
+		};
+		graphics = lib.mkIf (config.networking.hostName == "exelo") {
 			enable = true;
 			enable32Bit = true;
 		};

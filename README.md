@@ -8,6 +8,7 @@ Inventaire de mes configurations NixOS personnelles
 | exelo | AMD Ryzen 5 7640U | Main |
 | fierce-deity | AMD Ryzen 5 3600 | Gaming |
 | kimado | AMD Athlon 300U | Old Main |
+| midna | Intel Celeron N4020 | Multimédia |
 | live-boot | N/A | live-boot |
 
 ![UML](./utilities/inventory.svg)

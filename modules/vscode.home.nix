@@ -24,18 +24,18 @@
 				"workbench.preferredLightColorTheme" = "Catppuccin Latte";
 				"workbench.preferredDarkColorTheme" = "Catppuccin Mocha";
 				"editor.tabSize" = 2;
-				# "nix.serverPath" = "nixd";
-				"nix.serverPath" = "nil";
+				"diffEditor.ignoreTrimWhitespace" = false;
+				"nix.serverPath" = "nixd";
+				# "nix.serverPath" = "nil";
 				"nix.enableLanguageServer" = true;
 				"nix.formatterPath" = "nixfmt";
-				# "nix.serverSettings.nixd" = {
-				# 	"options.nixos.expr" = "${builtins.getFlake "/home/dawn/Documents/Projets/inventory"}.nixosConfigurations.exelo.options";
-				# 	"options.home-manager.expr" = "${builtins.getFlake "/home/dawn/Documents/Projets/inventory"}.homeConfigurations.exelo.options";
-				# };
+				"nix.serverSettings.nixd" = {
+					"options.nixos.expr" = "${builtins.getFlake "/home/dawn/Documents/Projets/nix-inventory"}.nixosConfigurations.exelo.options";
+					"options.home-manager.expr" = "${builtins.getFlake "/home/dawn/Documents/Projets/nix-inventory"}.homeConfigurations.exelo.options";
+				};
 				"redhat.telemetry.enabled" = false;
 				"sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
 				"python.languageServer" = "Jedi";
-				"shellcheck.customArgs" = [ "external-sources=true" ];
 				"git.autofetch" = true;
 				"git.enableSmartCommit" = true;
 				"git.confirmSync" = false;

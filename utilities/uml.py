@@ -130,8 +130,9 @@ class UML():
                 MaterialColors.LIGHT_GREEN.value[2],
                 MaterialColors.LIGHT_BLUE.value[2],
                 MaterialColors.GRAY.value[2],
-                MaterialColors.ORANGE.value[2],
-                MaterialColors.PURPLE.value[2]
+                MaterialColors.GREEN.value[2],
+                MaterialColors.PURPLE.value[2],
+                MaterialColors.ORANGE.value[2]
             ]
             assert len(colors) >= len(units), len(units)
             for unit, unit_modules in units.items():

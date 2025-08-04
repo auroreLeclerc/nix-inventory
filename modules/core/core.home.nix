@@ -59,28 +59,7 @@ ${s}${s}restart: unless-stopped''
 					"export JAVA_HOME" = pkgs.jdk;
 					"export ANDROID_HOME" = "/home/dawn/Android/Sdk/";
 				};
-				initContent = ''
-					if [[ "$TERM_PROGRAM" != 'vscode' ]] && (( ''${+functions[p10k]} )) && [[ -f ~/.p10k.zsh ]]; then
-						source ~/.p10k.zsh
-						typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='${
-						{
-							"bellum" = "👩🏻‍🏭";
-							"exelo" = "👩🏻‍💻";
-							"fierce-deity" = "🎮";
-							"midna" = "📼";
-							"kimado" = "🧟‍♀️";
-							"nixos" = "❄️";
-						}.${osConfig.networking.hostName}}	'
-						# https://github.com/ohmyzsh/ohmyzsh/wiki/FAQ#i-see-duplicate-typed-characters-after-i-complete-a-command
-						# https://github.com/nix-community/home-manager/issues/3711
-						motd
-					else
-						POWERLEVEL9K_DISABLE_CONFIGURATION_WIZARD=true
-						autoload -Uz promptinit
-						promptinit
-						prompt redhat
-					fi
-				'';
+				initContent = builtins.readFile ./zshrc.sh;
 			};
 			git = let
 				mail = (myLibs.impureSopsReading osConfig.sops.secrets.mail.path);

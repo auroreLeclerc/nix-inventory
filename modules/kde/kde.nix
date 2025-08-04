@@ -2,7 +2,7 @@
 {
 	imports = [ ./sddm.nix ./fprintd.nix ];
 	services = {
-		desktopManager.plasma6.enable = true; 	# Enable the KDE Plasma Desktop Environment.
+		desktopManager.plasma6.enable = true; # Enable the KDE Plasma Desktop Environment.
 		pulseaudio.enable = false; # Enable sound with pipewire.
 		pipewire = {
 			enable = true;
@@ -20,8 +20,8 @@
 			with pkgs.kdePackages; [
 				plasma-welcome kcrash drkonqi kate koi yakuake wacomtablet plasma-disks plasma-vault kcalc discover filelight
 				ghostwriter isoimagewriter k3b kcolorchooser kolourpaint kweather plasma-sdk plasma-browser-integration
-				/* umbrello */ kalarm kteatime kasts /* itinerary */ partitionmanager kontact korganizer kongress kompare ktimer
-				plasma-browser-integration
+				umbrello kalarm kteatime kasts itinerary partitionmanager kontact korganizer kongress kompare ktimer
+				plasma-browser-integration arianna
 			]
 			) ++ (
 			with pkgs; [ nil bash-language-server strawberry papirus-icon-theme gnome-firmware vlc wireguard-tools poppler-utils ]
