@@ -2,7 +2,8 @@
 if (( ${+functions[p10k]} )) && [[ ! -f ~/.p10k.zsh ]]; then
 	p10k configure
 elif [[ "$TERM_PROGRAM" != 'vscode' ]] && (( ${+functions[p10k]} )) && [[ -f ~/.p10k.zsh ]]; then
-	source /home/dawn/.p10k.zsh
+	# shellcheck disable=SC1090
+	source ~/.p10k.zsh
 	case "$(hostname)" in 
 		"bellum")
 			icon='👩🏻‍🏭';;

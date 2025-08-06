@@ -14,7 +14,6 @@ folder "lib" {
    component "default.nix" as 68e512ab9f77fd39f3722c23b9768434
 }
 collections ".sops.yaml" as 91f6f5e8b87d05d919871a4550a6fc38
-file ".shellcheckrc" as a8745e5a05e7228870daeca936a7dcec
 component "shell.nix" as 97c7e481026e36daa7b31230c6c6aadc
 folder "utilities" {
    collections "kde_colors.json" as 31b20c96119be911606aa1b692b28ba5

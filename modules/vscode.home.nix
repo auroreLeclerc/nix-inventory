@@ -25,14 +25,8 @@
 				"workbench.preferredDarkColorTheme" = "Catppuccin Mocha";
 				"editor.tabSize" = 2;
 				"diffEditor.ignoreTrimWhitespace" = false;
-				"nix.serverPath" = "nixd";
-				# "nix.serverPath" = "nil";
-				"nix.enableLanguageServer" = true;
-				"nix.formatterPath" = "nixfmt";
-				"nix.serverSettings.nixd" = {
-					"options.nixos.expr" = "${builtins.getFlake "/home/dawn/Documents/Projets/nix-inventory"}.nixosConfigurations.exelo.options";
-					"options.home-manager.expr" = "${builtins.getFlake "/home/dawn/Documents/Projets/nix-inventory"}.homeConfigurations.exelo.options";
-				};
+  			"nix.enableLanguageServer" = true;
+				"nix.serverPath" = "nil";
 				"redhat.telemetry.enabled" = false;
 				"sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
 				"python.languageServer" = "Jedi";
