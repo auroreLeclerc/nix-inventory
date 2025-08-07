@@ -1,7 +1,10 @@
 # shellcheck disable=SC2148
 if (( ${+functions[p10k]} )) && [[ ! -f ~/.p10k.zsh ]]; then
 	p10k configure
-elif [[ "$TERM_PROGRAM" != 'vscode' ]] && (( ${+functions[p10k]} )) && [[ -f ~/.p10k.zsh ]]; then
+elif
+	(( ${+functions[p10k]} )) && [[ -f ~/.p10k.zsh ]] &&
+	[[ "$TERM_PROGRAM" != 'vscode' ]] && { [[ "$SSH_TTY" ]] || [[ "$DISPLAY" ]]; };
+then
 	# shellcheck disable=SC1090
 	source ~/.p10k.zsh
 	case "$(hostname)" in 

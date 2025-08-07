@@ -11,11 +11,11 @@
 	;
 	hardware = {
 		xpadneo.enable = true;
-		amdgpu.amdvlk = lib.mkIf (config.networking.hostName != "exelo") { #TODO: check gamescope support
+		amdgpu.amdvlk = { # default but won't work in gamescope
 			enable = true;
 			support32Bit.enable = true;
 		};
-		graphics = lib.mkIf (config.networking.hostName == "exelo") {
+		graphics = { # RADV
 			enable = true;
 			enable32Bit = true;
 		};
