@@ -110,31 +110,37 @@ class UML():
 
     def __init__(self):
         with open(self.__OUT_PATH, "w", encoding="utf-8") as file:
+            def give_me_colors(units_number: int):
+                colors = [
+                    MaterialColors.YELLOW.value[2],
+                    MaterialColors.LIGHT_BLUE.value[2],
+                    MaterialColors.GRAY.value[2],
+                    MaterialColors.GREEN.value[2],
+                    MaterialColors.PURPLE.value[2],
+                    MaterialColors.ORANGE.value[2]
+                ]
+                assert len(colors) >= units_number, units_number
+                return colors
+
             # --- Start
             file.write("@startuml inventory\n")
             file.write("!theme amiga\n")
 
             # --- Component Declaration
             units: dict[Path, list[Path]] = {}
+            colors = give_me_colors(len(units))
             file.write(f"{PumlElement.FOLDER.value} \"units\" {{\n")
             for unit in (Path(UML.__DIR_PATH)/".."/"units").iterdir():
                 unit_configuration = unit/"configuration.nix"
                 units[unit_configuration] = self.__get_modules(unit_configuration)
-                file.write(f"{PumlElement.ACTOR.value} \"{unit.name}\" as {self.__md5_from(unit_configuration)}\n")
+                file.write(f"{PumlElement.ACTOR.value} \"{unit.name}\" as {self.__md5_from(unit_configuration)} {colors[0]}\n")
+                colors.pop(0)
             file.write("}\n")
                 
             modules = self.__discover_modules(file, Path(self.__DIR_PATH)/"..")
 
             # --- Relation Declaration
-            colors = [
-                MaterialColors.LIGHT_GREEN.value[2],
-                MaterialColors.LIGHT_BLUE.value[2],
-                MaterialColors.GRAY.value[2],
-                MaterialColors.GREEN.value[2],
-                MaterialColors.PURPLE.value[2],
-                MaterialColors.ORANGE.value[2]
-            ]
-            assert len(colors) >= len(units), len(units)
+            colors = give_me_colors(len(units))
             for unit, unit_modules in units.items():
                 for module in unit_modules:
                     file.write(f"{self.__md5_from(unit)} -[{colors[0]}]-> {self.__md5_from(module)}\n")

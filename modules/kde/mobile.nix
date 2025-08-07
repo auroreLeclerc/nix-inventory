@@ -1,7 +1,9 @@
 { pkgs, lib, ... }:
 {
-	services.desktopManager.plasma6.package = lib.mkForce pkgs.kdePackages.plasma-mobile;
-	environment = {
-		systemPackages = with pkgs.kdePackages; [  plasma-phonebook plasma-dialer calindori kclock kweather ];
+	imports = [ ./kde.nix ];
+	services.displayManager = {
+		sessionPackages = [ pkgs.kdePackages.plasma-mobile ];
+		defaultSession = lib.mkForce "plasma-mobile";
 	};
+	environment.systemPackages = with pkgs.kdePackages; [ calindori keysmith koko plasma-dialer spacebar ];
 }
