@@ -13,12 +13,13 @@
 	boot.kernelParams = [ ];
 
 	fileSystems."/" = {
-		device = "/dev/disk/by-uuid/de764d80-506c-4d9b-af50-af453d054927";
+		device = "/dev/disk/by-uuid/cfe70158-cab3-44eb-822e-183a09ac10de";
 		fsType = "ext4";
 	};
+  boot.initrd.luks.devices."luks-aeb25a6d-b698-4d41-a5be-080ed23a9817".device = "/dev/disk/by-uuid/aeb25a6d-b698-4d41-a5be-080ed23a9817";
 
 	fileSystems."/boot" = {
-		device = "/dev/disk/by-uuid/CD0B-B069";
+		device = "/dev/disk/by-uuid/1714-A994";
 		fsType = "vfat";
 		options = [ "fmask=0022" "dmask=0022" ];
 	};
