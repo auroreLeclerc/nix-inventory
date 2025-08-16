@@ -40,5 +40,5 @@
 		enable = true;
 		icons.enable = false;
 	};
-	home.packages = (with pkgs; [ nodejs nixfmt-rfc-style nixd typescript python3 graphviz ]);
+	home.packages = (with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz ]);
 }

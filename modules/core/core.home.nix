@@ -54,10 +54,11 @@ ${s}${s}restart: unless-stopped''
 					plugins = [ "sudo" "node" "npm" "git" "repo" "nvm" "emoji" ];
 				};
 				localVariables = lib.mkIf osConfig.programs.adb.enable  {
-					"export CHROME_EXECUTABLE" = "${pkgs.chromium}/bin/chromium-browser";
-					"export CAPACITOR_ANDROID_STUDIO_PATH" = unstablePkgs.android-studio;
-					"export JAVA_HOME" = pkgs.jdk;
-					"export ANDROID_HOME" = "/home/dawn/Android/Sdk/";
+					"CHROME_EXECUTABLE" = "${pkgs.chromium}/bin/chromium-browser";
+					"CAPACITOR_ANDROID_STUDIO_PATH" = unstablePkgs.android-studio;
+					"JAVA_HOME" = pkgs.jdk;
+					"ANDROID_HOME" = "/home/dawn/Android/Sdk/";
+					"ELECTRON_SKIP_BINARY_DOWNLOAD" = 1;
 				};
 				initContent = builtins.readFile ./zshrc.sh;
 			};
