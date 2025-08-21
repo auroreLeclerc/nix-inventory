@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 source /etc/os-release
 if [[ $(date +%s) -gt $(date -d "$SUPPORT_END" +%s) ]]; then
-	cowsay -f satanic "$PRETTY_NAME has reached EOL"
+	cowsay -f dragon-and-cow "$PRETTY_NAME has reached EOL"
 else
 	function date_calculator() {
 		local diff_sec=$(($(TZ='Europe/Paris' date -d "$1" +%s) - $(TZ='Europe/Paris' date +%s)))
@@ -24,7 +24,7 @@ else
 		clean_date=$(systemctl status nix-gc.timer | grep 'Trigger:' | grep -Eo '\w{3} [[:digit:]]{4}-[[:digit:]]{2}-[[:digit:]]{2} [[:digit:]]{2}:[[:digit:]]{2}:[[:digit:]]{2} CE(S?)T')
 		echo "Cleanup 🧹 dans $(date_calculator "$clean_date")"
 	fi
-	if [ -d ~/.local/share/podman/ ]; then
+	if [ -d ~/.local/share/containers/ ]; then
 		podman=$(($(podman ps | wc -l) - 1))
 		echo "$podman container(s) "
 	fi

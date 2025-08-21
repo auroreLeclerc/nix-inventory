@@ -337,6 +337,20 @@
 				};
 			};
 		};
+		systemd.user.services = {
+			mprisence = lib.mkIf (builtins.elem pkgs.mprisence osConfig.environment.systemPackages) {
+				Unit.Description = "Discord Rich Presence for MPRIS media players";
+				Service = {
+					Type = "simple";
+					ExecStart = "${pkgs.mprisence}/bin/mprisence";
+					Restart = "always";
+					RestartSec = 10;
+					Environment = ["RUST_LOG=info" "RUST_BACKTRACE=1"];
+					ReadWritePaths = ["%h/.config/mprisence" "%h/.cache/mprisence"];
+				};
+				Install.WantedBy = ["default.target"];
+			};
+		};
 		home = let
 				foldersorter = pkgs.writeShellScriptBin "foldersorter" (builtins.readFile ./foldersorter.sh);
 				downloadsort = pkgs.writeShellScriptBin "downloadsort" "foldersorter ~/Téléchargements";
@@ -374,6 +388,10 @@
 						"SKIP_HOST_UPDATE" = true;
 					};
 					target = ".config/discord/settings.json";
+				};
+				mprisence = lib.mkIf (builtins.elem unstablePkgs.discord osConfig.environment.systemPackages) {
+					text = builtins.readFile ./mprisence.toml;
+					target = ".config/mprisence/config.toml";
 				};
 				adb = lib.mkIf osConfig.programs.adb.enable {
 					source = "${pkgs.android-tools}/bin/adb";
