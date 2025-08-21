@@ -37,9 +37,9 @@
 						TZ = "Europe/Paris";
 					};
 					volumes = [
-						"media/bellum/gohma/data:/config"
-						"media/bellum/gohma/downloads:/downloads"
-						"media/bellum/gohma/watchdir:/watch"
+						"/media/bellum/gohma/data:/config"
+						"/media/bellum/gohma/downloads:/downloads"
+						"/media/bellum/gohma/watchdir:/watch"
 					];
 					ip4 = "172.18.0.11";
 				network= ["docker-like"];
@@ -52,9 +52,9 @@
 					TZ = "Europe/Paris";
 				};
 				volumes = [
-					"home/dawn/docker/sonarr:/config"
-					"media/bellum/gohma/downloads:/downloads"
-					"media/bellum/main/Multimédia/Séries:/tv"
+					"/home/dawn/docker/sonarr:/config"
+					"/media/bellum/gohma/downloads:/downloads"
+					"/media/bellum/main/Multimédia/Séries:/tv"
 				];
 				ip4 = "172.18.0.12";
 				network= ["docker-like"];
@@ -67,9 +67,9 @@
 					TZ = "Europe/Paris";
 				};
 				volumes = [
-					"home/dawn/docker/radarr:/config"
-					"media/bellum/gohma/downloads:/downloads"
-					"media/bellum/main/Multimédia/Films:/movies"
+					"/home/dawn/docker/radarr:/config"
+					"/media/bellum/gohma/downloads:/downloads"
+					"/media/bellum/main/Multimédia/Films:/movies"
 				];
 				ip4 = "172.18.0.13";
 				network= ["docker-like"];
@@ -82,7 +82,7 @@
 					TZ = "Europe/Paris";
 					AUTO_UPDATE = true;
 				};
-				volumes = [ "home/dawn/docker/jackett:/config" ];
+				volumes = [ "/home/dawn/docker/jackett:/config" ];
 				ip4 = "172.18.0.14";
 				network= ["docker-like"];
 			};
@@ -94,9 +94,9 @@
 					TZ = "Europe/Paris";
 				};
 				volumes = [
-					"home/dawn/docker/bazarr:/config"
-					"media/bellum/main/Multimédia/Films:/movies"
-					"media/bellum/main/Multimédia/Séries:/tv"
+					"/home/dawn/docker/bazarr:/config"
+					"/media/bellum/main/Multimédia/Films:/movies"
+					"/media/bellum/main/Multimédia/Séries:/tv"
 				];
 				ip4 = "172.18.0.15";
 				network= ["docker-like"];
@@ -113,10 +113,10 @@
 					];
 				};
 				volumes = [
-					"media/bellum/main/Multimédia/Films:/data/movies"
-					"media/bellum/main/Multimédia/Séries:/data/tvshows"
-					"media/bellum/main/new_Deezer:/data/music"
-					"media/bellum/jellyfin:/config"
+					"/media/bellum/main/Multimédia/Films:/data/movies"
+					"/media/bellum/main/Multimédia/Séries:/data/tvshows"
+					"/media/bellum/main/new_Deezer:/data/music"
+					"/media/bellum/jellyfin:/config"
 				];
 				devices = [
 					"dev/dri:/dev/dri"
@@ -133,8 +133,8 @@
 					TZ = "Europe/Paris";
 				};
 				volumes = [
-					"media/bellum/main/new_Deezer:/music"
-					"media/bellum/main/new_Deezer:/downloads"
+					"/media/bellum/main/new_Deezer:/music"
+					"/media/bellum/main/new_Deezer:/downloads"
 				];
 				ip4 = "172.18.0.17";
 				network= ["docker-like"];
@@ -146,7 +146,7 @@
 					PGID = 0;
 					TZ = "Europe/Paris";
 				};
-				volumes = [ "home/dawn/docker/nginx/config:/config" ];
+				volumes = [ "/home/dawn/docker/nginx/config:/config" ];
 				ip4 = "172.18.0.18";
 				network= ["docker-like"];
 			};
@@ -157,8 +157,8 @@
 					PGID = 0;
 				};
 				volumes = [
-					"home/dawn/docker/proxy-manager/data:/data"
-					"home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
+					"/home/dawn/docker/proxy-manager/data:/data"
+					"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
 				];
 				ip4 = "172.18.0.19";
 				network= ["docker-like"];
