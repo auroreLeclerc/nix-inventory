@@ -7,9 +7,9 @@
 	};
 	environment.systemPackages =
 		(with pkgs; [
-			celeste64 lutris ryubing dolphin-emu-primehack dolphin-emu azahar ppsspp itch xrgears radeontop mprisence
+			lutris ryubing dolphin-emu-primehack dolphin-emu azahar ppsspp itch xrgears radeontop mprisence
 		]) ++
-		(with unstablePkgs; [ discord ])
+		(with unstablePkgs; [ discord celeste64 ])
 	;
 	hardware = {
 		xpadneo.enable = true;
