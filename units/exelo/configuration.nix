@@ -16,6 +16,7 @@
 				imports = [
 					../../modules/kde/kde.home.nix
 					../../modules/vscode.home.nix
+					../../modules/flatpak.home.nix
 					../../modules/firefox.home.nix
 					../../modules/podman/workbench.home.nix
 				];

@@ -1,6 +1,5 @@
 { pkgs, lib, osConfig, config, unstablePkgs, ... }:
 {
-	imports = [ ../flatpak.home.nix ];
 	config = {
 		catppuccin = {
 			zsh-syntax-highlighting.enable = true;

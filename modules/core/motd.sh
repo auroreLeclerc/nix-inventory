@@ -26,7 +26,7 @@ else
 	fi
 	if [ -d ~/.local/share/containers/ ]; then
 		podman=$(($(podman ps | wc -l) - 1))
-		echo "$podman container(s) "
+		echo "$podman container(s) "
 	fi
 	if [ -f /etc/systemd/system/zfs-mount.service ]; then
 		result=''

@@ -6,7 +6,9 @@
 		localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
 	};
 	environment.systemPackages =
-		(with pkgs; [ lutris ryubing dolphin-emu-primehack dolphin-emu azahar ppsspp itch xrgears radeontop mprisence ]) ++
+		(with pkgs; [
+			celeste64 lutris ryubing dolphin-emu-primehack dolphin-emu azahar ppsspp itch xrgears radeontop mprisence
+		]) ++
 		(with unstablePkgs; [ discord ])
 	;
 	hardware = {
