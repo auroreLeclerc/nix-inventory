@@ -119,8 +119,8 @@
 					"/media/bellum/jellyfin:/config"
 				];
 				devices = [
-					"dev/dri:/dev/dri"
-					"dev/kfd:/dev/kfd"
+					"/dev/dri:/dev/dri"
+					"/dev/kfd:/dev/kfd"
 				];
 				ip4 = "172.18.0.16";
 				network= ["docker-like"];
