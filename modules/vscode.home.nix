@@ -10,7 +10,6 @@
 				ms-python.debugpy
 				ms-python.pylint
 				ms-pyright.pyright
-				# ms-azuretools.vscode-docker
 				redhat.vscode-yaml
 				stylelint.vscode-stylelint
 				sonarsource.sonarlint-vscode
@@ -33,6 +32,7 @@
 				"git.autofetch" = true;
 				"git.enableSmartCommit" = true;
 				"git.confirmSync" = false;
+  			"[css].editor.defaultFormatter" = "stylelint.vscode-stylelint";
 			};
 		};
 	};

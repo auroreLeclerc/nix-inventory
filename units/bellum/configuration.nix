@@ -1,11 +1,17 @@
 { inputs, pkgs, lib, myLibs, config, ... }:
 {
 	imports = [
-		../../modules/docker/docker.nix
 		inputs.nixos-hardware.nixosModules.common-cpu-amd
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
 		inputs.nixos-hardware.nixosModules.common-gpu-amd
+		{
+			home-manager.users.dawn = {
+				imports = [
+					../../modules/podman/homelab.home.nix
+				];
+			};
+		}
 	];
 
 	boot = {
@@ -16,6 +22,15 @@
 	networking = {
 		hostId = "6dec770a";
 		hostName = "bellum";
+		networkmanager.enable = true;
+		firewall = {
+			enable = true;
+			allowedUDPPorts = [ 51820 ];
+		};
+		nat = {
+			enable = true;
+			externalInterface = "enp10s0";
+		};
 	};
 
 	services = {

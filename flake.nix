@@ -20,7 +20,7 @@
 	outputs = { self, nixpkgs, home-manager, catppuccin, ... } @ inputs:
 	let
 # 		pkgs = nixpkgs.legacyPackages.x86_64-linux;
-		myLibs = import ./lib/default.nix { lib = nixpkgs.lib; const = (import ./lib/const.nix); };
+		myLibs = import ./lib/default.nix { lib = nixpkgs.lib; };
 		check = myLibs.checkSupportedVersion nixpkgs.lib.trivial.release;
 		unstablePkgs = import inputs.unstableNixpkgs {
 			system = "x86_64-linux";
@@ -62,7 +62,7 @@
 					./units/${unit}/hardware-configuration.nix
 					./modules/core/core.nix
 				];
-			} 
+			}
 		) (builtins.readDir ./units);
 # 		packages.x86_64-linux.default = pkgs.uwufetch;
 	};

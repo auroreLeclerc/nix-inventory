@@ -9,30 +9,30 @@
 		home = {
 			stateVersion = osConfig.system.stateVersion;
 			packages = with pkgs; [ nerd-fonts.meslo-lg ];
-			file.docker-compose = lib.mkIf osConfig.virtualisation.docker.rootless.enable { # TODO: move to docker component
-				text = let
-					s = "    ";
-					dns = (myLibs.impureSopsReading osConfig.sops.secrets.dns.path);
-					isDns = (dns != "");
-				in
-				lib.mkIf isDns builtins.readFile ../docker/docker-compose.yml + ''
-${s}vaultwarden:
-${s}${s}image: vaultwarden/server:latest
-${s}${s}container_name: vaultwarden
-${s}${s}environment:
-${s}${s}${s}PUID: 0
-${s}${s}${s}PGID: 0
-${s}${s}${s}DOMAIN: "https://vaultwarden.${dns}/"
-${s}${s}${s}SIGNUPS_ALLOWED: "false"
-${s}${s}volumes:
-${s}${s}${s}- /home/dawn/docker/vaultwarden/data:/data
-${s}${s}networks:
-${s}${s}${s}default:
-${s}${s}${s}${s}ipv4_address: 172.18.0.21
-${s}${s}restart: unless-stopped''
-				;
-				target = "docker-compose.yml";
-			};
+# 			file.docker-compose = lib.mkIf osConfig.virtualisation.docker.rootless.enable { # TODO: move to docker component
+# 				text = let
+# 					s = "    ";
+# 					dns = (myLibs.impureSopsReading osConfig.sops.secrets.dns.path);
+# 					isDns = (dns != "");
+# 				in
+# 				lib.mkIf isDns builtins.readFile  + ''
+# ${s}vaultwarden:
+# ${s}${s}image: vaultwarden/server:latest
+# ${s}${s}container_name: vaultwarden
+# ${s}${s}environment:
+# ${s}${s}${s}PUID: 0
+# ${s}${s}${s}PGID: 0
+# ${s}${s}${s}DOMAIN: "https://vaultwarden.${dns}/"
+# ${s}${s}${s}SIGNUPS_ALLOWED: "false"
+# ${s}${s}volumes:
+# ${s}${s}${s}- /home/dawn/docker/vaultwarden/data:/data
+# ${s}${s}networks:
+# ${s}${s}${s}default:
+# ${s}${s}${s}${s}ipv4_address: 172.18.0.21
+# ${s}${s}restart: unless-stopped''
+# 				;
+# 				target = "docker-compose.yml";
+# 			};
 		};
 		programs = {
 			thefuck = {

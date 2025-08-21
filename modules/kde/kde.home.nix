@@ -63,10 +63,10 @@
 							} {
 								plasmusicToolbar = {
 									panelIcon = {
-										# icon = builtins.fetchurl {
-										# 	url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/f50a4ba8-e3d6-4a76-8259-12aba129b9eb/ots/w=128";
-										# 	sha256 = "sha256-KDN2SGlJV7z+xkRo/4AHFQjmIFhyMDmADkWjkqPldpc=";
-										# }; # hash mismatch
+										icon = builtins.fetchurl {
+											url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/f50a4ba8-e3d6-4a76-8259-12aba129b9eb/ots/w=512";
+											sha256 = "sha256-6Fhb/6/VdiVWk3TVoVg2l3E4++zQfoQhn8JDyichTz0=";
+										};
 										albumCover = {
 											useAsIcon = true;
 											fallbackToIcon = true;

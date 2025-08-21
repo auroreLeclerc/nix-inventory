@@ -1,4 +1,4 @@
-{ ... }: {
+{ osConfig, lib, myLibs, ... }: {
 	imports = [ ./podman.home.nix ];
 	config = {
 		services.podman.containers = {
@@ -17,15 +17,17 @@
 				};
 				volumes = [ "/home/dawn/docker/wireguard/config:/config" ];
 				ports = [ "51820:51820/udp" ];
-				extraConfig = {
-					net.ipv4.conf.all.src_valid_mark = 1;
-					net.ipv4.ip_forward = 1;
-				};
+				extraPodmanArgs = [
+					"--sysctl net.ipv4.conf.all.src_valid_mark=1"
+					"--sysctl net.ipv4.ip_forward=1"
+				];
+				network= ["docker-like"];
 			};
 			heimdall = {
 				image = "lscr.io/linuxserver/heimdall:latest";
 				environment.TZ = "Europe/Paris";
 				ip4 = "172.18.0.10";
+				network= ["docker-like"];
 			};
 			transmission = {
 					image = "lscr.io/linuxserver/transmission:latest";
@@ -40,6 +42,7 @@
 						"media/bellum/gohma/watchdir:/watch"
 					];
 					ip4 = "172.18.0.11";
+				network= ["docker-like"];
 			};
 			sonarr = {
 				image = "lscr.io/linuxserver/sonarr:latest";
@@ -54,6 +57,7 @@
 					"media/bellum/main/Multimédia/Séries:/tv"
 				];
 				ip4 = "172.18.0.12";
+				network= ["docker-like"];
 			};
 			radarr = {
 				image = "lscr.io/linuxserver/radarr:latest";
@@ -68,6 +72,7 @@
 					"media/bellum/main/Multimédia/Films:/movies"
 				];
 				ip4 = "172.18.0.13";
+				network= ["docker-like"];
 			};
 			jackett = {
 				image = "lscr.io/linuxserver/jackett:latest";
@@ -79,6 +84,7 @@
 				};
 				volumes = [ "home/dawn/docker/jackett:/config" ];
 				ip4 = "172.18.0.14";
+				network= ["docker-like"];
 			};
 			bazarr = {
 				image = "lscr.io/linuxserver/bazarr:latest";
@@ -93,6 +99,7 @@
 					"media/bellum/main/Multimédia/Séries:/tv"
 				];
 				ip4 = "172.18.0.15";
+				network= ["docker-like"];
 			};
 			jellyfin = {
 				image = "lscr.io/linuxserver/jellyfin:latest";
@@ -100,7 +107,10 @@
 					PUID = 0;
 					PGID = 0;
 					TZ = "Europe/Paris";
-					DOCKER_MODS = ["linuxserver/mods:jellyfin-amd" "ghcr.io/intro-skipper/intro-skipper-docker-mod"];
+					DOCKER_MODS = [
+						"linuxserver/mods:jellyfin-amd"
+						"ghcr.io/intro-skipper/intro-skipper-docker-mod"
+					];
 				};
 				volumes = [
 					"media/bellum/main/Multimédia/Films:/data/movies"
@@ -108,8 +118,12 @@
 					"media/bellum/main/new_Deezer:/data/music"
 					"media/bellum/jellyfin:/config"
 				];
-				devices = [ "dev/dri:/dev/dri" "dev/kfd:/dev/kfd"];
+				devices = [
+					"dev/dri:/dev/dri"
+					"dev/kfd:/dev/kfd"
+				];
 				ip4 = "172.18.0.16";
+				network= ["docker-like"];
 			};
 			lidarr = {
 				image = "youegraillot/lidarr-on-steroids";
@@ -123,6 +137,7 @@
 					"media/bellum/main/new_Deezer:/downloads"
 				];
 				ip4 = "172.18.0.17";
+				network= ["docker-like"];
 			};
 			nginx = {
 				image = "lscr.io/linuxserver/nginx:latest";
@@ -133,6 +148,7 @@
 				};
 				volumes = [ "home/dawn/docker/nginx/config:/config" ];
 				ip4 = "172.18.0.18";
+				network= ["docker-like"];
 			};
 			proxy-manager = {
 				image = "jc21/nginx-proxy-manager:latest";
@@ -145,6 +161,7 @@
 					"home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
 				];
 				ip4 = "172.18.0.19";
+				network= ["docker-like"];
 			};
 			pihole = {
 				image = "pihole/pihole:latest";
@@ -154,6 +171,7 @@
 					FTLCONF_dns_listeningMode = "all"; # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
 				};
 				ip4 = "172.18.0.20";
+				network= ["docker-like"];
 			};
 			vaultwarden = let
 				dns = (myLibs.impureSopsReading osConfig.sops.secrets.dns.path);
@@ -169,6 +187,7 @@
 				};
 				volumes = [ "/home/dawn/docker/vaultwarden/data:/data" ];
 				ip4 = "172.18.0.21";
+				network= ["docker-like"];
 			};
 		};
 	};

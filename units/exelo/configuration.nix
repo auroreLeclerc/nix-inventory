@@ -17,7 +17,7 @@
 					../../modules/kde/kde.home.nix
 					../../modules/vscode.home.nix
 					../../modules/firefox.home.nix
-					../../modules/podman/podman.home.nix
+					../../modules/podman/workbench.home.nix
 				];
 			};
 		}

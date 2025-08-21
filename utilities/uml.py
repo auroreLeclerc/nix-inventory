@@ -83,7 +83,7 @@ class UML():
         modules: dict[Path, list[Path]] = {}
         with open(self.__DIR_PATH/".."/".gitignore", "r", encoding="utf-8") as gitignore:
             ignores = gitignore.read().split()
-            ignores.extend(["units", ".py", ".puml", ".svg", ".md", "LICENSE", ".shellcheckrc"])
+            ignores.extend(["units", ".py", ".puml", ".svg", ".md", "LICENSE", ".shellcheckrc", ".git"])
             for module in reading_dir.iterdir():
                 if not any(ignore in str(module) for ignore in ignores):
                     if module.is_file():

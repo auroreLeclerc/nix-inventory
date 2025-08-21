@@ -1,4 +1,6 @@
-{ lib, const, ...} : {
+{ lib, ...} : let 
+	const = import ./const.nix;
+in {
 	inherit const;
 	impureSopsReading = (location:
 		assert builtins.isString location;
