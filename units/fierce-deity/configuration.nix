@@ -16,6 +16,7 @@
 			home-manager.users.dawn = {
 				imports = [
 					../../modules/kde/kde.home.nix
+					../../modules/flatpak.home.nix
 					../../modules/firefox.home.nix
 				];
 			};
