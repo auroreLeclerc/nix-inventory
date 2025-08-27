@@ -19,7 +19,7 @@
 					../../modules/flatpak.home.nix
 					../../modules/firefox.home.nix
 					../../modules/podman/workbench.home.nix
-					../../modules/gaming/mprisenc.home.nix
+					../../modules/gaming/mprisence.home.nix
 				];
 			};
 		}

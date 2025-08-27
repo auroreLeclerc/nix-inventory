@@ -20,6 +20,8 @@ folder "utilities" {
 }
 folder "modules" {
    folder "gaming" {
+      component "mprisence.home.nix" as c02ddfafd82173da6d07e50463b65eac
+      file "mprisence.toml" as 388345b0335603b7af9674ffccc65ed6
       file "gamescope.sh" as 07bb30b5069aacb10b5677e227bfbeb4
       component "gaming.nix" as cc648f4643baab83856cbb1aee4c03ef
    }
@@ -42,7 +44,6 @@ folder "modules" {
       component "fprintd.nix" as 0fb371a9afb97f3c276f57e82617e12d
       component "sddm.nix" as 5ebad3bd91a08cf55c56e207db927f8e
       component "mobile.nix" as 8d2c80d6e09dc0fe9680025161c2f7f7
-      file "mprisence.toml" as c06534725a754fe4d7ad45cfb2b422e9
       component "kde.nix" as 33998a49668889da1de8827630f29048
       component "kde.home.nix" as 34f24b42df06d195232b3481cc71827b
       file "foldersorter.sh" as ad183a934b3ffac1938f0162d6a8a65b
@@ -66,6 +67,7 @@ collections "flake.lock" as acf05e6b4d5a2b6e0e87b24127cf384a
 946f41d7a0edfc2e0c01ee5a09a8c817 -[#FFF59D]-> 6a6caf7642ae4a75b6d8c64ecf6400b9
 946f41d7a0edfc2e0c01ee5a09a8c817 -[#FFF59D]-> 38cffe16d01eb2da09feac707c1aaa76
 946f41d7a0edfc2e0c01ee5a09a8c817 -[#FFF59D]-> d5572bc49194fd8103bc4b027c081b12
+946f41d7a0edfc2e0c01ee5a09a8c817 -[#FFF59D]-> c02ddfafd82173da6d07e50463b65eac
 c4bab5bd2a813b4140b129fe0e3fb658 -[#81D4FA]-> 33998a49668889da1de8827630f29048
 c4bab5bd2a813b4140b129fe0e3fb658 -[#81D4FA]-> cc648f4643baab83856cbb1aee4c03ef
 c4bab5bd2a813b4140b129fe0e3fb658 -[#81D4FA]-> 5a0152e173cf79e753b825a5923741a1
@@ -88,6 +90,7 @@ c4bab5bd2a813b4140b129fe0e3fb658 -[#81D4FA]-> 38cffe16d01eb2da09feac707c1aaa76
 3cfc5eb99249add5b61f5348132a1e77 --> 63f8d8e44685a13b538d30e2a0812668
 3cfc5eb99249add5b61f5348132a1e77 --> 6aafb3be03e9429fda102521e26edd7b
 68e512ab9f77fd39f3722c23b9768434 --> 42685639631220987acd22a87135e57c
+c02ddfafd82173da6d07e50463b65eac --> 388345b0335603b7af9674ffccc65ed6
 cc648f4643baab83856cbb1aee4c03ef --> 07bb30b5069aacb10b5677e227bfbeb4
 d418baa43b11df0205fd0d8001cf7901 --> 7eb8b1eccd344747a8b685427d1c8d47
 6aafb3be03e9429fda102521e26edd7b --> c82c7c2583c0b9ccbee6e5f55451c0f6
@@ -99,7 +102,6 @@ d418baa43b11df0205fd0d8001cf7901 --> 7eb8b1eccd344747a8b685427d1c8d47
 33998a49668889da1de8827630f29048 --> 0fb371a9afb97f3c276f57e82617e12d
 34f24b42df06d195232b3481cc71827b --> 31b20c96119be911606aa1b692b28ba5
 34f24b42df06d195232b3481cc71827b --> ad183a934b3ffac1938f0162d6a8a65b
-34f24b42df06d195232b3481cc71827b --> c06534725a754fe4d7ad45cfb2b422e9
 0413db864cd167d08bd86e74c14f26a4 --> dcbc3ce626c4baff59d73eac162ff6c2
 d5572bc49194fd8103bc4b027c081b12 --> dcbc3ce626c4baff59d73eac162ff6c2
 3cfc5eb99249add5b61f5348132a1e77 - acf05e6b4d5a2b6e0e87b24127cf384a

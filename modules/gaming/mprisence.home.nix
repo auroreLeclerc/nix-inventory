@@ -15,10 +15,8 @@
 		home = {
 			packages = [ pkgs.mprisence ];
 			file.mprisence = {
-				mprisence = {
-					text = builtins.readFile ./mprisence.toml;
-					target = ".config/mprisence/config.toml";
-				};
+				text = builtins.readFile ./mprisence.toml;
+				target = ".config/mprisence/config.toml";
 			};
 		};
 	};
