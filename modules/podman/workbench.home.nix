@@ -6,6 +6,7 @@
 			volumes = {
 				minio_data = {};
 				postgres_data = {};
+				deemix_data = {};
 			};
 			containers = {
 				postgres = {
@@ -111,6 +112,19 @@
 						# OPENID_SCOPE: openid profile email
 						# OPENID_TOKEN_URL:
 						# OPENID_USER_INFO_URL:
+					};
+					network= ["docker-like"];
+				};
+				deemix = {
+					image = "ghcr.io/bambanah/deemix:latest";
+					ports = ["6595:6595"];
+					volumes = [
+						"deemix_data:/config"
+						"/home/dawn/Musique/Deezer:/downloads"
+					];
+					environment = {
+						PUID = 0;
+						PGID = 0;
 					};
 					network= ["docker-like"];
 				};

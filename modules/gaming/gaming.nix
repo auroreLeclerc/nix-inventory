@@ -7,13 +7,13 @@
 	};
 	environment.systemPackages =
 		(with pkgs; [
-			lutris ryubing dolphin-emu-primehack dolphin-emu azahar ppsspp itch xrgears radeontop mprisence
+			lutris ryubing dolphin-emu-primehack dolphin-emu azahar ppsspp itch xrgears radeontop
 		]) ++
 		(with unstablePkgs; [ discord celeste64 ])
 	;
 	hardware = {
 		xpadneo.enable = true;
-		amdgpu.amdvlk = { # default but won't work in gamescope
+		amdgpu.amdvlk = {
 			enable = true;
 			support32Bit.enable = true;
 		};
@@ -25,6 +25,10 @@
 
 	specialisation."Steam Deck".configuration = {
 		services.desktopManager.plasma6.enable = lib.mkForce false;
+		hardware.amdgpu.amdvlk = { # https://github.com/GPUOpen-Drivers/AMDVLK/issues/403
+			enable = lib.mkForce false;
+			support32Bit.enable = lib.mkForce false;
+		};
 		programs = {
 			gamescope = {
 				enable = true;

@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-export AMD_VULKAN_ICD="RADV"
-
 set -xeuo pipefail
 
 gamescopeArgs=(
