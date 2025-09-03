@@ -1,5 +1,5 @@
-{ osConfig, lib, myLibs, ... }: {
-	imports = [ ./podman.home.nix ];
+{ osConfig, myLibs, ... }: {
+	imports = [ ./podman.home.nix ./homer.home.nix ];
 	config = {
 		services.podman.containers = {
 			wireguard = {
@@ -23,12 +23,6 @@
 				];
 				network= ["docker-like"];
 			};
-			# heimdall = {
-			# 	image = "lscr.io/linuxserver/heimdall:latest";
-			# 	environment.TZ = "Europe/Paris";
-			# 	ip4 = "172.18.0.10";
-			# 	network= ["docker-like"];
-			# };
 			transmission = {
 					image = "lscr.io/linuxserver/transmission:latest";
 					environment = {
