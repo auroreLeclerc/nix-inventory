@@ -23,12 +23,12 @@
 				];
 				network= ["docker-like"];
 			};
-			heimdall = {
-				image = "lscr.io/linuxserver/heimdall:latest";
-				environment.TZ = "Europe/Paris";
-				ip4 = "172.18.0.10";
-				network= ["docker-like"];
-			};
+			# heimdall = {
+			# 	image = "lscr.io/linuxserver/heimdall:latest";
+			# 	environment.TZ = "Europe/Paris";
+			# 	ip4 = "172.18.0.10";
+			# 	network= ["docker-like"];
+			# };
 			transmission = {
 					image = "lscr.io/linuxserver/transmission:latest";
 					environment = {
@@ -167,26 +167,33 @@
 				image = "pihole/pihole:latest";
 				environment = {
 					TZ = "Europe/Paris";
-					FTLCONF_webserver_api_password = "admin";
+					FTLCONF_webserver_api_password = "";
 					FTLCONF_dns_listeningMode = "all"; # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
 				};
 				ip4 = "172.18.0.20";
 				network= ["docker-like"];
 			};
-			vaultwarden = let
-				dns = (myLibs.impureSopsReading osConfig.sops.secrets.dns.path);
-				isDns = (dns != "");
-			in
-			lib.mkIf isDns {
+			vaultwarden = {
 				image = "vaultwarden/server:latest";
 				environment = {
 					PUID = 0;
 					PGID = 0;
-					DOMAIN = "https://vaultwarden.${dns}/";
+					DOMAIN = "https://vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 					SIGNUPS_ALLOWED = "false";
 				};
 				volumes = [ "/home/dawn/docker/vaultwarden/data:/data" ];
 				ip4 = "172.18.0.21";
+				network= ["docker-like"];
+			};
+			freshrss = {
+				image = "freshrss/freshrss";
+				environment = {
+					TZ = "Europe/Paris";
+					LISTEN = "0.0.0.0:81";
+					CRON_MIN = "1,31";
+				};
+				volumes = [ "/home/dawn/docker/freshrss/data:/var/www/FreshRSS/data" ];
+				ip4 = "172.18.0.22";
 				network= ["docker-like"];
 			};
 		};

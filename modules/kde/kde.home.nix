@@ -49,7 +49,7 @@
 							{
 								kickoff = {
 									icon = builtins.fetchurl {
-										url = "https://efimero.github.io/xenia-images/questfortori3.png";
+										url = "https://xenia-images.efi.pages.gay/xenia-images/questfortori3.png";
 										sha256 = "sha256-I7+vQ4R0AAXaZVwEohYCOnOSsM8sBSk18or56PrGZVc=";
 									};
 								};
@@ -302,11 +302,11 @@
 						Wallpaper =  {
 							enabled = true;
 							dark = builtins.fetchurl {
-								url = "https://efimero.github.io/xenia-images/neotheta2.png";
+								url = "https://xenia-images.efi.pages.gay/xenia-images/neotheta2.png";
 								sha256 = "sha256-GxGAo7uh717fy1aQREmMfZfuSdN1R0VflM7R3E4azU0=";
 							};
 							light =  builtins.fetchurl {
-								url = "https://efimero.github.io/xenia-images/flyinghyena1.jpeg";
+								url = "https://xenia-images.efi.pages.gay/xenia-images/flyinghyena1.jpeg";
 								sha256 = "sha256-Fe9bpTAYy8h26HG4WDOMwSl5oS56kHve5QXCrrhtlbU=";
 							};
 						};
@@ -319,9 +319,11 @@
 						};
 						Tealist = {
 							"Tea0 Name" = "Tortellini";
-							"Tea0 Time" = 180;
-							"Tea1 Name" = "Tortellini";
-							"Tea1 Time" = 300;
+							"Tea0 Time" = 3*60;
+							"Tea1 Name" = "Girasoli";
+							"Tea1 Time" = 4*60;
+							"Tea2 Name" = "Tortellini";
+							"Tea2 Time" = 5*60;
 						};
 					};
 					"kteatime.notifyrc" = {
@@ -426,8 +428,8 @@
 				};
 				sevenZip = {
 					source = builtins.fetchurl {
-						url = "https://7-zip.org/a/7z2409-x64.exe";
-						sha256 = "sha256-vdGjPeeGGNFu5M4Ui4SZMsBdABVJHDSIeEbUMdKfMI4=";
+						url = "https://7-zip.org/a/7z2501-x64.exe";
+						sha256 = "sha256-eK+iocdzyvPPft9i+FfSqKXaVfsP/12kFgdMDSiytV8=";
 					};
 					target = "Téléchargements/7-Zip.exe";
 				};
