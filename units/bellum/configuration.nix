@@ -60,12 +60,16 @@
 		options = "--delete-older-than 14d";
 	};
 
+	system.autoUpgrade = {
+		enable = true;
+		dates = "weekly";
+		flake = "github:auroreLeclerc/nix-inventory/";
+	};
+
 	# Enable CUPS to print documents.
 	# services.printing.enable = true;
 
 	environment.systemPackages = (with pkgs; [ lm_sensors smartmontools ]); # TODO: kexec-tools
-
-	system.autoUpgrade.enable = true;
 
 	# This option defines the first version of NixOS you have installed on this particular machine,
 	# and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

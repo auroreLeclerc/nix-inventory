@@ -127,6 +127,7 @@
 					TZ = "Europe/Paris";
 				};
 				volumes = [
+					"/home/dawn/docker/sonarr:/config"
 					"/media/bellum/main/new_Deezer:/music"
 					"/media/bellum/main/new_Deezer:/downloads"
 				];
@@ -183,8 +184,7 @@
 				image = "freshrss/freshrss";
 				environment = {
 					TZ = "Europe/Paris";
-					LISTEN = "0.0.0.0:81";
-					CRON_MIN = "1,31";
+					CRON_MIN = 0;
 				};
 				volumes = [ "/home/dawn/docker/freshrss/data:/var/www/FreshRSS/data" ];
 				ip4 = "172.18.0.22";

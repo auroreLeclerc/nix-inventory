@@ -12,7 +12,7 @@
 				ms-pyright.pyright
 				redhat.vscode-yaml
 				stylelint.vscode-stylelint
-				sonarsource.sonarlint-vscode
+				# sonarsource.sonarlint-vscode
 				dbaeumer.vscode-eslint
 				jnoortheen.nix-ide
 				jgclark.vscode-todo-highlight
@@ -27,7 +27,8 @@
   			"nix.enableLanguageServer" = true;
 				"nix.serverPath" = "nil";
 				"redhat.telemetry.enabled" = false;
-				"sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
+				# "sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
+				# "sonarlint.disableTelemetry" = true;
 				"python.languageServer" = "Jedi";
 				"git.autofetch" = true;
 				"git.enableSmartCommit" = true;
@@ -40,5 +41,5 @@
 		enable = true;
 		icons.enable = false;
 	};
-	home.packages = (with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz ]);
+	home.packages = (with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz sops ]);
 }

@@ -2,7 +2,10 @@
 	config = {
 		services.podman = {
 			enable = true;
-			autoUpdate.enable = true;
+			autoUpdate = {
+				enable = true;
+				onCalendar = "daily";
+			};
 			networks.docker-like = {
 				description = "Docker compatibilty (internal DNS resolution)";
 				driver = "bridge";
