@@ -27,11 +27,28 @@ else
 		result=''
 		for pool in $(zpool list -H -o name); do
 			health=$(zpool list -H -o health "$pool")
-			if [[ "$health" == "ONLINE" ]]; then
-				result+="$pool 󱘩 ; "
-			else
-				result+="$pool 󱘤 ; "
-			fi
+			result+="$pool "
+			case $health in
+				ONLINE)
+					result+='󱘩'
+				;;
+				DEGRADED)
+					result+='󱘷'
+				;;
+				FAULTED)
+					result+='󱘵'
+				;;
+				OFFLINE)
+					result+='󱘱'
+				;;
+				UNAVAIL)
+					result+='󱤡'
+				;;
+				REMOVED)
+					result+='󱘰'
+				;;
+			esac
+			result+=' ; '
 		done
 		echo "ZFS : $("$result%?%?")"
 	fi
