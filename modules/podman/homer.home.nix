@@ -25,7 +25,7 @@
 							name = "Jellyfin";
 							logo = "assets/jellyfin.svg";
 							type = "Jellyfin";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.homer.jellyfin.path;
+							apikey = myLibs.impureSopsReading osConfig.sops.secrets.jellyfin.path;
 							url = "https://jellyfin.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Transmission";
@@ -35,19 +35,19 @@
 							name = "Radarr";
 							logo = "assets/radarr.svg";
 							type = "Radarr";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.homer.radarr.path;
+							apikey = myLibs.impureSopsReading osConfig.sops.secrets.radarr.path;
 							url = "https://radarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Sonarr";
 							logo = "assets/sonarr.svg";
 							type = "Sonarr";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.homer.sonarr.path;
+							apikey = myLibs.impureSopsReading osConfig.sops.secrets.sonarr.path;
 							url = "https://sonarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Lidarr";
 							logo = "assets/lidarr.svg";
 							type = "Lidarr";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.homer.lidarr.path;
+							apikey = myLibs.impureSopsReading osConfig.sops.secrets.lidarr.path;
 							url = "https://lidarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Jackett";
@@ -69,7 +69,7 @@
 							name = "Pi-hole";
 							logo = "assets/pi.svg";
 							type = "PiHole";
-							# apikey = myLibs.impureSopsReading osConfig.sops.secrets.homer.pihole.path;
+							# apikey = myLibs.impureSopsReading osConfig.sops.secrets.pihole.path;
 							url = "https://pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/admin";
 						}	{
 							name = "Vaultwarden - Server";
