@@ -9,12 +9,10 @@
 			name = {};
 			ip = {};
 			dns = {};
-			homer = {
-				jellyfin = {};
-				radarr = {};
-				sonarr = {};
-				lidarr = {};
-			};
+			jellyfin = {};
+			radarr = {};
+			sonarr = {};
+			lidarr = {};
 		};
 	};
 }
