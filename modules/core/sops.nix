@@ -5,15 +5,15 @@
 		age.keyFile = myLibs.const.AGE_KEY_FILE;
 		defaultSopsFile = ./secrets/secrets.yml;
 		secrets = {
-			mail = "N/A";
-			name = "N/A";
-			ip = "N/A";
-			dns = "N/A";
+			mail = {};
+			name = {};
+			ip = {};
+			dns = {};
 			homer = {
-				jellyfin = "";
-				radarr = "";
-				sonarr = "";
-				lidarr = "";
+				jellyfin = {};
+				radarr = {};
+				sonarr = {};
+				lidarr = {};
 			};
 		};
 	};
