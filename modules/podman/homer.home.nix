@@ -2,7 +2,7 @@
 	 config.services.podman.containers = let
 		homerConfig = {
 			title = "App dashboard";
-			subtitle = "UwU";
+			# subtitle = "UwU";
 			header = true;
 			footer = false;
 			columns = "auto";
@@ -13,8 +13,8 @@
 			};
 			theme = "neon";
 			colors = {
-				light.background-image = "assets/light.png";
-				dark.background-image = "assets/dark.png";
+				light.background-image = "/www/assets/light.png";
+				dark.background-image = "/www/assets/dark.png";
 			};
 			services = [
 				{

@@ -127,7 +127,7 @@
 					TZ = "Europe/Paris";
 				};
 				volumes = [
-					"/home/dawn/docker/sonarr:/config"
+					"/home/dawn/docker/lidarr:/config"
 					"/media/bellum/main/new_Deezer:/music"
 					"/media/bellum/main/new_Deezer:/downloads"
 				];
@@ -165,6 +165,7 @@
 					FTLCONF_webserver_api_password = "";
 					FTLCONF_dns_listeningMode = "all"; # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
 				};
+				user = 0;
 				ip4 = "172.18.0.20";
 				network= ["docker-like"];
 			};
@@ -186,7 +187,8 @@
 					TZ = "Europe/Paris";
 					CRON_MIN = 0;
 				};
-				volumes = [ "/home/dawn/docker/freshrss/data:/var/www/FreshRSS/data" ];
+				user = 0;
+				volumes = [ "/home/dawn/docker/freshrss/:/var/www/FreshRSS/data" ];
 				ip4 = "172.18.0.22";
 				network= ["docker-like"];
 			};
