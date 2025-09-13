@@ -259,7 +259,7 @@
 						STORAGE_URL = "http://${config.services.podman.containers.minio.ip4}:9000/default";
 						CHROME_TOKEN = "chrome_token";
 						CHROME_URL = "ws://${config.services.podman.containers.chrome.ip4}:3000";
-						DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/postgres";
+						DATABASE_URL = "postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable";
 						ACCESS_TOKEN_SECRET = "access_token_secret";
 						REFRESH_TOKEN_SECRET = "refresh_token_secret";
 						MAIL_FROM = "noreply@localhost.gay";
@@ -271,7 +271,7 @@
 						STORAGE_USE_SSL = false;
 						STORAGE_SKIP_BUCKET_CHECK = false;
 					};
-					ip4 = "172.18.0.24";
+					ip4 = "172.18.0.25";
 					network = ["docker-like"];
 					autoUpdate = "registry";
 				};

@@ -108,7 +108,7 @@
 		};
 	in {
 		homer = {
-			image = "b4bz/homer";
+			image = "docker.io/b4bz/homer:latest";
 			volumes = [
 				"${ builtins.toFile "homerConfig" (builtins.toJSON homerConfig)}:/www/assets/config.yml"
 				"${builtins.fetchurl {
@@ -181,7 +181,7 @@
 			};
 			ip4 = "172.18.0.10";
 			network= ["docker-like"];
-			labels."io.containers.autoupdate" = "registry";
+			autoUpdate = "registry";
 		};
 	};
 }
