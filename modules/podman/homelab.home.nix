@@ -1,196 +1,281 @@
-{ osConfig, myLibs, ... }: {
+{ osConfig, config, myLibs, ... }: {
 	imports = [ ./podman.home.nix ./homer.home.nix ];
 	config = {
-		services.podman.containers = {
-			wireguard = {
-				image = "lscr.io/linuxserver/wireguard:latest";
-				addCapabilities = [ "NET_ADMIN" ];
-				environment = {
-					PUID = 0;
-					PGID = 0;
-					TZ = "Europe/Paris";
-					SERVERURL = "auto";
-					PEERS = "fierceDeity,exelo,taya";
-					PEERDNS = "172.18.0.20";
-					PERSITENTKEEPALIVE_PEERS = "all";
-					LOG_CONFS = false;
+		services.podman = {
+			containers = {
+				postgres = {
+					image = "docker.io/pgautoupgrade/pgautoupgrade:latest";
+					volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql/data" ];
+					environment = {
+						POSTGRES_DB = "postgres";
+						POSTGRES_USER = "postgres";
+						POSTGRES_PASSWORD = "postgres";
+					};
+					extraPodmanArgs = [
+						"--health-cmd 'CMD-SHELL,pg_isready -U postgres -d postgres'"
+						"--health-interval 10s"
+						"--health-retries 5"
+						"--health-timeout 5s"
+					];
+					network = ["docker-like"];
+					autoUpdate = "registry";
 				};
-				volumes = [ "/home/dawn/docker/wireguard/config:/config" ];
-				ports = [ "51820:51820/udp" ];
-				extraPodmanArgs = [
-					"--sysctl net.ipv4.conf.all.src_valid_mark=1"
-					"--sysctl net.ipv4.ip_forward=1"
-				];
-				network= ["docker-like"];
-			};
-			transmission = {
-					image = "lscr.io/linuxserver/transmission:latest";
+				wireguard = {
+					image = "lscr.io/linuxserver/wireguard:latest";
+					addCapabilities = [ "NET_ADMIN" ];
+					environment = {
+						PUID = 0;
+						PGID = 0;
+						TZ = "Europe/Paris";
+						SERVERURL = "auto";
+						PEERS = "fierceDeity,exelo,taya";
+						PEERDNS = "172.18.0.20";
+						PERSITENTKEEPALIVE_PEERS = "all";
+						LOG_CONFS = false;
+					};
+					volumes = [ "/home/dawn/docker/wireguard/config:/config" ];
+					ports = [ "51820:51820/udp" ];
+					extraPodmanArgs = [
+						"--sysctl net.ipv4.conf.all.src_valid_mark=1"
+						"--sysctl net.ipv4.ip_forward=1"
+					];
+					network= ["docker-like"];
+					autoUpdate = "registry";
+				};
+				transmission = {
+						image = "lscr.io/linuxserver/transmission:latest";
+						environment = {
+							PUID = 0;
+							PGID = 0;
+							TZ = "Europe/Paris";
+						};
+						volumes = [
+							"/media/bellum/gohma/data:/config"
+							"/media/bellum/gohma/downloads:/downloads"
+							"/media/bellum/gohma/watchdir:/watch"
+						];
+						ip4 = "172.18.0.11";
+					network= ["docker-like"];
+					autoUpdate = "registry";
+				};
+				sonarr = {
+					image = "lscr.io/linuxserver/sonarr:latest";
 					environment = {
 						PUID = 0;
 						PGID = 0;
 						TZ = "Europe/Paris";
 					};
 					volumes = [
-						"/media/bellum/gohma/data:/config"
+						"/home/dawn/docker/sonarr:/config"
 						"/media/bellum/gohma/downloads:/downloads"
-						"/media/bellum/gohma/watchdir:/watch"
+						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
-					ip4 = "172.18.0.11";
-				network= ["docker-like"];
-			};
-			sonarr = {
-				image = "lscr.io/linuxserver/sonarr:latest";
-				environment = {
-					PUID = 0;
-					PGID = 0;
-					TZ = "Europe/Paris";
+					ip4 = "172.18.0.12";
+					network= ["docker-like"];
+					autoUpdate = "registry";
 				};
-				volumes = [
-					"/home/dawn/docker/sonarr:/config"
-					"/media/bellum/gohma/downloads:/downloads"
-					"/media/bellum/main/Multimédia/Séries:/tv"
-				];
-				ip4 = "172.18.0.12";
-				network= ["docker-like"];
-			};
-			radarr = {
-				image = "lscr.io/linuxserver/radarr:latest";
-				environment = {
-					PUID = 0;
-					PGID = 0;
-					TZ = "Europe/Paris";
-				};
-				volumes = [
-					"/home/dawn/docker/radarr:/config"
-					"/media/bellum/gohma/downloads:/downloads"
-					"/media/bellum/main/Multimédia/Films:/movies"
-				];
-				ip4 = "172.18.0.13";
-				network= ["docker-like"];
-			};
-			jackett = {
-				image = "lscr.io/linuxserver/jackett:latest";
-				environment = {
-					PUID = 0;
-					PGID = 0;
-					TZ = "Europe/Paris";
-					AUTO_UPDATE = true;
-				};
-				volumes = [ "/home/dawn/docker/jackett:/config" ];
-				ip4 = "172.18.0.14";
-				network= ["docker-like"];
-			};
-			bazarr = {
-				image = "lscr.io/linuxserver/bazarr:latest";
-				environment = {
-					PUID = 0;
-					PGID = 0;
-					TZ = "Europe/Paris";
-				};
-				volumes = [
-					"/home/dawn/docker/bazarr:/config"
-					"/media/bellum/main/Multimédia/Films:/movies"
-					"/media/bellum/main/Multimédia/Séries:/tv"
-				];
-				ip4 = "172.18.0.15";
-				network= ["docker-like"];
-			};
-			jellyfin = {
-				image = "lscr.io/linuxserver/jellyfin:latest";
-				environment = {
-					PUID = 0;
-					PGID = 0;
-					TZ = "Europe/Paris";
-					DOCKER_MODS = [
-						"linuxserver/mods:jellyfin-amd"
-						"ghcr.io/intro-skipper/intro-skipper-docker-mod"
+				radarr = {
+					image = "lscr.io/linuxserver/radarr:latest";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+						TZ = "Europe/Paris";
+					};
+					volumes = [
+						"/home/dawn/docker/radarr:/config"
+						"/media/bellum/gohma/downloads:/downloads"
+						"/media/bellum/main/Multimédia/Films:/movies"
 					];
+					ip4 = "172.18.0.13";
+					network= ["docker-like"];
+					autoUpdate = "registry";
 				};
-				volumes = [
-					"/media/bellum/main/Multimédia/Films:/data/movies"
-					"/media/bellum/main/Multimédia/Séries:/data/tvshows"
-					"/media/bellum/main/new_Deezer:/data/music"
-					"/media/bellum/jellyfin:/config"
-				];
-				devices = [
-					"/dev/dri:/dev/dri"
-					"/dev/kfd:/dev/kfd"
-				];
-				ip4 = "172.18.0.16";
-				network= ["docker-like"];
-			};
-			lidarr = {
-				image = "youegraillot/lidarr-on-steroids";
-				environment = {
-					PUID = 0;
-					PGID = 0;
-					TZ = "Europe/Paris";
+				jackett = {
+					image = "lscr.io/linuxserver/jackett:latest";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+						TZ = "Europe/Paris";
+						AUTO_UPDATE = true;
+					};
+					volumes = [ "/home/dawn/docker/jackett:/config" ];
+					ip4 = "172.18.0.14";
+					network= ["docker-like"];
+					autoUpdate = "registry";
 				};
-				volumes = [
-					"/home/dawn/docker/lidarr:/config"
-					"/media/bellum/main/new_Deezer:/music"
-					"/media/bellum/main/new_Deezer:/downloads"
-				];
-				ip4 = "172.18.0.17";
-				network= ["docker-like"];
-			};
-			nginx = {
-				image = "lscr.io/linuxserver/nginx:latest";
-				environment = {
-					PUID = 0;
-					PGID = 0;
-					TZ = "Europe/Paris";
+				bazarr = {
+					image = "lscr.io/linuxserver/bazarr:latest";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+						TZ = "Europe/Paris";
+					};
+					volumes = [
+						"/home/dawn/docker/bazarr:/config"
+						"/media/bellum/main/Multimédia/Films:/movies"
+						"/media/bellum/main/Multimédia/Séries:/tv"
+					];
+					ip4 = "172.18.0.15";
+					network= ["docker-like"];
+					autoUpdate = "registry";
 				};
-				volumes = [ "/home/dawn/docker/nginx/config:/config" ];
-				ip4 = "172.18.0.18";
-				network= ["docker-like"];
-			};
-			proxy-manager = {
-				image = "jc21/nginx-proxy-manager:latest";
-				environment = {
-					PUID = 0;
-					PGID = 0;
+				jellyfin = {
+					image = "lscr.io/linuxserver/jellyfin:latest";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+						TZ = "Europe/Paris";
+						DOCKER_MODS = [
+							"lscr.io/linuxserver/mods:jellyfin-amd"
+							"ghcr.io/intro-skipper/intro-skipper-docker-mod"
+						];
+					};
+					volumes = [
+						"/media/bellum/main/Multimédia/Films:/data/movies"
+						"/media/bellum/main/Multimédia/Séries:/data/tvshows"
+						"/media/bellum/main/new_Deezer:/data/music"
+						"/media/bellum/jellyfin:/config"
+					];
+					devices = [
+						"/dev/dri:/dev/dri"
+						"/dev/kfd:/dev/kfd"
+					];
+					ip4 = "172.18.0.16";
+					network= ["docker-like"];
+					autoUpdate = "registry";
 				};
-				volumes = [
-					"/home/dawn/docker/proxy-manager/data:/data"
-					"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
-				];
-				ip4 = "172.18.0.19";
-				network= ["docker-like"];
-			};
-			pihole = {
-				image = "pihole/pihole:latest";
-				environment = {
-					TZ = "Europe/Paris";
-					FTLCONF_webserver_api_password = "";
-					FTLCONF_dns_listeningMode = "all"; # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
+				lidarr = {
+					image = "docker.io/youegraillot/lidarr-on-steroids";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+						TZ = "Europe/Paris";
+					};
+					volumes = [
+						"/home/dawn/docker/lidarr:/config"
+						"/media/bellum/main/new_Deezer:/music"
+						"/media/bellum/main/new_Deezer:/downloads"
+					];
+					ip4 = "172.18.0.17";
+					network= ["docker-like"];
+					autoUpdate = "registry";
 				};
-				user = 0;
-				ip4 = "172.18.0.20";
-				network= ["docker-like"];
-			};
-			vaultwarden = {
-				image = "vaultwarden/server:latest";
-				environment = {
-					PUID = 0;
-					PGID = 0;
-					DOMAIN = "https://vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
-					SIGNUPS_ALLOWED = "false";
+				nginx = {
+					image = "lscr.io/linuxserver/nginx:latest";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+						TZ = "Europe/Paris";
+					};
+					volumes = [ "/home/dawn/docker/nginx/config:/config" ];
+					ip4 = "172.18.0.18";
+					network= ["docker-like"];
+					autoUpdate = "registry";
 				};
-				volumes = [ "/home/dawn/docker/vaultwarden/data:/data" ];
-				ip4 = "172.18.0.21";
-				network= ["docker-like"];
-			};
-			freshrss = {
-				image = "freshrss/freshrss";
-				environment = {
-					TZ = "Europe/Paris";
-					CRON_MIN = 0;
+				proxy-manager = {
+					image = "docker.io/jc21/nginx-proxy-manager:latest";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+					};
+					volumes = [
+						"/home/dawn/docker/proxy-manager/data:/data"
+						"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
+					];
+					ip4 = "172.18.0.19";
+					network= ["docker-like"];
+					autoUpdate = "registry";
 				};
-				user = 0;
-				volumes = [ "/home/dawn/docker/freshrss/:/var/www/FreshRSS/data" ];
-				ip4 = "172.18.0.22";
-				network= ["docker-like"];
+				pihole = {
+					image = "docker.io/pihole/pihole:latest";
+					environment = {
+						TZ = "Europe/Paris";
+						FTLCONF_webserver_api_password = "";
+						FTLCONF_dns_listeningMode = "all"; # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
+					};
+					user = 0;
+					ip4 = "172.18.0.20";
+					network= ["docker-like"];
+					autoUpdate = "registry";
+				};
+				vaultwarden = {
+					image = "docker.io/vaultwarden/server:latest";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+						DOMAIN = "https://vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+						SIGNUPS_ALLOWED = "false";
+					};
+					volumes = [ "/home/dawn/docker/vaultwarden/data:/data" ];
+					ip4 = "172.18.0.21";
+					network= ["docker-like"];
+					autoUpdate = "registry";
+				};
+				miniflux = {
+					image = "docker.io/miniflux/miniflux:latest";
+					environment = {
+						DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/postgres";
+						RUN_MIGRATIONS = 1;
+						CREATE_ADMIN = 1;
+						ADMIN_USERNAME = "admin";
+						ADMIN_PASSWORD = "admin";
+					};
+					user = 0;
+					ip4 = "172.18.0.22";
+					network= ["docker-like"];
+					autoUpdate = "registry";
+				};
+				minio = { # Storage (for image uploads)
+					image = "docker.io/minio/minio:latest";
+					exec = "server /data";
+					environment = {
+						MINIO_ROOT_USER = "minioadmin";
+						MINIO_ROOT_PASSWORD = "minioadmin";
+					};
+					ip4 = "172.18.0.23";
+					network = ["docker-like"];
+					autoUpdate = "registry";
+				};
+				chrome = { # Chrome Browser (for printing and previews)
+					image = "ghcr.io/browserless/chromium:v2.18.0"; # Upgrading to newer versions causes issues
+					environment = {
+						TIMEOUT = 10000;
+						CONCURRENT = 10;
+						TOKEN = "chrome_token";
+						EXIT_ON_HEALTH_FAILURE = "true";
+						PRE_REQUEST_HEALTH_CHECK = "true";
+					};
+					ip4 = "172.18.0.24";
+					network = ["docker-like"];
+					autoUpdate = "registry";
+				};
+				reactive-resume = {
+					image = "docker.io/amruthpillai/reactive-resume:latest";
+					environment = {
+						PORT = 3000;
+						NODE_ENV = "production";
+						DISABLE_EMAIL_AUTH = false;
+						PUBLIC_URL = "https://reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						STORAGE_URL = "http://${config.services.podman.containers.minio.ip4}:9000/default";
+						CHROME_TOKEN = "chrome_token";
+						CHROME_URL = "ws://${config.services.podman.containers.chrome.ip4}:3000";
+						DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/postgres";
+						ACCESS_TOKEN_SECRET = "access_token_secret";
+						REFRESH_TOKEN_SECRET = "refresh_token_secret";
+						MAIL_FROM = "noreply@localhost.gay";
+						STORAGE_ENDPOINT = "minio";
+						STORAGE_PORT = 9000;
+						STORAGE_BUCKET = "default";
+						STORAGE_ACCESS_KEY = "minioadmin";
+						STORAGE_SECRET_KEY = "minioadmin";
+						STORAGE_USE_SSL = false;
+						STORAGE_SKIP_BUCKET_CHECK = false;
+					};
+					ip4 = "172.18.0.24";
+					network = ["docker-like"];
+					autoUpdate = "registry";
+				};
+
 			};
 		};
 	};

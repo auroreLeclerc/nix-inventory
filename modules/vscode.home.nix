@@ -17,6 +17,7 @@
 				jnoortheen.nix-ide
 				jgclark.vscode-todo-highlight
 				timonwong.shellcheck
+				davidanson.vscode-markdownlint
 			];
 			userSettings = {
 				"window.autoDetectColorScheme" = true;
@@ -27,8 +28,8 @@
   			"nix.enableLanguageServer" = true;
 				"nix.serverPath" = "nil";
 				"redhat.telemetry.enabled" = false;
-				# "sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
-				# "sonarlint.disableTelemetry" = true;
+				"sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
+				"sonarlint.disableTelemetry" = true;
 				"python.languageServer" = "Jedi";
 				"git.autofetch" = true;
 				"git.enableSmartCommit" = true;

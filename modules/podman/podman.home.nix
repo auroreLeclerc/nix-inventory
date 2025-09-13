@@ -1,5 +1,6 @@
-{ ... }: {
+{ pkgs, osConfig, lib, ... }: {
 	config = {
+		home.packages = lib.mkIf osConfig.services.desktopManager.plasma6.enable (with pkgs; [ podman-desktop podman-compose ]);
 		services.podman = {
 			enable = true;
 			autoUpdate = {

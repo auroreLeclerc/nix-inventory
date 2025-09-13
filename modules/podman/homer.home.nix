@@ -1,8 +1,9 @@
 { myLibs, osConfig, ... }: {
-	 config.services.podman.containers = let
+	config.services.podman.containers = let
 		homerConfig = {
-			title = "App dashboard";
-			# subtitle = "UwU";
+			title = "Mon laboratoire à moi que j'ai !";
+			subtitle = "👉🏻👈🏻";
+			icon = "fas fa-dragon";
 			header = true;
 			footer = false;
 			columns = "auto";
@@ -13,13 +14,46 @@
 			};
 			theme = "neon";
 			colors = {
-				light.background-image = "/www/assets/light.png";
-				dark.background-image = "/www/assets/dark.png";
+				light.background-image = "/assets/light.png";
+				dark.background-image = "/assets/dark.png";
 			};
 			services = [
 				{
-					name = "Homelab";
-					icon = "fas fa-code-branch";
+					name = "Administration";
+					icon = "fas fa-hammer";
+					items = [
+						{
+							name = "Transmission";
+							logo = "assets/transmission.png";
+							url = "https://transmission.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						} {
+							name = "Jackett";
+							logo = "assets/jackett.png";
+							url = "https://jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						} {
+							name = "Nginx";
+							logo = "assets/nginx.png";
+							url = "https://nginx.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						}	{
+							name = "Proxy Manager";
+							logo = "assets/proxy.svg";
+							url = "https://proxy-manager.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						}	{
+							name = "Pi-hole";
+							logo = "assets/pi.svg";
+							type = "PiHole";
+							# apikey = myLibs.impureSopsReading osConfig.sops.secrets.pihole.path;
+							url = "https://pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/admin";
+						}	{
+							name = "Vaultwarden - Server";
+							logo = "assets/vaultwarden.svg";
+							type = "Vaultwarden";
+							url = "https://vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+						}
+					];
+				}	{
+					name = "Multimédia";
+					icon = "fas fa-clapperboard";
 					items = [
 						{
 							name = "Jellyfin";
@@ -27,10 +61,6 @@
 							type = "Jellyfin";
 							apikey = myLibs.impureSopsReading osConfig.sops.secrets.jellyfin.path;
 							url = "https://jellyfin.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-						}	{
-							name = "Transmission";
-							logo = "assets/transmission.png";
-							url = "https://transmission.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Radarr";
 							logo = "assets/radarr.svg";
@@ -50,59 +80,32 @@
 							apikey = myLibs.impureSopsReading osConfig.sops.secrets.lidarr.path;
 							url = "https://lidarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
-							name = "Jackett";
-							logo = "assets/jackett.png";
-							url = "https://jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-						}	{
+							name = "Deemix";
+							logo = "assets/deemix.svg";
+							url = "http://localhost:6595/";
+						} {
 							name = "Bazarr";
 							logo = "assets/bazarr.png";
 							url = "https://bazarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						}	
+					];
+				} {
+					name = "Documents";
+					icon = "fas fa-briefcase";
+					items = [
+						{
+							name = "Reactive Resume";
+							logo = "assets/resume.svg";
+							url = "https://reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
-							name = "Nginx";
-							logo = "assets/nginx.png";
-							url = "https://nginx.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-						}	{
-							name = "Proxy Manager";
-							logo = "assets/proxy.svg";
-							url = "https://proxy-manager.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-						}	{
-							name = "Pi-hole";
-							logo = "assets/pi.svg";
-							type = "PiHole";
-							# apikey = myLibs.impureSopsReading osConfig.sops.secrets.pihole.path;
-							url = "https://pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/admin";
-						}	{
-							name = "Vaultwarden - Server";
-							logo = "assets/vaultwarden.svg";
-							type = "Vaultwarden";
-							url = "https://vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
-						}	{
-							name = "FreshRSS";
-							logo = "assets/freshrss.svg";
-							type = "FreshRSS";
-							url = "https://freshrss.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
-							username = "admin";
-							password = "admin";
-							updateInterval = 5000;
+							name = "miniflux";
+							logo = "assets/miniflux.svg";
+							url = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 						}
 					];
-				}	{
-				name = "Workbench";
-				icon = "fas fa-heartbeat";
-				items = [
-					{
-						name = "Reactive Resume";
-						logo = "assets/resume.svg";
-						url = "http://localhost:3000/";
-					} {
-						name = "Deemix";
-						logo = "assets/deemix.svg";
-						url = "http://localhost:6595/";
-					}
-				];
-			}
-		];
-	};
+				}
+			];
+		};
 	in {
 		homer = {
 			image = "b4bz/homer";
@@ -161,9 +164,9 @@
 					sha256 = "sha256-xY/pFVS9puG+Ub0M9WrISrY/eY1Rc+QeceGqHeUVx+8=";
 				}}:/www/assets/vaultwarden.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/FreshRSS/FreshRSS/refs/heads/edge/p/themes/icons/icon.svg";
-					sha256 = "sha256-pn8nvgp2gGCT48YxdtZ/Gwq7Na0syRpqRsA5Rv1e+qI=";
-				}}:/www/assets/freshrss.svg"
+					url = "https://raw.githubusercontent.com/miniflux/website/refs/heads/main/static/logo/icon_bg_white.svg";
+					sha256 = "sha256-j5glb/1FMilIOO9p///A/WAfcYXH6on6OzDJUtFbKlY=";
+				}}:/www/assets/miniflux.svg"
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/refs/heads/main/apps/artboard/public/favicon.svg";
 					sha256 = "sha256-NEhDw6TbcHvveQxDNFHKSrEudatpoYVGu0LR/lX5D3c=";
@@ -178,6 +181,7 @@
 			};
 			ip4 = "172.18.0.10";
 			network= ["docker-like"];
+			labels."io.containers.autoupdate" = "registry";
 		};
 	};
 }
