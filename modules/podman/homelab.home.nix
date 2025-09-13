@@ -214,11 +214,11 @@
 				miniflux = {
 					image = "docker.io/miniflux/miniflux:latest";
 					environment = {
-						DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/postgres";
+						DATABASE_URL = "postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable";
 						RUN_MIGRATIONS = 1;
 						CREATE_ADMIN = 1;
 						ADMIN_USERNAME = "admin";
-						ADMIN_PASSWORD = "admin";
+						ADMIN_PASSWORD = "adminadmin";
 					};
 					user = 0;
 					ip4 = "172.18.0.22";

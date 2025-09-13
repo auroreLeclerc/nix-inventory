@@ -1,8 +1,7 @@
 { myLibs, osConfig, ... }: {
 	config.services.podman.containers = let
 		homerConfig = {
-			title = "Mon laboratoire à moi que j'ai !";
-			subtitle = "👉🏻👈🏻";
+			title = "Laboratoire Maison";
 			icon = "fas fa-dragon";
 			header = true;
 			footer = false;
