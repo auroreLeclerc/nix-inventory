@@ -3,22 +3,6 @@
 	config = {
 		services.podman = {
 			containers = {
-				postgres = {
-					image = "docker.io/pgautoupgrade/pgautoupgrade:latest";
-					volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql/data" ];
-					environment = {
-						POSTGRES_USER = "postgres";
-						POSTGRES_PASSWORD = "postgres";
-					};
-					extraPodmanArgs = [
-						"--health-cmd 'CMD-SHELL,pg_isready -U postgres -d postgres'"
-						"--health-interval 10s"
-						"--health-retries 5"
-						"--health-timeout 5s"
-					];
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
-				};
 				wireguard = {
 					image = "lscr.io/linuxserver/wireguard:latest";
 					addCapabilities = [ "NET_ADMIN" ];
@@ -42,18 +26,18 @@
 					autoUpdate = "registry";
 				};
 				transmission = {
-						image = "lscr.io/linuxserver/transmission:latest";
-						environment = {
-							PUID = 0;
-							PGID = 0;
-							TZ = "Europe/Paris";
-						};
-						volumes = [
-							"/media/bellum/gohma/data:/config"
-							"/media/bellum/gohma/downloads:/downloads"
-							"/media/bellum/gohma/watchdir:/watch"
-						];
-						ip4 = "172.18.0.11";
+					image = "lscr.io/linuxserver/transmission:latest";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+						TZ = "Europe/Paris";
+					};
+					volumes = [
+						"/media/bellum/gohma/data:/config"
+						"/media/bellum/gohma/downloads:/downloads"
+						"/media/bellum/gohma/watchdir:/watch"
+					];
+					ip4 = "172.18.0.11";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -274,7 +258,23 @@
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
-
+				postgres = {
+					image = "docker.io/pgautoupgrade/pgautoupgrade:latest";
+					volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql/data" ];
+					environment = {
+						POSTGRES_USER = "postgres";
+						POSTGRES_PASSWORD = "postgres";
+					};
+					extraPodmanArgs = [
+						"--health-cmd 'CMD-SHELL,pg_isready -U postgres -d postgres'"
+						"--health-interval 10s"
+						"--health-retries 5"
+						"--health-timeout 5s"
+					];
+					network = [ "docker-like" ];
+					ip4 = "172.18.0.26";
+					autoUpdate = "registry";
+				};
 			};
 		};
 	};
