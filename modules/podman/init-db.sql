@@ -1,0 +1,2 @@
+CREATE DATABASE resume;
+CREATE DATABASE miniflux;

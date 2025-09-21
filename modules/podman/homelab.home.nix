@@ -242,7 +242,7 @@
 						STORAGE_URL = "http://${config.services.podman.containers.minio.ip4}:9000/default";
 						CHROME_TOKEN = "chrome_token";
 						CHROME_URL = "ws://${config.services.podman.containers.chrome.ip4}:3000";
-						DATABASE_URL = "postgresql://postgres:postgres@${config.services.podman.containers.postgres.ip4}:5432/reactive-resume";
+						DATABASE_URL = "postgresql://postgres:postgres@${config.services.podman.containers.postgres.ip4}:5432/resume";
 						ACCESS_TOKEN_SECRET = "access_token_secret";
 						REFRESH_TOKEN_SECRET = "refresh_token_secret";
 						MAIL_FROM = "noreply@localhost.gay";
@@ -260,7 +260,10 @@
 				};
 				postgres = {
 					image = "docker.io/pgautoupgrade/pgautoupgrade:latest";
-					volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql/data" ];
+					volumes = [
+						"/home/dawn/docker/postgres/:/var/lib/postgresql/data"
+						"${builtins.toFile "init-db" (builtins.readFile ./init-db.sql)}:/docker-entrypoint-initdb.d/init-user-db.sh"
+					];
 					environment = {
 						POSTGRES_USER = "postgres";
 						POSTGRES_PASSWORD = "postgres";
