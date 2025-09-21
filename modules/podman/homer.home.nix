@@ -2,6 +2,7 @@
 	config.services.podman.containers = let
 		homerConfig = {
 			title = "Laboratoire Maison";
+			subtitle = "OwO";
 			icon = "fas fa-dragon";
 			header = true;
 			footer = false;
@@ -179,7 +180,7 @@
 				INIT_ASSETS = 0;
 			};
 			ip4 = "172.18.0.10";
-			network= ["docker-like"];
+			network = [ "docker-like" ];
 			autoUpdate = "registry";
 		};
 	};

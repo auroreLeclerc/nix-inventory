@@ -7,7 +7,6 @@
 					image = "docker.io/pgautoupgrade/pgautoupgrade:latest";
 					volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql/data" ];
 					environment = {
-						POSTGRES_DB = "postgres";
 						POSTGRES_USER = "postgres";
 						POSTGRES_PASSWORD = "postgres";
 					};
@@ -17,7 +16,7 @@
 						"--health-retries 5"
 						"--health-timeout 5s"
 					];
-					network = ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				wireguard = {
@@ -39,7 +38,7 @@
 						"--sysctl net.ipv4.conf.all.src_valid_mark=1"
 						"--sysctl net.ipv4.ip_forward=1"
 					];
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				transmission = {
@@ -55,7 +54,7 @@
 							"/media/bellum/gohma/watchdir:/watch"
 						];
 						ip4 = "172.18.0.11";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				sonarr = {
@@ -71,7 +70,7 @@
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
 					ip4 = "172.18.0.12";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				radarr = {
@@ -87,7 +86,7 @@
 						"/media/bellum/main/Multimédia/Films:/movies"
 					];
 					ip4 = "172.18.0.13";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				jackett = {
@@ -100,7 +99,7 @@
 					};
 					volumes = [ "/home/dawn/docker/jackett:/config" ];
 					ip4 = "172.18.0.14";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				bazarr = {
@@ -116,7 +115,7 @@
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
 					ip4 = "172.18.0.15";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				jellyfin = {
@@ -141,7 +140,7 @@
 						"/dev/kfd:/dev/kfd"
 					];
 					ip4 = "172.18.0.16";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				lidarr = {
@@ -157,7 +156,7 @@
 						"/media/bellum/main/new_Deezer:/downloads"
 					];
 					ip4 = "172.18.0.17";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				nginx = {
@@ -169,7 +168,7 @@
 					};
 					volumes = [ "/home/dawn/docker/nginx/config:/config" ];
 					ip4 = "172.18.0.18";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				proxy-manager = {
@@ -183,7 +182,7 @@
 						"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
 					];
 					ip4 = "172.18.0.19";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				pihole = {
@@ -195,7 +194,7 @@
 					};
 					user = 0;
 					ip4 = "172.18.0.20";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				vaultwarden = {
@@ -208,13 +207,13 @@
 					};
 					volumes = [ "/home/dawn/docker/vaultwarden/data:/data" ];
 					ip4 = "172.18.0.21";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				miniflux = {
 					image = "docker.io/miniflux/miniflux:latest";
 					environment = {
-						DATABASE_URL = "postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable";
+						DATABASE_URL = "postgres://postgres:postgres@${config.services.podman.containers.postgres.ip4}:5432/miniflux?sslmode=disable";
 						RUN_MIGRATIONS = 1;
 						CREATE_ADMIN = 1;
 						ADMIN_USERNAME = "admin";
@@ -222,7 +221,7 @@
 					};
 					user = 0;
 					ip4 = "172.18.0.22";
-					network= ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				minio = { # Storage (for image uploads)
@@ -233,7 +232,7 @@
 						MINIO_ROOT_PASSWORD = "minioadmin";
 					};
 					ip4 = "172.18.0.23";
-					network = ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				chrome = { # Chrome Browser (for printing and previews)
@@ -246,7 +245,7 @@
 						PRE_REQUEST_HEALTH_CHECK = "true";
 					};
 					ip4 = "172.18.0.24";
-					network = ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				reactive-resume = {
@@ -259,7 +258,7 @@
 						STORAGE_URL = "http://${config.services.podman.containers.minio.ip4}:9000/default";
 						CHROME_TOKEN = "chrome_token";
 						CHROME_URL = "ws://${config.services.podman.containers.chrome.ip4}:3000";
-						DATABASE_URL = "postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable";
+						DATABASE_URL = "postgresql://postgres:postgres@${config.services.podman.containers.postgres.ip4}:5432/reactive-resume";
 						ACCESS_TOKEN_SECRET = "access_token_secret";
 						REFRESH_TOKEN_SECRET = "refresh_token_secret";
 						MAIL_FROM = "noreply@localhost.gay";
@@ -272,7 +271,7 @@
 						STORAGE_SKIP_BUCKET_CHECK = false;
 					};
 					ip4 = "172.18.0.25";
-					network = ["docker-like"];
+					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 

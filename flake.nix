@@ -22,7 +22,7 @@
 # 		pkgs = nixpkgs.legacyPackages.x86_64-linux;
 		myLibs = import ./lib/default.nix { lib = nixpkgs.lib; };
 		check = myLibs.checkSupportedVersion nixpkgs.lib.trivial.release;
-		unstablePkgs = import inputs.unstableNixpkgs {
+		unstablePkgs = import inputs.nixpkgs { # TODO: unstable and current might have incompatible Qt library
 			system = "x86_64-linux";
 			config = {
 				allowUnfree = builtins.trace "NixOS ${nixpkgs.lib.trivial.codeName}		${nixpkgs.lib.trivial.version}" check;

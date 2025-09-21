@@ -6,7 +6,7 @@
 			unstablePkgs.firefoxpwa
 			pkgs.kdePackages.plasma-browser-integration
 		];
-		languagePacks = [ "fr" "en-GB" ];
+		# languagePacks = [ "fr" "en-GB" ];
 		policies = {
 			DisableTelemetry = true;
 			DisableFirefoxStudies = true;
@@ -14,12 +14,8 @@
 				"SponsoredTopSites" = false;
 				"SponsoredPocket" = false;
 			};
-			Homepage =
-				let
-					path = (myLibs.impureSopsReading osConfig.sops.secrets.dns.path);
-					isPath = (path != "");
-				in lib.mkIf isPath {
-				"URL" = path;
+			Homepage = {
+				"URL" = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
 				"StartPage" = "homepage";
     	};
 			Preferences = {
