@@ -262,8 +262,9 @@
 					image = "docker.io/pgautoupgrade/pgautoupgrade:latest";
 					volumes = [
 						"/home/dawn/docker/postgres/:/var/lib/postgresql/data"
-						"${builtins.toFile "init-db" (builtins.readFile ./init-db.sql)}:/docker-entrypoint-initdb.d/init-user-db.sh"
+						"${builtins.toFile "init-db" (builtins.readFile ./init-db.sql)}:/docker-entrypoint-initdb.d/init-db.sql"
 					];
+					user = 0;
 					environment = {
 						POSTGRES_USER = "postgres";
 						POSTGRES_PASSWORD = "postgres";
