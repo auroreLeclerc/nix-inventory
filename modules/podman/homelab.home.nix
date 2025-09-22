@@ -238,11 +238,11 @@
 						PRE_REQUEST_HEALTH_CHECK = "true";
 					};
 					labels = {
-						traefik.enable = true;
+						traefik.enable = "true";
 						traefik.http.routers.storage.rule = "Host(`chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 						traefik.http.routers.storage.entrypoints = "websecure";
 						traefik.http.routers.storage.tls.certresolver = "letsencrypt";
-						traefik.http.services.storage.loadbalancer.server.port = 9000;
+						traefik.http.services.storage.loadbalancer.server.port = "9000";
 					};
 					ip4 = "172.18.0.24";
 					network = [ "docker-like" ];
