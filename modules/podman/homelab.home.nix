@@ -250,7 +250,7 @@
 						PUBLIC_URL = "https://reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						STORAGE_URL = "https://minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/default";
 						CHROME_TOKEN = "chrome_token";
-						CHROME_URL = "ws://${config.services.podman.containers.chrome.ip4}:3000";
+						CHROME_URL = "wss://chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						DATABASE_URL = "postgresql://postgres:postgres@${config.services.podman.containers.postgres.ip4}:5432/resume";
 						ACCESS_TOKEN_SECRET = "access_token_secret";
 						REFRESH_TOKEN_SECRET = "refresh_token_secret";
