@@ -110,7 +110,7 @@
 		homer = {
 			image = "docker.io/b4bz/homer:latest";
 			volumes = [
-				"${builtins.toFile "homerConfig" (builtins.toJSON homerConfig)}:/www/assets/config.yml"
+				"${builtins.toFile "homerConfig.json" (builtins.toJSON homerConfig)}:/www/assets/config.yml"
 				"${builtins.fetchurl {
 					url = "https://xenia-images.efi.pages.gay/chimmie_egg-wallpaper_light.png";
 					sha256 = "sha256-sEwFNdWClC1I3mc49EgJHSQJ4j1eAqReKQNOE+mZRus=";

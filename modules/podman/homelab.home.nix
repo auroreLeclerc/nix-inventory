@@ -2,6 +2,15 @@
 	imports = [ ./podman.home.nix ./homer.home.nix ];
 	config = {
 		services.podman = {
+			builds = {
+				postgres = {
+					file = builtins.toFile "Dockerfile" 
+					''
+						FROM docker.io/pgautoupgrade/pgautoupgrade:latest
+						COPY ${builtins.baseNameOf (builtins.toFile "init-db.sql" (builtins.readFile ./init-db.sql))} /docker-entrypoint-initdb.d/
+					'';
+				};
+			};
 			containers = {
 				wireguard = {
 					image = "lscr.io/linuxserver/wireguard:latest";
@@ -259,11 +268,8 @@
 					autoUpdate = "registry";
 				};
 				postgres = {
-					image = "docker.io/pgautoupgrade/pgautoupgrade:latest";
-					volumes = [
-						"/home/dawn/docker/postgres/:/var/lib/postgresql/data"
-						"${builtins.toFile "init-db" (builtins.readFile ./init-db.sql)}:/docker-entrypoint-initdb.d/init-db.sql"
-					];
+					image = "homemanager/postgres";
+					volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql/data" ];
 					user = 0;
 					environment = {
 						POSTGRES_USER = "postgres";
