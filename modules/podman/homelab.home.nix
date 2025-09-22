@@ -229,13 +229,10 @@
 					autoUpdate = "registry";
 				};
 				chrome = { # Chrome Browser (for printing and previews)
-					image = "ghcr.io/browserless/chromium:v2.18.0"; # Upgrading to newer versions causes issues
+					image = "ghcr.io/browserless/chromium:latest";
 					environment = {
-						TIMEOUT = 10000;
-						CONCURRENT = 10;
 						TOKEN = "chrome_token";
-						EXIT_ON_HEALTH_FAILURE = "true";
-						PRE_REQUEST_HEALTH_CHECK = "true";
+      			HEALTH = "true";
 						PROXY_HOST = "chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						PROXY_PORT = 443;
 						PROXY_SSL ="true";
