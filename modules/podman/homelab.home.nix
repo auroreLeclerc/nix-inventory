@@ -268,7 +268,7 @@
 					autoUpdate = "registry";
 				};
 				postgres = {
-					image = "homemanager/postgres";
+					image = "localhost/homemanager/postgres";
 					volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql/data" ];
 					user = 0;
 					environment = {
