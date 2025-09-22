@@ -224,6 +224,13 @@
 						MINIO_ROOT_USER = "minioadmin";
 						MINIO_ROOT_PASSWORD = "minioadmin";
 					};
+					labels = {
+    				"traefik.enable" = true;
+    				"traefik.http.routers.storage.rule" = "Host(`minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.storage.entrypoints" = "websecure";
+    				"traefik.http.routers.storage.tls.certresolver" = "letsencrypt";
+    				"traefik.http.services.storage.loadbalancer.server.port" = 9000;
+					};
 					ip4 = "172.18.0.23";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -235,7 +242,7 @@
       			HEALTH = "true";
 						PROXY_HOST = "chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						PROXY_PORT = 443;
-						PROXY_SSL ="true";
+						PROXY_SSL = "true";
 					};
 					ip4 = "172.18.0.24";
 					network = [ "docker-like" ];
