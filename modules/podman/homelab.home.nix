@@ -267,7 +267,7 @@
 						STORAGE_BUCKET = "default";
 						STORAGE_ACCESS_KEY = "minioadmin";
 						STORAGE_SECRET_KEY = "minioadmin";
-						STORAGE_USE_SSL = true;
+						STORAGE_USE_SSL = false;
 						STORAGE_SKIP_BUCKET_CHECK = false;
 					};
 					ip4 = "172.18.0.25";
