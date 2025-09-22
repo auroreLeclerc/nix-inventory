@@ -45,7 +45,7 @@ class UML():
     """Generator of UML"""
     __DIR_PATH = Path(__file__).parent
     __OUT_PATH = Path(__DIR_PATH/"inventory.puml")
-    __PUML_URL = "https://github.com/plantuml/plantuml/releases/download/v1.2025.4/plantuml-gplv2-1.2025.4.jar"
+    __PUML_URL = "https://github.com/plantuml/plantuml/releases/latest/download/plantuml.jar"
     __PUML_EXEC = "/tmp/plantuml.jar"
 
     @property
