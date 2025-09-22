@@ -253,7 +253,6 @@
 					environment = {
 						PORT = 3000;
 						NODE_ENV = "production";
-						DISABLE_EMAIL_AUTH = true;
 						PUBLIC_URL = "https://reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						STORAGE_URL = "https://minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/default";
 						CHROME_TOKEN = "chrome_token";
