@@ -130,7 +130,7 @@
 						lengthMode = "fit";
 						floating = true;
 						widgets = let
-							colors = builtins.fromJSON (builtins. readFile ../../utilities/kde_colors.json);
+							colors = builtins.fromJSON (builtins. readFile ./kde_colors.json);
 						in [
 							{
 								systemMonitor = {

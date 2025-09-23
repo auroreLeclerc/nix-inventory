@@ -3,7 +3,7 @@
 from enum import Enum
 import json
 import re
-import os
+from pathlib import Path
 
 class MaterialColors(Enum):
     """Enum of Material Colors"""
@@ -57,7 +57,7 @@ class KdeColors():
             "NETWORK": self.__build_array_of_colors([MaterialColors.LIIME], 2)
         }
 
-        with open(os.path.join(os.path.dirname(__file__), "kde_colors.json"), "w", encoding="utf-8") as file:
+        with open(Path(__file__).parent/".."/"modules"/"kde"/"kde_colors.json", "w", encoding="utf-8") as file:
             file.write(json.dumps(output, indent = 4))
 
 KdeColors(12)
