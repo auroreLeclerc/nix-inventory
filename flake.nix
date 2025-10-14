@@ -19,7 +19,7 @@
 	};
 	outputs = { self, nixpkgs, home-manager, catppuccin, ... } @ inputs:
 	let
-# 		pkgs = nixpkgs.legacyPackages.x86_64-linux;
+		pkgs = nixpkgs.legacyPackages.x86_64-linux;
 		myLibs = import ./lib/default.nix { lib = nixpkgs.lib; };
 		check = myLibs.checkSupportedVersion nixpkgs.lib.trivial.release;
 		unstablePkgs = import inputs.nixpkgs { # FIXME: unstable and current have incompatible Qt library
@@ -64,6 +64,8 @@
 				];
 			}
 		) (builtins.readDir ./units);
-# 		packages.x86_64-linux.default = pkgs.uwufetch;
+		devShells.x86_64-linux.default = pkgs.mkShell {
+  		buildInputs = with pkgs; [ nano nanorc wget openssl curl age htop parted fastfetch p7zip unzip file sops python3 ];
+		};
 	};
 }

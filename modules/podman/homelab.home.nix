@@ -2,15 +2,6 @@
 	imports = [ ./podman.home.nix ./homer.home.nix ];
 	config = {
 		services.podman = {
-			builds = {
-				postgres = {
-					file = builtins.toFile "Dockerfile" 
-					''
-						FROM docker.io/pgautoupgrade/pgautoupgrade:latest
-						COPY ${builtins.baseNameOf (builtins.toFile "init-db.sql" (builtins.readFile ./init-db.sql))} /docker-entrypoint-initdb.d/
-					'';
-				};
-			};
 			containers = {
 				wireguard = {
 					image = "lscr.io/linuxserver/wireguard:latest";
@@ -152,23 +143,24 @@
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
-				nginx = {
-					image = "lscr.io/linuxserver/nginx:latest";
-					environment = {
-						PUID = 0;
-						PGID = 0;
-						TZ = "Europe/Paris";
-					};
-					volumes = [ "/home/dawn/docker/nginx/config:/config" ];
-					ip4 = "172.18.0.18";
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
-				};
+				# nginx = {
+				# 	image = "lscr.io/linuxserver/nginx:latest";
+				# 	environment = {
+				# 		PUID = 0;
+				# 		PGID = 0;
+				# 		TZ = "Europe/Paris";
+				# 	};
+				# 	volumes = [ "/home/dawn/docker/nginx/config:/config" ];
+				# 	ip4 = "172.18.0.18";
+				# 	network = [ "docker-like" ];
+				# 	autoUpdate = "registry";
+				# };
 				proxy-manager = {
 					image = "docker.io/jc21/nginx-proxy-manager:latest";
 					environment = {
 						PUID = 0;
 						PGID = 0;
+     				DISABLE_IPV6 = true;
 					};
 					volumes = [
 						"/home/dawn/docker/proxy-manager/data:/data"
@@ -289,6 +281,25 @@
 					];
 					network = [ "docker-like" ];
 					ip4 = "172.18.0.26";
+					autoUpdate = "local";
+				};
+				traefik = {
+					image = "docker.io/doijanky/traefik:latest";
+					volumes = [ "/run/user/1000/podman/podman.sock:/var/run/docker.sock" ];
+					user = 0;
+					extraPodmanArgs = [
+						"--api.insecure=true"
+						"--providers.docker=true"
+						"--providers.docker.exposedbydefault=false"
+						"--entrypoints.web.address=:80"
+						"--entrypoints.websecure.address=:443"
+						"--certificatesresolvers.duckresolver.acme.dnschallenge=true"
+						"--certificatesresolvers.duckresolver.acme.dnschallenge.provider=duckdns"
+						"--certificatesresolvers.duckresolver.acme.email=<your email>"
+						"--certificatesresolvers.duckresolver.acme.storage=/letsencrypt/acme.json"
+					];
+					network = [ "docker-like" ];
+					ip4 = "172.18.0.27";
 					autoUpdate = "registry";
 				};
 			};

@@ -12,7 +12,7 @@
 		(with unstablePkgs; [ discord celeste64 ])
 	;
 	hardware = {
-		xpadneo.enable = true;
+		xone.enable = true;
 		amdgpu.amdvlk = {
 			enable = true;
 			support32Bit.enable = true;

@@ -324,6 +324,8 @@
 							"Tea1 Time" = 4*60;
 							"Tea2 Name" = "Tortellini";
 							"Tea2 Time" = 5*60;
+							"Tea3 Name" = "Coquillettes";
+							"Tea3 Time" = 8*60;
 						};
 					};
 					"kteatime.notifyrc" = {
@@ -367,7 +369,7 @@
 					target = ".config/autostart/org.kde.kteatime.desktop";
 				};
 				foldersorter = {
-					source = "${downloadsort}";
+					source = "${downloadsort}/bin/downloadsort";
 					target = ".config/plasma-workspace/env/downloadsort.sh";
 				};
 				discord = lib.mkIf (builtins.elem unstablePkgs.discord osConfig.environment.systemPackages) {
