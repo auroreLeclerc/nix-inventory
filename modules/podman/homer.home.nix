@@ -181,7 +181,7 @@
 			};
 			labels = {
 				"traefik.enable" = "true";
-				"traefik.http.routers.homer.rule" = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+				"traefik.http.routers.homer.rule" = "Host(\\\"${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}\\\")";
 				"traefik.http.routers.homer.entrypoints" = "web";
 			};
 			ip4 = "172.18.0.10";
