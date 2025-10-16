@@ -2,13 +2,11 @@
 	config = {
 		services.podman.containers.traefik = let
 			traefikConfig = {
-				DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 				api = {
 					insecure = true;
 					dashboard = true;
 				};
 				log.level = "DEBUG";
-				# providers.docker.exposedbydefault=false;
 				# entrypoints = {
 				# 	web = {
 				# 		address = ":80";
@@ -22,14 +20,20 @@
 				# 		http.tls = true;
 				# 	};
 				# };
+				providers = {
+					file.filename = "/etc/traefik/dynamic.yml";
+					docker.exposedbydefault=false;
+				};
+			};
+			dynamicConfig = {
 				http = {
 					routers = builtins.mapAttrs (name: content: {
-						# entryPoints = [ "web" ];
+						entryPoints = [ "web" ];
 						rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`/${name}`)";
 						service = name;
 					}) (config.services.podman.containers);
 					services = builtins.mapAttrs (name: content: {
-						loadBalancer.servers.url = "http://${content.ip4}:8080";
+						loadBalancer.servers = [ { url = "http://${content.ip4}:8080"; } ];
 					}) (config.services.podman.containers);
 				};
 				certificatesresolvers.duckresolver.acme = {
@@ -46,14 +50,15 @@
 		in {
 			image = "docker.io/traefik:latest";
 			volumes = [
-				# "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
+				"/run/user/1000/podman/podman.sock:/var/run/docker.sock"
 				"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
-				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/traefik.yaml"
+				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
+				"${builtins.toFile "dynamicConfig.json" (builtins.toJSON dynamicConfig)}:/etc/traefik/dynamic.yml"
 			];
 			user = 0;
-			# environment = {
-			# 	DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
-			# };
+			environment = {
+				DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
+			};
 			ip4 = "172.18.0.27";
 			network = [ "docker-like" ];
 			autoUpdate = "registry";
