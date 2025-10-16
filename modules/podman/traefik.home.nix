@@ -2,6 +2,7 @@
 	config = {
 		services.podman.containers.traefik = let
 			traefikConfig = {
+				DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 				api = {
 					insecure = true;
 					dashboard = true;
@@ -49,9 +50,9 @@
 				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
 			];
 			user = 0;
-			environment = {
-				DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
-			};
+			# environment = {
+			# 	DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
+			# };
 			ip4 = "172.18.0.27";
 			network = [ "docker-like" ];
 			autoUpdate = "registry";
