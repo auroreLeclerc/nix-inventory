@@ -47,7 +47,7 @@
 			volumes = [
 				# "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
 				"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
-				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
+				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/traefik.yaml"
 			];
 			user = 0;
 			# environment = {
