@@ -22,15 +22,13 @@
 				# };
 				http = {
 					routers = builtins.mapAttrs (name: content: {
-						"${name}-rooter" = {
-							# entryPoints = [ "web" ];
-							rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`/${name}`)";
-							service = "${name}-service";
-						};
-					}) (config.services.podman);
+						# entryPoints = [ "web" ];
+						rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`/${name}`)";
+						service = name;
+					}) (config.services.podman.containers);
 					services = builtins.mapAttrs (name: content: {
-						"${name}-service".loadBalancer.servers.url = "http://${content.ip4}:80";
-					}) (config.services.podman);
+						loadBalancer.servers.url = "http://${content.ip4}:80";
+					}) (config.services.podman.containers);
 				};
 				certificatesresolvers.duckresolver.acme = {
 					dnschallenge.provider = "duckdns";
