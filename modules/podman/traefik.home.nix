@@ -6,7 +6,7 @@
 					insecure = true;
 					dashboard = true;
 				};
-				log.level = "DEBUG";
+				# log.level = "DEBUG";
 				entrypoints = {
 					web = {
 						address = ":80";
@@ -20,6 +20,11 @@
 						http.tls = true;
 					};
 				};
+				certificatesresolvers.duckresolver.acme = {
+					dnschallenge.provider = "duckdns";
+					email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
+					storage = "/letsencrypt/acme.json";
+				};
 				providers = {
 					file.filename = "/etc/traefik/dynamic.yml";
 					docker.exposedbydefault=false;
@@ -31,15 +36,14 @@
 						entryPoints = [ "web" ];
 						rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`/${name}`)";
 						service = name;
+						tls = {
+							certResolver = "duckresolver";
+							domains = [ { main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path; } ];
+						};
 					}) (config.services.podman.containers);
 					services = builtins.mapAttrs (name: content: {
 						loadBalancer.servers = [ { url = "http://${content.ip4}:8080"; } ];
 					}) (config.services.podman.containers);
-				};
-				certificatesresolvers.duckresolver.acme = {
-					dnschallenge.provider = "duckdns";
-					email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
-					storage = "/letsencrypt/acme.json";
 				};
 				observability = {
 					accessLogs = false;
