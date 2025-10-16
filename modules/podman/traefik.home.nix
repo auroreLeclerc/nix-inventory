@@ -7,6 +7,7 @@
 					insecure = true;
 					dashboard = true;
 				};
+				log.level = "DEBUG";
 				# providers.docker.exposedbydefault=false;
 				# entrypoints = {
 				# 	web = {
