@@ -28,20 +28,20 @@
 				};
 				providers = {
 					file.filename = "/etc/traefik/dynamic.yml";
-					docker.exposedbydefault=false;
+					# docker.exposedbydefault = false;
 				};
 			};
 			dynamicConfig = {
 				http = {
 					routers = builtins.mapAttrs (name: content: {
 						entryPoints = [ "web" ];
-						rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+						rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`${name}`)";
 						service = name;
 						tls = {
 							certResolver = "duckresolver";
 							domains = [ {
 								main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
-								sans = [ "${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}" ];
+								# sans = [ "${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}" ];
 							} ];
 						};
 					}) (config.services.podman.containers);
@@ -49,16 +49,11 @@
 						loadBalancer.servers = [ { url = "http://${content.ip4}:8080"; } ];
 					}) (config.services.podman.containers);
 				};
-				observability = {
-					accessLogs = false;
-					metrics = false;
-					tracing = false;
-				};
 			};
 		in {
 			image = "docker.io/traefik:latest";
 			volumes = [
-				"/run/user/1000/podman/podman.sock:/var/run/docker.sock"
+				# "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
 				"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
 				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
 				"${builtins.toFile "dynamicConfig.json" (builtins.toJSON dynamicConfig)}:/etc/traefik/dynamic.yml"
