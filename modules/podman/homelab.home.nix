@@ -38,9 +38,9 @@
 						"/media/bellum/gohma/watchdir:/watch"
 					];
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.transmission.rule = "Host(`transmission.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.transmission.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.transmission.rule" = "Host(`transmission.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.transmission.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.11";
 					network = [ "docker-like" ];
@@ -59,9 +59,9 @@
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.sonarr.rule = "Host(`sonarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.sonarr.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.sonarr.rule" = "Host(`sonarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.sonarr.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.12";
 					network = [ "docker-like" ];
@@ -80,9 +80,9 @@
 						"/media/bellum/main/Multimédia/Films:/movies"
 					];
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.radarr.rule = "Host(`radarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.radarr.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.radarr.rule" = "Host(`radarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.radarr.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.13";
 					network = [ "docker-like" ];
@@ -98,9 +98,9 @@
 					};
 					volumes = [ "/home/dawn/docker/jackett:/config" ];
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.jackett.rule = "Host(`jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.jackett.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.jackett.rule" = "Host(`jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.jackett.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.14";
 					network = [ "docker-like" ];
@@ -119,9 +119,9 @@
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.bazarr.rule = "Host(`bazarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.bazarr.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.bazarr.rule" = "Host(`bazarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.bazarr.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.15";
 					network = [ "docker-like" ];
@@ -149,9 +149,9 @@
 						"/dev/kfd:/dev/kfd"
 					];
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.jellyfin.rule = "Host(`jellyfin.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.jellyfin.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.jellyfin.rule" = "Host(`jellyfin.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.jellyfin.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.16";
 					network = [ "docker-like" ];
@@ -170,9 +170,9 @@
 						"/media/bellum/main/new_Deezer:/downloads"
 					];
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.lidarr.rule = "Host(`lidarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.lidarr.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.lidarr.rule" = "Host(`lidarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.lidarr.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.17";
 					network = [ "docker-like" ];
@@ -214,9 +214,9 @@
 					};
 					user = 0;
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.pihole.rule = "Host(`pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.pihole.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.pihole.rule" = "Host(`pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.pihole.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.20";
 					network = [ "docker-like" ];
@@ -232,9 +232,9 @@
 					};
 					volumes = [ "/home/dawn/docker/vaultwarden/data:/data" ];
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.vaultwarden.rule = "Host(`vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.vaultwarden.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.vaultwarden.rule" = "Host(`vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.vaultwarden.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.21";
 					network = [ "docker-like" ];
@@ -252,9 +252,9 @@
 					user = 0;
 					ip4 = "172.18.0.22";
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.miniflux.rule = "Host(`miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.miniflux.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.miniflux.rule" = "Host(`miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.miniflux.entrypoints" = "web";
 					};
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -267,9 +267,9 @@
 						MINIO_ROOT_PASSWORD = "minioadmin";
 					};
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.minio.rule = "Host(`minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.minio.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.minio.rule" = "Host(`minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.minio.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.23";
 					network = [ "docker-like" ];
@@ -285,9 +285,9 @@
 						PROXY_SSL = "true";
 					};
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.chrome.rule = "Host(`chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.chrome.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.chrome.rule" = "Host(`chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.chrome.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.24";
 					network = [ "docker-like" ];
@@ -315,9 +315,9 @@
 						STORAGE_SKIP_BUCKET_CHECK = false;
 					};
 					labels = {
-    				traefik.enable = "true";
-    				traefik.http.routers.reactive-resume.rule = "Host(`reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				traefik.http.routers.reactive-resume.entrypoints = "web";
+    				"traefik.enable" = "true";
+    				"traefik.http.routers.reactive-resume".rule = "Host(`reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.reactive-resume".entrypoints = "web";
 					};
 					ip4 = "172.18.0.25";
 					network = [ "docker-like" ];
