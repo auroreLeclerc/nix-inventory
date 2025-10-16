@@ -9,7 +9,7 @@
 				# log.level = "DEBUG";
 				entrypoints = {
 					web = {
-						address = ":8080";
+						address = ":80";
 						http.redirections.entryPoint = {
 							to = "websecure";
 							scheme = "https";
