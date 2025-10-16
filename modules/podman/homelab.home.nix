@@ -23,6 +23,7 @@
 						"--sysctl net.ipv4.ip_forward=1"
 					];
 					network = [ "docker-like" ];
+					ip4 = "172.18.0.10";
 					autoUpdate = "registry";
 				};
 				transmission = {
