@@ -3,13 +3,13 @@
 		services.podman.containers.traefik = let
 			traefikConfig = {
 				api = {
-					insecure = false;
-					dashboard = false;
+					insecure = true;
+					dashboard = true;
 				};
 				# log.level = "DEBUG";
 				entrypoints = {
 					web = {
-						address = ":8080";
+						address = ":80";
 						http.redirections.entryPoint = {
 							to = "websecure";
 							scheme = "https";
@@ -37,6 +37,7 @@
 						entryPoints = [ "web" ];
 						rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`/${name}`)";
 						service = name;
+      			middlewares = [ name ];
 						tls = {
 							certResolver = "duckresolver";
 							domains = [ {
@@ -47,6 +48,9 @@
 					}) (config.services.podman.containers);
 					services = builtins.mapAttrs (name: content: {
 						loadBalancer.servers = [ { url = "http://${content.ip4}:8080"; } ];
+					}) (config.services.podman.containers);
+					middlewares = builtins.mapAttrs (name: content: {
+						addPrefix.prefix = "/api";
 					}) (config.services.podman.containers);
 				};
 			};
