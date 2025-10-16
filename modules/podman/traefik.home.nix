@@ -44,8 +44,8 @@
 			};
 			labels = {
 				"traefik.enable" = "true";
-				"traefik.http.routers.web.rule" = "Host(`traefik.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-				"traefik.http.routers.web.entrypoints" = "web";
+				"traefik.http.routers.traefik.rule" = "Host(`traefik.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+				"traefik.http.routers.traefik.entrypoints" = "web";
 			};
 			ip4 = "172.18.0.27";
 			network = [ "docker-like" ];
