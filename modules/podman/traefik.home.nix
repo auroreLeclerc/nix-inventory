@@ -3,13 +3,13 @@
 		services.podman.containers.traefik = let
 			traefikConfig = {
 				api = {
-					insecure = true;
-					dashboard = true;
+					insecure = false;
+					dashboard = false;
 				};
 				# log.level = "DEBUG";
 				entrypoints = {
 					web = {
-						address = ":80";
+						address = ":8080";
 						http.redirections.entryPoint = {
 							to = "websecure";
 							scheme = "https";
