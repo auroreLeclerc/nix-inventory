@@ -4,9 +4,9 @@
 			traefikConfig = {
 				api = {
 					insecure = true;
-					# dashboard = true;
+					dashboard = true;
 				};
-				providers.docker.exposedbydefault=false;
+				# providers.docker.exposedbydefault=false;
 				# entrypoints = {
 				# 	web = {
 				# 		address = ":80";
@@ -27,7 +27,7 @@
 						service = name;
 					}) (config.services.podman.containers);
 					services = builtins.mapAttrs (name: content: {
-						loadBalancer.servers.url = "http://${content.ip4}:80";
+						loadBalancer.servers.url = "http://${content.ip4}:8080";
 					}) (config.services.podman.containers);
 				};
 				certificatesresolvers.duckresolver.acme = {
@@ -44,7 +44,7 @@
 		in {
 			image = "docker.io/traefik:latest";
 			volumes = [
-				"/run/user/1000/podman/podman.sock:/var/run/docker.sock"
+				# "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
 				"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
 				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
 			];
