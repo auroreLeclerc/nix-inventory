@@ -35,7 +35,7 @@
 				http = {
 					routers = builtins.mapAttrs (name: content: {
 						entryPoints = [ "web" ];
-						rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`${name}`)";
+						rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`/${name}`)";
 						service = name;
 						tls = {
 							certResolver = "duckresolver";
