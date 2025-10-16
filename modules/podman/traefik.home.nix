@@ -9,7 +9,7 @@
 				# log.level = "DEBUG";
 				entrypoints = {
 					web = {
-						address = ":80";
+						address = ":8080";
 						http.redirections.entryPoint = {
 							to = "websecure";
 							scheme = "https";
@@ -24,6 +24,7 @@
 					dnschallenge.provider = "duckdns";
 					email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 					storage = "/letsencrypt/acme.json";
+      		httpChallenge.entryPoint = "web";
 				};
 				providers = {
 					file.filename = "/etc/traefik/dynamic.yml";
@@ -34,11 +35,14 @@
 				http = {
 					routers = builtins.mapAttrs (name: content: {
 						entryPoints = [ "web" ];
-						rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`/${name}`)";
+						rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 						service = name;
 						tls = {
 							certResolver = "duckresolver";
-							domains = [ { main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path; } ];
+							domains = [ {
+								main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
+								sans = [ "${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}" ];
+							} ];
 						};
 					}) (config.services.podman.containers);
 					services = builtins.mapAttrs (name: content: {
