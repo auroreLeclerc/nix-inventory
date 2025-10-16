@@ -180,7 +180,7 @@
 				INIT_ASSETS = 0;
 			};
 			labels = {
-				traefik.enable = true;
+				traefik.enable = "true";
 				traefik.http.routers.homer.rule = "Host(`homer.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 				traefik.http.routers.homer.entrypoints = "web";
 			};

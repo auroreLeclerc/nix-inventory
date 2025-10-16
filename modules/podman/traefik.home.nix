@@ -43,7 +43,7 @@
 				DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 			};
 			labels = {
-				traefik.enable = true;
+				traefik.enable = "true";
 				traefik.http.routers.traefik.rule = "Host(`traefik.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 				traefik.http.routers.traefik.entrypoints = "web";
 			};
