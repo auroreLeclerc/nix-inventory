@@ -7,19 +7,19 @@
 					dashboard = true;
 				};
 				log.level = "DEBUG";
-				# entrypoints = {
-				# 	web = {
-				# 		address = ":80";
-				# 		http.redirections.entryPoint = {
-				# 			to = "websecure";
-				# 			scheme = "https";
-				# 		};
-				# 	};
-				# 	websecure = {
-				# 		address = ":443";
-				# 		http.tls = true;
-				# 	};
-				# };
+				entrypoints = {
+					web = {
+						address = ":80";
+						http.redirections.entryPoint = {
+							to = "websecure";
+							scheme = "https";
+						};
+					};
+					websecure = {
+						address = ":443";
+						http.tls = true;
+					};
+				};
 				providers = {
 					file.filename = "/etc/traefik/dynamic.yml";
 					docker.exposedbydefault=false;
