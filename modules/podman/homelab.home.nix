@@ -316,8 +316,8 @@
 					};
 					labels = {
     				"traefik.enable" = "true";
-    				"traefik.http.routers.reactive-resume".rule = "Host(`reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				"traefik.http.routers.reactive-resume".entrypoints = "web";
+    				"traefik.http.routers.reactive-resume.rule" = "Host(`reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				"traefik.http.routers.reactive-resume.entrypoints" = "web";
 					};
 					ip4 = "172.18.0.25";
 					network = [ "docker-like" ];
