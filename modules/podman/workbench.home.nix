@@ -1,5 +1,5 @@
 { ... }: {
-	imports = [ ./podman.home.nix ./traefik.home.nix ];
+	imports = [ ./podman.home.nix ];
 	config = {
 		services.podman = {
 			volumes = {

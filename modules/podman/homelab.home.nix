@@ -1,5 +1,5 @@
 { osConfig, config, myLibs, ... }: {
-	imports = [ ./podman.home.nix ./homer.home.nix ];
+	imports = [ ./podman.home.nix ./homer.home.nix ./traefik.home.nix ];
 	config = {
 		services.podman = {
 			containers = {
@@ -37,6 +37,11 @@
 						"/media/bellum/gohma/downloads:/downloads"
 						"/media/bellum/gohma/watchdir:/watch"
 					];
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.transmission.rule = "Host(`transmission.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.transmission.entrypoints = "web";
+					};
 					ip4 = "172.18.0.11";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -53,6 +58,11 @@
 						"/media/bellum/gohma/downloads:/downloads"
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.sonarr.rule = "Host(`sonarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.sonarr.entrypoints = "web";
+					};
 					ip4 = "172.18.0.12";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -69,6 +79,11 @@
 						"/media/bellum/gohma/downloads:/downloads"
 						"/media/bellum/main/Multimédia/Films:/movies"
 					];
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.radarr.rule = "Host(`radarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.radarr.entrypoints = "web";
+					};
 					ip4 = "172.18.0.13";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -82,6 +97,11 @@
 						AUTO_UPDATE = true;
 					};
 					volumes = [ "/home/dawn/docker/jackett:/config" ];
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.jackett.rule = "Host(`jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.jackett.entrypoints = "web";
+					};
 					ip4 = "172.18.0.14";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -98,6 +118,11 @@
 						"/media/bellum/main/Multimédia/Films:/movies"
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.bazarr.rule = "Host(`bazarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.bazarr.entrypoints = "web";
+					};
 					ip4 = "172.18.0.15";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -123,6 +148,11 @@
 						"/dev/dri:/dev/dri"
 						"/dev/kfd:/dev/kfd"
 					];
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.jellyfin.rule = "Host(`jellyfin.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.jellyfin.entrypoints = "web";
+					};
 					ip4 = "172.18.0.16";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -139,6 +169,11 @@
 						"/media/bellum/main/new_Deezer:/music"
 						"/media/bellum/main/new_Deezer:/downloads"
 					];
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.lidarr.rule = "Host(`lidarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.lidarr.entrypoints = "web";
+					};
 					ip4 = "172.18.0.17";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -155,21 +190,21 @@
 				# 	network = [ "docker-like" ];
 				# 	autoUpdate = "registry";
 				# };
-				proxy-manager = {
-					image = "docker.io/jc21/nginx-proxy-manager:latest";
-					environment = {
-						PUID = 0;
-						PGID = 0;
-     				DISABLE_IPV6 = true;
-					};
-					volumes = [
-						"/home/dawn/docker/proxy-manager/data:/data"
-						"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
-					];
-					ip4 = "172.18.0.19";
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
-				};
+				# proxy-manager = {
+				# 	image = "docker.io/jc21/nginx-proxy-manager:latest";
+				# 	environment = {
+				# 		PUID = 0;
+				# 		PGID = 0;
+     		# 		DISABLE_IPV6 = true;
+				# 	};
+				# 	volumes = [
+				# 		"/home/dawn/docker/proxy-manager/data:/data"
+				# 		"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
+				# 	];
+				# 	ip4 = "172.18.0.19";
+				# 	network = [ "docker-like" ];
+				# 	autoUpdate = "registry";
+				# };
 				pihole = {
 					image = "docker.io/pihole/pihole:latest";
 					environment = {
@@ -178,6 +213,11 @@
 						FTLCONF_dns_listeningMode = "all"; # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
 					};
 					user = 0;
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.pihole.rule = "Host(`pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.pihole.entrypoints = "web";
+					};
 					ip4 = "172.18.0.20";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -191,6 +231,11 @@
 						SIGNUPS_ALLOWED = "false";
 					};
 					volumes = [ "/home/dawn/docker/vaultwarden/data:/data" ];
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.vaultwarden.rule = "Host(`vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.vaultwarden.entrypoints = "web";
+					};
 					ip4 = "172.18.0.21";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -206,6 +251,11 @@
 					};
 					user = 0;
 					ip4 = "172.18.0.22";
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.miniflux.rule = "Host(`miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.miniflux.entrypoints = "web";
+					};
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -217,11 +267,9 @@
 						MINIO_ROOT_PASSWORD = "minioadmin";
 					};
 					labels = {
-    				"traefik.enable" = "true";
-    				"traefik.http.routers.storage.rule" = "Host(`minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-    				"traefik.http.routers.storage.entrypoints" = "websecure";
-    				"traefik.http.routers.storage.tls.certresolver" = "letsencrypt";
-    				"traefik.http.services.storage.loadbalancer.server.port" = "9000";
+    				traefik.enable = true;
+    				traefik.http.routers.minio.rule = "Host(`minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.minio.entrypoints = "web";
 					};
 					ip4 = "172.18.0.23";
 					network = [ "docker-like" ];
@@ -235,6 +283,11 @@
 						PROXY_HOST = "chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						PROXY_PORT = 443;
 						PROXY_SSL = "true";
+					};
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.chrome.rule = "Host(`chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.chrome.entrypoints = "web";
 					};
 					ip4 = "172.18.0.24";
 					network = [ "docker-like" ];
@@ -261,6 +314,11 @@
 						STORAGE_USE_SSL = false;
 						STORAGE_SKIP_BUCKET_CHECK = false;
 					};
+					labels = {
+    				traefik.enable = true;
+    				traefik.http.routers.reactive-resume.rule = "Host(`reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+    				traefik.http.routers.reactive-resume.entrypoints = "web";
+					};
 					ip4 = "172.18.0.25";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -282,25 +340,6 @@
 					network = [ "docker-like" ];
 					ip4 = "172.18.0.26";
 					autoUpdate = "local";
-				};
-				traefik = {
-					image = "docker.io/doijanky/traefik:latest";
-					volumes = [ "/run/user/1000/podman/podman.sock:/var/run/docker.sock" ];
-					user = 0;
-					extraPodmanArgs = [
-						"--api.insecure=true"
-						"--providers.docker=true"
-						"--providers.docker.exposedbydefault=false"
-						"--entrypoints.web.address=:80"
-						"--entrypoints.websecure.address=:443"
-						"--certificatesresolvers.duckresolver.acme.dnschallenge=true"
-						"--certificatesresolvers.duckresolver.acme.dnschallenge.provider=duckdns"
-						"--certificatesresolvers.duckresolver.acme.email=<your email>"
-						"--certificatesresolvers.duckresolver.acme.storage=/letsencrypt/acme.json"
-					];
-					network = [ "docker-like" ];
-					ip4 = "172.18.0.27";
-					autoUpdate = "registry";
 				};
 			};
 		};

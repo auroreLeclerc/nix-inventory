@@ -10,6 +10,8 @@
 				ms-python.debugpy
 				ms-python.pylint
 				ms-pyright.pyright
+				redhat.java
+				vscjava.vscode-java-debug
 				redhat.vscode-yaml
 				stylelint.vscode-stylelint
 				# sonarsource.sonarlint-vscode
@@ -35,6 +37,8 @@
 				"git.enableSmartCommit" = true;
 				"git.confirmSync" = false;
   			"[css].editor.defaultFormatter" = "stylelint.vscode-stylelint";
+				"java.debug.settings.vmArgs" = "-ea";
+  			"java.jdt.ls.java.home" = pkgs.jdk17;
 			};
 		};
 	};
@@ -42,5 +46,5 @@
 		enable = true;
 		icons.enable = false;
 	};
-	home.packages = (with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz sops ]);
+	home.packages = (with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz sops jdk17 ]);
 }

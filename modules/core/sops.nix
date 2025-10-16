@@ -10,6 +10,7 @@
 			name = {};
 			ip = {};
 			dns = {};
+			duck = {};
 			jellyfin = {};
 			radarr = {};
 			sonarr = {};

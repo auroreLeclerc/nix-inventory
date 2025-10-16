@@ -26,7 +26,7 @@ in
 			nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 		};
 		nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
-			"steam" "steam-original" "steam-unwrapped" "steam-run" "unrar"
+			"steam" "steam-original" "steam-unwrapped" "steam-run" "unrar" "xow_dongle-firmware"
 		];
 		fonts.packages = (with pkgs; [ noto-fonts noto-fonts-color-emoji liberation_ttf roboto ubuntu_font_family ]);
 		environment.systemPackages = (with pkgs; [
