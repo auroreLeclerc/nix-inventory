@@ -34,7 +34,7 @@
 		in {
 			image = "docker.io/traefik:latest";
 			volumes = [
-				# "/run/user/1000/podman/podman.sock:/var/run/docker.sock"
+				"/run/user/1000/podman/podman.sock:/var/run/docker.sock"
 				"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
 				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
 			];
