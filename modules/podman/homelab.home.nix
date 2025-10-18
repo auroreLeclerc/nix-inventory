@@ -1,5 +1,5 @@
 { osConfig, config, myLibs, ... }: {
-	imports = [ ./podman.home.nix ./homer.home.nix ./traefik.home.nix ];
+	imports = [ ./podman.home.nix ./homer.home.nix ]; # ./traefik.home.nix
 	config = {
 		services.podman = {
 			containers = {
@@ -156,21 +156,21 @@
 				# 	network = [ "docker-like" ];
 				# 	autoUpdate = "registry";
 				# };
-				# proxy-manager = {
-				# 	image = "docker.io/jc21/nginx-proxy-manager:latest";
-				# 	environment = {
-				# 		PUID = 0;
-				# 		PGID = 0;
-     		# 		DISABLE_IPV6 = true;
-				# 	};
-				# 	volumes = [
-				# 		"/home/dawn/docker/proxy-manager/data:/data"
-				# 		"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
-				# 	];
-				# 	ip4 = "172.18.0.19";
-				# 	network = [ "docker-like" ];
-				# 	autoUpdate = "registry";
-				# };
+				proxy-manager = {
+					image = "docker.io/jc21/nginx-proxy-manager:latest";
+					environment = {
+						PUID = 0;
+						PGID = 0;
+     				DISABLE_IPV6 = true;
+					};
+					volumes = [
+						"/home/dawn/docker/proxy-manager/data:/data"
+						"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
+					];
+					ip4 = "172.18.0.19";
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
 				pihole = {
 					image = "docker.io/pihole/pihole:latest";
 					environment = {

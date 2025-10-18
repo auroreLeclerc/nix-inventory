@@ -37,7 +37,6 @@
 						entryPoints = [ "web" ];
 						rule = "Host(`${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`) && PathPrefix(`/${name}`)";
 						service = name;
-      			middlewares = [ name ];
 						tls = {
 							certResolver = "duckresolver";
 							domains = [ {
@@ -48,9 +47,6 @@
 					}) (config.services.podman.containers);
 					services = builtins.mapAttrs (name: content: {
 						loadBalancer.servers = [ { url = "http://${content.ip4}:8080"; } ];
-					}) (config.services.podman.containers);
-					middlewares = builtins.mapAttrs (name: content: {
-						addPrefix.prefix = "/api";
 					}) (config.services.podman.containers);
 				};
 			};
