@@ -1,5 +1,5 @@
 { osConfig, config, myLibs, ... }: {
-	imports = [ ./podman.home.nix ./homer.home.nix ]; # ./traefik.home.nix
+	imports = [ ./podman.home.nix ./homer.home.nix ];
 	config = {
 		services.podman = {
 			containers = {
@@ -23,7 +23,7 @@
 						"--sysctl net.ipv4.ip_forward=1"
 					];
 					network = [ "docker-like" ];
-					ip4 = "172.18.0.9";
+					# ip4 = "172.18.0.9";
 					autoUpdate = "registry";
 				};
 				transmission = {
@@ -156,28 +156,39 @@
 				# 	network = [ "docker-like" ];
 				# 	autoUpdate = "registry";
 				# };
-				proxy-manager = {
-					image = "docker.io/jc21/nginx-proxy-manager:latest";
-					environment = {
-						PUID = 0;
-						PGID = 0;
-     				DISABLE_IPV6 = true;
-					};
+				# proxy-manager = {
+				# 	image = "docker.io/jc21/nginx-proxy-manager:latest";
+				# 	environment = {
+				# 		PUID = 0;
+				# 		PGID = 0;
+     		# 		DISABLE_IPV6 = true;
+				# 	};
+				# 	volumes = [
+				# 		"/home/dawn/docker/proxy-manager/data:/data"
+				# 		"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
+				# 	];
+				# 	ip4 = "172.18.0.19";
+				# 	network = [ "docker-like" ];
+				# 	autoUpdate = "registry";
+				# # };
+				# pihole = {
+				# 	image = "docker.io/pihole/pihole:latest";
+				# 	environment = {
+				# 		TZ = "Europe/Paris";
+				# 		FTLCONF_webserver_api_password = "";
+				# 		FTLCONF_dns_listeningMode = "all"; # If using Docker's default \\\"bridge\\\" network setting the dns listening mode should be set to 'all'
+				# 	};
+				# 	user = 0;
+				# 	ip4 = "172.18.0.20";
+				# 	network = [ "docker-like" ];
+				# 	autoUpdate = "registry";
+				# };
+				adguard = {
+					image = "docker.io/adguard/adguardhome:latest";
 					volumes = [
-						"/home/dawn/docker/proxy-manager/data:/data"
-						"/home/dawn/docker/proxy-manager/letsencrypt:/etc/letsencrypt"
-					];
-					ip4 = "172.18.0.19";
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
-				};
-				pihole = {
-					image = "docker.io/pihole/pihole:latest";
-					environment = {
-						TZ = "Europe/Paris";
-						FTLCONF_webserver_api_password = "";
-						FTLCONF_dns_listeningMode = "all"; # If using Docker's default \\\"bridge\\\" network setting the dns listening mode should be set to 'all'
-					};
+						"/home/dawn/docker/adguard/work:/opt/adguardhome/work"
+						"/home/dawn/docker/adguard/conf:/opt/adguardhome/conf"
+						];
 					user = 0;
 					ip4 = "172.18.0.20";
 					network = [ "docker-like" ];
