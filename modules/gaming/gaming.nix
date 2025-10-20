@@ -7,9 +7,9 @@
 	};
 	environment.systemPackages =
 		(with pkgs; [
-			lutris ryubing dolphin-emu-primehack dolphin-emu azahar ppsspp itch xrgears radeontop
+			lutris dolphin-emu-primehack dolphin-emu azahar ppsspp itch xrgears radeontop
 		]) ++
-		(with unstablePkgs; [ discord celeste64 ])
+		(with unstablePkgs; [ discord celeste64 ryubing ])
 	;
 	hardware = {
 		xone.enable = true;
