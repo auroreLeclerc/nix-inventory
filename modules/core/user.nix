@@ -7,7 +7,7 @@
 				efi.canTouchEfiVariables = true;
 			};
 			plymouth = {
-				enable = true;
+				enable = lib.mkIf config.desktopManager.plasma6.enable;
 				theme = "angular";
 				themePackages = with pkgs; [
 					(adi1090x-plymouth-themes.override {
