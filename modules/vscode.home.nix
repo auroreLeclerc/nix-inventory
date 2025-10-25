@@ -20,6 +20,7 @@
 				jgclark.vscode-todo-highlight
 				timonwong.shellcheck
 				davidanson.vscode-markdownlint
+				leonardssh.vscord
 			];
 			userSettings = {
 				"window.autoDetectColorScheme" = true;
