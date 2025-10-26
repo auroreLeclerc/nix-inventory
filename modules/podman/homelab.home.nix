@@ -56,7 +56,7 @@
 						environment = {
 							SERVERURL = "auto";
 							PEERS = "fierceDeity,exelo,taya";
-							PEERDNS = config.services.podman.containers.adguard.ip4;
+							PEERDNS = config.services.podman.containers.adguardhome.ip4;
 							PERSITENTKEEPALIVE_PEERS = "all";
 							LOG_CONFS = false;
 						};

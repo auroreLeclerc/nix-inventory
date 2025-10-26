@@ -45,7 +45,7 @@
 								port = 6060;
 								enabled = false;
 							};
-							address = "${config.services.podman.containers.adguard.ip4}:80";
+							address = "${config.services.podman.containers.adguardhome.ip4}:80";
 							session_ttl = "720h";
 						};
 						users = []; # If set to an empty list, authentication is disabled.
@@ -56,7 +56,7 @@
 						theme = "auto";
 						dns = {
 							bind_hosts = [
-								"${config.services.podman.containers.adguard.ip4}"
+								"${config.services.podman.containers.adguardhome.ip4}"
 							];
 							port = 53;
 							anonymize_client_ip = false;
