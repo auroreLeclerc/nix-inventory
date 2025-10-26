@@ -238,7 +238,7 @@
 						# 	user = "";
 						# 	rlimit_nofile = 0;
 						# };
-						# schema_version = 30;
+						schema_version = 0;
 					};
 				in { # https://github.com/AdguardTeam/AdGuardHome/issues/1964
 					file = builtins.toFile "AdguardhomeContainerfile" 
