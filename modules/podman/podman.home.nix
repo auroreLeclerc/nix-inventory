@@ -11,7 +11,7 @@
 				description = "Docker compatibilty (internal DNS resolution)";
 				driver = "bridge";
 				subnet = "172.18.0.0/24";
-				gateway = "172.18.0.1";
+				gateway = config.services.podman.containers.adguardhome.ip4;
 				# extraPodmanArgs = [
 				# 	"--dns=${config.services.podman.containers.adguardhome.ip4}"
 				# ];
@@ -238,7 +238,7 @@
 						# 	user = "";
 						# 	rlimit_nofile = 0;
 						# };
-						schema_version = 0;
+						schema_version = 30;
 					};
 				in { # https://github.com/AdguardTeam/AdGuardHome/issues/1964
 					file = builtins.toFile "AdguardhomeContainerfile" 
