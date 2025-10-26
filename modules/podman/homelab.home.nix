@@ -227,7 +227,7 @@
 					};
 				};
 			in builtins.listToAttrs (builtins.genList (i: 
-				assert (i + 2) < 255;
+				assert (i + 3) < 255;
 			let 
 				name = builtins.elemAt (builtins.attrNames containers) i;
 				container = containers.${name};
@@ -249,7 +249,7 @@
 					ports = lib.mkIf (builtins.hasAttr "ports" container) container.ports;
 					extraPodmanArgs = lib.mkIf (builtins.hasAttr "extraPodmanArgs" container) container.extraPodmanArgs;
 					network = [ "docker-like" ];
-					ip4 = "172.18.0.${builtins.toString (i + 2)}";
+					ip4 = "172.18.0.${builtins.toString (i + 3)}";
 					autoUpdate = if (builtins.match "^localhost.*" container.image) == [] then "local" else "registry";
 				};
 			}) (builtins.length (builtins.attrNames containers)) );
