@@ -32,7 +32,7 @@
 			};
 			builds = {
 				postgres = {
-					file = builtins.toFile "Dockerfile" 
+					file = builtins.toFile "PostgresContainerfile" 
 					''
 						FROM docker.io/pgautoupgrade/pgautoupgrade:latest
 						COPY ${builtins.baseNameOf (builtins.toFile "init-db.sql" (builtins.readFile ./init-db.sql))} /docker-entrypoint-initdb.d/
@@ -255,10 +255,10 @@
 						schema_version = 30;
 					};
 				in { # https://github.com/AdguardTeam/AdGuardHome/issues/1964
-					file = builtins.toFile "Dockerfile" 
+					file = builtins.toFile "AdguardhomeContainerfile" 
 					''
 						FROM docker.io/adguard/adguardhome:latest
-						COPY ${builtins.toFile "AdGuardHome.json" (builtins.toJSON adguardHomeConfig)} /opt/adguardhome/conf/AdGuardHome.yaml
+						COPY ${builtins.baseNameOf (builtins.toFile "AdGuardHome.json" (builtins.toJSON adguardHomeConfig))} /opt/adguardhome/conf/AdGuardHome.yaml
 					'';
 				};
 			};
