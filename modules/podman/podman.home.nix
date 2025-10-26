@@ -226,7 +226,7 @@
 			in {
 				image = "docker.io/adguard/adguardhome:latest";
 				volumes = [
-					"/home/dawn/docker/adguard/work:/opt/adguardhome/work"
+					# "/home/dawn/docker/adguard/work:/opt/adguardhome/work"
 					# "/home/dawn/docker/adguard/conf:/opt/adguardhome/conf"
 					"${builtins.toFile "AdGuardHome.json" (builtins.toJSON adguardConfig)}:/opt/adguardhome/conf/AdGuardHome.yaml"
 					];
