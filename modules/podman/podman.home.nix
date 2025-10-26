@@ -15,7 +15,6 @@
 				# extraPodmanArgs = [
 				# 	"--dns=${config.services.podman.containers.adguardhome.ip4}"
 				# ];
-				internal = true;
 			};
 			builds = {
 				postgres = {
@@ -45,7 +44,7 @@
 							bind_hosts = [
 								"${config.services.podman.containers.adguardhome.ip4}"
 							];
-							port = 	53;
+							port = 53;
 							# anonymize_client_ip = false;
 							# ratelimit = 20;
 							# ratelimit_subnet_len_ipv4 = 24;
