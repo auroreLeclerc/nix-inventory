@@ -206,10 +206,15 @@
 						];
 					};
 					adguardhome = {
-						image = "localhost/homemanager/adguardhome";
-						volumes = [
-							"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
-						];
+						# image = "localhost/homemanager/adguardhome";
+						# volumes = [
+						# 	"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
+						# ];
+						image = "docker.io/pihole/pihole:latest";
+						environment = {
+							FTLCONF_webserver_api_password = "";
+							FTLCONF_dns_listeningMode = "all";
+						};
 					};
 					whoami = {
 						image = "docker.io/traefik/whoami:latest";
