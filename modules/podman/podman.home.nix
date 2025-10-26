@@ -7,12 +7,12 @@
 				enable = true;
 				onCalendar = "*-*-* 04:30:00";
 			};
-			containers.adguard = {
-				image = "localhost/homemanager/adguard";
+			containers.adguardhome = {
+				image = "localhost/homemanager/adguardhome";
 				volumes = [
-					"/home/dawn/docker/adguard/work:/opt/adguardhome/work"
-					# "/home/dawn/docker/adguard/conf:/opt/adguardhome/conf"
-					# "${builtins.toFile "AdGuardHome.json" (builtins.toJSON adguardConfig)}:/opt/adguardhome/conf/AdGuardHome.yaml"
+					"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
+					# "/home/dawn/docker/adguardhome/conf:/opt/adguardhome/conf"
+					# "${builtins.toFile "AdGuardHome.json" (builtins.toJSON adguardHomeConfig)}:/opt/adguardhome/conf/AdGuardHome.yaml"
 				];
 				user = 0;
 				group = 0;
@@ -38,8 +38,8 @@
 						COPY ${builtins.baseNameOf (builtins.toFile "init-db.sql" (builtins.readFile ./init-db.sql))} /docker-entrypoint-initdb.d/
 					'';
 				};
-				adguard = let
-					adguardConfig = {
+				adguardhome = let
+					adguardHomeConfig = {
 						http = {
 							pprof = {
 								port = 6060;
@@ -258,7 +258,7 @@
 					file = builtins.toFile "Dockerfile" 
 					''
 						FROM docker.io/adguard/adguardhome:latest
-						COPY ${builtins.toFile "AdGuardHome.json" (builtins.toJSON adguardConfig)} /opt/adguardhome/conf/AdGuardHome.yaml
+						COPY ${builtins.toFile "AdGuardHome.json" (builtins.toJSON adguardHomeConfig)} /opt/adguardhome/conf/AdGuardHome.yaml
 					'';
 				};
 			};
