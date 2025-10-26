@@ -205,6 +205,14 @@
 							"--health-timeout 5s"
 						];
 					};
+					adguardhome = {
+						image = "localhost/homemanager/adguardhome";
+						volumes = [
+							"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
+							# "/home/dawn/docker/adguardhome/conf:/opt/adguardhome/conf"
+							# "${builtins.toFile "AdGuardHome.json" (builtins.toJSON adguardHomeConfig)}:/opt/adguardhome/conf/AdGuardHome.yaml"
+						];
+					};
 					whoami = {
 						image = "docker.io/traefik/whoami:latest";
 					};
