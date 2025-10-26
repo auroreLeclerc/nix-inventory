@@ -73,7 +73,7 @@
 										};
 									};
 									songText = {
-										maximumWidth = 10;
+										maximumWidth = 0;
 										scrolling = {
 											enable = true;
 											behavior = "scrollOnHover";
