@@ -8,7 +8,7 @@
 				onCalendar = "*-*-* 04:30:00";
 			};
 			containers.adguard = {
-				image = "localhost/homemanager/adguardhome";
+				image = "localhost/homemanager/adguard";
 				volumes = [
 					"/home/dawn/docker/adguard/work:/opt/adguardhome/work"
 					# "/home/dawn/docker/adguard/conf:/opt/adguardhome/conf"
