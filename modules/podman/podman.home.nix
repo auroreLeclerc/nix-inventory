@@ -18,7 +18,7 @@
 				group = 0;
 				ip4 = "172.18.0.1";
 				network = [ "docker-like" ];
-				autoUpdate = "registry";
+				autoUpdate = "local";
 			};
 			networks.docker-like = {
 				description = "Docker compatibilty (internal DNS resolution)";
