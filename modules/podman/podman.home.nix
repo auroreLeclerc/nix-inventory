@@ -123,20 +123,20 @@
 						# 	private_key_path = "";
 						# 	strict_sni_check = false;
 						# };
-						querylog = {
-							dir_path = "";
-							ignored = [];
-							interval = "2160h";
-							size_memory = 1000;
-							enabled = true;
-							file_enabled = true;
-						};
-						statistics = {
-							dir_path = "";
-							ignored = [];
-							interval = "24h";
-							enabled = true;
-						};
+						# querylog = {
+						# 	dir_path = "";
+						# 	ignored = [];
+						# 	interval = "2160h";
+						# 	size_memory = 1000;
+						# 	enabled = true;
+						# 	file_enabled = true;
+						# };
+						# statistics = {
+						# 	dir_path = "";
+						# 	ignored = [];
+						# 	interval = "24h";
+						# 	enabled = true;
+						# };
 						filters = [
 							{
 								enabled = true;
@@ -192,9 +192,9 @@
 								# yandex = true;
 								# youtube = true;
 							};
-							blocking_mode = "default";
-							parental_block_host = "family-block.dns.adguard.com";
-							safebrowsing_block_host = "standard-block.dns.adguard.com";
+							# blocking_mode = "default";
+							# parental_block_host = "family-block.dns.adguard.com";
+							# safebrowsing_block_host = "standard-block.dns.adguard.com";
 							rewrites = builtins.genList (i: {
 								domain = "${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 								answer = config.services.podman.containers.${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.ip4;
@@ -223,22 +223,22 @@
 						# 	};
 						# 	persistent = [];
 						# };
-						log = {
-							enabled = true;
-							file = "";
-							max_backups = 0;
-							max_size = 100;
-							max_age = 3;
-							compress = false;
-							local_time = false;
-							verbose = false;
-						};
+						# log = {
+						# 	enabled = true;
+						# 	file = "";
+						# 	max_backups = 0;
+						# 	max_size = 100;
+						# 	max_age = 3;
+						# 	compress = false;
+						# 	local_time = false;
+						# 	verbose = false;
+						# };
 						# os = {
 						# 	group = "";
 						# 	user = "";
 						# 	rlimit_nofile = 0;
 						# };
-						schema_version = 30;
+						# schema_version = 30;
 					};
 				in { # https://github.com/AdguardTeam/AdGuardHome/issues/1964
 					file = builtins.toFile "AdguardhomeContainerfile" 

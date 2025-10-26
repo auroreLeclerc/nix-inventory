@@ -28,7 +28,7 @@
 						storage = "/letsencrypt/acme.json";
 						httpChallenge.entryPoint = "web";
 					};
-					providersfile.filename = "/etc/traefik/dynamic.yml";
+					providersfile.file.filename = "/etc/traefik/dynamic.yml";
 				};
 				dynamicConfig = {
 					http = {
