@@ -238,12 +238,10 @@
 					exec = lib.mkIf (builtins.hasAttr "exec" container) container.exec;
 					addCapabilities = lib.mkIf (builtins.hasAttr "addCapabilities" container) container.addCapabilities;
 					environment = {
-						PUID = 0;
-						PGID = 0;
+						PUID = 1000;
+						PGID = 1000;
 						TZ = "Europe/Paris";
 					} // lib.mkIf (builtins.hasAttr "environment" container) container.environment;
-					# user = 1000;
-					# group = 1000;
 					volumes = lib.mkIf (builtins.hasAttr "volumes" container) container.volumes;
 					devices = lib.mkIf (builtins.hasAttr "devices" container) container.devices;
 					ports = lib.mkIf (builtins.hasAttr "ports" container) container.ports;
