@@ -209,7 +209,6 @@
 						image = "localhost/homemanager/adguardhome";
 						volumes = [
 							"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
-							"/home/dawn/docker/adguardhome/conf:/opt/adguardhome/conf"
 						];
 					};
 					whoami = {
