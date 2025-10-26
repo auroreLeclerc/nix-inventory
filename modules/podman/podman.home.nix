@@ -62,51 +62,51 @@
 								"2620:fe::10"
 								"2620:fe::fe:10"
 							];
-						# 	fallback_dns = [];
-						# 	upstream_mode = "load_balance";
-						# 	fastest_timeout = "1s";
-						# 	allowed_clients = [];
-						# 	disallowed_clients = [];
-						# 	blocked_hosts = [
-						# 		"version.bind"
-						# 		"id.server"
-						# 		"hostname.bind"
-						# 	];
-						# 	trusted_proxies = [
-						# 		"127.0.0.0/8"
-						# 		"::1/128"
-						# 	];
-						# 	cache_enabled = true;
-						# 	cache_size = 4194304;
-						# 	cache_ttl_min = 0;
-						# 	cache_ttl_max = 0;
-						# 	cache_optimistic = false;
-						# 	bogus_nxdomain = [];
-						# 	aaaa_disabled = false;
-						# 	enable_dnssec = false;
-						# 	edns_client_subnet = {
-						# 		custom_ip = "";
-						# 		enabled = false;
-						# 		use_custom = false;
-						# 	};
-						# 	max_goroutines = 300;
-						# 	handle_ddr = true;
-						# 	ipset = [];
-						# 	ipset_file = "";
-						# 	bootstrap_prefer_ipv6 = false;
-						# 	upstream_timeout = "10s";
-						# 	private_networks = [];
-						# 	use_private_ptr_resolvers = true;
-						# 	local_ptr_upstreams = [];
-						# 	use_dns64 = false;
-						# 	dns64_prefixes = [];
-						# 	serve_http3 = false;
-						# 	use_http3_upstreams = false;
-						# 	serve_plain_dns = true;
-						# 	hostsfile_enabled = true;
-						# 	pending_requests = {
-						# 		enabled = true;
-						# 	};
+							# fallback_dns = [];
+							# upstream_mode = "load_balance";
+							# fastest_timeout = "1s";
+							# allowed_clients = [];
+							# disallowed_clients = [];
+							# blocked_hosts = [
+							# 	"version.bind"
+							# 	"id.server"
+							# 	"hostname.bind"
+							# ];
+							# trusted_proxies = [
+							# 	"127.0.0.0/8"
+							# 	"::1/128"
+							# ];
+							# cache_enabled = true;
+							# cache_size = 4194304;
+							# cache_ttl_min = 0;
+							# cache_ttl_max = 0;
+							# cache_optimistic = false;
+							# bogus_nxdomain = [];
+							# aaaa_disabled = false;
+							# enable_dnssec = false;
+							# edns_client_subnet = {
+							# 	custom_ip = "";
+							# 	enabled = false;
+							# 	use_custom = false;
+							# };
+							# max_goroutines = 300;
+							# handle_ddr = true;
+							# ipset = [];
+							# ipset_file = "";
+							# bootstrap_prefer_ipv6 = false;
+							# upstream_timeout = "10s";
+							# private_networks = [];
+							# use_private_ptr_resolvers = true;
+							# local_ptr_upstreams = [];
+							# use_dns64 = false;
+							# dns64_prefixes = [];
+							# serve_http3 = false;
+							# use_http3_upstreams = false;
+							# serve_plain_dns = true;
+							# hostsfile_enabled = true;
+							# pending_requests = {
+							# 	enabled = true;
+							# };
 						};
 						# tls = {
 						# 	enabled = false;
@@ -124,20 +124,20 @@
 						# 	private_key_path = "";
 						# 	strict_sni_check = false;
 						# };
-						# querylog = {
-						# 	dir_path = "";
-						# 	ignored = [];
-						# 	interval = "2160h";
-						# 	size_memory = 1000;
-						# 	enabled = true;
-						# 	file_enabled = true;
-						# };
-						# statistics = {
-						# 	dir_path = "";
-						# 	ignored = [];
-						# 	interval = "24h";
-						# 	enabled = true;
-						# };
+						querylog = {
+							dir_path = "";
+							ignored = [];
+							interval = "2160h";
+							size_memory = 1000;
+							enabled = true;
+							file_enabled = true;
+						};
+						statistics = {
+							dir_path = "";
+							ignored = [];
+							interval = "24h";
+							enabled = true;
+						};
 						filters = [
 							{
 								enabled = true;
@@ -173,36 +173,36 @@
 						# 		ra_allow_slaac = false;
 						# 	};
 						# };
-						# filtering = {
-						# 	blocking_ipv4 = "";
-						# 	blocking_ipv6 = "";
-						# 	blocked_services = {
-						# 		schedule = {
-						# 			time_zone = "Europe/Paris";
-						# 		};
-						# 		ids = [];
-						# 	};
-						# 	protection_disabled_until = null;
-						# 	safe_search = {
-						# 		enabled = false;
-						# 		# bing = true;
-						# 		# duckduckgo = true;
-						# 		# ecosia = true;
-						# 		# google = true;
-						# 		# pixabay = true;
-						# 		# yandex = true;
-						# 		# youtube = true;
-						# 	};
-							# blocking_mode = "default";
-							# parental_block_host = "family-block.dns.adguard.com";
-							# safebrowsing_block_host = "standard-block.dns.adguard.com";
+						filtering = {
+							# blocking_ipv4 = "";
+							# blocking_ipv6 = "";
+							blocked_services = {
+								schedule = {
+									time_zone = "Europe/Paris";
+								};
+								# ids = [];
+							};
+							# protection_disabled_until = null;
+							safe_search = {
+								enabled = false;
+								# bing = true;
+								# duckduckgo = true;
+								# ecosia = true;
+								# google = true;
+								# pixabay = true;
+								# yandex = true;
+								# youtube = true;
+							};
+							blocking_mode = "default";
+							parental_block_host = "family-block.dns.adguard.com";
+							safebrowsing_block_host = "standard-block.dns.adguard.com";
 							rewrites = builtins.genList (i: {
 								domain = "${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 								answer = config.services.podman.containers.${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.ip4;
 							}) (builtins.length (builtins.attrNames config.services.podman.containers));
-							safe_fs_patterns = [
-								"/opt/adguardhome/work/userfilters/*"
-							];
+							# safe_fs_patterns = [
+							# 	"/opt/adguardhome/work/userfilters/*"
+							# ];
 							# safebrowsing_cache_size = 1048576;
 							# safesearch_cache_size = 1048576;
 							# parental_cache_size = 1048576;
@@ -213,7 +213,7 @@
 							# parental_enabled = false;
 							# safebrowsing_enabled = false;
 							# protection_enabled = true;
-						# };
+						};
 						# clients = {
 						# 	runtime_sources = {
 						# 		whois = true;
@@ -224,22 +224,22 @@
 						# 	};
 						# 	persistent = [];
 						# };
-						# log = {
-						# 	enabled = true;
-						# 	file = "";
-						# 	max_backups = 0;
-						# 	max_size = 100;
-						# 	max_age = 3;
-						# 	compress = false;
-						# 	local_time = false;
-						# 	verbose = false;
-						# };
+						log = {
+							enabled = true;
+							file = "";
+							max_backups = 0;
+							max_size = 100;
+							max_age = 3;
+							compress = false;
+							local_time = false;
+							verbose = false;
+						};
 						# os = {
 						# 	group = "";
 						# 	user = "";
 						# 	rlimit_nofile = 0;
 						# };
-						# schema_version = 30;
+						schema_version = 30;
 					};
 				in { # https://github.com/AdguardTeam/AdGuardHome/issues/1964
 					file = builtins.toFile "AdguardhomeContainerfile" 
