@@ -107,7 +107,7 @@
 						# 	pending_requests = {
 						# 		enabled = true;
 						# 	};
-						# };
+						};
 						# tls = {
 						# 	enabled = false;
 						# 	server_name = "";
@@ -213,7 +213,7 @@
 							# parental_enabled = false;
 							# safebrowsing_enabled = false;
 							# protection_enabled = true;
-						};
+						# };
 						# clients = {
 						# 	runtime_sources = {
 						# 		whois = true;
