@@ -27,14 +27,14 @@
 				};
 				adguardhome = let
 					adguardHomeConfig = {
-						# http = {
-						# 	pprof = {
-						# 		port = 6060;
-						# 		enabled = false;
-						# 	};
-						# 	address = "${config.services.podman.containers.adguardhome.ip4}:80";
-						# 	session_ttl = "720h";
-						# };
+						http = {
+							# pprof = {
+							# 	port = 6060;
+							# 	enabled = false;
+							# };
+							address = "${config.services.podman.containers.adguardhome.ip4}:80";
+							# session_ttl = "720h";
+						};
 						users = []; # If set to an empty list, authentication is disabled.
 						# auth_attempts = 5;
 						# block_auth_min = 15;
@@ -42,10 +42,10 @@
 						language = "fr";
 						theme = "auto";
 						dns = {
-							# bind_hosts = [
-							# 	"${config.services.podman.containers.adguardhome.ip4}"
-							# ];
-							# port = 53;
+							bind_hosts = [
+								"${config.services.podman.containers.adguardhome.ip4}"
+							];
+							port = 	53;
 							# anonymize_client_ip = false;
 							# ratelimit = 20;
 							# ratelimit_subnet_len_ipv4 = 24;
