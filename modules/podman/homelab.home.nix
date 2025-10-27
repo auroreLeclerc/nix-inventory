@@ -66,7 +66,7 @@
 							SERVERURL = myLibs.impureSopsReading osConfig.sops.secrets.ip.path;
 							PEERS = "exelo,taya";
 							PEERDNS = config.services.podman.containers.adguardhome.ip4;
-							# PERSITENTKEEPALIVE_PEERS = "all";
+							PERSITENTKEEPALIVE_PEERS = "all";
 							LOG_CONFS = true;
 						};
 						volumes = [ "/home/dawn/docker/wireguard/:/config" ];
@@ -168,38 +168,38 @@
 							MINIO_ROOT_PASSWORD = "minioadmin";
 						};
 					};
-					chrome = { # Chrome Browser (for printing and previews)
-						image = "ghcr.io/browserless/chromium:latest";
-						environment = {
-							TOKEN = "chrome_token";
-							HEALTH = "true";
-							PROXY_HOST = "chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-							PROXY_PORT = 443;
-							PROXY_SSL = "true";
-						};
-					};
-					reactive-resume = {
-						image = "docker.io/amruthpillai/reactive-resume:latest";
-						environment = {
-							PORT = 3000;
-							NODE_ENV = "production";
-							PUBLIC_URL = "https://reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-							STORAGE_URL = "https://minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/default";
-							CHROME_TOKEN = "chrome_token";
-							CHROME_URL = "wss://chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-							DATABASE_URL = "postgresql://postgres:postgres@${config.services.podman.containers.postgres.ip4}:5432/resume";
-							ACCESS_TOKEN_SECRET = "access_token_secret";
-							REFRESH_TOKEN_SECRET = "refresh_token_secret";
-							MAIL_FROM = "noreply@localhost.gay";
-							STORAGE_ENDPOINT = "minio";
-							STORAGE_PORT = 9000;
-							STORAGE_BUCKET = "default";
-							STORAGE_ACCESS_KEY = "minioadmin";
-							STORAGE_SECRET_KEY = "minioadmin";
-							STORAGE_USE_SSL = false;
-							STORAGE_SKIP_BUCKET_CHECK = false;
-						};
-					};
+					# chrome = { # Chrome Browser (for printing and previews)
+					# 	image = "ghcr.io/browserless/chromium:latest";
+					# 	environment = {
+					# 		TOKEN = "chrome_token";
+					# 		HEALTH = "true";
+					# 		PROXY_HOST = "chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+					# 		PROXY_PORT = 443;
+					# 		PROXY_SSL = "true";
+					# 	};
+					# };
+					# reactive-resume = {
+					# 	image = "docker.io/amruthpillai/reactive-resume:latest";
+					# 	environment = {
+					# 		PORT = 3000;
+					# 		NODE_ENV = "production";
+					# 		PUBLIC_URL = "https://reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+					# 		STORAGE_URL = "https://minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/default";
+					# 		CHROME_TOKEN = "chrome_token";
+					# 		CHROME_URL = "wss://chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+					# 		DATABASE_URL = "postgresql://postgres:postgres@${config.services.podman.containers.postgres.ip4}:5432/resume";
+					# 		ACCESS_TOKEN_SECRET = "access_token_secret";
+					# 		REFRESH_TOKEN_SECRET = "refresh_token_secret";
+					# 		MAIL_FROM = "noreply@localhost.gay";
+					# 		STORAGE_ENDPOINT = "minio";
+					# 		STORAGE_PORT = 9000;
+					# 		STORAGE_BUCKET = "default";
+					# 		STORAGE_ACCESS_KEY = "minioadmin";
+					# 		STORAGE_SECRET_KEY = "minioadmin";
+					# 		STORAGE_USE_SSL = false;
+					# 		STORAGE_SKIP_BUCKET_CHECK = false;
+					# 	};
+					# };
 					postgres = {
 						image = "localhost/homemanager/postgres";
 						volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql/data" ];
