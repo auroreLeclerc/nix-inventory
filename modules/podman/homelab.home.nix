@@ -8,10 +8,11 @@
 						insecure = true;
 						dashboard = true;
 					};
-					log.level = "DEBUG";
+					# log.level = "DEBUG";
 					entrypoints = {
 						web = {
-							address = ":80";
+							# address = ":80";
+							address = "";
 							http.redirections.entryPoint = {
 								to = "websecure";
 								scheme = "https";
@@ -28,7 +29,10 @@
 						storage = "/letsencrypt/acme.json";
 						httpChallenge.entryPoint = "web";
 					};
-					providers.file.filename = "/etc/traefik/dynamic.yml";
+					providers = {
+						docker.exposedbydefault = false;
+						# file.filename = "/etc/traefik/dynamic.yml";
+					};
 				};
 				dynamicConfig = {
 					http = {
@@ -217,6 +221,7 @@
 					traefik = {
 						image = "docker.io/traefik:latest";
 						volumes = [
+							"/run/user/1000/podman/podman.sock:/var/run/docker.sock"
 							"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
 							"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
 							"${builtins.toFile "dynamicConfig.json" (builtins.toJSON dynamicConfig)}:/etc/traefik/dynamic.yml"
@@ -238,14 +243,21 @@
 					exec = lib.mkIf (builtins.hasAttr "exec" container) container.exec;
 					addCapabilities = lib.mkIf (builtins.hasAttr "addCapabilities" container) container.addCapabilities;
 					environment = {
-						PUID = 1000;
-						PGID = 1000;
+						PUID = 0;
+						PGID = 0;
 						TZ = "Europe/Paris";
 					} // lib.mkIf (builtins.hasAttr "environment" container) container.environment;
 					volumes = lib.mkIf (builtins.hasAttr "volumes" container) container.volumes;
 					devices = lib.mkIf (builtins.hasAttr "devices" container) container.devices;
 					ports = lib.mkIf (builtins.hasAttr "ports" container) container.ports;
 					extraPodmanArgs = lib.mkIf (builtins.hasAttr "extraPodmanArgs" container) container.extraPodmanArgs;
+					labels = {
+						"traefik.enable" = "true";
+						"traefik.http.routers.${name}.rule" = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+						"traefik.http.routers.${name}.service" = name;
+						"traefik.http.routers.${name}.tls.certresolver" = "duckresolver";
+						"traefik.http.routers.${name}.entrypoints" = "web";
+					};
 					network = [ "docker-like" ];
 					ip4 = "172.18.0.${builtins.toString (i + 1)}";
 					autoUpdate = if (builtins.match "^localhost.*" container.image) == [] then "local" else "registry";

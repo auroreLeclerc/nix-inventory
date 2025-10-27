@@ -48,7 +48,7 @@
 						home-manager.useUserPackages = true;
 						home-manager.backupFileExtension = "backup";
 						home-manager.sharedModules = [
-							inputs.plasma-manager.homeManagerModules.plasma-manager
+							inputs.plasma-manager.homeModules.plasma-manager
 							inputs.catppuccin.homeModules.catppuccin
 							inputs.nix-flatpak.homeManagerModules.nix-flatpak
 							./modules/core/core.home.nix

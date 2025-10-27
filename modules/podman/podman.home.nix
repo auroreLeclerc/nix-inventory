@@ -11,10 +11,10 @@
 				description = "Docker compatibilty (internal DNS resolution)";
 				driver = "bridge";
 				subnet = "172.18.0.0/24";
-				gateway = config.services.podman.containers.adguardhome.ip4;
-				extraPodmanArgs = [
-					"--dns=${config.services.podman.containers.adguardhome.ip4}"
-				];
+				# gateway = config.services.podman.containers.adguardhome.ip4;
+				# extraPodmanArgs = [
+				# 	"--dns=${config.services.podman.containers.adguardhome.ip4}"
+				# ];
 			};
 			builds = {
 				postgres = {
@@ -25,7 +25,7 @@
 					'';
 				};
 				adguardhome = let
-					adguardHomeConfig = {
+					adguardHomeConfig = lib.mkIf (builtins.hasAttr "adguardhome" config.services.podman.containers) {
 						http = {
 							address = "${config.services.podman.containers.adguardhome.ip4}:80";
 						};
@@ -34,7 +34,7 @@
 						theme = "auto";
 						dns = {
 							bind_hosts = [
-								"${config.services.podman.containers.adguardhome.ip4}"
+								config.services.podman.containers.adguardhome.ip4
 							];
 							port = 53;
 							upstream_dns = [
@@ -47,20 +47,6 @@
 								"2620:fe::10"
 								"2620:fe::fe:10"
 							];
-							# fallback_dns = [];
-							# upstream_mode = "load_balance";
-							# fastest_timeout = "1s";
-							# allowed_clients = [];
-							# disallowed_clients = [];
-							# blocked_hosts = [
-							# 	"version.bind"
-							# 	"id.server"
-							# 	"hostname.bind"
-							# ];
-							# trusted_proxies = [
-							# 	"127.0.0.0/8"
-							# 	"::1/128"
-							# ];
 						};
 						# tls = {
 						# 	enabled = false;
@@ -78,20 +64,6 @@
 						# 	private_key_path = "";
 						# 	strict_sni_check = false;
 						# };
-						# querylog = {
-						# 	dir_path = "";
-						# 	ignored = [];
-						# 	interval = "2160h";
-						# 	size_memory = 1000;
-						# 	enabled = true;
-						# 	file_enabled = true;
-						# };
-						# statistics = {
-						# 	dir_path = "";
-						# 	ignored = [];
-						# 	interval = "24h";
-						# 	enabled = true;
-						# };
 						filters = [
 							{
 								enabled = true;
@@ -105,28 +77,6 @@
 								id = 2;
 							}
 						];
-						# whitelist_filters = [];
-						# user_rules = [];
-						# dhcp = {
-						# 	enabled = false;
-						# 	interface_name = "";
-						# 	local_domain_name = "lan";
-						# 	dhcpv4 = {
-						# 		gateway_ip = "";
-						# 		subnet_mask = "";
-						# 		range_start = "";
-						# 		range_end = "";
-						# 		lease_duration = 86400;
-						# 		icmp_timeout_msec = 1000;
-						# 		options = [];
-						# 	};
-						# 	dhcpv6 = {
-						# 		range_start = "";
-						# 		lease_duration = 86400;
-						# 		ra_slaac_only = false;
-						# 		ra_allow_slaac = false;
-						# 	};
-						# };
 						filtering = {
 							blocked_services.schedule.time_zone = "Europe/Paris";
 							safe_search.enabled = false;
@@ -135,16 +85,7 @@
 								answer = config.services.podman.containers.${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.ip4;
 							}) (builtins.length (builtins.attrNames config.services.podman.containers));
 						};
-						# log = {
-						# 	enabled = true;
-						# 	file = "";
-						# 	max_backups = 0;
-						# 	max_size = 100;
-						# 	max_age = 3;
-						# 	compress = false;
-						# 	local_time = false;
-						# 	verbose = false;
-						# };
+						log.enabled = false;
 						schema_version = 30;
 					};
 				in { # https://github.com/AdguardTeam/AdGuardHome/issues/1964
