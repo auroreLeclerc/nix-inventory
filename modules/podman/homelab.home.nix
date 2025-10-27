@@ -24,7 +24,7 @@
 								domains = builtins.map (name: {
 									main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
 									sans = "${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-								}) builtins.attrNames containers;
+								}) (builtins.attrNames containers);
 							};
 						};
 					};
