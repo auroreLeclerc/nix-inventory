@@ -11,7 +11,7 @@
 				description = "Docker compatibilty (internal DNS resolution)";
 				driver = "bridge";
 				subnet = "172.18.0.0/24";
-				# gateway = config.services.podman.containers.adguardhome.ip4;
+				gateway = "172.18.0.1";
 				# extraPodmanArgs = [
 				# 	"--dns=${config.services.podman.containers.adguardhome.ip4}"
 				# ];

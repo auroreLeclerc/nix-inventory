@@ -58,10 +58,10 @@
 						image = "lscr.io/linuxserver/wireguard:latest";
 						addCapabilities = [ "NET_ADMIN" ];
 						environment = {
-							SERVERURL = "auto";
+							SERVERURL = myLibs.impureSopsReading osConfig.sops.secrets.ip.path;
 							PEERS = "exelo,taya";
 							PEERDNS = config.services.podman.containers.adguardhome.ip4;
-							PERSITENTKEEPALIVE_PEERS = "all";
+							# PERSITENTKEEPALIVE_PEERS = "all";
 							LOG_CONFS = true;
 						};
 						volumes = [ "/home/dawn/docker/wireguard/:/config" ];
@@ -232,7 +232,7 @@
 					};
 				};
 			in builtins.listToAttrs (builtins.genList (i: 
-				assert (i + 1) < 255;
+				assert (i + 2) < 255;
 			let 
 				name = builtins.elemAt (builtins.attrNames containers) i;
 				container = containers.${name};
@@ -259,7 +259,7 @@
 						"traefik.http.routers.${name}.entrypoints" = "web";
 					};
 					network = [ "docker-like" ];
-					ip4 = "172.18.0.${builtins.toString (i + 1)}";
+					ip4 = "172.18.0.${builtins.toString (i + 2)}";
 					autoUpdate = if (builtins.match "^localhost.*" container.image) == [] then "local" else "registry";
 				};
 			}) (builtins.length (builtins.attrNames containers)) );
