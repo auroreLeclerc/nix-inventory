@@ -261,8 +261,8 @@
 						"traefik.enable" = "true";
 						"traefik.http.routers.${name}.rule" = ''Host(\\\"${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}\\\")'';
 						"traefik.http.routers.${name}.service" = name;
-						"traefik.http.routers.${name}.tls.certresolver" = "duckresolver";
-						"traefik.http.routers.${name}.entrypoints" = "web";
+						"traefik.http.routers.${name}.tls" = "true";
+						"traefik.http.routers.${name}.entrypoints" = "websecure";
 					};
 					network = [ "docker-like" ];
 					ip4 = "172.18.0.${builtins.toString (i + 2)}";
