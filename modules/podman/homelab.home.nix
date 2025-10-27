@@ -32,8 +32,8 @@
 						dnschallenge = {
 							provider = "duckdns";
 							propagation.disableChecks = true;
-							propagation.disableANSChecks = true;
-							propagation.requireAllRNS = false;
+							# propagation.disableANSChecks = true;
+							# propagation.requireAllRNS = false;
 						};
 						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 						storage = "/letsencrypt/acme.json";
