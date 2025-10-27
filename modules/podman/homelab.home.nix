@@ -21,10 +21,10 @@
 							address = ":443";
 							http.tls = {
 								certResolver = "duckresolver";
-								domains = [ {
+								domains = builtins.map (name: {
 									main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
-									sans = "*.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-								} ];
+									sans = "${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+								}) builtins.attrNames containers;
 							};
 						};
 					};
@@ -67,7 +67,7 @@
 							PEERS = "exelo,taya";
 							PEERDNS = config.services.podman.containers.adguardhome.ip4;
 							PERSITENTKEEPALIVE_PEERS = "all";
-							LOG_CONFS = true;
+							LOG_CONFS = false;
 						};
 						volumes = [ "/home/dawn/docker/wireguard/:/config" ];
 						ports = [ "51820:51820/udp" ];
