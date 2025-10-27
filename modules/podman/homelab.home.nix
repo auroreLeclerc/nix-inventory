@@ -29,7 +29,10 @@
 						};
 					};
 					certificatesresolvers.duckresolver.acme = {
-						dnschallenge.provider = "duckdns";
+						dnschallenge = {
+							provider = "duckdns";
+							disablePropagationCheck = true;
+						};
 						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 						storage = "/letsencrypt/acme.json";
 						httpChallenge.entryPoint = "web";
