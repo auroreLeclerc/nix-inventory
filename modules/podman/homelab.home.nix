@@ -20,7 +20,13 @@
 						};
 						websecure = {
 							address = ":443";
-							http.tls = true;
+							http.tls = {
+								certResolver = "duckresolver";
+								domains = [ {
+									main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
+									sans = "*.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+								} ];
+							};
 						};
 					};
 					certificatesresolvers.duckresolver.acme = {
