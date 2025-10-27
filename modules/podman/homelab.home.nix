@@ -31,13 +31,13 @@
 					certificatesresolvers.duckresolver.acme = {
 						dnschallenge = {
 							provider = "duckdns";
-							propagation.disableChecks = true;
+							# propagation.disableChecks = true;
 							# propagation.disableANSChecks = true;
 							# propagation.requireAllRNS = false;
 						};
 						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 						storage = "/letsencrypt/acme.json";
-						httpChallenge.entryPoint = "web";
+						# httpChallenge.entryPoint = "web";
 					};
 					providers = {
 						docker.exposedbydefault = false;
