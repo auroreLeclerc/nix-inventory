@@ -25,7 +25,7 @@
 					'';
 				};
 				adguardhome = let
-					adguardHomeConfig = lib.mkIf (builtins.hasAttr "adguardhome" config.services.podman.containers) {
+					adguardHomeConfig = { # lib.mkIf (builtins.hasAttr "adguardhome" config.services.podman.containers) {
 						http = {
 							address = "${config.services.podman.containers.adguardhome.ip4}:80";
 						};
@@ -78,14 +78,11 @@
 							}
 						];
 						filtering = {
-							blocked_services.schedule.time_zone = "Europe/Paris";
-							safe_search.enabled = false;
 							rewrites = builtins.genList (i: {
 								domain = "${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 								answer = config.services.podman.containers.${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.ip4;
 							}) (builtins.length (builtins.attrNames config.services.podman.containers));
 						};
-						log.enabled = false;
 						schema_version = 30;
 					};
 				in { # https://github.com/AdguardTeam/AdGuardHome/issues/1964
