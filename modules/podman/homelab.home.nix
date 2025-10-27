@@ -253,7 +253,7 @@
 					extraPodmanArgs = lib.mkIf (builtins.hasAttr "extraPodmanArgs" container) container.extraPodmanArgs;
 					labels = {
 						"traefik.enable" = "true";
-						"traefik.http.routers.${name}.rule" = ''"Host(\"${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}\")"'';
+						"traefik.http.routers.${name}.rule" = ''Host(\\\"${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}\\\")'';
 						"traefik.http.routers.${name}.service" = name;
 						"traefik.http.routers.${name}.tls.certresolver" = "duckresolver";
 						"traefik.http.routers.${name}.entrypoints" = "web";
