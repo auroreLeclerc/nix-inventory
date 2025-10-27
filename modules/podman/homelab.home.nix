@@ -246,7 +246,7 @@
 						PUID = 0;
 						PGID = 0;
 						TZ = "Europe/Paris";
-					} // lib.mkIf (builtins.hasAttr "environment" container) container.environment;
+					} // (if (builtins.hasAttr "environment" container) then container.environment else {});
 					volumes = lib.mkIf (builtins.hasAttr "volumes" container) container.volumes;
 					devices = lib.mkIf (builtins.hasAttr "devices" container) container.devices;
 					ports = lib.mkIf (builtins.hasAttr "ports" container) container.ports;
