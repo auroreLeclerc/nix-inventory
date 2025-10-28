@@ -8,7 +8,7 @@
 						insecure = true;
 						dashboard = true;
 					};
-					# log.level = "DEBUG";
+					log.level = "INFO";
 					entrypoints = {
 						web = {
 							address = ":80";
