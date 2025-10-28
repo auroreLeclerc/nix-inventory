@@ -35,7 +35,7 @@
 							propagation.delaybeforechecks = 120;
 							# propagation.disableANSChecks = true;
 							# propagation.requireAllRNS = false;
-							resolvers = [ config.services.podman.containers.adguardhome.ip4 ];
+							resolvers = [ "${config.services.podman.containers.adguardhome.ip4}:53" ];
 						};
 						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 						storage = "/letsencrypt/acme.json";
