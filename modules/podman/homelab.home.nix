@@ -32,7 +32,8 @@
 						dnschallenge = {
 							provider = "duckdns";
 							# propagation.disableChecks = true;
-							propagation.delaybeforechecks = 120;
+							delaybeforecheck = 240;
+							propagation.delaybeforechecks = 240;
 							# propagation.disableANSChecks = true;
 							# propagation.requireAllRNS = false;
 						};
