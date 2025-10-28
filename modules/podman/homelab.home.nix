@@ -265,9 +265,7 @@
 					volumes = lib.mkIf (builtins.hasAttr "volumes" container) container.volumes;
 					devices = lib.mkIf (builtins.hasAttr "devices" container) container.devices;
 					ports = lib.mkIf (builtins.hasAttr "ports" container) container.ports;
-					extraPodmanArgs = [
-						"--dns ${config.services.podman.containers.adguardhome.ip4}"
-					] ++ (if (builtins.hasAttr "extraPodmanArgs" container) then container.extraPodmanArgs else []);
+					extraPodmanArgs = lib.mkIf (builtins.hasAttr "extraPodmanArgs" container) container.extraPodmanArgs;
 					labels = {
 						"traefik.enable" = "true";
 						"traefik.http.routers.${name}.rule" = ''Host(\\\"${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}\\\")'';
