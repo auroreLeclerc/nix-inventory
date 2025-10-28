@@ -21,10 +21,10 @@
 							address = ":443";
 							http.tls = {
 								certResolver = "duckresolver";
-								domains = builtins.map (name: {
+								domains = [{
 									main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
-									sans = "${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-								}) (builtins.attrNames containers);
+									sans = "*.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+								}];
 							};
 						};
 					};
