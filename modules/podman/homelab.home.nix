@@ -32,10 +32,10 @@
 						dnschallenge = {
 							provider = "duckdns";
 							# propagation.disableChecks = true;
-							delaybeforecheck = 240;
 							propagation.delaybeforechecks = 240;
 							# propagation.disableANSChecks = true;
 							# propagation.requireAllRNS = false;
+							resolver = [ config.services.podman.containers.adguardhome.ip4 ];
 						};
 						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 						storage = "/letsencrypt/acme.json";
