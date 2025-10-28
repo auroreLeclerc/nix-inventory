@@ -35,7 +35,10 @@
 							propagation.delaybeforechecks = 120;
 							# propagation.disableANSChecks = true;
 							# propagation.requireAllRNS = false;
-							resolvers = [ "${config.services.podman.containers.adguardhome.ip4}:53" ];
+							resolvers = [
+								"${config.services.podman.containers.adguardhome.ip4}:53"
+								"${config.services.podman.containers.adguardhome.ip4}:53"
+							];
 						};
 						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 						storage = "/letsencrypt/acme.json";
@@ -262,7 +265,9 @@
 					volumes = lib.mkIf (builtins.hasAttr "volumes" container) container.volumes;
 					devices = lib.mkIf (builtins.hasAttr "devices" container) container.devices;
 					ports = lib.mkIf (builtins.hasAttr "ports" container) container.ports;
-					extraPodmanArgs = lib.mkIf (builtins.hasAttr "extraPodmanArgs" container) container.extraPodmanArgs;
+					extraPodmanArgs = [
+						"--dns ${config.services.podman.containers.adguardhome.ip4}"
+					] ++ (if (builtins.hasAttr "extraPodmanArgs" container) then container.extraPodmanArgs else []);
 					labels = {
 						"traefik.enable" = "true";
 						"traefik.http.routers.${name}.rule" = ''Host(\\\"${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}\\\")'';
