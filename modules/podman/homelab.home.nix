@@ -31,7 +31,7 @@
 					certificatesresolvers.duckresolver.acme = {
 						dnschallenge = {
 							provider = "duckdns";
-							# propagation.disableChecks = true;
+							propagation.disableChecks = true;
 							# propagation.disableANSChecks = true;
 							# propagation.requireAllRNS = false;
 						};
