@@ -20,6 +20,7 @@
 						websecure = {
 							address = ":443";
 							http.tls = {
+        				passthrough = true;
 								certResolver = "duckresolver";
 								domains = [{
 									main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
@@ -40,8 +41,6 @@
 					providers = {
 						docker = {
 							exposedbydefault = false;
-							network = "docker-like";
-							useBindPortIP = true;
 						};
 						# file.filename = "/etc/traefik/dynamic.yml";
 					};
@@ -266,8 +265,6 @@
 					labels = {
 						"traefik.enable" = "true";
 						"traefik.http.routers.${name}.rule" = ''Host(\\\"${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}\\\")'';
-						# "traefik.http.routers.${name}.service" = name;
-						# "traefik.http.routers.${name}.tls" = "true";
 						"traefik.http.routers.${name}.entrypoints" = "websecure";
 					};
 					network = [ "docker-like" ];
