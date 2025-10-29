@@ -215,7 +215,7 @@
 						};
 						extraPodmanArgs = [
 							# "--user 1000:1000" # https://github.com/docker-library/docs/blob/master/postgres/README.md#arbitrary---user-notes
-							"--health-cmd \\'CMD-SHELL,pg_isready -U postgres -d postgres\\'"
+							"--health-cmd 'CMD-SHELL,pg_isready -U postgres -d postgres'"
 							"--health-interval 10s"
 							"--health-retries 5"
 							"--health-timeout 5s"
