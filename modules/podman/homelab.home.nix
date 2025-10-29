@@ -4,10 +4,6 @@
 		services.podman = {
 			containers = let
 				traefikConfig = {
-					api = {
-						insecure = true;
-						dashboard = true;
-					};
 					log.level = "INFO";
 					entrypoints = let 
 						ports = [ 80 8080 7878 8989 9091 ];
