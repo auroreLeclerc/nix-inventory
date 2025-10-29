@@ -9,14 +9,9 @@
 						dashboard = true;
 					};
 					log.level = "INFO";
-					entrypoints = {
-						web = {
-							address = ":80";
-							http.redirections.entryPoint = {
-								to = "websecure";
-								scheme = "https";
-							};
-						};
+					entrypoints = let 
+						ports = [ 80 8080 7878 8989 9091 ];
+					in {
 						websecure = {
 							address = ":443";
 							http.tls = {
@@ -27,13 +22,25 @@
 								}];
 							};
 						};
-					};
+					} // builtins.listToAttrs (builtins.genList (i: 
+					let
+						port = builtins.elemAt ports i;
+					in {
+						name = "web-${port}";
+						value = {
+							address = ":${port}";
+							http.redirections.entryPoint = {
+								to = "websecure";
+								scheme = "https";
+							};
+						};
+					}) builtins.length ports);
 					serversTransport.insecureSkipVerify = true;
 					certificatesresolvers.duckresolver.acme = {
 						dnschallenge = {
 							provider = "duckdns";
 							propagation = {
-								disableChecks = true;
+								# disableChecks = true;
 								delaybeforechecks = 120;
 							};
 						};
@@ -50,16 +57,9 @@
 				dynamicConfig = {
 					http = {
 						routers = builtins.mapAttrs (name: _: {
-							entryPoints = [ "web" ];
+							entryPoints = [ "websecure" ];
 							rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 							service = name;
-							tls = {
-								certResolver = "duckresolver";
-								domains = [ {
-									main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
-									sans = [ "${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}" ];
-								} ];
-							};
 						}) containers;
 						services = builtins.mapAttrs (name: _: {
 							loadBalancer.servers = [ { url = "http://${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}"; } ];
@@ -223,15 +223,10 @@
 						];
 					};
 					adguardhome = {
-						# image = "localhost/homemanager/adguardhome";
-						# volumes = [
-						# 	"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
-						# ];
-						image = "docker.io/pihole/pihole:latest";
-						environment = {
-							FTLCONF_webserver_api_password = "";
-							FTLCONF_dns_listeningMode = "all"; # If using Docker's default \\\"bridge\\\" network setting the dns listening mode should be set to 'all'
-						};
+						image = "localhost/homemanager/adguardhome";
+						volumes = [
+							"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
+						];
 					};
 					whoami = {
 						image = "docker.io/traefik/whoami:latest";

@@ -25,17 +25,17 @@
 					'';
 				};
 				adguardhome = let
-					adguardHomeConfig = { # lib.mkIf (builtins.hasAttr "adguardhome" config.services.podman.containers) {
-						http = {
-							address = "${config.services.podman.containers.adguardhome.ip4}:80";
-						};
+					adguardHomeConfig = { 
+						# http = {
+						# 	address = "${config.services.podman.containers.adguardhome.ip4}:80";
+						# };
 						users = []; # If set to an empty list, authentication is disabled.
 						language = "fr";
 						theme = "auto";
 						dns = {
-							bind_hosts = [
-								config.services.podman.containers.adguardhome.ip4
-							];
+							# bind_hosts = [
+							# 	config.services.podman.containers.adguardhome.ip4
+							# ];
 							port = 53;
 							upstream_dns = [
 								"https://dns10.quad9.net/dns-query"
@@ -77,12 +77,12 @@
 								id = 2;
 							}
 						];
-						filtering = {
-							rewrites = builtins.genList (i: {
-								domain = "${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-								answer = config.services.podman.containers.${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.ip4;
-							}) (builtins.length (builtins.attrNames config.services.podman.containers));
-						};
+						# filtering = {
+						# 	rewrites = builtins.genList (i: {
+						# 		domain = "${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						# 		answer = config.services.podman.containers.${builtins.elemAt (builtins.attrNames config.services.podman.containers) i}.ip4;
+						# 	}) (builtins.length (builtins.attrNames config.services.podman.containers));
+						# };
 						schema_version = 30;
 					};
 				in { # https://github.com/AdguardTeam/AdGuardHome/issues/1964
