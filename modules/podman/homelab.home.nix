@@ -206,15 +206,16 @@
 					# };
 					postgres = {
 						image = "localhost/homemanager/postgres";
-						volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql" ];
+						volumes = [
+							# "/etc/passwd:/etc/passwd:ro"
+							"/home/dawn/docker/postgres/:/var/lib/postgresql"
+						];
 						environment = {
 							POSTGRES_PASSWORD = "postgres";
 						};
 						extraPodmanArgs = [
-							"--user dawn" # https://hub.docker.com/_/postgres/#arbitrary---user-notesc
-							''
-								--health-cmd \'CMD-SHELL,pg_isready -U postgres -d postgres\'
-							''
+							# "--user 1000:1000" # https://github.com/docker-library/docs/blob/master/postgres/README.md#arbitrary---user-notes
+							"--health-cmd \\'CMD-SHELL,pg_isready -U postgres -d postgres\\'"
 							"--health-interval 10s"
 							"--health-retries 5"
 							"--health-timeout 5s"
@@ -232,7 +233,7 @@
 					traefik = {
 						image = "docker.io/traefik:latest";
 						volumes = [
-							"/run/user/1000/podman/podman.sock:/var/run/docker.sock"
+							"/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
 							"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
 							"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
 							"${builtins.toFile "dynamicConfig.json" (builtins.toJSON dynamicConfig)}:/etc/traefik/dynamic.yml"
