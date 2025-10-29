@@ -30,22 +30,19 @@
 					};
 					serversTransport.insecureSkipVerify = true;
 					certificatesresolvers.duckresolver.acme = {
-						caServer = "https://acme-staging-v02.api.letsencrypt.org/directory";
 						dnschallenge = {
 							provider = "duckdns";
-							disablepropagationcheck = true;
-							propagation.disableChecks = true;
 							propagation.delaybeforechecks = 120;
-							# propagation.disableANSChecks = true;
-							# propagation.requireAllRNS = false;
-							resolvers = [ "1.1.1.1:53" "1.0.0.1:53" ];
 						};
 						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 						storage = "/letsencrypt/acme.json";
-						# httpChallenge.entryPoint = "web";
 					};
 					providers = {
-						docker.exposedbydefault = false;
+						docker = {
+							exposedbydefault = false;
+							network = "docker-like";
+							useBindPortIP = true;
+						};
 						# file.filename = "/etc/traefik/dynamic.yml";
 					};
 				};
