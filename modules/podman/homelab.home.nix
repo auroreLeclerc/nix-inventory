@@ -26,15 +26,15 @@
 					let
 						port = builtins.elemAt ports i;
 					in {
-						name = "web-${port}";
+						name = "web-${builtins.toString port}";
 						value = {
-							address = ":${port}";
+							address = ":${builtins.toString port}";
 							http.redirections.entryPoint = {
 								to = "websecure";
 								scheme = "https";
 							};
 						};
-					}) builtins.length ports);
+					}) (builtins.length ports));
 					serversTransport.insecureSkipVerify = true;
 					certificatesresolvers.duckresolver.acme = {
 						dnschallenge = {
