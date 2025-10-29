@@ -69,7 +69,7 @@
 						environment = {
 							SERVERURL = myLibs.impureSopsReading osConfig.sops.secrets.ip.path;
 							PEERS = "exelo,taya";
-							PEERDNS = config.services.podman.containers.adguardhome.ip4;
+							PEERDNS = config.services.podman.containers.pihole.ip4;
 							PERSITENTKEEPALIVE_PEERS = "all";
 							LOG_CONFS = false;
 						};
@@ -221,11 +221,21 @@
 							"--health-timeout 5s"
 						];
 					};
-					adguardhome = {
-						image = "localhost/homemanager/adguardhome";
-						volumes = [
-							"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
+					pihole = {
+						image = "docker.io/pihole/pihole:latest";
+						volumes = let 
+							adlists = ''
+								https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
+							'';
+						in [
+							"${builtins.toFile "adlists.list" adlists}:/etc/pihole/adlists.list"
 						];
+						environment = {
+							FTLCONF_webserver_api_password = "";
+							FTLCONF_dns_listeningMode = "all";
+							FTLCONF_dns_upstreams = "9.9.9.10;149.112.112.10;2620:fe::10;2620:fe::fe:10";
+						};
+						addCapabilities = [ "NET_BIND_SERVICE" "NET_RAW" "NET_ADMIN" "SYS_NICE" "SYS_TIME" ];
 					};
 					whoami = {
 						image = "docker.io/traefik/whoami:latest";
