@@ -206,7 +206,7 @@
 					# };
 					postgres = {
 						image = "localhost/homemanager/postgres";
-						volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql/data" ];
+						volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql" ];
 						environment = {
 							POSTGRES_USER = "postgres";
 							POSTGRES_PASSWORD = "postgres";
