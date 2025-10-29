@@ -6,7 +6,7 @@
 				traefikConfig = {
 					log.level = "INFO";
 					entrypoints = let 
-						ports = [ 80 8080 7878 8989 9091 ];
+						ports = [ 80 ];
 					in {
 						websecure = {
 							address = ":443";
