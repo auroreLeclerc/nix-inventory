@@ -211,8 +211,10 @@
 							POSTGRES_PASSWORD = "postgres";
 						};
 						extraPodmanArgs = [
-							"--user dawn" # https://hub.docker.com/_/postgres/#arbitrary---user-notes
-							"--health-cmd 'CMD-SHELL,pg_isready -U postgres -d postgres'"
+							"--user dawn" # https://hub.docker.com/_/postgres/#arbitrary---user-notesc
+							''
+								--health-cmd \\\'CMD-SHELL,pg_isready -U postgres -d postgres\\\'
+							''
 							"--health-interval 10s"
 							"--health-retries 5"
 							"--health-timeout 5s"
