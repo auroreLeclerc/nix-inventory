@@ -32,7 +32,10 @@
 					certificatesresolvers.duckresolver.acme = {
 						dnschallenge = {
 							provider = "duckdns";
-							propagation.delaybeforechecks = 120;
+							propagation = {
+								disableChecks = true;
+								delaybeforechecks = 120;
+							};
 						};
 						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 						storage = "/letsencrypt/acme.json";
