@@ -20,7 +20,6 @@
 						websecure = {
 							address = ":443";
 							http.tls = {
-        				passthrough = true;
 								certResolver = "duckresolver";
 								domains = [{
 									main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
