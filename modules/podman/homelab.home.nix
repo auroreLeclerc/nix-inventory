@@ -220,10 +220,15 @@
 						];
 					};
 					adguardhome = {
-						image = "localhost/homemanager/adguardhome";
-						volumes = [
-							"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
-						];
+						# image = "localhost/homemanager/adguardhome";
+						# volumes = [
+						# 	"/home/dawn/docker/adguardhome/work:/opt/adguardhome/work"
+						# ];
+						image = "docker.io/pihole/pihole:latest";
+						environment = {
+							FTLCONF_webserver_api_password = "";
+							FTLCONF_dns_listeningMode = "all"; # If using Docker's default \\\"bridge\\\" network setting the dns listening mode should be set to 'all'
+						};
 					};
 					whoami = {
 						image = "docker.io/traefik/whoami:latest";
