@@ -5,9 +5,15 @@
 			containers = let
 				traefikConfig = {
 					log.level = "INFO";
-					entrypoints = let 
-						ports = [ 80 ];
-					in {
+					api.dashboard = true;
+					entrypoints = {
+						web = {
+							address = ":80";
+							http.redirections.entryPoint = {
+								to = "websecure";
+								scheme = "https";
+							};
+						};
 						websecure = {
 							address = ":443";
 							http.tls = {
@@ -18,20 +24,8 @@
 								}];
 							};
 						};
-					} // builtins.listToAttrs (builtins.genList (i: 
-					let
-						port = builtins.elemAt ports i;
-					in {
-						name = "web-${builtins.toString port}";
-						value = {
-							address = ":${builtins.toString port}";
-							http.redirections.entryPoint = {
-								to = "websecure";
-								scheme = "https";
-							};
-						};
-					}) (builtins.length ports));
-					serversTransport.insecureSkipVerify = true;
+					};
+					# serversTransport.insecureSkipVerify = true;
 					certificatesresolvers.duckresolver.acme = {
 						dnschallenge = {
 							provider = "duckdns";
@@ -44,21 +38,19 @@
 						storage = "/letsencrypt/acme.json";
 					};
 					providers = {
-						docker = {
-							exposedbydefault = false;
-						};
-						# file.filename = "/etc/traefik/dynamic.yml";
+						# docker.exposedbydefault = false;
+						file.filename = "/etc/traefik/dynamic.yml";
 					};
 				};
 				dynamicConfig = {
 					http = {
 						routers = builtins.mapAttrs (name: _: {
-							entryPoints = [ "websecure" ];
 							rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+							entryPoints = [ "websecure" ];
 							service = name;
 						}) containers;
 						services = builtins.mapAttrs (name: _: {
-							loadBalancer.servers = [ { url = "http://${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}"; } ];
+							loadBalancer.servers = [ { url = "http://${name}"; } ];
 						}) containers;
 					};
 				};
@@ -128,9 +120,9 @@
 							];
 						};
 						volumes = [
-							"/media/bellum/main/Multimédia/Films:/data/movies"
-							"/media/bellum/main/Multimédia/Séries:/data/tvshows"
-							"/media/bellum/main/new_Deezer:/data/music"
+							"/media/bellum/main/Multimédia/Films:/data/movies:ro"
+							"/media/bellum/main/Multimédia/Séries:/data/tvshows:ro"
+							"/media/bellum/main/new_Deezer:/data/music:ro"
 							"/media/bellum/jellyfin:/config"
 						];
 						devices = [
@@ -207,14 +199,14 @@
 					postgres = {
 						image = "localhost/homemanager/postgres";
 						volumes = [
-							# "/etc/passwd:/etc/passwd:ro"
+							"/etc/passwd:/etc/passwd:ro"
 							"/home/dawn/docker/postgres/:/var/lib/postgresql"
 						];
 						environment = {
 							POSTGRES_PASSWORD = "postgres";
 						};
 						extraPodmanArgs = [
-							# "--user 1000:1000" # https://github.com/docker-library/docs/blob/master/postgres/README.md#arbitrary---user-notes
+							"--user 1000:1000" # https://github.com/docker-library/docs/blob/master/postgres/README.md#arbitrary---user-notes
 							"--health-cmd 'CMD-SHELL,pg_isready -U postgres -d postgres'"
 							"--health-interval 10s"
 							"--health-retries 5"
@@ -224,9 +216,7 @@
 					pihole = {
 						image = "docker.io/pihole/pihole:latest";
 						volumes = let 
-							adlists = ''
-								https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts
-							'';
+							adlists = ''https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts'';
 						in [
 							"${builtins.toFile "adlists.list" adlists}:/etc/pihole/adlists.list"
 						];
@@ -235,7 +225,6 @@
 							FTLCONF_dns_listeningMode = "all";
 							FTLCONF_dns_upstreams = "9.9.9.10;149.112.112.10;2620:fe::10;2620:fe::fe:10";
 						};
-						addCapabilities = [ "NET_BIND_SERVICE" "NET_RAW" "NET_ADMIN" "SYS_NICE" "SYS_TIME" ];
 					};
 					whoami = {
 						image = "docker.io/traefik/whoami:latest";
