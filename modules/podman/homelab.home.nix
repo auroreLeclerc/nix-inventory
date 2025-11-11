@@ -41,8 +41,8 @@
 						storage = "/letsencrypt/acme.json";
 					};
 					providers = {
-						# docker.exposedbydefault = false;
-						file.filename = "/etc/traefik/dynamic.yml";
+						docker.exposedbydefault = false;
+						# file.filename = "/etc/traefik/dynamic.yml";
 					};
 				};
 				dynamicConfig = {
@@ -54,8 +54,8 @@
 						}) containers;
 						services = builtins.mapAttrs (name: _: {
 							loadBalancer.servers = [
-								{ url = "http://${name}:8080"; preservePath = true; }
-								{ url = "http://${name}:8096"; preservePath = true; } # WIP
+								{ url = "http://${name}:8080"; }
+								{ url = "http://${name}:8096"; } # WIP
 							];
 						}) containers;
 					};
