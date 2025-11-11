@@ -5,7 +5,10 @@
 			containers = let
 				traefikConfig = {
 					log.level = "INFO";
-					api.dashboard = true;
+					api = {
+						dashboard = true;
+						insecure = true;
+					};
 					entrypoints = {
 						web = {
 							address = ":80";
@@ -50,7 +53,10 @@
 							service = name;
 						}) containers;
 						services = builtins.mapAttrs (name: _: {
-							loadBalancer.servers = [ { url = "http://${name}"; } ];
+							loadBalancer.servers = [
+								{ url = "http://${name}:8080"; }
+								{ url = "http://${name}:8096"; } # WIP
+							];
 						}) containers;
 					};
 				};
