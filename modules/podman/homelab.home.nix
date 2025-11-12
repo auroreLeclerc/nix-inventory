@@ -51,12 +51,12 @@
 							rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 							entryPoints = [ "websecure" ];
 							service = name;
-						} else {}) containers;
+						} else null) containers;
 						services = builtins.mapAttrs (name: content: if (builtins.hasAttr "webSecurePort" content) then {
 							loadBalancer.servers = [
 								{ url = "http://${name}:${builtins.toString content.webSecurePort}"; } # WIP
 							];
-						} else {}) containers;
+						} else null) containers;
 					};
 				};
 				containers = {
