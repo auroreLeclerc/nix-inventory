@@ -41,23 +41,22 @@
 						storage = "/letsencrypt/acme.json";
 					};
 					providers = {
-						docker.exposedbydefault = false;
-						# file.filename = "/etc/traefik/dynamic.yml";
+						# docker.exposedbydefault = false;
+						file.filename = "/etc/traefik/dynamic.yml";
 					};
 				};
 				dynamicConfig = {
 					http = {
-						routers = builtins.mapAttrs (name: _: {
+						routers = builtins.mapAttrs (name: content: if (builtins.hasAttr "webSecurePort" content) then {
 							rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 							entryPoints = [ "websecure" ];
 							service = name;
-						}) containers;
-						services = builtins.mapAttrs (name: _: {
+						} else {}) containers;
+						services = builtins.mapAttrs (name: content: if (builtins.hasAttr "webSecurePort" content) then {
 							loadBalancer.servers = [
-								{ url = "http://${name}:8080"; }
-								{ url = "http://${name}:8096"; } # WIP
+								{ url = "http://${name}:${builtins.toString content.webSecurePort}"; } # WIP
 							];
-						}) containers;
+						} else {}) containers;
 					};
 				};
 				containers = {
@@ -85,6 +84,7 @@
 							"/media/bellum/gohma/downloads:/downloads"
 							"/media/bellum/gohma/watchdir:/watch"
 						];
+						webSecurePort = 9091;
 					};
 					sonarr = {
 						image = "lscr.io/linuxserver/sonarr:latest";
@@ -93,6 +93,7 @@
 							"/media/bellum/gohma/downloads:/downloads"
 							"/media/bellum/main/Multimédia/Séries:/tv"
 						];
+						webSecurePort = 8989;
 					};
 					radarr = {
 						image = "lscr.io/linuxserver/radarr:latest";
@@ -101,6 +102,7 @@
 							"/media/bellum/gohma/downloads:/downloads"
 							"/media/bellum/main/Multimédia/Films:/movies"
 						];
+						webSecurePort = 7878;
 					};
 					jackett = {
 						image = "lscr.io/linuxserver/jackett:latest";
@@ -108,6 +110,7 @@
 							AUTO_UPDATE = true;
 						};
 						volumes = [ "/home/dawn/docker/jackett:/config" ];
+						webSecurePort = 9117;
 					};
 					bazarr = {
 						image = "lscr.io/linuxserver/bazarr:latest";
@@ -116,6 +119,7 @@
 							"/media/bellum/main/Multimédia/Films:/movies"
 							"/media/bellum/main/Multimédia/Séries:/tv"
 						];
+						webSecurePort = 6767;
 					};
 					jellyfin = {
 						image = "lscr.io/linuxserver/jellyfin:latest";
@@ -135,6 +139,7 @@
 							"/dev/dri:/dev/dri"
 							"/dev/kfd:/dev/kfd"
 						];
+						webSecurePort = 8096;
 					};
 					lidarr = {
 						image = "docker.io/youegraillot/lidarr-on-steroids";
@@ -143,6 +148,7 @@
 							"/media/bellum/main/new_Deezer:/music"
 							"/media/bellum/main/new_Deezer:/downloads"
 						];
+						webSecurePort = 6595;
 					};
 					vaultwarden = {
 						image = "docker.io/vaultwarden/server:latest";
@@ -151,6 +157,7 @@
 							SIGNUPS_ALLOWED = "false";
 						};
 						volumes = [ "/home/dawn/docker/vaultwarden/data:/data" ];
+						webSecurePort = 80;
 					};
 					miniflux = {
 						image = "docker.io/miniflux/miniflux:latest";
@@ -169,6 +176,7 @@
 							MINIO_ROOT_USER = "minioadmin";
 							MINIO_ROOT_PASSWORD = "minioadmin";
 						};
+						webSecurePort = 9000;
 					};
 					# chrome = { # Chrome Browser (for printing and previews)
 					# 	image = "ghcr.io/browserless/chromium:latest";
@@ -231,9 +239,11 @@
 							FTLCONF_dns_listeningMode = "all";
 							FTLCONF_dns_upstreams = "9.9.9.10;149.112.112.10;2620:fe::10;2620:fe::fe:10";
 						};
+						webSecurePort = 53;
 					};
 					whoami = {
 						image = "docker.io/traefik/whoami:latest";
+						webSecurePort = 80;
 					};
 					traefik = {
 						image = "docker.io/traefik:latest";
@@ -246,6 +256,7 @@
 						environment = {
 							DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 						};
+						webSecurePort = 8080;
 					};
 				};
 			in builtins.listToAttrs (builtins.genList (i: 
