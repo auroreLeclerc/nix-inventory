@@ -1,12 +1,10 @@
 { config, osConfig, myLibs, ... }: {
-	config = {
-		services.podman.containers.traefik = let
+	config.services.podman.containers.traefik = {
+		image = "docker.io/traefik:latest";
+		volumes = let
 			traefikConfig = {
-				api = {
-					insecure = true;
-					dashboard = true;
-				};
-				# log.level = "DEBUG";
+				log.level = "INFO";
+				api.dashboard = true;
 				entrypoints = {
 					web = {
 						address = ":80";
@@ -17,51 +15,53 @@
 					};
 					websecure = {
 						address = ":443";
-						http.tls = true;
+						http.tls = {
+							certResolver = "duckresolver";
+							domains = [{
+								main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
+								sans = "*.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							}];
+						};
 					};
 				};
+				# serversTransport.insecureSkipVerify = true;
 				certificatesresolvers.duckresolver.acme = {
-					dnschallenge.provider = "duckdns";
+					dnschallenge = {
+						provider = "duckdns";
+						propagation = {
+							# disableChecks = true;
+							delaybeforechecks = 120;
+						};
+					};
 					email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 					storage = "/letsencrypt/acme.json";
-      		httpChallenge.entryPoint = "web";
 				};
-				providersfile.filename = "/etc/traefik/dynamic.yml";
+				providers.file.filename = "/etc/traefik/dynamic.yml";
 			};
 			dynamicConfig = {
 				http = {
-					routers = builtins.mapAttrs (name: content: {
-						entryPoints = [ "web" ];
+					routers = builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container)) then {
 						rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+						entryPoints = [ "websecure" ];
 						service = name;
-						tls = {
-							certResolver = "duckresolver";
-							domains = [ {
-								main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
-								sans = [ "${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}" ];
-							} ];
-						};
-					}) (config.services.podman.containers);
-					services = builtins.mapAttrs (name: content: {
-						loadBalancer.servers = [ { url = "http://${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}"; } ];
-					}) (config.services.podman.containers);
+					} else null) config.services.podman.containers;
+					services = builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container)) then {
+						loadBalancer.servers = [
+							{ url = "http://${name}:${builtins.toString container.environment.PORT}"; }
+						];
+					} else null) config.services.podman.containers;
 				};
 			};
-		in {
-			image = "docker.io/traefik:latest";
-			volumes = [
-				"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
-				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
-				"${builtins.toFile "dynamicConfig.json" (builtins.toJSON dynamicConfig)}:/etc/traefik/dynamic.yml"
-			];
-			user = 0;
-			group = 0;
-			environment = {
-				DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
-			};
-			ip4 = "172.18.0.27";
-			network = [ "docker-like" ];
-			autoUpdate = "registry";
+		in [
+			"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
+			"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
+			"${builtins.toFile "dynamicConfig.json" (builtins.toJSON dynamicConfig)}:/etc/traefik/dynamic.yml"
+		];
+		environment = {
+			PORT = 443;
+			DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 		};
+		network = [ "docker-like" ];
+		autoUpdate = "registry";
 	};
 }
