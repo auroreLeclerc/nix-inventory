@@ -12,9 +12,6 @@
 				driver = "bridge";
 				subnet = "172.18.0.0/24";
 				gateway = "172.18.0.1";
-				# extraPodmanArgs = [
-				# 	"--dns=${config.services.podman.containers.adguardhome.ip4}"
-				# ];
 			};
 			builds = {
 				postgres = {

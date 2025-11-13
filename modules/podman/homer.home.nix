@@ -35,9 +35,9 @@
 							logo = "assets/nginx.png";
 							url = "https://nginx.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
-							name = "Proxy Manager";
-							logo = "assets/proxy.svg";
-							url = "https://proxy-manager.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							name = "Traefik";
+							logo = "assets/traefik.svg";
+							url = "https://traefik.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Pi-hole";
 							logo = "assets/pi.svg";
@@ -152,9 +152,9 @@
 					sha256 = "sha256-hewoVqgtHEBlGr6cI1/6AUTJnsJSWA/s5yTAzAbYaMg=";
 				}}:/www/assets/nginx.png"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/NginxProxyManager/nginx-proxy-manager/refs/heads/develop/docs/src/public/logo.svg";
-					sha256 = "sha256-Hp5XU/e4hSXYcM9+Y94GZzFmZqE/0Ob0CFcLj7kFc84=";
-				}}:/www/assets/proxy.svg"
+					url = "https://doc.traefik.io/traefik/assets/images/logo-traefik-proxy-logo.svg";
+					sha256 = "sha256-LRhBw8QDkDdxNnLc798x0bg00msTzjRFnWMQIwY8vss=";
+				}}:/www/assets/traefik.svg"
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/pi-hole/web/refs/heads/master/img/logo.svg";
 					sha256 = "sha256-xYQy+/XuOdWv2Ntg/7vURhBYHnF5PUCPbMFfz5AEYpw=";
