@@ -3,7 +3,7 @@
 		image = "docker.io/traefik:latest";
 		volumes = let
 			traefikConfig = {
-				log.level = "DEBUG";
+				log.level = "INFO";
 				api = {
 					dashboard = true;
 					insecure = true;
@@ -27,7 +27,6 @@
 						};
 					};
 				};
-				# serversTransport.insecureSkipVerify = true;
 				certificatesresolvers.duckresolver.acme = {
 					dnschallenge = {
 						provider = "duckdns";
@@ -39,7 +38,6 @@
 					email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 					storage = "/letsencrypt/acme.json";
 				};
-				# Reminder: DNS ip must be traefik's ip !
 				providers.file.filename = "/etc/traefik/dynamic.yml";
 			};
 			dynamicConfig = {
@@ -52,7 +50,7 @@
 							};
 						};
 					};
-					routers = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container.environment)) then {
+					routers = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 						rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 						entryPoints = [ "websecure" ];
 						service = name;
@@ -63,7 +61,7 @@
 							service = "error-handler";
 						};
 					};
-					services = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container.environment)) then {
+					services = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 						loadBalancer.servers = [
 							{ url = "http://${name}:${builtins.toString container.environment.PORT}"; }
 						];
@@ -81,7 +79,7 @@
 			PORT = 8080;
 			DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 		};
-		ip4 = "172.18.0.2";
+		ip4 = "172.18.0.2"; # IMPORTANT: the ip of the domain's dns must be traefik's ip !
 		network = [ "docker-like" ];
 		autoUpdate = "registry";
 	};
