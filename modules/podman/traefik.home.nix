@@ -4,7 +4,10 @@
 		volumes = let
 			traefikConfig = {
 				log.level = "INFO";
-				api.dashboard = true;
+				api = {
+					dashboard = true;
+					insecure = true;
+				};
 				entrypoints = {
 					web = {
 						address = ":80";
