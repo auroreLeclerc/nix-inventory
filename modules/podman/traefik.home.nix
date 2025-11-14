@@ -39,7 +39,8 @@
 					email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 					storage = "/letsencrypt/acme.json";
 				};
-				providers.file.filename = "/etc/traefik/dynamic.yml";
+				# providers.file.filename = "/etc/traefik/dynamic.yml";
+				providers.docker.exposedbydefault = false;
 			};
 			dynamicConfig = {
 				http = {
