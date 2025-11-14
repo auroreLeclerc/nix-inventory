@@ -237,11 +237,6 @@
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
-				imnot = {
-					image = "docker.io/traefik/whoami:latest";
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
-				};
 			};
 			# in builtins.mapAttrs (name: container: {
 			# 	name = name;
