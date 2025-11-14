@@ -3,7 +3,7 @@
 		image = "docker.io/traefik:latest";
 		volumes = let
 			traefikConfig = {
-				log.level = "INFO";
+				log.level = "DEBUG";
 				api = {
 					dashboard = true;
 					insecure = true;
