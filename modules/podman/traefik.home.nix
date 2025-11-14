@@ -41,18 +41,24 @@
 			dynamicConfig = {
 				http = {
 					middlewares = {
-						errors-config = {
+						error-handler = {
 							errors = {
 								service = "error-handler";
 								query = "/{status}.html";
 							};
 						};
 					};
-					routers = builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container)) then {
+					routers = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container)) then {
 						rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 						entryPoints = [ "websecure" ];
 						service = name;
-					} else null) config.services.podman.containers;
+					} else null) config.services.podman.containers) // {
+						error-handler = {
+							rule = "Host(`error-handler.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+							entryPoints = [ "websecure" ];
+							service = "error-handler";
+						};
+					};
 					services = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container)) then {
 						loadBalancer.servers = [
 							{ url = "http://${name}:${builtins.toString container.environment.PORT}"; }
