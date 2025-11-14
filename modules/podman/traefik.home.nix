@@ -39,47 +39,47 @@
 					email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 					storage = "/letsencrypt/acme.json";
 				};
-				# providers.file.filename = "/etc/traefik/dynamic.yml";
-				providers.docker.exposedbydefault = false;
+				providers.file.filename = "/etc/traefik/dynamic.yml";
+				# providers.docker.exposedbydefault = false;
 			};
 			dynamicConfig = {
 				http = {
-					middlewares = {
-						error-handler = {
-							errors = {
-								service = "error-handler";
-								query = "/{status}.html";
-							};
-						};
-					};
+					# middlewares = {
+					# 	error-handler = {
+					# 		errors = {
+					# 			service = "error-handler";
+					# 			query = "/{status}.html";
+					# 		};
+					# 	};
+					# };
 					routers = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container.environment)) then {
 						rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 						entryPoints = [ "websecure" ];
 						service = name;
-					} else null) config.services.podman.containers) // {
-						error-handler = {
-							rule = "Host(`error-handler.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
-							entryPoints = [ "websecure" ];
-							service = "error-handler";
-						};
-					};
+					} else null) config.services.podman.containers); # // {
+						# error-handler = {
+						# 	rule = "Host(`error-handler.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+						# 	entryPoints = [ "websecure" ];
+						# 	service = "error-handler";
+						# };
+					# };
 					services = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container.environment)) then {
 						loadBalancer.servers = [
 							{ url = "http://${container.ip4}:${builtins.toString container.environment.PORT}"; }
 						];
-					} else null) config.services.podman.containers) // {
-						error-handler.loadBalancer.servers = [ { url = "https://http.cat/"; } ];
-					};
+					} else null) config.services.podman.containers); # // {
+						#error-handler.loadBalancer.servers = [ { url = "https://http.cat/"; } ];
+					#};
 				};
 			};
 		in [
-			"/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
+			# "/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
 			"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
 			"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
 			"${builtins.toFile "dynamicConfig.json" (builtins.toJSON dynamicConfig)}:/etc/traefik/dynamic.yml"
 		];
 		environment = {
-			PORT = 443;
+			PORT = 8080;
 			DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 		};
 		ip4 = "172.18.0.2";

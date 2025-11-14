@@ -213,11 +213,11 @@
 					devices = lib.mkIf (builtins.hasAttr "devices" container) container.devices;
 					ports = lib.mkIf (builtins.hasAttr "ports" container) container.ports;
 					extraPodmanArgs = lib.mkIf (builtins.hasAttr "extraPodmanArgs" container) container.extraPodmanArgs;
-					labels = {
-						"traefik.enable" = "true";
-						"traefik.http.routers.${name}.rule" = ''Host(\\\"${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}\\\")'';
-						"traefik.http.routers.${name}.entrypoints" = "websecure";
-					};
+					# labels = {
+					# 	"traefik.enable" = "true";
+					# 	"traefik.http.routers.${name}.rule" = ''Host(\\\"${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}\\\")'';
+					# 	"traefik.http.routers.${name}.entrypoints" = "websecure";
+					# };
 					network = [ "docker-like" ];
 					ip4 = "172.18.0.${builtins.toString (i + 4)}";
 					autoUpdate = if (builtins.match "^localhost.*" container.image) == [] then "local" else "registry";
