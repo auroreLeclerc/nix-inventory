@@ -48,7 +48,7 @@
 							};
 						};
 					};
-					routers = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container)) then {
+					routers = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container.environment)) then {
 						rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 						entryPoints = [ "websecure" ];
 						service = name;
@@ -59,7 +59,7 @@
 							service = "error-handler";
 						};
 					};
-					services = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container)) then {
+					services = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container.environment)) then {
 						loadBalancer.servers = [
 							{ url = "http://${name}:${builtins.toString container.environment.PORT}"; }
 						];
