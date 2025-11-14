@@ -64,7 +64,7 @@
 					};
 					services = (builtins.mapAttrs (name: container: if ((builtins.hasAttr "environment" container) && (builtins.hasAttr "PORT" container.environment)) then {
 						loadBalancer.servers = [
-							{ url = "http://${name}:${builtins.toString container.environment.PORT}"; }
+							{ url = "http://${container.ip4}:${builtins.toString container.environment.PORT}"; }
 						];
 					} else null) config.services.podman.containers) // {
 						error-handler.loadBalancer.servers = [ { url = "https://http.cat/"; } ];
@@ -80,6 +80,7 @@
 			PORT = 443;
 			DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 		};
+		ip4 = "172.18.0.2";
 		network = [ "docker-like" ];
 		autoUpdate = "registry";
 	};

@@ -180,6 +180,7 @@
 				PORT = 8080;
 				INIT_ASSETS = 0;
 			};
+			ip4 = "172.18.0.3";
 			network = [ "docker-like" ];
 			autoUpdate = "registry";
 		};
