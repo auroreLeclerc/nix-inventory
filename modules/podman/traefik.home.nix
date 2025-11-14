@@ -72,6 +72,7 @@
 				};
 			};
 		in [
+			"/run/user/1000/podman/podman.sock:/var/run/docker.sock:ro"
 			"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
 			"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
 			"${builtins.toFile "dynamicConfig.json" (builtins.toJSON dynamicConfig)}:/etc/traefik/dynamic.yml"
