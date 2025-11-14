@@ -11,7 +11,7 @@
 			packages = with pkgs; [ nerd-fonts.meslo-lg ];
 		};
 		programs = {
-			thefuck = {
+			pay-respects = {
 				enable = osConfig.users.mutableUsers;
 				enableZshIntegration = true;
 			};
@@ -27,7 +27,7 @@
 				}];
 				oh-my-zsh = {
 					enable = osConfig.users.mutableUsers;
-					plugins = [ "sudo" "node" "npm" "git" "repo" "nvm" "emoji" ];
+					plugins = [ "sudo" "node" "npm" "git" "repo" "nvm" "emoji" "podman" ];
 				};
 				localVariables = lib.mkIf osConfig.programs.adb.enable  {
 					"CHROME_EXECUTABLE" = "${pkgs.chromium}/bin/chromium-browser";

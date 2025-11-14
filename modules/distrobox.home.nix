@@ -4,15 +4,15 @@
 		programs.distrobox = {
 			enable = true;
 			containers = {
-				debian = {
-					additional_packages = "git nano";
-					image = "docker.io/debian/debian:stable";
+				debian-python = {
+					image = "docker.io/debian:bookworm";
+					additional_packages = "git nano apt-file python3 python3-pip python3-wheel pipenv";
+					init_hooks = [ "apt-file update;" ];
 				};
-				pip3 = {
-					clone = "debian";
-					entry = true;
-					additional_packages = "python3";
-					init_hooks = "pip3 install numpy pandas";
+				arch-wine = {
+					image = "docker.io/archlinux:multilib-devel";
+					additional_packages = "wine wine-gecko wine-mono winetricks";
+					init_hooks = [ "winetricks --force vcrun2022;" ];
 				};
 			};
 			# settings = { # FIXME: 25.11
