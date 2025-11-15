@@ -45,6 +45,7 @@
 					middlewares = {
 						error-handler = {
 							errors = {
+								status = [ "100-599" ];
 								service = "error-handler";
 								query = "/{status}.html";
 							};
