@@ -57,7 +57,8 @@
 						service = name;
 					} else null) config.services.podman.containers) // {
 						error-handler = {
-							rule = "Host(`error-handler.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+							rule = "HostRegexp(`{host:.+}`)";
+							priority = 1;
 							entryPoints = [ "websecure" ];
 							service = "error-handler";
 						};
