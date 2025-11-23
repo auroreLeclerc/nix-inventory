@@ -114,7 +114,9 @@
 				};
 				lidarr = {
 					image = "docker.io/youegraillot/lidarr-on-steroids";
-					environment.PORT = 6595;
+					environment = {
+						PORT = 6595;
+					} // lscr;
 					volumes = [
 						"/home/dawn/docker/lidarr:/config"
 						"/media/bellum/main/new_Deezer:/music"
@@ -227,7 +229,7 @@
 						FTLCONF_dns_listeningMode = "all";
 						FTLCONF_dns_upstreams = "9.9.9.10;149.112.112.10;2620:fe::10;2620:fe::fe:10";
 					};
-					ip4 = "172.18.0.3";
+					ip4 = "172.18.0.253";
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -237,26 +239,75 @@
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
+				photoprism = { # https://dl.photoprism.app/podman/docker-compose.yml
+					image = "docker.io/photoprism/photoprism:latest";
+					environment = {
+						PORT = 2342;
+						PHOTOPRISM_AUTH_MODE = "public";
+						PHOTOPRISM_SITE_URL = "https://photoprism.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						PHOTOPRISM_DISABLE_TLS = true;
+						PHOTOPRISM_READONLY = true;
+						PHOTOPRISM_DATABASE_SERVER = "mariadb:3306";
+						PHOTOPRISM_DATABASE_NAME = "photoprism";
+						PHOTOPRISM_DATABASE_USER = "photoprism";
+						PHOTOPRISM_DATABASE_PASSWORD = "insecure";
+						# PHOTOPRISM_SITE_CAPTION = "AI-Powered Photos App";
+						PHOTOPRISM_SITE_DESCRIPTION = "UwU";
+						PHOTOPRISM_SITE_AUTHOR = "Aurore";
+					};
+					devices = [
+						"/dev/dri:/dev/dri"
+						"/dev/kfd:/dev/kfd"
+					];
+					volumes = [
+						"/media/bellum/main/Dawn/Images/:/photoprism/originals:ro"
+						"/media/bellum/main/Dawn/Images/:/photoprism/import:ro"
+						"/home/dawn/docker/photoprism:/photoprism/storage"
+					];
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
+				mariadb = {
+					image = "docker.io/library/mariadb:lts";
+					volumes = [ "/home/dawn/docker/mariadb:/var/lib/mysql" ];
+					environment = {
+						MARIADB_AUTO_UPGRADE = true;
+						MARIADB_DATABASE = "photoprism";
+						MARIADB_USER = "photoprism";
+						MARIADB_PASSWORD = "insecure";
+						MARIADB_ROOT_PASSWORD = "insecure";
+					};
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
+				redis = {
+					image = "docker.io/library/redis:8";
+					volumes = [ "/home/dawn/docker/redis:/data" ];
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
+				paperless = {
+					image = "ghcr.io/paperless-ngx/paperless-ngx:latest";
+					volumes = [
+						"/home/dawn/docker/paperless:/usr/src/paperless/data"
+						"/home/dawn/docker/paperless:/usr/src/paperless/media"
+						# "./export:/usr/src/paperless/export"
+						"/media/bellum/main/Dawn/Images/:/usr/src/paperless/consume:ro"
+					];
+					environment = {
+						PORT = 8000;
+						USERMAP_UID = lscr.PUID;
+						USERMAP_GID = lscr.PGID;
+						PAPERLESS_TIME_ZONE = lscr.TZ;
+						PAPERLESS_OCR_LANGUAGE= "fra";
+						PAPERLESS_URL = "https://paperless.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						PAPERLESS_REDIS = "redis:6379";
+						PAPERLESS_DBHOST = "postgres";
+					};
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
 			};
-			# in builtins.mapAttrs (name: container: {
-			# 	name = name;
-			# 	value = {
-			# 		image = container.image;
-			# 		exec = lib.mkIf (builtins.hasAttr "exec" container) container.exec;
-			# 		addCapabilities = lib.mkIf (builtins.hasAttr "addCapabilities" container) container.addCapabilities;
-			# 		environment = {
-			# 			PUID = 0;
-			# 			PGID = 0;
-			# 			TZ = "Europe/Paris";
-			# 		} // (if (builtins.hasAttr "environment" container) then container.environment else {});
-			# 		volumes = lib.mkIf (builtins.hasAttr "volumes" container) container.volumes;
-			# 		devices = lib.mkIf (builtins.hasAttr "devices" container) container.devices;
-			# 		ports = lib.mkIf (builtins.hasAttr "ports" container) container.ports;
-			# 		extraPodmanArgs = lib.mkIf (builtins.hasAttr "extraPodmanArgs" container) container.extraPodmanArgs;
-			# 		network = [ "docker-like" ];
-			# 		autoUpdate = if (builtins.match "^localhost.*" container.image) == [] then "local" else "registry";
-			# 	};
-			# }) containers;
 		};
 	};
 }

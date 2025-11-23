@@ -1,2 +1,3 @@
 CREATE DATABASE resume;
 CREATE DATABASE miniflux;
+CREATE DATABASE paperless;

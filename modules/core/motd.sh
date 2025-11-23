@@ -41,7 +41,7 @@ else
 				OFFLINE)
 					result+='󱘱'
 				;;
-				UNAVAIL)
+				UNAVAIL|SUSPENDED)
 					result+='󱤡'
 				;;
 				REMOVED)

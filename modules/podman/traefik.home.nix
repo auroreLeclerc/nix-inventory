@@ -1,6 +1,6 @@
 { config, osConfig, myLibs, ... }: {
 	config.services.podman.containers.traefik = {
-		image = "docker.io/traefik:latest";
+		image = "docker.io/library/traefik:latest";
 		volumes = let
 			traefikConfig = {
 				log.level = "INFO";
@@ -43,7 +43,7 @@
 			dynamicConfig = {
 				http = {
 					middlewares = {
-						error-handler = {
+						error-handler = { # TODO
 							errors = {
 								status = [ "100-599" ];
 								service = "error-handler";
@@ -81,7 +81,7 @@
 			PORT = 8080;
 			DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 		};
-		ip4 = "172.18.0.2"; # IMPORTANT: the ip of the domain's dns must be traefik's ip !
+		ip4 = "172.18.0.254"; # IMPORTANT: the ip of the domain's dns must be traefik's ip !
 		network = [ "docker-like" ];
 		autoUpdate = "registry";
 	};

@@ -1,4 +1,4 @@
-{ pkgs, unstablePkgs, myLibs, osConfig, lib, ... }:
+{ pkgs, unstablePkgs, myLibs, osConfig, ... }:
 {
 	programs.firefox = {
 		enable = true;
@@ -6,7 +6,7 @@
 			unstablePkgs.firefoxpwa
 			pkgs.kdePackages.plasma-browser-integration
 		];
-		# languagePacks = [ "fr" "en-GB" ];
+		languagePacks = [ "fr" "en-GB" ];
 		policies = {
 			DisableTelemetry = true;
 			DisableFirefoxStudies = true;

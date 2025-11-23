@@ -25,25 +25,22 @@
 						{
 							name = "Transmission";
 							logo = "assets/transmission.png";
+  						type = "Transmission";
 							url = "https://transmission.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						} {
 							name = "Jackett";
 							logo = "assets/jackett.png";
 							url = "https://jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						} {
-							name = "Nginx";
-							logo = "assets/nginx.png";
-							url = "https://nginx.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-						}	{
 							name = "Traefik";
 							logo = "assets/traefik.svg";
+  						type = "Traefik";
 							url = "https://traefik.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Pi-hole";
 							logo = "assets/pi.svg";
 							type = "PiHole";
-							# apikey = myLibs.impureSopsReading osConfig.sops.secrets.pihole.path;
-							url = "https://pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/admin";
+							url = "https://pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Vaultwarden - Server";
 							logo = "assets/vaultwarden.svg";
@@ -61,6 +58,7 @@
 							type = "Jellyfin";
 							apikey = myLibs.impureSopsReading osConfig.sops.secrets.jellyfin.path;
 							url = "https://jellyfin.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							libraryType = "series";
 						}	{
 							name = "Radarr";
 							logo = "assets/radarr.svg";
@@ -98,9 +96,14 @@
 							logo = "assets/resume.svg";
 							url = "https://reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
-							name = "miniflux";
+							name = "Miniflux";
+  						type = "Miniflux";
 							logo = "assets/miniflux.svg";
 							url = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+						}	{
+							name = "Photoprism";
+							logo = "assets/photoprism.svg";
+							url = "https://photoprism.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 						}
 					];
 				}
@@ -175,6 +178,10 @@
 					url = "https://raw.githubusercontent.com/bambanah/deemix/refs/heads/main/packages/webui/src/client/assets/deemix-icon.svg";
 					sha256 = "sha256-9fjm/zWvZWEyI2Zj4FdbtkBmdsFR/7VH+62e9KrpRcA=";
 				}}:/www/assets/deemix.svg"
+				"${builtins.fetchurl {
+					url = "https://www.photoprism.app/static/icons/logo.svg";
+					sha256 = "sha256-QWaJiZgQ7HXgpi8NO3zfLHylmeV3J/rX66LkkDGH1qA=";
+				}}:/www/assets/photoprism.svg"	
 			];
 			environment = {
 				PORT = 8080;
