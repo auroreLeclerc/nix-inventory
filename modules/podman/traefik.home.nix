@@ -42,34 +42,36 @@
 			};
 			dynamicConfig = {
 				http = {
-					middlewares = {
-						error-handler = { # TODO
-							errors = {
-								status = [ "100-599" ];
-								service = "error-handler";
-								query = "/{status}.html";
-							};
-						};
-					};
+					# middlewares = {
+					# 	error-handler = { # TODO
+					# 		errors = {
+					# 			status = [ "100-599" ];
+					# 			service = "error-handler";
+					# 			query = "/{status}.html";
+					# 		};
+					# 	};
+					# };
 					routers = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 						rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 						entryPoints = [ "websecure" ];
 						service = name;
-					} else null) config.services.podman.containers) // {
-						error-handler = {
-							rule = "HostRegexp(`{host:.+}`)";
-							priority = 1;
-							entryPoints = [ "websecure" ];
-							service = "error-handler";
-						};
-					};
+					} else null) config.services.podman.containers);
+					# // {
+					# 	error-handler = {
+					# 		rule = "HostRegexp(`{host:.+}`)";
+					# 		priority = 1;
+					# 		entryPoints = [ "websecure" ];
+					# 		service = "error-handler";
+					# 	};
+					# };
 					services = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 						loadBalancer.servers = [
 							{ url = "http://${name}:${builtins.toString container.environment.PORT}"; }
 						];
-					} else null) config.services.podman.containers) // {
-						error-handler.loadBalancer.servers = [ { url = "https://http.cat/"; } ];
-					};
+					} else null) config.services.podman.containers);
+					#  // {
+					# 	error-handler.loadBalancer.servers = [ { url = "https://http.cat/"; } ];
+					# };
 				};
 			};
 		in [
