@@ -34,9 +34,9 @@
 						PORT = 9091;
 					} // lscr;
 					volumes = [
-						"/media/bellum/gohma/data:/config"
-						"/media/bellum/gohma/downloads:/downloads"
-						"/media/bellum/gohma/watchdir:/watch"
+						# "/media/bellum/gohma/data:/config"
+						# "/media/bellum/gohma/downloads:/downloads"
+						# "/media/bellum/gohma/watchdir:/watch"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -48,7 +48,7 @@
 					} // lscr;
 					volumes = [
 						"/home/dawn/docker/sonarr:/config"
-						"/media/bellum/gohma/downloads:/downloads"
+						# "/media/bellum/gohma/downloads:/downloads"
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
 					network = [ "docker-like" ];
@@ -61,7 +61,7 @@
 					} // lscr;
 					volumes = [
 						"/home/dawn/docker/radarr:/config"
-						"/media/bellum/gohma/downloads:/downloads"
+						# "/media/bellum/gohma/downloads:/downloads"
 						"/media/bellum/main/Multimédia/Films:/movies"
 					];
 					network = [ "docker-like" ];
