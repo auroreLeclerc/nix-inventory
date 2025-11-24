@@ -5,7 +5,7 @@
 			enable = true;
 			autoUpdate = {
 				enable = true;
-				onCalendar = "*-*-* 04:30:00";
+				onCalendar = "weekly";
 			};
 			networks.docker-like = {
 				description = "Docker compatibilty (internal DNS resolution)";

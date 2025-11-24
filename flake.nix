@@ -16,6 +16,10 @@
 		};
 		nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
 		sops-nix.url = "github:Mic92/sops-nix";
+		nix-index-database = {
+			url = "github:nix-community/nix-index-database";
+    	inputs.nixpkgs.follows = "nixpkgs";
+		};
 	};
 	outputs = { self, nixpkgs, home-manager, catppuccin, ... } @ inputs:
 	let
@@ -43,6 +47,7 @@
 					inputs.home-manager.nixosModules.home-manager
 					inputs.catppuccin.nixosModules.catppuccin
 					inputs.sops-nix.nixosModules.sops
+          inputs.nix-index-database.nixosModules.nix-index
 					{
 						home-manager.useGlobalPkgs = true;
 						home-manager.useUserPackages = true;
