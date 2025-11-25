@@ -21,7 +21,9 @@
 				{
 					name = "Administration";
 					icon = "fas fa-hammer";
-					items = [
+					items = let
+						piholeEndpoint = "https://pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+					in [
 						{
 							name = "Transmission";
 							logo = "assets/transmission.png";
@@ -40,8 +42,9 @@
 							name = "Pi-hole";
 							logo = "assets/pi.svg";
 							type = "PiHole";
+							endpoint = piholeEndpoint;
 							apiVersion = 6;
-							url = "https://pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/admin";
+							url = "${piholeEndpoint}/admin";
 						}	{
 							name = "Vaultwarden - Server";
 							logo = "assets/vaultwarden.svg";

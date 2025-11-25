@@ -224,7 +224,7 @@
 					];
 					environment = {
 						PORT = 80;
-						TZ = "Europe/Paris";
+						TZ = lscr.TZ;
 						FTLCONF_webserver_api_password = "";
 						FTLCONF_dns_listeningMode = "all";
 						FTLCONF_dns_upstreams = "9.9.9.10;149.112.112.10;2620:fe::10;2620:fe::fe:10";
