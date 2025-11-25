@@ -68,7 +68,7 @@
 								{ url = "http://${name}:${builtins.toString container.environment.PORT}"; }
 							];
 						} else null) config.services.podman.containers) // {
-							error-handler.loadBalancer.servers = [ { url = "http://error-pages:${config.services.podman.containers.error-pages.environment.PORT}"; } ];
+							error-handler.loadBalancer.servers = [ { url = "http://error-pages:8080"; } ]; # static
 						};
 					};
 				};
