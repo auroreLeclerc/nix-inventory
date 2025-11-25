@@ -52,11 +52,12 @@
 							cors-handler.headers = {
 								accessControlAllowMethods = [ "GET" "HEAD" "OPTIONS" ];
 								accessControlAllowHeaders = "*";
-								accessControlAllowOriginList = let
-									keys = builtins.attrNames config.services.podman.containers;
-								in builtins.genList (i :
-									"${builtins.elemAt keys i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}"
-								) (builtins.length keys);
+								accessControlAllowOriginList = "*";
+								# 	let
+								# 	keys = builtins.attrNames config.services.podman.containers;
+								# in builtins.genList (i :
+								# 	"${builtins.elemAt keys i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}"
+								# ) (builtins.length keys);
 								accessControlMaxAge = 100;
 								# addVaryHeader = true;
 							}; 
