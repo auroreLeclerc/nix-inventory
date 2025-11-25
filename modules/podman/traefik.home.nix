@@ -50,7 +50,7 @@
 								query = "/{status}";
 							};
 							cors-handler.headers = {
-								accessControlAllowMethods = [ "GET" "OPTIONS" ];
+								accessControlAllowMethods = [ "GET" "HEAD" "OPTIONS" ];
 								accessControlAllowHeaders = "*";
 								accessControlAllowOriginList = let
 									keys = builtins.attrNames config.services.podman.containers;
@@ -58,7 +58,7 @@
 									"${builtins.elemAt keys i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}"
 								) (builtins.length keys);
 								accessControlMaxAge = 100;
-								addVaryHeader = true;
+								# addVaryHeader = true;
 							}; 
 						};
 						routers = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
