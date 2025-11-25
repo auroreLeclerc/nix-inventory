@@ -40,7 +40,6 @@
 							name = "Pi-hole";
 							logo = "assets/pi.svg";
 							type = "PiHole";
-							apiVersion = 6;
 							url = "https://pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/admin";
 						}	{
 							name = "Vaultwarden - Server";

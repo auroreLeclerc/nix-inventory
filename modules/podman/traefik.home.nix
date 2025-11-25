@@ -50,7 +50,7 @@
 								query = "/{status}";
 							};
 							cors-handler.headers = {
-								accessControlAllowMethods = [ "GET" ];
+								accessControlAllowMethods = [ "GET" "OPTIONS" ];
 								accessControlAllowHeaders = "*";
 								accessControlAllowOriginList = let
 									keys = builtins.attrNames config.services.podman.containers;
