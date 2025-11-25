@@ -53,13 +53,8 @@
 								accessControlAllowMethods = [ "GET" "HEAD" "OPTIONS" ];
 								accessControlAllowHeaders = "*";
 								accessControlAllowOriginList = "*";
-								# 	let
-								# 	keys = builtins.attrNames config.services.podman.containers;
-								# in builtins.genList (i :
-								# 	"${builtins.elemAt keys i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}"
-								# ) (builtins.length keys);
 								accessControlMaxAge = 100;
-								# addVaryHeader = true;
+								addVaryHeader = true;
 							}; 
 						};
 						routers = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
@@ -94,7 +89,7 @@
 			image = "ghcr.io/tarampampam/error-pages:3";
 			environment = {
 				PORT = 8080;
-				TEMPLATE_NAME = "hacker-terminal";
+				TEMPLATE_NAME = "connection";
 			};
 			network = [ "docker-like" ];
 			autoUpdate = "registry";
