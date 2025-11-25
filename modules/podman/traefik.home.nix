@@ -44,9 +44,9 @@
 				http = {
 					middlewares = {
 						error-handler.errors = {
-							status = [ "100-599" ];
+							status = [ "300-599" ];
 							service = "error-handler";
-							query = "/{status}.html";
+							query = "/{status}";
 						};
 						cors-handler.headers = {
 							accessControlAllowMethods = [ "GET" ];
@@ -67,7 +67,7 @@
 							{ url = "http://${name}:${builtins.toString container.environment.PORT}"; }
 						];
 					} else null) config.services.podman.containers) // {
-						error-handler.loadBalancer.servers = [ { url = "https://http.cat/"; } ];
+						error-handler.loadBalancer.servers = [ { url = "http://error-pages:${config.services.podman.containers.error-pages.environment.PORT}"; } ];
 					};
 				};
 			};
@@ -81,6 +81,15 @@
 			DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
 		};
 		ip4 = "172.18.0.254"; # IMPORTANT: the ip of the domain's dns must be traefik's ip !
+		network = [ "docker-like" ];
+		autoUpdate = "registry";
+	};
+	error-pages = {
+		image = "ghcr.io/tarampampam/error-pages:3";
+		environment = {
+			PORT = 8080;
+			TEMPLATE_NAME = "hacker-terminal";
+		};
 		network = [ "docker-like" ];
 		autoUpdate = "registry";
 	};
