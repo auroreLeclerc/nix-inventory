@@ -52,10 +52,14 @@
 							cors-handler.headers = {
 								accessControlAllowMethods = [ "GET" ];
 								accessControlAllowHeaders = "*";
-								accessControlAllowOriginList = [ "homer.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}" ];
+								accessControlAllowOriginList = let
+									keys = builtins.attrNames config.services.podman.containers;
+								in builtins.genList (i :
+									"${builtins.elemAt keys i}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}"
+								) (builtins.length keys);
 								accessControlMaxAge = 100;
 								addVaryHeader = true;
-							};
+							}; 
 						};
 						routers = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 							rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
