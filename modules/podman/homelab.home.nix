@@ -198,15 +198,12 @@
 				};
 				postgres = {
 					image = "localhost/homemanager/postgres";
-					volumes = [
-						"/etc/passwd:/etc/passwd:ro"
-						"/home/dawn/docker/postgres/:/var/lib/postgresql"
-					];
+					volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql" ];
 					environment = {
 						POSTGRES_PASSWORD = "postgres";
 					};
 					extraPodmanArgs = [
-						"--user 1000:1000" # https://github.com/docker-library/docs/blob/master/postgres/README.md#arbitrary---user-notes
+						"--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
 						"--health-cmd 'CMD-SHELL,pg_isready -U postgres -d postgres'"
 						"--health-interval 10s"
 						"--health-retries 5"
