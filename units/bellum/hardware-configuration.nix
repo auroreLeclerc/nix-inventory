@@ -5,10 +5,12 @@
 
 {
 	imports = [(modulesPath + "/installer/scan/not-detected.nix")];
+
 	boot.initrd.availableKernelModules = [ "mpt3sas" "xhci_pci" "ahci" "nvme" "usbhid" "usb_storage" "sd_mod" ];
 	boot.initrd.kernelModules = [ "amdgpu" ];
 	boot.kernelModules = [ "kvm-amd" ];
 	boot.extraModulePackages = [ ];
+
 	fileSystems."/" = {
 		device = "/dev/disk/by-uuid/26833b48-9554-4709-85c1-89110160b348";
 		fsType = "ext4";
@@ -22,11 +24,15 @@
 		device = "/dev/disk/by-uuid/497838fe-2287-47d4-8d1e-2b0851fc8f9d";
 		fsType = "ext4";
 	};
-	fileSystems."/media/bellum/jellyfin" = {
+	fileSystems."/run/media/dawn/jellyfin" = {
 		device = "/dev/disk/by-uuid/8cca9dcc-d96a-4e05-a171-683ecbdc0b13";
 		fsType = "ext4";
 	};
-	swapDevices = [ ];
+	fileSystems."/run/media/dawn/transmission" = {
+		device = "/dev/disk/by-uuid/17e3a856-eafa-43b6-b14a-ad4af890a2f9";
+		fsType = "ext4";
+	};
+
 	# Enables DHCP on each ethernet and wireless interface. In case of scripted networking
 	# (the default) this is the recommended approach. When using systemd-networkd it's
 	# still possible to use this option, but it's recommended to use it in conjunction

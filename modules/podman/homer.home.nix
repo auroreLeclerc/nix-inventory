@@ -108,6 +108,16 @@
 							name = "Photoprism";
 							logo = "assets/photoprism.svg";
 							url = "https://photoprism.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+						}	{
+							name = "Paperless";
+							logo = "assets/paperless.svg";
+							type = "PaperlessNG";
+							apikey = "<---insert-api-key-here--->";
+							url = "https://paperless.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+						} {
+							name = "IT-Tools";
+							logo = "assets/it-tools.svg";
+							url = "https://it-tools.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 						}
 					];
 				}
@@ -159,8 +169,8 @@
 					sha256 = "sha256-hewoVqgtHEBlGr6cI1/6AUTJnsJSWA/s5yTAzAbYaMg=";
 				}}:/www/assets/nginx.png"
 				"${builtins.fetchurl {
-					url = "https://doc.traefik.io/traefik/assets/images/logo-traefik-proxy-logo.svg";
-					sha256 = "sha256-LRhBw8QDkDdxNnLc798x0bg00msTzjRFnWMQIwY8vss=";
+					url = "https://raw.githubusercontent.com/traefik/traefik/refs/heads/master/docs/content/assets/img/traefikproxy-icon-color.png";
+					sha256 = "sha256-GEWtfkxKSI/QZIw0jPozwAwSkqZn9vnZNcr9OHWloBA=";
 				}}:/www/assets/traefik.svg"
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/pi-hole/web/refs/heads/master/img/logo.svg";
@@ -186,6 +196,14 @@
 					url = "https://www.photoprism.app/static/icons/logo.svg";
 					sha256 = "sha256-QWaJiZgQ7HXgpi8NO3zfLHylmeV3J/rX66LkkDGH1qA=";
 				}}:/www/assets/photoprism.svg"	
+				"${builtins.fetchurl {
+					url = "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/refs/heads/dev/resources/logo/web/svg/square.svg";
+					sha256 = "sha256-yr3c21EUv/pYhfS0N/efeyZUwgLEBaW6betIU+1yLyg=";
+				}}:/www/assets/paperless.svg"	
+				"${builtins.fetchurl {
+					url = "https://raw.githubusercontent.com/CorentinTh/it-tools/refs/heads/main/public/safari-pinned-tab.svg";
+					sha256 = "sha256-2ehrE3XcBR95E0S6EibxfkU7F67sCt9gCw1r0kB45sU=";
+				}}:/www/assets/it-tools.svg"	
 			];
 			environment = {
 				PORT = 8080;

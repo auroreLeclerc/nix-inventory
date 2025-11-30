@@ -34,9 +34,9 @@
 						PORT = 9091;
 					} // lscr;
 					volumes = [
-						# "/media/bellum/gohma/data:/config"
-						# "/media/bellum/gohma/downloads:/downloads"
-						# "/media/bellum/gohma/watchdir:/watch"
+						"/run/media/dawn/transmission/data:/config"
+						"/run/media/dawn/transmission/downloads:/downloads"
+						"/run/media/dawn/transmission/watchdir:/watch"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -48,7 +48,7 @@
 					} // lscr;
 					volumes = [
 						"/home/dawn/docker/sonarr:/config"
-						# "/media/bellum/gohma/downloads:/downloads"
+						"/run/media/dawn/transmission/downloads:/downloads"
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
 					network = [ "docker-like" ];
@@ -61,7 +61,7 @@
 					} // lscr;
 					volumes = [
 						"/home/dawn/docker/radarr:/config"
-						# "/media/bellum/gohma/downloads:/downloads"
+						"/run/media/dawn/transmission/downloads:/downloads"
 						"/media/bellum/main/Multimédia/Films:/movies"
 					];
 					network = [ "docker-like" ];
@@ -103,7 +103,7 @@
 						"/media/bellum/main/Multimédia/Films:/data/movies:ro"
 						"/media/bellum/main/Multimédia/Séries:/data/tvshows:ro"
 						"/media/bellum/main/new_Deezer:/data/music:ro"
-						"/media/bellum/jellyfin:/config"
+						"/run/media/dawn/jellyfin:/config"
 					];
 					devices = [
 						"/dev/dri:/dev/dri"
@@ -301,6 +301,12 @@
 						PAPERLESS_REDIS = "redis:6379";
 						PAPERLESS_DBHOST = "postgres";
 					};
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
+				it-tools = {
+					image = "docker.io/corentinth/it-tools:latest";
+					environment.PORT = 80;
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
