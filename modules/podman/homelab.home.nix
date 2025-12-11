@@ -139,7 +139,8 @@
 				miniflux = {
 					image = "docker.io/miniflux/miniflux:latest";
 					environment = {
-						DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/miniflux";
+						PORT = 8080;
+						DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/miniflux?sslmode=disable";
 						RUN_MIGRATIONS = 1;
 						CREATE_ADMIN = 1;
 						ADMIN_USERNAME = "admin";
