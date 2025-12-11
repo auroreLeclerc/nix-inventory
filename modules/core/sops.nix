@@ -15,6 +15,7 @@
 			radarr = {};
 			sonarr = {};
 			lidarr = {};
+			miniflux = {};
 		};
 	};
 }
