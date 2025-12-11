@@ -45,7 +45,7 @@
 					http = {
 						middlewares = {
 							error-handler.errors = {
-								status = [ "400-599" ];
+								status = [ "400-404" "500-599" ]; # transmission needs 409 untouch for some reasons
 								service = "error-handler";
 								query = "/{status}";
 							};
@@ -61,7 +61,7 @@
 							rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 							entryPoints = [ "websecure" ];
 							service = name;
-							middlewares = if builtins.elem name [] then [ "cors-handler" "error-handler" ] else [ ];
+							middlewares = [ "cors-handler" "error-handler" ];
 						} else null) config.services.podman.containers);
 						services = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 							loadBalancer.servers = [
