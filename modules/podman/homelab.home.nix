@@ -115,7 +115,7 @@
 				lidarr = {
 					image = "docker.io/youegraillot/lidarr-on-steroids";
 					environment = {
-						PORT = 6595;
+						PORT = 8686;
 					} // lscr;
 					volumes = [
 						"/home/dawn/docker/lidarr:/config"

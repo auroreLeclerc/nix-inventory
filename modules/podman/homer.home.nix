@@ -103,6 +103,7 @@
 							name = "Miniflux";
   						type = "Miniflux";
 							logo = "assets/miniflux.svg";
+  						apikey = myLibs.impureSopsReading osConfig.sops.secrets.miniflux.path;
 							url = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 						}	{
 							name = "Photoprism";
