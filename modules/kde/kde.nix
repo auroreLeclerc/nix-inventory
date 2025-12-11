@@ -25,7 +25,7 @@
 			) ++ (
 			with pkgs; [ nil bash-language-server strawberry papirus-icon-theme gnome-firmware vlc wireguard-tools poppler-utils ]
 		);
-		plasma6.excludePackages = with pkgs.kdePackages; [ elisa oxygen ];
+		plasma6.excludePackages = with pkgs.kdePackages; [ elisa oxygen kmahjongg kmines kpat ksudoku ktorrent ];
 	};
 	programs.kdeconnect.enable = true;
 

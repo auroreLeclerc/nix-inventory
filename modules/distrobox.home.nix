@@ -9,10 +9,9 @@
 					additional_packages = "git nano apt-file python3 python3-pip python3-wheel pipenv";
 					init_hooks = [ "apt-file update;" ];
 				};
-				arch-wine = {
+				arch = {
 					image = "docker.io/archlinux:multilib-devel";
-					additional_packages = "wine wine-gecko wine-mono winetricks";
-					init_hooks = [ "winetricks --force vcrun2022;" ];
+					init_hooks = [ "sudo pacman -Fy core extra multilib;" ];
 				};
 			};
 			# settings = { # FIXME: 25.11

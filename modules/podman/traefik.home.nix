@@ -50,11 +50,7 @@
 								query = "/{status}";
 							};
 							cors-handler.headers = {
-								accessControlAllowMethods = [ "GET" "HEAD" "OPTIONS" ];
-								accessControlAllowHeaders = "*";
 								accessControlAllowOriginList = "*";
-								accessControlMaxAge = 100;
-								addVaryHeader = true;
 							}; 
 						};
 						routers = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {

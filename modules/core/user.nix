@@ -6,15 +6,6 @@
 				systemd-boot.enable = true;
 				efi.canTouchEfiVariables = true;
 			};
-			plymouth = {
-				enable = config.services.desktopManager.plasma6.enable;
-				theme = "angular";
-				themePackages = with pkgs; [
-					(adi1090x-plymouth-themes.override {
-						selected_themes = [ "angular" ];
-					})
-				];
-			};
 		};
 		users.users.dawn = {
 			description = "Aurore";
