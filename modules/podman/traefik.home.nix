@@ -50,14 +50,18 @@
 								query = "/{status}";
 							};
 							cors-handler.headers = {
+								accessControlAllowMethods = [ "GET" "HEAD" "OPTIONS" ];
+								accessControlAllowHeaders = "*";
 								accessControlAllowOriginList = "*";
+								accessControlMaxAge = 100;
+								addVaryHeader = true;
 							}; 
 						};
 						routers = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 							rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 							entryPoints = [ "websecure" ];
 							service = name;
-							middlewares = [ "cors-handler" "error-handler" ];
+							middlewares = if builtins.elem name [] then [ "cors-handler" "error-handler" ] else [ "error-handler" ];
 						} else null) config.services.podman.containers);
 						services = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 							loadBalancer.servers = [
