@@ -45,7 +45,7 @@
 					http = {
 						middlewares = {
 							error-handler.errors = {
-								status = [ "400-404" "500-599" ]; # transmission needs 409 untouch for some reasons
+								status = [ "400-404" "500-599" ]; # transmission needs 409 untouch
 								service = "error-handler";
 								query = "/{status}";
 							};

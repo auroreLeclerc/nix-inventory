@@ -59,7 +59,7 @@
 						{
 							name = "Jellyfin";
 							logo = "assets/jellyfin.svg";
-							type = "Jellyfin";
+							type = "Emby";
 							apikey = myLibs.impureSopsReading osConfig.sops.secrets.jellyfin.path;
 							url = "https://jellyfin.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 							libraryType = "series";

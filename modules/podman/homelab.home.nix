@@ -139,12 +139,14 @@
 				miniflux = {
 					image = "docker.io/miniflux/miniflux:latest";
 					environment = {
-						DATABASE_URL = "postgres://postgres:postgres@postgre:5432/miniflux?sslmode=disable";
+						DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/miniflux";
 						RUN_MIGRATIONS = 1;
 						CREATE_ADMIN = 1;
 						ADMIN_USERNAME = "admin";
 						ADMIN_PASSWORD = "adminadmin";
+      			BASE_URL = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 					};
+					extraPodmanArgs = [ "--health-cmd CMD,/usr/bin/miniflux,-healthcheck,auto" ];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
