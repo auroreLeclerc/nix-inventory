@@ -289,20 +289,23 @@
 				paperless = {
 					image = "ghcr.io/paperless-ngx/paperless-ngx:latest";
 					volumes = [
-						"/home/dawn/docker/paperless:/usr/src/paperless/data"
-						"/home/dawn/docker/paperless:/usr/src/paperless/media"
-						# "./export:/usr/src/paperless/export"
-						"/media/bellum/main/Dawn/Images/:/usr/src/paperless/consume:ro"
+						"/home/dawn/docker/paperless/data:/usr/src/paperless/data"
+						"/home/dawn/docker/paperless/media:/usr/src/paperless/media"
+						"/home/dawn/docker/paperless/export:/usr/src/paperless/export"
+						"/home/dawn/docker/paperless/consume:/usr/src/paperless/consume"
 					];
 					environment = {
 						PORT = 8000;
 						USERMAP_UID = lscr.PUID;
 						USERMAP_GID = lscr.PGID;
 						PAPERLESS_TIME_ZONE = lscr.TZ;
-						PAPERLESS_OCR_LANGUAGE= "fra";
+						PAPERLESS_OCR_LANGUAGE = "fra";
+						PAPERLESS_APP_TITLE = "Sans papier !";
 						PAPERLESS_URL = "https://paperless.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-						PAPERLESS_REDIS = "redis:6379";
+						PAPERLESS_REDIS = "redis://redis:6379";
 						PAPERLESS_DBHOST = "postgres";
+						PAPERLESS_DBUSER = "postgres";
+						PAPERLESS_DBPASS = "postgres";
 					};
 					network = [ "docker-like" ];
 					autoUpdate = "registry";

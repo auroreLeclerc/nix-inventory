@@ -182,8 +182,8 @@
 					sha256 = "sha256-xY/pFVS9puG+Ub0M9WrISrY/eY1Rc+QeceGqHeUVx+8=";
 				}}:/www/assets/vaultwarden.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/miniflux/website/refs/heads/main/static/logo/icon_bg_white.svg";
-					sha256 = "sha256-j5glb/1FMilIOO9p///A/WAfcYXH6on6OzDJUtFbKlY=";
+					url = "https://raw.githubusercontent.com/miniflux/logo/refs/heads/master/original/icon-512.png";
+					sha256 = "sha256-KDYpsZxsumtw9vIoP+HfBPGUvyB5btHjmWKkmc9q4qw=";
 				}}:/www/assets/miniflux.svg"
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/refs/heads/main/apps/artboard/public/favicon.svg";

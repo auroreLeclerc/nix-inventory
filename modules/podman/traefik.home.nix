@@ -8,6 +8,7 @@
 					api = {
 						dashboard = true;
 						insecure = true;
+						disabledashboardad = true;
 					};
 					entrypoints = {
 						web = {
