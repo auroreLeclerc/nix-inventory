@@ -16,6 +16,7 @@
 			sonarr = {};
 			lidarr = {};
 			miniflux = {};
+			paperless = {};
 		};
 	};
 }
