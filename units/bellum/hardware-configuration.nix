@@ -24,11 +24,11 @@
 		device = "/dev/disk/by-uuid/497838fe-2287-47d4-8d1e-2b0851fc8f9d";
 		fsType = "ext4";
 	};
-	fileSystems."/run/media/dawn/jellyfin" = {
+	fileSystems."/run/media/dawn/cache" = {
 		device = "/dev/disk/by-uuid/8cca9dcc-d96a-4e05-a171-683ecbdc0b13";
 		fsType = "ext4";
 	};
-	fileSystems."/run/media/dawn/transmission" = {
+	fileSystems."/run/media/dawn/blaaz" = {
 		device = "/dev/disk/by-uuid/17e3a856-eafa-43b6-b14a-ad4af890a2f9";
 		fsType = "ext4";
 	};

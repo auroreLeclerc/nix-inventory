@@ -19,7 +19,7 @@
 						PERSITENTKEEPALIVE_PEERS = "all";
 						LOG_CONFS = false;
 					} // lscr;
-					volumes = [ "/home/dawn/docker/wireguard/:/config" ];
+					volumes = [ "/media/bellum/main/docker/wireguard/:/config" ];
 					ports = [ "51820:51820/udp" ];
 					extraPodmanArgs = [
 						"--sysctl net.ipv4.conf.all.src_valid_mark=1"
@@ -34,9 +34,9 @@
 						PORT = 9091;
 					} // lscr;
 					volumes = [
-						"/run/media/dawn/transmission/data:/config"
-						"/run/media/dawn/transmission/downloads:/downloads"
-						"/run/media/dawn/transmission/watchdir:/watch"
+						"/run/media/dawn/blaaz/data:/config"
+						"/run/media/dawn/blaaz/downloads:/downloads"
+						"/run/media/dawn/blaaz/watchdir:/watch"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -47,8 +47,8 @@
 						PORT = 8989;
 					} // lscr;
 					volumes = [
-						"/home/dawn/docker/sonarr:/config"
-						"/run/media/dawn/transmission/downloads:/downloads"
+						"/media/bellum/main/docker/sonarr:/config"
+						"/run/media/dawn/blaaz/downloads:/downloads"
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
 					network = [ "docker-like" ];
@@ -60,8 +60,8 @@
 						PORT = 7878;
 					} // lscr;
 					volumes = [
-						"/home/dawn/docker/radarr:/config"
-						"/run/media/dawn/transmission/downloads:/downloads"
+						"/media/bellum/main/docker/radarr:/config"
+						"/run/media/dawn/blaaz/downloads:/downloads"
 						"/media/bellum/main/Multimédia/Films:/movies"
 					];
 					network = [ "docker-like" ];
@@ -73,7 +73,7 @@
 						PORT = 9117;
 						AUTO_UPDATE = true;
 					} // lscr;
-					volumes = [ "/home/dawn/docker/jackett:/config" ];
+					volumes = [ "/media/bellum/main/docker/jackett:/config" ];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -83,7 +83,7 @@
 						PORT = 6767;
 					} // lscr;
 					volumes = [
-						"/home/dawn/docker/bazarr:/config"
+						"/media/bellum/main/docker/bazarr:/config"
 						"/media/bellum/main/Multimédia/Films:/movies"
 						"/media/bellum/main/Multimédia/Séries:/tv"
 					];
@@ -103,7 +103,8 @@
 						"/media/bellum/main/Multimédia/Films:/data/movies:ro"
 						"/media/bellum/main/Multimédia/Séries:/data/tvshows:ro"
 						"/media/bellum/main/new_Deezer:/data/music:ro"
-						"/run/media/dawn/jellyfin:/config"
+						"/run/media/dawn/cache/jellyfin:/config/cache"
+						"/media/bellum/main/docker/jellyfin:/config"
 					];
 					devices = [
 						"/dev/dri:/dev/dri"
@@ -118,7 +119,7 @@
 						PORT = 8686;
 					} // lscr;
 					volumes = [
-						"/home/dawn/docker/lidarr:/config"
+						"/media/bellum/main/docker/lidarr:/config"
 						"/media/bellum/main/new_Deezer:/music"
 						"/media/bellum/main/new_Deezer:/downloads"
 					];
@@ -132,7 +133,7 @@
 						DOMAIN = "https://vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 						SIGNUPS_ALLOWED = "false";
 					};
-					volumes = [ "/home/dawn/docker/vaultwarden/data:/data" ];
+					volumes = [ "/media/bellum/main/docker/vaultwarden/data:/data" ];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -147,7 +148,7 @@
 						ADMIN_PASSWORD = "adminadmin";
       			BASE_URL = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 					};
-					extraPodmanArgs = [ "--health-cmd CMD,/usr/bin/miniflux,-healthcheck,auto" ];
+					extraPodmanArgs = [ "--health-cmd '/usr/bin/miniflux -healthcheck auto'" ];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -201,13 +202,13 @@
 				};
 				postgres = {
 					image = "localhost/homemanager/postgres";
-					volumes = [ "/home/dawn/docker/postgres/:/var/lib/postgresql" ];
+					volumes = [ "/media/bellum/main/docker/postgres/:/var/lib/postgresql" ];
 					environment = {
 						POSTGRES_PASSWORD = "postgres";
 					};
 					extraPodmanArgs = [
 						"--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
-						"--health-cmd 'CMD-SHELL,pg_isready -U postgres -d postgres'"
+						"--health-cmd 'pg_isready -U postgres -d postgres'"
 						"--health-interval 10s"
 						"--health-retries 5"
 						"--health-timeout 5s"
@@ -233,12 +234,6 @@
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
-				whoami = {
-					image = "docker.io/traefik/whoami:latest";
-					environment.PORT = 80;
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
-				};
 				photoprism = { # https://dl.photoprism.app/podman/docker-compose.yml
 					image = "docker.io/photoprism/photoprism:latest";
 					environment = {
@@ -251,25 +246,26 @@
 						PHOTOPRISM_DATABASE_NAME = "photoprism";
 						PHOTOPRISM_DATABASE_USER = "photoprism";
 						PHOTOPRISM_DATABASE_PASSWORD = "insecure";
-						# PHOTOPRISM_SITE_CAPTION = "AI-Powered Photos App";
 						PHOTOPRISM_SITE_DESCRIPTION = "UwU";
 						PHOTOPRISM_SITE_AUTHOR = "Aurore";
+						PHOTOPRISM_DEFAULT_LOCALE = "fr";
+						PHOTOPRISM_DEFAULT_TIMEZONE = lscr.TZ;
 					};
 					devices = [
 						"/dev/dri:/dev/dri"
 						"/dev/kfd:/dev/kfd"
 					];
 					volumes = [
-						"/media/bellum/main/Dawn/Images/:/photoprism/originals:ro"
-						"/media/bellum/main/Dawn/Images/:/photoprism/import:ro"
-						"/home/dawn/docker/photoprism:/photoprism/storage"
+						"/media/bellum/main/Dawn/Images/DCIM/:/photoprism/originals:ro"
+						"/media/bellum/main/docker/photoprism/import/:/photoprism/import"
+						"/media/bellum/main/docker/photoprism:/photoprism/storage"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				mariadb = {
 					image = "docker.io/library/mariadb:lts";
-					volumes = [ "/home/dawn/docker/mariadb:/var/lib/mysql" ];
+					volumes = [ "/media/bellum/main/docker/mariadb:/var/lib/mysql" ];
 					environment = {
 						MARIADB_AUTO_UPGRADE = true;
 						MARIADB_DATABASE = "photoprism";
@@ -282,17 +278,20 @@
 				};
 				redis = {
 					image = "docker.io/library/redis:8";
-					volumes = [ "/home/dawn/docker/redis:/data" ];
+					volumes = [ "/media/bellum/main/docker/redis:/data" ];
+					extraPodmanArgs = [
+						"--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
+					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				paperless = {
 					image = "ghcr.io/paperless-ngx/paperless-ngx:latest";
 					volumes = [
-						"/home/dawn/docker/paperless/data:/usr/src/paperless/data"
-						"/home/dawn/docker/paperless/media:/usr/src/paperless/media"
-						"/home/dawn/docker/paperless/export:/usr/src/paperless/export"
-						"/home/dawn/docker/paperless/consume:/usr/src/paperless/consume"
+						"/media/bellum/main/docker/paperless/data:/usr/src/paperless/data"
+						"/media/bellum/main/docker/paperless/media:/usr/src/paperless/media"
+						"/media/bellum/main/docker/paperless/export:/usr/src/paperless/export"
+						"/media/bellum/main/docker/paperless/consume:/usr/src/paperless/consume"
 					];
 					environment = {
 						PORT = 8000;
@@ -300,7 +299,7 @@
 						USERMAP_GID = lscr.PGID;
 						PAPERLESS_TIME_ZONE = lscr.TZ;
 						PAPERLESS_OCR_LANGUAGE = "fra";
-						PAPERLESS_APP_TITLE = "Sans papier !";
+						PAPERLESS_APP_TITLE = "Sans-papier";
 						PAPERLESS_URL = "https://paperless.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						PAPERLESS_REDIS = "redis://redis:6379";
 						PAPERLESS_DBHOST = "postgres";
@@ -313,6 +312,28 @@
 				it-tools = {
 					image = "docker.io/corentinth/it-tools:latest";
 					environment.PORT = 80;
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
+  			tdarr = {
+    			image = "ghcr.io/haveagitgat/tdarr:latest";
+					environment = {
+						PORT = 8265;
+						serverURL = "https://tdarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						inContainer = true;
+						auth = false;
+					} // lscr;
+					volumes = [
+						"/media/bellum/main/docker/tdarr/server:/app/server"
+						"/media/bellum/main/docker/tdarr/configs:/app/configs"
+						"/media/bellum/main/docker/tdarr/logs:/app/logs"
+						"/media/bellum/main/Multimédia:/media"
+						"/run/media/dawn/cache/tdarr/:/temp"
+					];
+					devices = [
+						"/dev/dri:/dev/dri"
+						"/dev/kfd:/dev/kfd"
+					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};

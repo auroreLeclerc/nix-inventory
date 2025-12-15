@@ -51,7 +51,18 @@
 				PermitRootLogin = "no";
 			};
 		};
-		zfs.autoScrub.enable = true;
+		zfs = {
+			autoScrub.enable = true;
+			trim.enable = true;
+			autoSnapshot = {
+				enable = true;
+				frequent = 0;
+				hourly= 0;
+				daily = 0;
+				monthly = 24;
+				# flags = "-k -p --utc";
+			};
+		};
 	};
 
 	nix.gc = {

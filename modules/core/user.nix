@@ -13,6 +13,7 @@
 			isNormalUser = true;
 			shell = pkgs.zsh;
 			extraGroups = [ "wheel" ]; # Enable ‘sudo’ for the user.
+			linger = config.networking.hostName == "bellum";
 		};
 		swapDevices = let
 			size = {

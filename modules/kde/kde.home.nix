@@ -105,7 +105,7 @@
 									"file:///run/current-system/sw/share/applications/discord.desktop"
 									"file:///home/dawn/.local/share/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop" # Whatsapp Web
 									"file:///run/current-system/sw/share/applications/steam.desktop"
-									"file:///run/current-system/sw/share/applications/net.lutris.Lutris.desktop"
+									"file:///run/current-system/sw/share/applications/com.usebottles.bottles.desktop"
 									"file:///home/dawn/.local/share/applications/chrome-lgnggepjiihbfdbedefdhcffnmhcahbm-Default.desktop" # Reddit
 									"file:///home/dawn/.local/share/applications/chrome-agimnkijcaahngcdmfeangaknmldooml-Default.desktop" # YouTube
 									"file:///etc/profiles/per-user/dawn/share/applications/codium.desktop"

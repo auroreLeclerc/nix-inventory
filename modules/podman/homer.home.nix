@@ -35,7 +35,7 @@
 							url = "https://jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						} {
 							name = "Traefik";
-							logo = "assets/traefik.svg";
+							logo = "assets/traefik.png";
   						type = "Traefik";
 							url = "https://traefik.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
@@ -81,6 +81,11 @@
 							type = "Lidarr";
 							apikey = myLibs.impureSopsReading osConfig.sops.secrets.lidarr.path;
 							url = "https://lidarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						} {
+							name = "Tdarr";
+							logo = "assets/tdarr.png";
+							type = "Tdarr";
+							url = "https://tdarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Deemix";
 							logo = "assets/deemix.svg";
@@ -102,7 +107,7 @@
 						}	{
 							name = "Miniflux";
   						type = "Miniflux";
-							logo = "assets/miniflux.svg";
+							logo = "assets/miniflux.png";
   						apikey = myLibs.impureSopsReading osConfig.sops.secrets.miniflux.path;
 							url = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 						}	{
@@ -113,7 +118,7 @@
 							name = "Paperless";
 							logo = "assets/paperless.svg";
 							type = "PaperlessNG";
-							apikey = "<---insert-api-key-here--->";
+							apikey = myLibs.impureSopsReading osConfig.sops.secrets.paperless.path;
 							url = "https://paperless.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 						} {
 							name = "IT-Tools";
@@ -172,7 +177,7 @@
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/traefik/traefik/refs/heads/master/docs/content/assets/img/traefikproxy-icon-color.png";
 					sha256 = "sha256-GEWtfkxKSI/QZIw0jPozwAwSkqZn9vnZNcr9OHWloBA=";
-				}}:/www/assets/traefik.svg"
+				}}:/www/assets/traefik.png"
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/pi-hole/web/refs/heads/master/img/logo.svg";
 					sha256 = "sha256-xYQy+/XuOdWv2Ntg/7vURhBYHnF5PUCPbMFfz5AEYpw=";
@@ -184,7 +189,7 @@
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/miniflux/logo/refs/heads/master/original/icon-512.png";
 					sha256 = "sha256-KDYpsZxsumtw9vIoP+HfBPGUvyB5btHjmWKkmc9q4qw=";
-				}}:/www/assets/miniflux.svg"
+				}}:/www/assets/miniflux.png"
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/refs/heads/main/apps/artboard/public/favicon.svg";
 					sha256 = "sha256-NEhDw6TbcHvveQxDNFHKSrEudatpoYVGu0LR/lX5D3c=";
@@ -196,15 +201,19 @@
 				"${builtins.fetchurl {
 					url = "https://www.photoprism.app/static/icons/logo.svg";
 					sha256 = "sha256-QWaJiZgQ7HXgpi8NO3zfLHylmeV3J/rX66LkkDGH1qA=";
-				}}:/www/assets/photoprism.svg"	
+				}}:/www/assets/photoprism.svg"
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/refs/heads/dev/resources/logo/web/svg/square.svg";
 					sha256 = "sha256-yr3c21EUv/pYhfS0N/efeyZUwgLEBaW6betIU+1yLyg=";
-				}}:/www/assets/paperless.svg"	
+				}}:/www/assets/paperless.svg"
 				"${builtins.fetchurl {
 					url = "https://raw.githubusercontent.com/CorentinTh/it-tools/refs/heads/main/public/safari-pinned-tab.svg";
 					sha256 = "sha256-2ehrE3XcBR95E0S6EibxfkU7F67sCt9gCw1r0kB45sU=";
-				}}:/www/assets/it-tools.svg"	
+				}}:/www/assets/it-tools.svg"
+				"${builtins.fetchurl {
+					url = "https://home.tdarr.io/static/media/logo3-min.246d6df44c7f16ddebaf.png";
+					sha256 = "sha256-/5f5r74LLuWWGr2J3Ikw5ihxGvKKDtDK7NVC5wFftU4=";
+				}}:/www/assets/tdarr.png"
 			];
 			environment = {
 				PORT = 8080;

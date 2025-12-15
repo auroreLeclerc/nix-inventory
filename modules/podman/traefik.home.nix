@@ -1,5 +1,13 @@
-{ config, osConfig, myLibs, ... }: {
-	config.services.podman.containers = {
+{ config, osConfig, myLibs, lib, ... }: {
+	config.services.podman.containers = let
+		debug = false;
+	in {
+		whoami = lib.mkIf debug {
+			image = "docker.io/traefik/whoami:latest";
+			environment.PORT = 80;
+			network = [ "docker-like" ];
+			autoUpdate = "registry";
+		};
 		traefik = {
 			image = "docker.io/library/traefik:latest";
 			volumes = let
@@ -32,10 +40,7 @@
 					certificatesresolvers.duckresolver.acme = {
 						dnschallenge = {
 							provider = "duckdns";
-							propagation = {
-								# disableChecks = true;
-								delaybeforechecks = 120;
-							};
+							propagation.delaybeforechecks = 120;
 						};
 						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
 						storage = "/letsencrypt/acme.json";
@@ -89,7 +94,7 @@
 		error-pages = {
 			image = "ghcr.io/tarampampam/error-pages:3";
 			environment = {
-				PORT = 8080;
+				PORT = lib.mkIf debug 8080;
 				TEMPLATE_NAME = "connection";
 			};
 			network = [ "docker-like" ];
