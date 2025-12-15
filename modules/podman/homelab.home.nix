@@ -14,7 +14,7 @@
 					addCapabilities = [ "NET_ADMIN" ];
 					environment = {
 						SERVERURL = myLibs.impureSopsReading osConfig.sops.secrets.ip.path;
-						PEERS = "exelo,taya";
+						PEERS = "exelo,taya,fierceDeity";
 						PEERDNS = config.services.podman.containers.pihole.ip4;
 						PERSITENTKEEPALIVE_PEERS = "all";
 						LOG_CONFS = false;

@@ -4,7 +4,7 @@
 		programs.distrobox = {
 			enable = true;
 			containers = {
-				debian-python = {
+				debian = {
 					image = "docker.io/debian:bookworm";
 					additional_packages = "git nano apt-file python3 python3-pip python3-wheel pipenv";
 					init_hooks = [ "apt-file update;" ];

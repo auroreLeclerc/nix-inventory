@@ -19,9 +19,12 @@ else
 	fi
 	if [ -d ~/.local/share/containers/ ]; then
 		update_time=$(systemctl --user status podman-auto-update.timer | grep 'Trigger:' | cut -d ";" -f 2)
-		echo "Podman Update $update_time"
-		containers=$(($(podman ps | wc -l) - 1))
-		echo "Container(s)  Running : $containers"
+		echo "Podman Update $update_time"
+		containers_list=$(podman ps)
+		containers=$(($($containers_list | wc -l) - 1))
+		healthy=$($containers_list | grep -c 'healthy')
+		unhealthy=$($containers_list | grep -c 'unhealthy')
+		echo "Containers  Running : $containers ( $healthy 󱐮 and $unhealthy 󱐯 )"
 	fi
 	if [ -f /etc/systemd/system/zfs-mount.service ]; then
 		result=''
