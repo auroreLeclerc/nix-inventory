@@ -110,6 +110,7 @@
 						"/dev/dri:/dev/dri"
 						"/dev/kfd:/dev/kfd"
 					];
+					extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -327,7 +328,7 @@
 						"/media/bellum/main/docker/tdarr/server:/app/server"
 						"/media/bellum/main/docker/tdarr/configs:/app/configs"
 						"/media/bellum/main/docker/tdarr/logs:/app/logs"
-						"/media/bellum/main/Multimédia:/media"
+						"/media/bellum/main/Multimédia:/media:ro"
 						"/run/media/dawn/cache/tdarr/:/temp"
 					];
 					devices = [
