@@ -52,7 +52,7 @@
 			systemPackages = (
 				with pkgs; [ networkmanagerapplet calamares-nixos calamares-nixos-extensions glibcLocales nil bash-language-server ]
 			) ++ (
-				with pkgs.libsForQt5; [ kpmcore partitionmanager kate filelight ]
+				with pkgs.kdePackages; [ kpmcore partitionmanager kate filelight ]
 			);
 			lxqt.excludePackages = with pkgs; [ adwaita-icon-theme adwaita-qt ];
 		};

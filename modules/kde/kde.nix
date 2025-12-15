@@ -18,7 +18,7 @@
 	environment = {
 		systemPackages = (
 			with pkgs.kdePackages; [
-				plasma-welcome kcrash drkonqi kate koi yakuake wacomtablet plasma-disks plasma-vault kcalc discover filelight
+				plasma-welcome kcrash drkonqi kate koi yakuake wacomtablet plasma-disks /*plasma-vault*/ kcalc discover filelight
 				ghostwriter isoimagewriter k3b kcolorchooser kolourpaint kweather plasma-browser-integration akregator
 				kalarm kteatime kasts ktrip partitionmanager kontact korganizer ktimer arianna
 			]

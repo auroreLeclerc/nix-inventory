@@ -66,13 +66,11 @@
 				postgres = {
 					image = "localhost/homemanager/postgres";
 					volumes = [ "postgres_data:/var/lib/postgresql/data" ];
-					user = 0;
 					environment = {
-						POSTGRES_USER = "postgres";
 						POSTGRES_PASSWORD = "postgres";
 					};
 					extraPodmanArgs = [
-						"--health-cmd 'CMD-SHELL,pg_isready -U postgres -d postgres'"
+						"--health-cmd 'pg_isready -U postgres -d postgres'"
 						"--health-interval 10s"
 						"--health-retries 5"
 						"--health-timeout 5s"

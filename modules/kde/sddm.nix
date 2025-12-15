@@ -1,4 +1,4 @@
-{ pkgs, config, lib, ... }:
+{ pkgs, config, ... }:
 {
 	boot.	plymouth = {
 		enable = true;
@@ -8,7 +8,6 @@
 	services = {
 		displayManager.sddm = {
 			enable = true;
-			package = lib.mkForce pkgs.kdePackages.sddm; # TODO: libsForQt5.sddm is default in 25.05
 			wayland.enable = true;
 			autoNumlock = true;
 		};

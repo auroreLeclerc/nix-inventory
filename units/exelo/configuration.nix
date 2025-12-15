@@ -26,14 +26,7 @@
 		}
 	];
 	config = {
-		# Use latest kernel.
-		#   boot.kernelPackages = pkgs.linuxPackages_latest;
-
 		networking.hostName = "exelo"; # Define your hostname.
-
-		# Enable automatic login for the user.
-		#   services.displayManager.autoLogin.enable = true;
-		#   services.displayManager.autoLogin.user = "dawn";
 
 		# This value determines the NixOS release from which the default
 		# settings for stateful data, like file locations and database versions

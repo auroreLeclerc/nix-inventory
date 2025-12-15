@@ -1,12 +1,12 @@
 {
 	description = "nix-inventory";
 	inputs = {
-		nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.05";
+		nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-25.11";
 		unstableNixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
 		nixos-hardware.url = "github:NixOS/nixos-hardware/master";
-		catppuccin.url = "github:catppuccin/nix/release-25.05";
+		catppuccin.url = "github:catppuccin/nix"; # /release-25.11
 		home-manager = {
-			url = "github:nix-community/home-manager?ref=release-25.05";
+			url = "github:nix-community/home-manager?ref=release-25.11";
 			inputs.nixpkgs.follows = "nixpkgs";
 		};
 		plasma-manager = {

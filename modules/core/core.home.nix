@@ -38,16 +38,18 @@
 				};
 				initContent = builtins.readFile ./zshrc.sh;
 			};
-			git = let
-				mail = (myLibs.impureSopsReading osConfig.sops.secrets.mail.path);
-				isMail = (mail != "");
-				name = (myLibs.impureSopsReading osConfig.sops.secrets.name.path);
-				isName = (mail != "");
-			in lib.mkIf osConfig.users.mutableUsers {
+			diff-highlight.enable = true;
+			git = {
 				enable = true;
-				diff-highlight.enable = true;
-				userEmail = lib.mkIf isMail mail;
-				userName = lib.mkIf isName name;
+				settings = let
+					mail = (myLibs.impureSopsReading osConfig.sops.secrets.mail.path);
+					isMail = (mail != "");
+					name = (myLibs.impureSopsReading osConfig.sops.secrets.name.path);
+					isName = (mail != "");
+				in lib.mkIf osConfig.users.mutableUsers {
+					user.email = lib.mkIf isMail mail;
+					user.name = lib.mkIf isName name;
+				};
 			};
 		};
 	};

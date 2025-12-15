@@ -14,15 +14,7 @@
 					init_hooks = [ "sudo pacman -Fy core extra multilib;" ];
 				};
 			};
-			# settings = { # FIXME: 25.11
-			# 	container_manager = "podman";
-			# };
-		};
-		home.file = {
-			distroboxrc = {
-				source = builtins.toFile "distroboxrc" ''container_manager="podman"'';
-				target = ".distroboxrc";
-			};
+			settings.container_manager = "podman";
 		};
 	};
 }
