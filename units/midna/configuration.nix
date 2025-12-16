@@ -6,12 +6,12 @@
 {
 	imports = [
 		../../modules/kde/mobile.nix
+		../../modules/firefox.nix
 		inputs.nixos-hardware.nixosModules.common-cpu-intel
 		{
 			home-manager.users.dawn = {
 				imports = [
 					../../modules/kde/kde.home.nix
-					../../modules/firefox.home.nix
 				];
 			};
 		}

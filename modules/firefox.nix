@@ -2,7 +2,7 @@
 {
 	programs.firefox = {
 		enable = true;
-		nativeMessagingHosts = [
+		nativeMessagingHosts.packages = [
 			unstablePkgs.firefoxpwa
 			pkgs.kdePackages.plasma-browser-integration
 		];

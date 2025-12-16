@@ -10,6 +10,7 @@
 		../../modules/android-studio.nix
 		../../modules/gaming/gaming.nix
 		../../modules/virtualbox.nix
+		../../modules/firefox.nix
 		inputs.nixos-hardware.nixosModules.framework-13-7040-amd
 		{
 			home-manager.users.dawn = {
@@ -17,7 +18,6 @@
 					../../modules/kde/kde.home.nix
 					../../modules/vscode.home.nix
 					../../modules/flatpak.home.nix
-					../../modules/firefox.home.nix
 					../../modules/podman/workbench.home.nix
 					../../modules/distrobox.home.nix
 					../../modules/gaming/mprisence.home.nix

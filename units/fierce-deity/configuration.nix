@@ -8,6 +8,7 @@
 		../../modules/kde/kde.nix
 		../../modules/gaming/gaming.nix
 		../../modules/workstation.nix
+		../../modules/firefox.nix
 		inputs.nixos-hardware.nixosModules.common-cpu-amd
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
@@ -17,7 +18,6 @@
 				imports = [
 					../../modules/kde/kde.home.nix
 					../../modules/flatpak.home.nix
-					../../modules/firefox.home.nix
 				];
 			};
 		}

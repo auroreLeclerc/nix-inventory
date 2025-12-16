@@ -361,8 +361,8 @@
 					target = ".config/autostart/org.kde.yakuake.desktop";
 				};
 				koi = {
-					source = "${pkgs.kdePackages.koi}/share/applications/koi.desktop";
-					target = ".config/autostart/koi.desktop";
+					source = "${pkgs.kdePackages.koi}/share/applications/local.KoiDbusInterface.desktop";
+					target = ".config/autostart/local.KoiDbusInterface.desktop";
 				};
 				kteatime = {
 					source = "${pkgs.kdePackages.kteatime}/share/applications/org.kde.kteatime.desktop";
