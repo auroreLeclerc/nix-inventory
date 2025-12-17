@@ -6,7 +6,6 @@
 {
 	imports = [
 		../../modules/kde/kde.nix
-		../../modules/firefox.nix
 		inputs.nixos-hardware.nixosModules.common-cpu-amd
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
@@ -14,6 +13,7 @@
 		{
 			home-manager.users.dawn = {
 				imports = [
+					../../modules/firefox.home.nix
 					../../modules/kde/kde.home.nix
 				];
 			};
