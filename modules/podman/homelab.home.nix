@@ -320,7 +320,6 @@
     			image = "ghcr.io/haveagitgat/tdarr:latest";
 					environment = {
 						PORT = 8265;
-						serverURL = "https://tdarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						inContainer = true;
 						auth = false;
 					} // lscr;
@@ -356,6 +355,8 @@
 						"/dev/dri:/dev/dri"
 						"/dev/kfd:/dev/kfd"
 					];
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
 				};
 			};
 		};
