@@ -338,6 +338,25 @@
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
+				tdarr-node = {
+					image = "ghcr.io/haveagitgat/tdarr_node:latest";
+					environment = {
+						serverURL = "http://tdarr:8265";
+						inContainer = true;
+						nodeType = "mapped";
+						priority = -1;
+					} // lscr;
+					volumes = [
+						"/media/bellum/main/docker/tdarr/configs:/app/configs"
+						"/media/bellum/main/docker/tdarr/logs:/app/logs"
+						"/media/bellum/main/Multimédia:/media:ro"
+						"/run/media/dawn/cache/tdarr/:/temp"
+					];
+					devices = [
+						"/dev/dri:/dev/dri"
+						"/dev/kfd:/dev/kfd"
+					];
+				};
 			};
 		};
 	};

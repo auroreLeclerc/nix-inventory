@@ -37,21 +37,27 @@
 					private_browsing = true;
 				};
 				"jid1-ZAdIEUB7XOzOJw@jetpack" = {
+					installation_mode = "normal_installed";
 					install_url = "https://addons.mozilla.org/firefox/downloads/latest/duckduckgo-for-firefox/latest.xpi";
 				};
 				"addon@darkreader.org" = {
+					installation_mode = "normal_installed";
 					install_url = "https://addons.mozilla.org/firefox/downloads/latest/darkreader/latest.xpi";
 				};
 				"{6AC85730-7D0F-4de0-B3FA-21142DD85326}" = {
+					installation_mode = "normal_installed";
 					install_url = "https://addons.mozilla.org/firefox/downloads/latest/colorzilla/latest.xpi";
 				};
 				"{446900e4-71c2-419f-a6a7-df9c091e268b}" = {
+					installation_mode = "normal_installed";
 					install_url = "https://addons.mozilla.org/firefox/downloads/latest/bitwarden-password-manager/latest.xpi";
 				};
 				"plasma-browser-integration@kde.org" = {
+					installation_mode = "normal_installed";
 					install_url = "https://addons.mozilla.org/firefox/downloads/latest/plasma-integration/latest.xpi";
 				};
 				"firefoxpwa@filips.si" = {
+					installation_mode = "normal_installed";
 					install_url = "https://addons.mozilla.org/firefox/downloads/latest/pwas-for-firefox/latest.xpi";
 				};
 			};

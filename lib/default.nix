@@ -18,7 +18,7 @@ in {
 			infra = import (
 				builtins.fetchurl { # FIXME: how to update the SRI sha256 each 6months
 					url = "https://raw.githubusercontent.com/NixOS/infra/refs/heads/main/channels.nix";
-					sha256 = "sha256-fmNA4hOyihxWzIeZr39f0X3rKPLt5D+0COXzTFokkXU=";
+					sha256 = "sha256-MBHWO7AUrNMD0RCdz5qyoII24c2FoHNFkL2uqPG5cIo=";
 				}
 			);
 		in
