@@ -340,7 +340,7 @@
 				tdarr-node = {
 					image = "ghcr.io/haveagitgat/tdarr_node:latest";
 					environment = {
-						serverURL = "http://tdarr:8265";
+						serverURL = "http://tdarr:8266"; # server port not UI port
 						inContainer = true;
 						nodeType = "mapped";
 						priority = -1;
