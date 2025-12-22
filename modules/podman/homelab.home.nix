@@ -242,7 +242,6 @@
 						PHOTOPRISM_AUTH_MODE = "public";
 						PHOTOPRISM_SITE_URL = "https://photoprism.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						PHOTOPRISM_DISABLE_TLS = true;
-						PHOTOPRISM_READONLY = true;
 						PHOTOPRISM_DATABASE_SERVER = "mariadb:3306";
 						PHOTOPRISM_DATABASE_NAME = "photoprism";
 						PHOTOPRISM_DATABASE_USER = "photoprism";
@@ -316,40 +315,15 @@
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
-  			tdarr = {
-    			image = "ghcr.io/haveagitgat/tdarr:latest";
+  			unmanic = {
+    			image = "docker.io/josh5/unmanic:latest";
 					environment = {
-						PORT = 8265;
-						inContainer = true;
-						auth = false;
+						PORT = 8888;
 					} // lscr;
 					volumes = [
-						"/media/bellum/main/docker/tdarr/server:/app/server"
-						"/media/bellum/main/docker/tdarr/configs:/app/configs"
-						"/media/bellum/main/docker/tdarr/logs:/app/logs"
-						"/media/bellum/main/Multimédia:/media:ro"
-						"/run/media/dawn/cache/tdarr/:/temp"
-					];
-					devices = [
-						"/dev/dri:/dev/dri"
-						"/dev/kfd:/dev/kfd"
-					];
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
-				};
-				tdarr-node = {
-					image = "ghcr.io/haveagitgat/tdarr_node:latest";
-					environment = {
-						serverURL = "http://tdarr:8266"; # server port not UI port
-						inContainer = true;
-						nodeType = "mapped";
-						priority = -1;
-					} // lscr;
-					volumes = [
-						"/media/bellum/main/docker/tdarr/configs:/app/configs"
-						"/media/bellum/main/docker/tdarr/logs:/app/logs"
-						"/media/bellum/main/Multimédia:/media:ro"
-						"/run/media/dawn/cache/tdarr/:/temp"
+						"/media/bellum/main/docker/unmanic/:/config"
+						"/media/bellum/main/Multimédia:/library:ro"
+						"/run/media/dawn/cache/unmanic/:/tmp/unmanic"
 					];
 					devices = [
 						"/dev/dri:/dev/dri"
