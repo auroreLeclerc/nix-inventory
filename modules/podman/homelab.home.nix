@@ -106,10 +106,7 @@
 						"/run/media/dawn/cache/jellyfin:/config/cache"
 						"/media/bellum/main/docker/jellyfin:/config"
 					];
-					devices = [
-						"/dev/dri:/dev/dri"
-						"/dev/kfd:/dev/kfd"
-					];
+					devices = [ "/dev/dri:/dev/dri"	];
 					extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -147,7 +144,7 @@
 						CREATE_ADMIN = 1;
 						ADMIN_USERNAME = "admin";
 						ADMIN_PASSWORD = "adminadmin";
-      			BASE_URL = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						BASE_URL = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 					};
 					extraPodmanArgs = [ "--health-cmd '/usr/bin/miniflux -healthcheck auto'" ];
 					network = [ "docker-like" ];
@@ -250,6 +247,7 @@
 						PHOTOPRISM_SITE_AUTHOR = "Aurore";
 						PHOTOPRISM_DEFAULT_LOCALE = "fr";
 						PHOTOPRISM_DEFAULT_TIMEZONE = lscr.TZ;
+						PHOTOPRISM_FFMPEG_ENCODER = "vaapi";
 					};
 					devices = [
 						"/dev/dri:/dev/dri"
@@ -315,20 +313,30 @@
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
-  			unmanic = {
-    			image = "docker.io/josh5/unmanic:latest";
+				unmanic = {
+					image = "docker.io/josh5/unmanic:latest";
 					environment = {
 						PORT = 8888;
 					} // lscr;
 					volumes = [
 						"/media/bellum/main/docker/unmanic/:/config"
-						"/media/bellum/main/Multimédia:/library:ro"
+						"/media/bellum/main/Multimédia/test:/library"
 						"/run/media/dawn/cache/unmanic/:/tmp/unmanic"
 					];
-					devices = [
-						"/dev/dri:/dev/dri"
-						"/dev/kfd:/dev/kfd"
+					devices = [ "/dev/dri:/dev/dri" ];
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
+				fileflows = {
+					image = "docker.io/revenz/fileflows:stable";
+					environment = {
+						PORT = 5000;
+					} // lscr;
+					volumes = [
+						"/media/bellum/main/docker/fileflows/:/app/Data"
+						"/media/bellum/main/Multimédia/test:/media"
 					];
+					devices = [ "/dev/dri:/dev/dri" ];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};

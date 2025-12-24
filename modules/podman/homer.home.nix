@@ -143,72 +143,72 @@
 					sha256 = "sha256-XXLFsFyULzshW7FA09swQHzFkVp2W0YXrSGXncv+66Y=";
 				}}:/www/assets/dark.png"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/jellyfin/jellyfin-ux/refs/heads/master/branding/SVG/icon-transparent.svg";
-					sha256 = "sha256-gXwltHRCsZIlBEj+SM1fJl/pGDvHWqEgMLvjNUlSVdE=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellyfin.svg";
+					sha256 = "sha256-f1PPCD27MRnsjFrL2AScUDMidhfkYVQPcFkawQkSQwY=";
 				}}:/www/assets/jellyfin.svg"
 				"${builtins.fetchurl {
-					url = "https://transmissionbt.com/assets/images/Transmission_icon.png";
-					sha256 = "sha256-zGsbzhZPGzmlceJTE7NvhGcat933Hq78+v1cRAblcmE=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/transmission.svg";
+					sha256 = "sha256-+DTKLQAq/r6M2l1QBRJ5fU+5clatOM3qHJOupCK4dN4=";
 				}}:/www/assets/transmission.png"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/Radarr/Radarr/refs/heads/develop/Logo/Radarr.svg";
-					sha256 = "sha256-rZwdLjTtfQPn3SiKEuSfai9fXR1JF2vz+/0vSpx9wME=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/radarr.svg";
+					sha256 = "sha256-w9B+zfq0MsqX8mzwH+Btv8CZO1y2CTgns94cdCGm+5U=";
 				}}:/www/assets/radarr.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/Sonarr/Sonarr/refs/heads/v5-develop/Logo/Sonarr.svg";
-					sha256 = "sha256-51sYu/L2YniCFEN+R7rPY5NnYjHO3a4y5tAs/6vFDHU=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/sonarr.svg";
+					sha256 = "sha256-pd6+VlKB6xa3RtdbnOcuIvL7FcGbT1VCj99iuEvnkwY=";
 				}}:/www/assets/sonarr.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/Lidarr/Lidarr/refs/heads/develop/Logo/Lidarr.svg";
-					sha256 = "sha256-IWVWk7rM1taRafVCnXyjYL4xeWzDQ2JKy1eHUetjn8c=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/lidarr.svg";
+					sha256 = "sha256-L1X2lFCgygNiHodVDoHsD2eYxKV4tU5LmIqacjSoNkc==";
 				}}:/www/assets/lidarr.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/linuxserver/docker-templates/refs/heads/master/linuxserver.io/img/jacket-icon.png";
-					sha256 = "sha256-meOHrn7w088jXGGXiDM5NrmI3oR61LGVe5DPrxeoMAE=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jackett.svg";
+					sha256 = "sha256-tDCcmamBUUWNOoOviXcJBLrGk+GVC6XEv/Q45VfAjrg=";
 				}}:/www/assets/jackett.png"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/linuxserver/docker-templates/refs/heads/master/linuxserver.io/img/bazarr-logo.png";
-					sha256 = "sha256-29v0BEQHdemkkB7H3q6fG7faS0KawvOZK/Ld6XN/8/k=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/bazarr.svg";
+					sha256 = "sha256-tCd37mIt34Ws4V2+mnDUcaLKNk50XHPqRn2joKdYYWI=";
 				}}:/www/assets/bazarr.png"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/linuxserver/docker-templates/refs/heads/master/linuxserver.io/img/nginx-logo.png";
-					sha256 = "sha256-hewoVqgtHEBlGr6cI1/6AUTJnsJSWA/s5yTAzAbYaMg=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/nginx.svg";
+					sha256 = "sha256-OGDw05nkj8qjDysh081eDWkyZxQPHijLLTQZgauNL0w=";
 				}}:/www/assets/nginx.png"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/traefik/traefik/refs/heads/master/docs/content/assets/img/traefikproxy-icon-color.png";
-					sha256 = "sha256-GEWtfkxKSI/QZIw0jPozwAwSkqZn9vnZNcr9OHWloBA=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik-proxy.svg";
+					sha256 = "sha256-ufA9hQ1pSuNmNkMcZc3jzo/pxr+WFDU6B2H0PWXO7l8=";
 				}}:/www/assets/traefik.png"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/pi-hole/web/refs/heads/master/img/logo.svg";
-					sha256 = "sha256-xYQy+/XuOdWv2Ntg/7vURhBYHnF5PUCPbMFfz5AEYpw=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pi-hole.svg";
+					sha256 = "sha256-RJRONKcheXwycc/GsV3/gc1vu/ZsfJbaU6NO05vgbqU=";
 				}}:/www/assets/pi.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/dani-garcia/vaultwarden/refs/heads/main/resources/vaultwarden-icon.svg";
-					sha256 = "sha256-xY/pFVS9puG+Ub0M9WrISrY/eY1Rc+QeceGqHeUVx+8=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vaultwarden.svg";
+					sha256 = "sha256-r6OvcjtN5/UC0syWI1KEKly0ECa7WUCp+XDLUnG5Rys=";
 				}}:/www/assets/vaultwarden.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/miniflux/logo/refs/heads/master/original/icon-512.png";
-					sha256 = "sha256-KDYpsZxsumtw9vIoP+HfBPGUvyB5btHjmWKkmc9q4qw=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/miniflux.svg";
+					sha256 = "sha256-EyAyRYpTOhRFHYw6EIovyYMF6AT8TschgxvoZ3vQqLU=";
 				}}:/www/assets/miniflux.png"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/AmruthPillai/Reactive-Resume/refs/heads/main/apps/artboard/public/favicon.svg";
-					sha256 = "sha256-NEhDw6TbcHvveQxDNFHKSrEudatpoYVGu0LR/lX5D3c=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/reactive-resume.svg";
+					sha256 = "sha256-EuhtOleP7Pim3OFP0ymqkbyDZAVXVUHcqFi31gTVZLI==";
 				}}:/www/assets/resume.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/bambanah/deemix/refs/heads/main/packages/webui/src/client/assets/deemix-icon.svg";
-					sha256 = "sha256-9fjm/zWvZWEyI2Zj4FdbtkBmdsFR/7VH+62e9KrpRcA=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/deezer.svg";
+					sha256 = "sha256-0End70IeMHnSXZ4sPjowZAAAgvj1QnKtrY5VD0Gk5cE=";
 				}}:/www/assets/deemix.svg"
 				"${builtins.fetchurl {
-					url = "https://www.photoprism.app/static/icons/logo.svg";
-					sha256 = "sha256-QWaJiZgQ7HXgpi8NO3zfLHylmeV3J/rX66LkkDGH1qA=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/photoprism.svg";
+					sha256 = "sha256-caAQMpjc7zzoyifC0zdb2AgE95Yu/nSEggWUS9zF8AE=";
 				}}:/www/assets/photoprism.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/paperless-ngx/paperless-ngx/refs/heads/dev/resources/logo/web/svg/square.svg";
-					sha256 = "sha256-yr3c21EUv/pYhfS0N/efeyZUwgLEBaW6betIU+1yLyg=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/paperless-ngx.svg";
+					sha256 = "sha256-rD9pCxUb3xTha+vqUnIReLN/9hmGYKEljslEXq+yuNA=";
 				}}:/www/assets/paperless.svg"
 				"${builtins.fetchurl {
-					url = "https://raw.githubusercontent.com/CorentinTh/it-tools/refs/heads/main/public/safari-pinned-tab.svg";
-					sha256 = "sha256-2ehrE3XcBR95E0S6EibxfkU7F67sCt9gCw1r0kB45sU=";
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/it-tools.svg";
+					sha256 = "sha256-8pBo65DI9D1oUX6YJZzRoKY+q3S765KtR9YrpH3YGTA=";
 				}}:/www/assets/it-tools.svg"
 				"${builtins.fetchurl {
 					url = "https://home.tdarr.io/static/media/logo3-min.246d6df44c7f16ddebaf.png";
