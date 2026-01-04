@@ -39,8 +39,8 @@
 			maxretry = 5;
 			bantime = "730h";
 			ignoreIP = let
-				ip = (myLibs.impureSopsReading config.sops.secrets.ip.path);
-				isIp = (ip != "");
+				ip = myLibs.impureSopsReading config.sops.secrets.ip.path;
+				isIp = ip != "";
 			in lib.mkIf isIp [ ip ];
 		};
 		openssh = {
@@ -80,7 +80,7 @@
 	# Enable CUPS to print documents.
 	# services.printing.enable = true;
 
-	environment.systemPackages = (with pkgs; [ lm_sensors smartmontools ]); # TODO: kexec-tools
+	environment.systemPackages = with pkgs; [ lm_sensors smartmontools ]; # TODO: kexec-tools
 
 	# This option defines the first version of NixOS you have installed on this particular machine,
 	# and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.

@@ -28,7 +28,7 @@ in
 		nixpkgs.config.allowUnfreePredicate = pkg: builtins.elem (lib.getName pkg) [
 			"steam" "steam-original" "steam-unwrapped" "steam-run" "unrar" "xow_dongle-firmware"
 		];
-		fonts.packages = (with pkgs; [ noto-fonts noto-fonts-color-emoji liberation_ttf roboto ubuntu-classic ]);
+		fonts.packages = with pkgs; [ noto-fonts noto-fonts-color-emoji liberation_ttf roboto ubuntu-classic ];
 		environment.systemPackages = (with pkgs; [
 			nano nanorc wget openssl curl age htop parted jq fastfetch cowsay lolcat p7zip unzip unrar file ffmpeg
 		]) ++ [ motd ];

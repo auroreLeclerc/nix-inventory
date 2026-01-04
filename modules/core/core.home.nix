@@ -42,10 +42,10 @@
 			git = {
 				enable = true;
 				settings = let
-					mail = (myLibs.impureSopsReading osConfig.sops.secrets.mail.path);
-					isMail = (mail != "");
-					name = (myLibs.impureSopsReading osConfig.sops.secrets.name.path);
-					isName = (mail != "");
+					mail = myLibs.impureSopsReading osConfig.sops.secrets.mail.path;
+					isMail = mail != "";
+					name = myLibs.impureSopsReading osConfig.sops.secrets.name.path;
+					isName = mail != "";
 				in lib.mkIf osConfig.users.mutableUsers {
 					user.email = lib.mkIf isMail mail;
 					user.name = lib.mkIf isName name;

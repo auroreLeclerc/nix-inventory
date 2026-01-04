@@ -14,7 +14,7 @@
 					addCapabilities = [ "NET_ADMIN" ];
 					environment = {
 						SERVERURL = myLibs.impureSopsReading osConfig.sops.secrets.ip.path;
-						PEERS = "exelo,taya,fiercedeity";
+						PEERS = "exelo,taya,fdeity";
 						PEERDNS = config.services.podman.containers.pihole.ip4;
 						PERSITENTKEEPALIVE_PEERS = "all";
 						LOG_CONFS = false;
@@ -313,20 +313,6 @@
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
-				unmanic = {
-					image = "docker.io/josh5/unmanic:latest";
-					environment = {
-						PORT = 8888;
-					} // lscr;
-					volumes = [
-						"/media/bellum/main/docker/unmanic/:/config"
-						"/media/bellum/main/Multimédia/test:/library"
-						"/run/media/dawn/cache/unmanic/:/tmp/unmanic"
-					];
-					devices = [ "/dev/dri:/dev/dri" ];
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
-				};
 				fileflows = {
 					image = "docker.io/revenz/fileflows:stable";
 					environment = {
@@ -334,7 +320,8 @@
 					} // lscr;
 					volumes = [
 						"/media/bellum/main/docker/fileflows/:/app/Data"
-						"/media/bellum/main/Multimédia/test:/media"
+						"/run/media/dawn/cache/fileflows/:/temp"
+						"/media/bellum/main/test/:/media"
 					];
 					devices = [ "/dev/dri:/dev/dri" ];
 					network = [ "docker-like" ];

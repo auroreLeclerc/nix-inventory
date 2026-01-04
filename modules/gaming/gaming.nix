@@ -19,7 +19,48 @@
 		};
 	};
 
-	specialisation."Steam Deck".configuration = {
+	specialisation."Gamescope Compositor".configuration = {
+		home-manager.users.dawn = {
+			home.file = {
+				cef = {
+					text = "";
+					target = ".steam/steam/.cef-enable-remote-debugging";
+				};
+				pluginLoader = {
+					source = builtins.fetchurl {
+						url = "https://github.com/SteamDeckHomebrew/decky-loader/releases/latest/download/PluginLoader";
+						sha256 = "0xq18mpd9yn21wf0ggf5hf692s41aavmph4bvi7kgwz0zjgqsaif";
+					};
+					executable = true;
+					target = "homebrew/services/PluginLoader";
+				};
+			};
+			systemd.user.services.decky-loader = {
+				Unit = {
+					Description = "SteamDeck Plugin Loader";
+					After = "network.target";
+				};
+				Service = let
+					HOMEBREW_FOLDER = "~/homebrew";
+				in {
+					Type = "simple";
+					# User = "root";
+					Restart = "always";
+					KillMode = "process";
+					TimeoutStopSec = 15;
+					ExecStart = "${HOMEBREW_FOLDER}/services/PluginLoader";
+					WorkingDirectory = "${HOMEBREW_FOLDER}/services";
+					Environment = [
+						# "UNPRIVILEGED_PATH=${HOMEBREW_FOLDER}"
+						# "PRIVILEGED_PATH=${HOMEBREW_FOLDER}"
+						"LOG_LEVEL=INFO"
+					];
+				};
+				Install = {
+					WantedBy = [ "multi-user.target" ];
+				};
+			};
+		};
 		services.desktopManager.plasma6.enable = lib.mkForce false;
 		programs = {
 			gamescope = {
@@ -28,8 +69,10 @@
 			};
 			steam.gamescopeSession.enable = true;
 		};
-		environment = {
-			systemPackages = with pkgs; [ mangohud (writeShellScriptBin "steamdeck" (builtins.readFile ./gamescope.sh)) ];
+		environment = let
+			gamescope = pkgs.writeShellScriptBin "gamescope" (builtins.readFile ./gamescope.sh);
+		in {
+			systemPackages = with pkgs; [ mangohud ] ++ [ gamescope ];
 			loginShellInit = ''
 				[[ "$(tty)" = "/dev/tty1" ]] && steamdeck
 			'';

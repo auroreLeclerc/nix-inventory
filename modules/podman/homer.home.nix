@@ -26,16 +26,16 @@
 					in [
 						{
 							name = "Transmission";
-							logo = "assets/transmission.png";
+							logo = "assets/transmission.svg";
   						type = "Transmission";
 							url = "https://transmission.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						} {
 							name = "Jackett";
-							logo = "assets/jackett.png";
+							logo = "assets/jackett.svg";
 							url = "https://jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						} {
 							name = "Traefik";
-							logo = "assets/traefik.png";
+							logo = "assets/traefik.svg";
   						type = "Traefik";
 							url = "https://traefik.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
@@ -82,17 +82,16 @@
 							apikey = myLibs.impureSopsReading osConfig.sops.secrets.lidarr.path;
 							url = "https://lidarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						} {
-							name = "Tdarr";
-							logo = "assets/tdarr.png";
-							type = "Tdarr";
-							url = "https://tdarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							name = "FileFlows";
+							logo = "assets/fileflows.svg";
+							url = "https://fileflows.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	{
 							name = "Deemix";
 							logo = "assets/deemix.svg";
 							url = "http://localhost:6595/";
 						} {
 							name = "Bazarr";
-							logo = "assets/bazarr.png";
+							logo = "assets/bazarr.svg";
 							url = "https://bazarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						}	
 					];
@@ -107,7 +106,7 @@
 						}	{
 							name = "Miniflux";
   						type = "Miniflux";
-							logo = "assets/miniflux.png";
+							logo = "assets/miniflux.svg";
   						apikey = myLibs.impureSopsReading osConfig.sops.secrets.miniflux.path;
 							url = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 						}	{
@@ -149,7 +148,7 @@
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/transmission.svg";
 					sha256 = "sha256-+DTKLQAq/r6M2l1QBRJ5fU+5clatOM3qHJOupCK4dN4=";
-				}}:/www/assets/transmission.png"
+				}}:/www/assets/transmission.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/radarr.svg";
 					sha256 = "sha256-w9B+zfq0MsqX8mzwH+Btv8CZO1y2CTgns94cdCGm+5U=";
@@ -165,19 +164,19 @@
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jackett.svg";
 					sha256 = "sha256-tDCcmamBUUWNOoOviXcJBLrGk+GVC6XEv/Q45VfAjrg=";
-				}}:/www/assets/jackett.png"
+				}}:/www/assets/jackett.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/bazarr.svg";
 					sha256 = "sha256-tCd37mIt34Ws4V2+mnDUcaLKNk50XHPqRn2joKdYYWI=";
-				}}:/www/assets/bazarr.png"
+				}}:/www/assets/bazarr.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/nginx.svg";
 					sha256 = "sha256-OGDw05nkj8qjDysh081eDWkyZxQPHijLLTQZgauNL0w=";
-				}}:/www/assets/nginx.png"
+				}}:/www/assets/nginx.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik-proxy.svg";
 					sha256 = "sha256-ufA9hQ1pSuNmNkMcZc3jzo/pxr+WFDU6B2H0PWXO7l8=";
-				}}:/www/assets/traefik.png"
+				}}:/www/assets/traefik.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pi-hole.svg";
 					sha256 = "sha256-RJRONKcheXwycc/GsV3/gc1vu/ZsfJbaU6NO05vgbqU=";
@@ -189,7 +188,7 @@
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/miniflux.svg";
 					sha256 = "sha256-EyAyRYpTOhRFHYw6EIovyYMF6AT8TschgxvoZ3vQqLU=";
-				}}:/www/assets/miniflux.png"
+				}}:/www/assets/miniflux.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/reactive-resume.svg";
 					sha256 = "sha256-EuhtOleP7Pim3OFP0ymqkbyDZAVXVUHcqFi31gTVZLI==";
@@ -211,9 +210,9 @@
 					sha256 = "sha256-8pBo65DI9D1oUX6YJZzRoKY+q3S765KtR9YrpH3YGTA=";
 				}}:/www/assets/it-tools.svg"
 				"${builtins.fetchurl {
-					url = "https://home.tdarr.io/static/media/logo3-min.246d6df44c7f16ddebaf.png";
-					sha256 = "sha256-/5f5r74LLuWWGr2J3Ikw5ihxGvKKDtDK7NVC5wFftU4=";
-				}}:/www/assets/tdarr.png"
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/fileflows.svg";
+					sha256 = "sha256-G6O5PLpMRwVS5GSOs0EBAFqI0jBdzTbszQVnhL7xVh4=";
+				}}:/www/assets/fileflows.svg"
 			];
 			environment = {
 				PORT = 8080;

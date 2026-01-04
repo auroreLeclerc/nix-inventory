@@ -63,12 +63,12 @@
 								addVaryHeader = true;
 							}; 
 						};
-						routers = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
+						routers = builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 							rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
 							entryPoints = [ "websecure" ];
 							service = name;
 							middlewares = [ "cors-handler" "error-handler" ];
-						} else null) config.services.podman.containers);
+						} else null) config.services.podman.containers;
 						services = (builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
 							loadBalancer.servers = [
 								{ url = "http://${name}:${builtins.toString container.environment.PORT}"; }

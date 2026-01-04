@@ -25,7 +25,7 @@
 			}.${config.networking.hostName}*1024;
 			isSwap = size != 0;
 		in lib.mkIf isSwap [ {
-			size = size;
+			inherit size;
 			device = "/var/lib/${config.networking.hostName}.swap";
   	} ];
 	};

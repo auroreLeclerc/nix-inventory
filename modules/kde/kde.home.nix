@@ -19,10 +19,13 @@
 			};
 			plasma = {
 				enable = true;
-				workspace.iconTheme = "Papirus";
-				workspace.cursor = {
-					theme = "catppuccin-mocha-mauve-cursors";
-					size = 24;
+				workspace = {
+					iconTheme = "Papirus";
+					cursor = {
+						theme = "catppuccin-mocha-mauve-cursors";
+						size = 24;
+					};
+					splashScreen.theme = "xenia";
 				};
 				desktop.widgets = [
 					{
@@ -349,6 +352,13 @@
 				userAgent = "Mozilla/5.0 (Linux; x86_64) 🏳️‍⚧️/6.6.6";
 				opts = [ "--user-agent" ''"${userAgent}"'' ];
 			in {
+				xeniaSplashScreen = {
+					source = builtins.fetchTarball {
+						url = "https://github.com/astro-cyberpaws/xenia-kde6/releases/latest/download/xenia.tar.gz";
+						sha256 = "08810rnv9ib3ixqdi8sd95ilng3r4s22q4xymvl7kdydnchligcc";
+					};
+					target = ".local/share/plasma/look-and-feel/xenia";
+				};
 				icon = { # https://github.com/NixOS/nixpkgs/issues/163080
 					source = builtins.fetchurl {
 						url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/d6f42c40-e039-4006-8991-a518b74c7506/upset/w=512";
@@ -372,12 +382,12 @@
 					source = "${downloadsort}/bin/downloadsort";
 					target = ".config/plasma-workspace/env/downloadsort.sh";
 				};
-				discord = lib.mkIf (builtins.elem unstablePkgs.discord osConfig.environment.systemPackages) {
-					text = builtins.toJSON {
-						"SKIP_HOST_UPDATE" = true;
-					};
-					target = ".config/discord/settings.json";
-				};
+				# discord = lib.mkIf (builtins.elem unstablePkgs.discord osConfig.environment.systemPackages) {
+				# 	text = builtins.toJSON {
+				# 		"SKIP_HOST_UPDATE" = true;
+				# 	};
+				# 	target = ".config/discord/settings.json";
+				# };
 				adb = lib.mkIf osConfig.programs.adb.enable {
 					source = "${pkgs.android-tools}/bin/adb";
 					target = "Android/Sdk/platform-tools/adb";

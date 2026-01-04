@@ -32,8 +32,8 @@
 	users.users.dawn.extraGroups = [ "networkmanager" ];
 
 	fileSystems."/media/dawn/bellum" = let
-		ip = (myLibs.impureSopsReading config.sops.secrets.ip.path);
-		isIp = (ip != "");
+		ip = myLibs.impureSopsReading config.sops.secrets.ip.path;
+		isIp = ip != "";
 		ssh = /home/dawn/.ssh/bellum;
 		isSsh = isIp && (myLibs.consoleWarn (builtins.pathExists ssh) "SSH credentials are missing");
 	in lib.mkIf isSsh {

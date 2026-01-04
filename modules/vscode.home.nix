@@ -30,6 +30,7 @@
 				"diffEditor.ignoreTrimWhitespace" = false;
   			"nix.enableLanguageServer" = true;
 				"nix.serverPath" = "nil";
+				"nix.serverSettings.nil.formatting" = { "command" = ["nixfmt"]; };
 				"redhat.telemetry.enabled" = false;
 				"sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
 				"sonarlint.disableTelemetry" = true;
@@ -47,5 +48,5 @@
 		enable = true;
 		icons.enable = false;
 	};
-	home.packages = (with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz sops jdk17 ]);
+	home.packages = with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz sops jdk17 ];
 }
