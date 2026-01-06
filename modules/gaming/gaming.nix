@@ -19,19 +19,30 @@
 		};
 	};
 
-	specialisation."Steam Deck (Gamescope)".configuration = {
+	specialisation."Steam Deck (Gamescope)".configuration = let 
+		decky-loader = import (builtins.fetchurl {
+			url = "https://raw.githubusercontent.com/Jovian-Experiments/Jovian-NixOS/refs/heads/development/pkgs/decky-loader/default.nix";
+			sha256 = "0afjb8jcqb4kx4sld3b0jpxfxwvs9y3d5lhkdvavhw5ajzx1m5bh";
+		}) {
+			inherit lib;
+			fetchFromGitHub = pkgs.fetchFromGitHub;
+			nodejs = pkgs.nodejs;
+			pnpm_9 = pkgs.pnpm_9;
+			fetchPnpmDeps = pkgs.fetchPnpmDeps;
+			pnpmConfigHook = pkgs.pnpmConfigHook;
+			python3 = pkgs.python3;
+			coreutils = pkgs.coreutils;
+			psmisc = pkgs.psmisc;
+		};
+	in {
 		home-manager.users.dawn = {
 			home.file = {
 				cef = {
-					text = "";
+					text = null;
 					target = ".steam/steam/.cef-enable-remote-debugging";
 				};
 				pluginLoader = {
-					source = builtins.fetchurl {
-						url = "https://github.com/SteamDeckHomebrew/decky-loader/releases/latest/download/PluginLoader";
-						sha256 = "0xq18mpd9yn21wf0ggf5hf692s41aavmph4bvi7kgwz0zjgqsaif";
-					};
-					executable = true;
+					text = null;
 					target = "homebrew/services/PluginLoader";
 				};
 			};
@@ -49,7 +60,7 @@
 				Restart = "always";
 				KillMode = "process";
 				TimeoutStopSec = 15;
-				ExecStart = "${HOMEBREW_FOLDER}/services/PluginLoader";
+				ExecStart = "${decky-loader}/bin/decky-loader";
 				WorkingDirectory = "${HOMEBREW_FOLDER}/services";
 				Environment = [
 					"UNPRIVILEGED_PATH=${HOMEBREW_FOLDER}"
@@ -71,7 +82,7 @@
 		environment = let
 			steamdeck = pkgs.writeShellScriptBin "steamdeck" (builtins.readFile ./gamescope.sh);
 		in {
-			systemPackages = with pkgs; [ mangohud ] ++ [ steamdeck ];
+			systemPackages = with pkgs; [ mangohud ] ++ [ steamdeck decky-loader ];
 			loginShellInit = ''
 				[[ "$(tty)" = "/dev/tty1" ]] && steamdeck
 			'';
