@@ -38,11 +38,12 @@
 		home-manager.users.dawn = {
 			home.file = {
 				cef = {
-					text = null;
+					text = "";
 					target = ".steam/steam/.cef-enable-remote-debugging";
 				};
 				pluginLoader = {
-					text = null;
+					source = decky-loader;
+					executable = true;
 					target = "homebrew/services/PluginLoader";
 				};
 			};
@@ -60,7 +61,7 @@
 				Restart = "always";
 				KillMode = "process";
 				TimeoutStopSec = 15;
-				ExecStart = "${decky-loader}/bin/decky-loader";
+				ExecStart = "${HOMEBREW_FOLDER}/services/PluginLoader";
 				WorkingDirectory = "${HOMEBREW_FOLDER}/services";
 				Environment = [
 					"UNPRIVILEGED_PATH=${HOMEBREW_FOLDER}"
