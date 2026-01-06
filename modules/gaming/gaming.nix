@@ -42,7 +42,7 @@
 					target = ".steam/steam/.cef-enable-remote-debugging";
 				};
 				pluginLoader = {
-					source = decky-loader;
+					source = "${decky-loader}/bin/decky-loader";
 					executable = true;
 					target = "homebrew/services/PluginLoader";
 				};
