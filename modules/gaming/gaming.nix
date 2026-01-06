@@ -19,7 +19,7 @@
 		};
 	};
 
-	specialisation."Gamescope Compositor".configuration = {
+	specialisation."Steam Deck (Gamescope)".configuration = {
 		home-manager.users.dawn = {
 			home.file = {
 				cef = {
@@ -35,32 +35,31 @@
 					target = "homebrew/services/PluginLoader";
 				};
 			};
-			systemd.user.services.decky-loader = {
-				Unit = {
-					Description = "SteamDeck Plugin Loader";
-					After = "network.target";
-				};
-				Service = let
-					HOMEBREW_FOLDER = "~/homebrew";
-				in {
-					Type = "simple";
-					# User = "root";
-					Restart = "always";
-					KillMode = "process";
-					TimeoutStopSec = 15;
-					ExecStart = "${HOMEBREW_FOLDER}/services/PluginLoader";
-					WorkingDirectory = "${HOMEBREW_FOLDER}/services";
-					Environment = [
-						# "UNPRIVILEGED_PATH=${HOMEBREW_FOLDER}"
-						# "PRIVILEGED_PATH=${HOMEBREW_FOLDER}"
-						"LOG_LEVEL=INFO"
-					];
-				};
-				Install = {
-					WantedBy = [ "multi-user.target" ];
-				};
-			};
 		};
+		systemd.services.decky-loader = {
+			unitConfig = {
+				Description = "SteamDeck Plugin Loader";
+				After = "network.target";
+			};
+			serviceConfig = let
+				HOMEBREW_FOLDER = "/home/dawn/homebrew";
+			in {
+				Type = "simple";
+				User = "root";
+				Restart = "always";
+				KillMode = "process";
+				TimeoutStopSec = 15;
+				ExecStart = "${HOMEBREW_FOLDER}/services/PluginLoader";
+				WorkingDirectory = "${HOMEBREW_FOLDER}/services";
+				Environment = [
+					"UNPRIVILEGED_PATH=${HOMEBREW_FOLDER}"
+					"PRIVILEGED_PATH=${HOMEBREW_FOLDER}"
+					"LOG_LEVEL=INFO"
+				];
+			};
+			wantedBy = [ "multi-user.target" ];
+		};
+
 		services.desktopManager.plasma6.enable = lib.mkForce false;
 		programs = {
 			gamescope = {
@@ -70,9 +69,9 @@
 			steam.gamescopeSession.enable = true;
 		};
 		environment = let
-			gamescope = pkgs.writeShellScriptBin "gamescope" (builtins.readFile ./gamescope.sh);
+			steamdeck = pkgs.writeShellScriptBin "steamdeck" (builtins.readFile ./gamescope.sh);
 		in {
-			systemPackages = with pkgs; [ mangohud ] ++ [ gamescope ];
+			systemPackages = with pkgs; [ mangohud ] ++ [ steamdeck ];
 			loginShellInit = ''
 				[[ "$(tty)" = "/dev/tty1" ]] && steamdeck
 			'';

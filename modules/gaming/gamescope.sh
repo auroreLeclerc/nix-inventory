@@ -4,7 +4,7 @@ set -xeuo pipefail
 
 gamescopeArgs=(
 	--adaptive-sync # VRR support
-	--hdr-enabled
+	# --hdr-enabled
 	--mangoapp # performance overlay
 	--rt
 	--steam
