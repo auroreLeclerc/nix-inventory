@@ -8,6 +8,7 @@
 		../../modules/kde/kde.nix
 		../../modules/gaming/gaming.nix
 		../../modules/workstation.nix
+		../../modules/podman/workbench.nix
 		inputs.nixos-hardware.nixosModules.common-cpu-amd
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
