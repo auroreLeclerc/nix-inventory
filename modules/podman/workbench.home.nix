@@ -12,8 +12,8 @@
 				scrutiny = {
 					image = "ghcr.io/analogj/scrutiny:master-omnibus	";
 					ports = [
-						"8080:8080"
-						"8086:8086"
+						"3002:8080"
+						"3003:8086"
 					];
 					volumes = [
 						"/run/udev:/run/udev:ro"
