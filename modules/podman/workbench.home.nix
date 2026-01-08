@@ -6,8 +6,27 @@
 				minio_data = {};
 				postgres_data = {};
 				deemix_data = {};
+				scrutiny_data = {};
 			};
 			containers = {
+				scrutiny = {
+					image = "ghcr.io/analogj/scrutiny:master-omnibus	";
+					ports = [
+						"8080:8080"
+						"8086:8086"
+					];
+					volumes = [
+						"/run/udev:/run/udev:ro"
+						"scrutiny_data/scrutiny:/opt/scrutiny/config"
+						"scrutiny_data/influxdb2:/opt/scrutiny/influxdb"
+					];
+					environment = {
+						PUID = 0;
+						PGID = 0;
+					};
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
 				deemix = {
 					image = "ghcr.io/bambanah/deemix:latest";
 					ports = [ "6595:6595" ];

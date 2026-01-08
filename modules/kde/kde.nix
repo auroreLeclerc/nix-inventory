@@ -31,21 +31,19 @@
 
 	users.users.dawn.extraGroups = [ "networkmanager" ];
 
-	fileSystems."/media/dawn/bellum" = let
+	fileSystems.bellum = let
 		ip = myLibs.impureSopsReading config.sops.secrets.ip.path;
 		isIp = ip != "";
 		ssh = /home/dawn/.ssh/bellum;
 		isSsh = isIp && (myLibs.consoleWarn (builtins.pathExists ssh) "SSH credentials are missing");
 	in lib.mkIf isSsh {
-		device = "dawn@${ip}:/media/bellum/main/";
+		device = "dawn@${ip}:/media/bellum/main";
 		fsType = "sshfs";
+		mountPoint = "/run/media/dawn/bellum";
 		options = [
 			"x-systemd.automount"
+			"x-systemd.mount-timeout=10"
 			"_netdev"
-			"users"
-			"idmap=user"
-			# "allow_other"
-			"reconnect"
 			"IdentityFile=${ssh}"
 		];
 	};
