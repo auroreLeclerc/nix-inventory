@@ -27,7 +27,7 @@
 		fsType = "ext4";
 	};
 	fileSystems."/run/media/dawn/gyorg" = {
-		device = "/dev/disk/by-uuid/681c9d69-4c9e-47eb-b217-a542afdf783c";
+		device = "/dev/disk/by-uuid/08970f93-820e-4448-8487-74b2fe99810f";
 		fsType = "ext4";
 	};
 
