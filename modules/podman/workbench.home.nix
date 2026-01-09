@@ -7,6 +7,7 @@
 				postgres_data = {};
 				deemix_data = {};
 				scrutiny_data = {};
+				influxdb2_data = {};
 			};
 			containers = {
 				scrutiny = {
@@ -17,8 +18,8 @@
 					];
 					volumes = [
 						"/run/udev:/run/udev:ro"
-						"scrutiny_data/scrutiny:/opt/scrutiny/config"
-						"scrutiny_data/influxdb2:/opt/scrutiny/influxdb"
+						"scrutiny_data:/opt/scrutiny/config"
+						"influxdb2_data:/opt/scrutiny/influxdb"
 					];
 					environment = {
 						PUID = 0;
