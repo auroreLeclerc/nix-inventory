@@ -8,15 +8,20 @@
 			};
 		};
 		services.udev.extraRules = ''
-			KERNEL=="sd[a-z]", OWNER="dawn", MODE="0660"
+			SUBSYSTEM=="block", KERNEL=="sd[a-z]", GROUP="smart", MODE="0660"
 		'';
-		users.users.dawn = {
-			description = "Aurore";
-			initialPassword = "dawn";
-			isNormalUser = true;
-			shell = pkgs.zsh;
-			extraGroups = [ "wheel" ];
-			linger = config.networking.hostName == "bellum";
+		users = {
+			users.dawn = {
+				description = "Aurore";
+				initialPassword = "dawn";
+				isNormalUser = true;
+				shell = pkgs.zsh;
+				extraGroups = [ "wheel" ];
+				linger = config.networking.hostName == "bellum";
+			};
+			groups.smart = {
+				members = [ "dawn" ];
+			};
 		};
 		swapDevices = let
 			size = {
