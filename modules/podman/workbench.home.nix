@@ -16,6 +16,7 @@
 						"3002:8080"
 						"3003:8086"
 					];
+					addCapabilities = [ "SYS_RAWIO" ];
 					volumes = [
 						"/run/udev:/run/udev:ro"
 						"scrutiny_data:/opt/scrutiny/config"
