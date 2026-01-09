@@ -12,15 +12,18 @@
 			containers = {
 				scrutiny = {
 					image = "ghcr.io/analogj/scrutiny:master-omnibus	";
-					ports = [
-						"3002:8080"
-						"3003:8086"
-					];
+					ports = [ "3002:8080" ];
 					addCapabilities = [ "SYS_RAWIO" ];
 					volumes = [
 						"/run/udev:/run/udev:ro"
 						"scrutiny_data:/opt/scrutiny/config"
 						"influxdb2_data:/opt/scrutiny/influxdb"
+					];
+					devices = [
+						"/dev/sda"
+						"/dev/sdb"
+						"/dev/sdc"
+						"/dev/sdd"
 					];
 					environment = {
 						PUID = 0;
