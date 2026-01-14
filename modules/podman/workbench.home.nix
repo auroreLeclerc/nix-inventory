@@ -25,10 +25,6 @@
 						"/dev/sdc"
 						"/dev/sdd"
 					];
-					environment = {
-						PUID = 0;
-						PGID = 0;
-					};
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -39,10 +35,6 @@
 						"deemix_data:/config"
 						"/home/dawn/Musique/Deezer:/downloads"
 					];
-					environment = {
-						PUID = 0;
-						PGID = 0;
-					};
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
