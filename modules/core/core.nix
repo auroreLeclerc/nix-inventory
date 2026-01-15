@@ -31,7 +31,7 @@ in
 		fonts.packages = with pkgs; [ noto-fonts noto-fonts-color-emoji liberation_ttf roboto ubuntu-classic ];
 		environment.systemPackages = (with pkgs; [
 			nano nanorc wget openssl curl age htop parted jq fastfetch cowsay lolcat p7zip
-			unzip unrar file ffmpeg toybox openseachest
+			unzip unrar file ffmpeg toybox openseachest sg3_utils
 		]) ++ [ motd ];
 		programs.zsh.enable = true;
 	};
