@@ -16,7 +16,7 @@
 
 	boot = {
 		supportedFilesystems = [ "zfs" ];
-		zfs.extraPools = [ "bellum" ];
+		# zfs.extraPools = [ "bellum" ];
 	};
 
 	networking = {
@@ -55,11 +55,11 @@
 			autoScrub.enable = true;
 			trim.enable = true;
 			autoSnapshot = {
-				enable = true;
-				frequent = 0;
-				hourly= 0;
-				daily = 0;
-				monthly = 24;
+				enable = true; # Note that you must set the com.sun:auto-snapshot property to true on all datasets which you wish to auto-snapshot.
+				# frequent = 0;
+				# hourly= 0;
+				# daily = 0;
+				# monthly = 24;
 				# flags = "-k -p --utc";
 			};
 		};
