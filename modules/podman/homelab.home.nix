@@ -2,6 +2,10 @@
 	imports = [ ./podman.home.nix ./homer.home.nix ./traefik.home.nix ];
 	config = {
 		services.podman = {
+			settings.storage = {
+				driver = "overlay";
+				rootless_storage_path = "/run/media/dawn/cubus/storage";
+			};
 			containers = let 
 				lscr = {
 					PUID = 0;
@@ -104,7 +108,8 @@
 					environment = {
 						PORT = 8096;
 						DOCKER_MODS = [
-							"lscr.io/linuxserver/mods:jellyfin-amd"
+							# "linuxserver/mods:jellyfin-amd"
+							"linuxserver/mods:jellyfin-opencl-intel"
 							"ghcr.io/intro-skipper/intro-skipper-docker-mod"
 						];
 					} // lscr;
