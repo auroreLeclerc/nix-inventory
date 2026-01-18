@@ -2,7 +2,7 @@
 	imports = [ ./podman.home.nix ./homer.home.nix ./traefik.home.nix ];
 	config = {
 		services.podman = {
-			settings.storage = {
+			settings.storage.storage = {
 				driver = "overlay";
 				rootless_storage_path = "/run/media/dawn/cubus/storage";
 			};
