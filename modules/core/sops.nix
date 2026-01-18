@@ -15,6 +15,7 @@
 			radarr = {};
 			sonarr = {};
 			lidarr = {};
+			prowlar = {};
 			miniflux = {};
 			paperless = {};
 		};
