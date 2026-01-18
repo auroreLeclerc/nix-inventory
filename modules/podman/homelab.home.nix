@@ -38,7 +38,7 @@
 						PORT = 9091;
 					} // lscr;
 					volumes = [
-						"/run/media/dawn/eox/data:/config"
+						"/run/media/dawn/eox/transmission:/config"
 						"/run/media/dawn/eox/downloads:/downloads"
 						"/run/media/dawn/eox/watchdir:/watch"
 					];
