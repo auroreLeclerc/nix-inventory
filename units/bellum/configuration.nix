@@ -16,7 +16,10 @@
 
 	boot = {
 		supportedFilesystems = [ "zfs" ];
-		zfs.extraPools = [ "bellum" "cubus" ];
+		zfs = {
+			requestEncryptionCredentials = false;
+			extraPools = [ "bellum" "cubus" ];
+		};
 	};
 
 	networking = {
