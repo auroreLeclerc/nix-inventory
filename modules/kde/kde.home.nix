@@ -1,4 +1,4 @@
-{ pkgs, lib, osConfig, config, unstablePkgs, ... }:
+{ pkgs, lib, osConfig, config, ... }:
 {
 	config = {
 		catppuccin = {
@@ -382,12 +382,6 @@
 					source = "${downloadsort}/bin/downloadsort";
 					target = ".config/plasma-workspace/env/downloadsort.sh";
 				};
-				# discord = lib.mkIf (builtins.elem unstablePkgs.discord osConfig.environment.systemPackages) {
-				# 	text = builtins.toJSON {
-				# 		"SKIP_HOST_UPDATE" = true;
-				# 	};
-				# 	target = ".config/discord/settings.json";
-				# };
 				adb = lib.mkIf osConfig.programs.adb.enable {
 					source = "${pkgs.android-tools}/bin/adb";
 					target = "Android/Sdk/platform-tools/adb";

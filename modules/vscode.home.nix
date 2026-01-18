@@ -48,5 +48,5 @@
 		enable = true;
 		icons.enable = false;
 	};
-	home.packages = with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz sops jdk17 ];
+	home.packages = with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz sops jdk17 shellcheck ];
 }

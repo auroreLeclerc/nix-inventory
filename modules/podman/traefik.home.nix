@@ -79,7 +79,7 @@
 					};
 				};
 			in [
-				"/home/dawn/docker/traefik/letsencrypt:/letsencrypt"
+				"/run/media/dawn/cubus/traefik/letsencrypt:/letsencrypt"
 				"${builtins.toFile "traefikConfig.json" (builtins.toJSON traefikConfig)}:/etc/traefik/traefik.yml"
 				"${builtins.toFile "dynamicConfig.json" (builtins.toJSON dynamicConfig)}:/etc/traefik/dynamic.yml"
 			];

@@ -53,7 +53,9 @@ else
 			esac
 			result+=' ; '
 		done
-		echo "ZFS : ${result::-2}"
+		if [ -n "$result" ]; then
+			echo "ZFS : ${result::-2}"
+		fi
 	fi
 	current_kernel=$(readlink /run/booted-system/kernel | grep -Eo 'linux-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+')
 	new_kernel=$(readlink /nix/var/nix/profiles/system/kernel | grep -Eo 'linux-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+')

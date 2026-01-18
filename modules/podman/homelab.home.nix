@@ -19,7 +19,7 @@
 						PERSITENTKEEPALIVE_PEERS = "all";
 						LOG_CONFS = false;
 					} // lscr;
-					volumes = [ "/media/bellum/main/docker/wireguard/:/config" ];
+					volumes = [ "/run/media/dawn/cubus/wireguard/:/config" ];
 					ports = [ "51820:51820/udp" ];
 					extraPodmanArgs = [
 						"--sysctl net.ipv4.conf.all.src_valid_mark=1"
@@ -34,9 +34,9 @@
 						PORT = 9091;
 					} // lscr;
 					volumes = [
-						"/run/media/dawn/blaaz/data:/config"
-						"/run/media/dawn/blaaz/downloads:/downloads"
-						"/run/media/dawn/blaaz/watchdir:/watch"
+						"/run/media/dawn/eox/data:/config"
+						"/run/media/dawn/eox/downloads:/downloads"
+						"/run/media/dawn/eox/watchdir:/watch"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -47,9 +47,9 @@
 						PORT = 8989;
 					} // lscr;
 					volumes = [
-						"/media/bellum/main/docker/sonarr:/config"
-						"/run/media/dawn/blaaz/downloads:/downloads"
-						"/media/bellum/main/Multimédia/Séries:/tv"
+						"/run/media/dawn/cubus/sonarr:/config"
+						"/run/media/dawn/eox/downloads:/downloads"
+						"/run/media/dawn/bellum/Multimédia/Séries:/tv"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -60,9 +60,9 @@
 						PORT = 7878;
 					} // lscr;
 					volumes = [
-						"/media/bellum/main/docker/radarr:/config"
-						"/run/media/dawn/blaaz/downloads:/downloads"
-						"/media/bellum/main/Multimédia/Films:/movies"
+						"/run/media/dawn/cubus/radarr:/config"
+						"/run/media/dawn/eox/downloads:/downloads"
+						"/run/media/dawn/bellum/Multimédia/Films:/movies"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -73,7 +73,16 @@
 						PORT = 9117;
 						AUTO_UPDATE = true;
 					} // lscr;
-					volumes = [ "/media/bellum/main/docker/jackett:/config" ];
+					volumes = [ "/run/media/dawn/cubus/jackett:/config" ];
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
+				prowlarr = {
+					image = "lscr.io/linuxserver/prowlarr:latest";
+					environment = {
+						PORT = 9696;
+					} // lscr;
+					volumes = [ "/run/media/dawn/cubus/prowlarr:/config" ];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -83,9 +92,9 @@
 						PORT = 6767;
 					} // lscr;
 					volumes = [
-						"/media/bellum/main/docker/bazarr:/config"
-						"/media/bellum/main/Multimédia/Films:/movies"
-						"/media/bellum/main/Multimédia/Séries:/tv"
+						"/run/media/dawn/cubus/bazarr:/config"
+						"/run/media/dawn/bellum/Multimédia/Films:/movies"
+						"/run/media/dawn/bellum/Multimédia/Séries:/tv"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -100,11 +109,10 @@
 						];
 					} // lscr;
 					volumes = [
-						"/media/bellum/main/Multimédia/Films:/data/movies:ro"
-						"/media/bellum/main/Multimédia/Séries:/data/tvshows:ro"
-						"/media/bellum/main/new_Deezer:/data/music:ro"
-						"/run/media/dawn/cache/jellyfin:/config/cache"
-						"/media/bellum/main/docker/jellyfin:/config"
+						"/run/media/dawn/bellum/Multimédia/Films:/data/movies:ro"
+						"/run/media/dawn/bellum/Multimédia/Séries:/data/tvshows:ro"
+						"/run/media/dawn/bellum/new_Deezer:/data/music:ro"
+						"/run/media/dawn/cubus/jellyfin:/config"
 					];
 					devices = [ "/dev/dri:/dev/dri"	];
 					extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
@@ -117,9 +125,9 @@
 						PORT = 8686;
 					} // lscr;
 					volumes = [
-						"/media/bellum/main/docker/lidarr:/config"
-						"/media/bellum/main/new_Deezer:/music"
-						"/media/bellum/main/new_Deezer:/downloads"
+						"/run/media/dawn/cubus/lidarr:/config"
+						"/run/media/dawn/bellum/new_Deezer:/music"
+						"/run/media/dawn/bellum/new_Deezer:/downloads"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
@@ -131,7 +139,7 @@
 						DOMAIN = "https://vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
 						SIGNUPS_ALLOWED = "false";
 					};
-					volumes = [ "/media/bellum/main/docker/vaultwarden/data:/data" ];
+					volumes = [ "/run/media/dawn/cubus/vaultwarden/data:/data" ];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
@@ -200,7 +208,7 @@
 				};
 				postgres = {
 					image = "localhost/homemanager/postgres";
-					volumes = [ "/media/bellum/main/docker/postgres/:/var/lib/postgresql" ];
+					volumes = [ "/run/media/dawn/cubus/postgres/:/var/lib/postgresql" ];
 					environment = {
 						POSTGRES_PASSWORD = "postgres";
 					};
@@ -254,16 +262,16 @@
 						"/dev/kfd:/dev/kfd"
 					];
 					volumes = [
-						"/media/bellum/main/Dawn/Images/DCIM/:/photoprism/originals:ro"
-						"/media/bellum/main/docker/photoprism/import/:/photoprism/import"
-						"/media/bellum/main/docker/photoprism:/photoprism/storage"
+						"/run/media/dawn/bellum/Dawn/Images/DCIM/:/photoprism/originals:ro"
+						"/run/media/dawn/cubus/photoprism/import/:/photoprism/import"
+						"/run/media/dawn/cubus/photoprism:/photoprism/storage"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				mariadb = {
 					image = "docker.io/library/mariadb:lts";
-					volumes = [ "/media/bellum/main/docker/mariadb:/var/lib/mysql" ];
+					volumes = [ "/run/media/dawn/cubus/mariadb:/var/lib/mysql" ];
 					environment = {
 						MARIADB_AUTO_UPGRADE = true;
 						MARIADB_DATABASE = "photoprism";
@@ -271,12 +279,15 @@
 						MARIADB_PASSWORD = "insecure";
 						MARIADB_ROOT_PASSWORD = "insecure";
 					};
+					extraPodmanArgs = [
+						"--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
+					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
 				redis = {
 					image = "docker.io/library/redis:8";
-					volumes = [ "/media/bellum/main/docker/redis:/data" ];
+					volumes = [ "/run/media/dawn/cubus/redis:/data" ];
 					extraPodmanArgs = [
 						"--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
 					];
@@ -286,10 +297,10 @@
 				paperless = {
 					image = "ghcr.io/paperless-ngx/paperless-ngx:latest";
 					volumes = [
-						"/media/bellum/main/docker/paperless/data:/usr/src/paperless/data"
-						"/media/bellum/main/docker/paperless/media:/usr/src/paperless/media"
-						"/media/bellum/main/docker/paperless/export:/usr/src/paperless/export"
-						"/media/bellum/main/docker/paperless/consume:/usr/src/paperless/consume"
+						"/run/media/dawn/cubus/paperless/data:/usr/src/paperless/data"
+						"/run/media/dawn/cubus/paperless/media:/usr/src/paperless/media"
+						"/run/media/dawn/cubus/paperless/export:/usr/src/paperless/export"
+						"/run/media/dawn/cubus/paperless/consume:/usr/src/paperless/consume"
 					];
 					environment = {
 						PORT = 8000;
@@ -319,9 +330,9 @@
 						PORT = 5000;
 					} // lscr;
 					volumes = [
-						"/media/bellum/main/docker/fileflows/:/app/Data"
-						"/run/media/dawn/cache/fileflows/:/temp"
-						"/media/bellum/main/test/:/media"
+						"/run/media/dawn/cubus/fileflows/:/app/Data"
+						"/run/media/dawn/cubus/fileflows/cache/:/temp"
+						"/run/media/dawn/bellum/test/:/media"
 					];
 					devices = [ "/dev/dri:/dev/dri" ];
 					network = [ "docker-like" ];

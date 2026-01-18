@@ -34,6 +34,12 @@
 							logo = "assets/jackett.svg";
 							url = "https://jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
 						} {
+							name = "Prowlarr";
+							logo = "assets/prowlarr.svg";
+							type = "Prowlarr";
+							apikey = myLibs.impureSopsReading osConfig.sops.secrets.prowlarr.path;
+							url = "https://prowlarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						} {
 							name = "Traefik";
 							logo = "assets/traefik.svg";
   						type = "Traefik";
@@ -165,6 +171,10 @@
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jackett.svg";
 					sha256 = "sha256-tDCcmamBUUWNOoOviXcJBLrGk+GVC6XEv/Q45VfAjrg=";
 				}}:/www/assets/jackett.svg"
+				"${builtins.fetchurl {
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/prowlarr.svg";
+					sha256 = "0rxwym371bkybg55gsabwj5dpscnbwhdgm2r7s2ssl35xyy3cxyd";
+				}}:/www/assets/prowlarr.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/bazarr.svg";
 					sha256 = "sha256-tCd37mIt34Ws4V2+mnDUcaLKNk50XHPqRn2joKdYYWI=";

@@ -4,7 +4,7 @@
 		enable = true;
 		update.auto.enable = true;
 		uninstallUnmanaged = true;
-		packages = [ "fr.handbrake.ghb" ];
+		packages = [];
 	};
 	home.packages = with pkgs; [ flatpak appimage-run ];
 }
