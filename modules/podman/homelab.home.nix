@@ -3,7 +3,7 @@
 	config = {
 		services.podman = {
 			settings.storage.storage = {
-				driver = "zfs";
+				driver = "overlay";
 				rootless_storage_path = "/run/media/dawn/cubus/storage";
 			};
 			containers = let 
