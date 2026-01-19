@@ -4,7 +4,7 @@
 		inputs.nixos-hardware.nixosModules.common-cpu-amd
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
-		inputs.nixos-hardware.nixosModules.common-gpu-amd
+		# inputs.nixos-hardware.nixosModules.common-gpu-amd
 		{
 			home-manager.users.dawn = {
 				imports = [
@@ -83,7 +83,7 @@
 	# Enable CUPS to print documents.
 	# services.printing.enable = true;
 
-	environment.systemPackages = with pkgs; [ lm_sensors smartmontools ]; # TODO: kexec-tools
+	environment.systemPackages = with pkgs; [ lm_sensors smartmontools nvtopPackages.intel ]; # TODO: kexec-tools
 
 	# This option defines the first version of NixOS you have installed on this particular machine,
 	# and is used to maintain compatibility with application data (e.g. databases) created on older NixOS versions.
