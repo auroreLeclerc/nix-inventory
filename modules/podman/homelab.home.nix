@@ -4,7 +4,7 @@
 		services.podman = {
 			settings.storage.storage = {
 				driver = "overlay";
-				rootless_storage_path = "/run/media/dawn/cubus/storage";
+				rootless_storage_path = "/run/media/dawn/cache/podman";
 			};
 			containers = let 
 				lscr = {
@@ -118,6 +118,7 @@
 						"/run/media/dawn/bellum/Multimédia/Séries:/data/tvshows:ro"
 						"/run/media/dawn/bellum/new_Deezer:/data/music:ro"
 						"/run/media/dawn/cubus/jellyfin:/config"
+						"/run/media/dawn/cache/jellyfin:/config/cache"
 					];
 					devices = [ "/dev/dri:/dev/dri"	];
 					extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
@@ -336,7 +337,7 @@
 					} // lscr;
 					volumes = [
 						"/run/media/dawn/cubus/fileflows/:/app/Data"
-						"/run/media/dawn/cubus/fileflows/cache/:/temp"
+						"/run/media/dawn/cache/fileflows/:/temp"
 						"/run/media/dawn/bellum/test/:/media"
 					];
 					devices = [ "/dev/dri:/dev/dri" ];
