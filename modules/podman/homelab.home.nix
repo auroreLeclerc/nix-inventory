@@ -338,7 +338,7 @@
 					volumes = [
 						"/run/media/dawn/cubus/fileflows/:/app/Data"
 						"/run/media/dawn/cache/fileflows/:/temp"
-						"/run/media/dawn/bellum/test/:/media"
+						"/run/media/dawn/bellum/Multimédia/test/:/media"
 					];
 					devices = [ "/dev/dri:/dev/dri" ];
 					network = [ "docker-like" ];
