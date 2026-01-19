@@ -5,6 +5,7 @@
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
 		# inputs.nixos-hardware.nixosModules.common-gpu-amd
+		inputs.nixos-hardware.nixosModules.common-gpu-intel
 		{
 			home-manager.users.dawn = {
 				imports = [
@@ -13,6 +14,7 @@
 			};
 		}
 	];
+	hardware.intelgpu.driver = "xe";
 
 	boot = {
 		supportedFilesystems = [ "zfs" ];
