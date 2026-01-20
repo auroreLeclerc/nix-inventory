@@ -337,7 +337,7 @@
 					} // lscr;
 					volumes = [
 						"/run/media/dawn/cubus/fileflows/:/app/Data"
-						"/run/media/dawn/cache/fileflows/:/temp"
+						"/run/media/dawn/slowcache/:/temp"
 						"/run/media/dawn/bellum/Multimédia/:/media"
 					];
 					devices = [ "/dev/dri:/dev/dri" ];

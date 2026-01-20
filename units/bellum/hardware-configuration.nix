@@ -40,6 +40,11 @@
 		fsType = "ext4";
 		options = [ "nofail" ];
 	};
+	fileSystems."/run/media/dawn/slowcache" = {
+		device = "/dev/disk/by-uuid/19477eb3-300f-4e7c-9992-164fbe1f66a4";
+		fsType = "ext4";
+		options = [ "nofail" ];
+	};
 
 	# Enables DHCP on each ethernet and wireless interface. In case of scripted networking
 	# (the default) this is the recommended approach. When using systemd-networkd it's
