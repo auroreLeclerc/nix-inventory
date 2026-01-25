@@ -16,7 +16,7 @@
 					addCapabilities = [ "SYS_RAWIO" ];
 					volumes = [
 						"/run/udev:/run/udev:ro"
-						"scrutiny_data:/opt/scrutiny/config"
+						"/home/dawn/tmp:/opt/scrutiny/config"
 						"influxdb2_data:/opt/scrutiny/influxdb"
 					];
 					devices = [

@@ -9,7 +9,7 @@
 		(with pkgs; [
 			bottles dolphin-emu-primehack dolphin-emu azahar ppsspp itch xrgears archipelago
 		]) ++
-		(with unstablePkgs; [ discord celeste64 freeciv_qt ryubing shipwright ])
+		(with unstablePkgs; [ discord celeste64 freeciv_qt ryubing /* shipwright */ ])
 	;
 	hardware = {
 		xone.enable = true;
