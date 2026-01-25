@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
 	imports = [
 		../../modules/kde/kde.nix
@@ -25,6 +25,11 @@
 	];
 	config = {
 		networking.hostName = "fierce-deity"; # Define your hostname.
+
+		boot.supportedFilesystems = [ "btrfs" ];
+		services.btrfs.autoScrub.enable = true;
+
+		environment.systemPackages = with pkgs; [ btrfs-progs ];
 
 		# This value determines the NixOS release from which the default
 		# settings for stateful data, like file locations and database versions
