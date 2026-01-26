@@ -1,15 +1,7 @@
-{ config, ... }: {
+{ ... }: {
 	boot = {
 		supportedFilesystems = [ "zfs" ];
-		zfs = {
-			requestEncryptionCredentials = false;
-			extraPools = let
-			pools = {
-				"bellum" = [ "bellum" "cubus" ];
-				"fierce-deity" = [ "odolwa" ];
-			}.${config.networking.hostName};
-			in pools;
-		};
+		zfs.requestEncryptionCredentials = false;
 	};
 	services.zfs = {
 		autoScrub.enable = true;
