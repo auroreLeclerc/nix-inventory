@@ -25,7 +25,7 @@
 	fileSystems."/run/media/dawn/odolwa" = {
 		device = "/dev/disk/by-uuid/aa579304-9b54-4b98-b4fe-d786bf28b40b";
 		fsType = "btrfs";
-		options = [ "compress=zstd" ];
+		options = [ "compress=zstd" "defaults" ];
 	};
 
 	# Enables DHCP on each ethernet and wireless interface. In case of scripted networking
