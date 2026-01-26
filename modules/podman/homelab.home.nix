@@ -1,5 +1,10 @@
 { osConfig, config, myLibs, ... }: {
-	imports = [ ./podman.home.nix ./homer.home.nix ./traefik.home.nix ];
+	imports = [
+		./podman.home.nix
+		./homer.home.nix
+		./traefik.home.nix
+		./ci-cd.home.nix
+	];
 	config = {
 		services.podman = {
 			settings.storage.storage = {

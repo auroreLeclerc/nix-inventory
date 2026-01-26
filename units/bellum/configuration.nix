@@ -1,6 +1,7 @@
 { inputs, pkgs, lib, myLibs, config, ... }:
 {
 	imports = [
+		../../modules/zfs.nix
 		inputs.nixos-hardware.nixosModules.common-cpu-amd
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-pstate
 		inputs.nixos-hardware.nixosModules.common-cpu-amd-zenpower
@@ -15,14 +16,6 @@
 		}
 	];
 	hardware.intelgpu.driver = "xe";
-
-	boot = {
-		supportedFilesystems = [ "zfs" ];
-		zfs = {
-			requestEncryptionCredentials = false;
-			extraPools = [ "bellum" "cubus" ];
-		};
-	};
 
 	networking = {
 		hostId = "6dec770a";
@@ -54,18 +47,6 @@
 				PasswordAuthentication = false;
 				AllowUsers = [ "dawn" ];
 				PermitRootLogin = "no";
-			};
-		};
-		zfs = {
-			autoScrub.enable = true;
-			trim.enable = true;
-			autoSnapshot = {
-				enable = true; # Note that you must set the com.sun:auto-snapshot property to true on all datasets which you wish to auto-snapshot.
-				frequent = 0;
-				hourly = 0;
-				daily = 7;
-				weekly = 0;
-				monthly = 24;
 			};
 		};
 	};

@@ -22,11 +22,6 @@
 		fsType = "vfat";
 		options = [ "fmask=0077" "dmask=0077" ];
 	};
-	fileSystems."/run/media/dawn/odolwa" = {
-		device = "/dev/disk/by-uuid/aa579304-9b54-4b98-b4fe-d786bf28b40b";
-		fsType = "btrfs";
-		options = [ "compress=zstd" "defaults" ];
-	};
 
 	# Enables DHCP on each ethernet and wireless interface. In case of scripted networking
 	# (the default) this is the recommended approach. When using systemd-networkd it's
