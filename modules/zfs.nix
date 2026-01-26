@@ -6,7 +6,7 @@
 			extraPools = let
 			pools = {
 				"bellum" = [ "bellum" "cubus" ];
-				"fierce-deity" = [];
+				"fierce-deity" = [ "odolwa" ];
 			}.${config.networking.hostName};
 			in pools;
 		};
