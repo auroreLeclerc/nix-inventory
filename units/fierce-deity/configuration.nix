@@ -25,7 +25,10 @@
 		}
 	];
 	config = {
-		networking.hostName = "fierce-deity"; # Define your hostname.
+		networking = {
+			hostId = "007f0200";
+			hostName = "fierce-deity";
+		};
 
 		# This value determines the NixOS release from which the default
 		# settings for stateful data, like file locations and database versions
