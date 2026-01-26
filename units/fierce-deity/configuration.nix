@@ -27,7 +27,7 @@
 		networking.hostName = "fierce-deity"; # Define your hostname.
 
 		boot.supportedFilesystems = [ "btrfs" ];
-		# services.btrfs.autoScrub.enable = true;
+		services.btrfs.autoScrub.enable = true;
 
 		environment.systemPackages = with pkgs; [ btrfs-progs ];
 
