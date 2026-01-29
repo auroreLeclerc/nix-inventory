@@ -1,7 +1,13 @@
-{ ... }: {
+{ config, ... }: {
 	boot = {
 		supportedFilesystems = [ "zfs" ];
-		zfs.requestEncryptionCredentials = false;
+		zfs = {
+			requestEncryptionCredentials = false;
+			extraPools = {
+				"bellum" = [ "cubus" "bellum" ];
+				"fierce-deity" = [ "odolwa" ];
+			}.${config.networking.hostName};
+		};
 	};
 	services.zfs = {
 		autoScrub.enable = true;

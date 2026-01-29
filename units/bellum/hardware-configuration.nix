@@ -45,14 +45,6 @@
 		fsType = "ext4";
 		options = [ "nofail" ];
 	};
-	fileSystems."/run/media/dawn/bellum" = {
-		device = "bellum";
-		fsType = "zfs";
-	};
-	fileSystems."/run/media/dawn/cubus" = {
-		device = "cubus";
-		fsType = "zfs";
-	};
 
 	# Enables DHCP on each ethernet and wireless interface. In case of scripted networking
 	# (the default) this is the recommended approach. When using systemd-networkd it's
