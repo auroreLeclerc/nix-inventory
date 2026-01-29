@@ -52,7 +52,7 @@
 							{
 								kickoff = {
 									icon = builtins.fetchurl {
-										url = "https://xenia-images.efi.pages.gay/xenia-images/questfortori3.png";
+										url = "https://xenia-images.efi.pages.gay/questfortori3.png";
 										sha256 = "sha256-I7+vQ4R0AAXaZVwEohYCOnOSsM8sBSk18or56PrGZVc=";
 									};
 								};
@@ -305,11 +305,11 @@
 						Wallpaper =  {
 							enabled = true;
 							dark = builtins.fetchurl {
-								url = "https://xenia-images.efi.pages.gay/xenia-images/neotheta2.png";
+								url = "https://xenia-images.efi.pages.gay/neotheta2.png";
 								sha256 = "sha256-GxGAo7uh717fy1aQREmMfZfuSdN1R0VflM7R3E4azU0=";
 							};
 							light =  builtins.fetchurl {
-								url = "https://xenia-images.efi.pages.gay/xenia-images/flyinghyena1.jpeg";
+								url = "https://xenia-images.efi.pages.gay/flyinghyena1.jpeg";
 								sha256 = "sha256-Fe9bpTAYy8h26HG4WDOMwSl5oS56kHve5QXCrrhtlbU=";
 							};
 						};
