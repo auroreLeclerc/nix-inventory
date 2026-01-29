@@ -21,6 +21,7 @@
 				timonwong.shellcheck
 				davidanson.vscode-markdownlint
 				leonardssh.vscord
+				golang.go
 			];
 			userSettings = {
 				"window.autoDetectColorScheme" = true;
@@ -41,6 +42,9 @@
   			"[css].editor.defaultFormatter" = "stylelint.vscode-stylelint";
 				"java.debug.settings.vmArgs" = "-ea";
   			"java.jdt.ls.java.home" = pkgs.jdk17;
+				"go.alternateTools.dlv" = pkgs.delve;
+				"go.alternateTools.go" = pkgs.go;
+				"go.alternateTools.gopls" = pkgs.gopls;
 			};
 		};
 	};
@@ -48,5 +52,8 @@
 		enable = true;
 		icons.enable = false;
 	};
-	home.packages = with pkgs; [ nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz sops jdk17 shellcheck ];
+	home.packages = with pkgs; [
+		nodejs electron nixfmt-rfc-style nixd typescript python3 graphviz sops jdk17 shellcheck
+		libcap go gcc gopls delve
+	];
 }
