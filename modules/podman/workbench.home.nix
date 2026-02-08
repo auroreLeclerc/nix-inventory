@@ -44,7 +44,7 @@
 				ollama = {
 					image = "docker.io/ollama/ollama:rocm";
 					ports = [ "11434:11434" ];
-					environment = lib.mkIf osConfig.networking.hostName == "exelo" {
+					environment = lib.mkIf (osConfig.networking.hostName == "exelo") {
 						HSA_OVERRIDE_GFX_VERSION = "11.0.2";
 					};
 					devices = [

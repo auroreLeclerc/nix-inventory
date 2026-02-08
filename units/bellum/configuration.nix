@@ -1,5 +1,7 @@
-{ inputs, pkgs, lib, myLibs, config, ... }:
-{
+{ inputs, pkgs, lib, config, ... }:
+let
+	secrets = config.secrets.values;
+in {
 	imports = [
 		../../modules/zfs.nix
 		inputs.nixos-hardware.nixosModules.common-cpu-amd
@@ -37,7 +39,7 @@
 			maxretry = 5;
 			bantime = "730h";
 			ignoreIP = let
-				ip = myLibs.impureSopsReading config.sops.secrets.ip.path;
+				ip = secrets.ip;
 				isIp = ip != "";
 			in lib.mkIf isIp [ ip ];
 		};

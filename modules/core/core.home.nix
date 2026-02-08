@@ -1,5 +1,7 @@
-{ pkgs, lib, osConfig, unstablePkgs, myLibs, ... }:
-{
+{ pkgs, lib, osConfig, unstablePkgs, ... }:
+let
+	secrets = osConfig.secrets.values;
+in {
 	config = {
 		catppuccin = {
 			enable = false; # no global enable
@@ -29,7 +31,7 @@
 					enable = osConfig.users.mutableUsers;
 					plugins = [ "sudo" "node" "npm" "git" "repo" "nvm" "emoji" "podman" ];
 				};
-				localVariables = lib.mkIf osConfig.programs.adb.enable  {
+				localVariables = lib.mkIf osConfig.programs.adb.enable {
 					"CHROME_EXECUTABLE" = "${pkgs.chromium}/bin/chromium-browser";
 					"CAPACITOR_ANDROID_STUDIO_PATH" = unstablePkgs.android-studio;
 					"JAVA_HOME" = pkgs.jdk;
@@ -42,10 +44,10 @@
 			git = {
 				enable = true;
 				settings = let
-					mail = myLibs.impureSopsReading osConfig.sops.secrets.mail.path;
+					mail = secrets.mail;
 					isMail = mail != "";
-					name = myLibs.impureSopsReading osConfig.sops.secrets.name.path;
-					isName = mail != "";
+					name = secrets.name;
+					isName = name != "";
 				in lib.mkIf osConfig.users.mutableUsers {
 					user.email = lib.mkIf isMail mail;
 					user.name = lib.mkIf isName name;

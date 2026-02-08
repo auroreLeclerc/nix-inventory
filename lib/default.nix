@@ -1,4 +1,4 @@
-{ lib, ... } : let 
+{ lib, ... } : let
 	const = import ./const.nix;
 in {
 	inherit const;
@@ -15,13 +15,13 @@ in {
 	);
 	checkSupportedVersion = (version:
 		assert builtins.isString version;
-		let 
+		let
 			infra = import (builtins.fetchurl { # FIXME: how to update the SRI sha256 each 6months
 				url = "https://raw.githubusercontent.com/NixOS/infra/refs/heads/main/channels.nix";
 				sha256 = "144rk6bgax7885p6f3qcd9ca4cyrp1bq72y4700znk88s9wkvl1y";
 			});
 		in {
-			"rolling" = builtins.trace "💁🏻‍♀️ You sure about that ?" true;	
+			"rolling" = builtins.trace "💁🏻‍♀️ You sure about that ?" true;
 			"stable" = true;
 			"deprecated" = builtins.trace "🙎🏻‍♀️ Nixos ${version} is deprecated !" true;
 			"unmaintained" = builtins.abort "🙅🏻‍♀️ Nixos ${version} is End Of Life !";

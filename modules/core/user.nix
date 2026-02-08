@@ -1,13 +1,7 @@
 { pkgs, lib, config, ... }:
 {
 	config = let
-		ramSize = {
-			"bellum" = 0;
-			"exelo" = 14;
-			"fierce-deity" = 16;
-			"midna" = 4;
-			"kimado" = 6;
-		}.${config.networking.hostName};
+		ramSize = config.hardware.ramSizeGiB;
 		swapSize = builtins.ceil (ramSize*1024*0.4);
 	in lib.mkIf config.users.mutableUsers {
 		boot = { # Use the systemd-boot EFI boot loader.
@@ -39,7 +33,7 @@
 		swapDevices = lib.mkIf (ramSize > 0) [ {
 			size = swapSize;
 			device = "/var/lib/${config.networking.hostName}.swap";
-  	} ];
+		} ];
 	};
 }
 

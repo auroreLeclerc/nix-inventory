@@ -1,6 +1,6 @@
 { pkgs, config, ... }:
 {
-	boot.	plymouth = {
+	boot.plymouth = {
 		enable = true;
 		theme = "blahaj";
 		themePackages = with pkgs; [ plymouth-blahaj-theme kdePackages.breeze-plymouth ];
@@ -12,10 +12,10 @@
 			autoNumlock = true;
 		};
 		xserver = { # TODO: https://nixos.wiki/wiki/Wayland
-		 	enable = true; # Enable the X11 windowing system.
-		 	xkb = { # Configure keymap in X11
-		 		layout = "fr";
-		 		variant = "azerty";
+			enable = true; # Enable the X11 windowing system.
+			xkb = { # Configure keymap in X11
+				layout = "fr";
+				variant = "azerty";
 			};
 			excludePackages = [ pkgs.xterm ];
 		};

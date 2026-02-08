@@ -47,7 +47,11 @@
 					inputs.home-manager.nixosModules.home-manager
 					inputs.catppuccin.nixosModules.catppuccin
 					inputs.sops-nix.nixosModules.sops
-          inputs.nix-index-database.nixosModules.nix-index
+					inputs.nix-index-database.nixosModules.nix-index
+					./modules/core/core.nix
+					./modules/core/options.nix
+					./units/${unit}/configuration.nix
+					./units/${unit}/hardware-configuration.nix
 					{
 						home-manager.useGlobalPkgs = true;
 						home-manager.useUserPackages = true;
@@ -63,9 +67,6 @@
 							inherit myLibs;
 						};
 					}
-					./units/${unit}/configuration.nix
-					./units/${unit}/hardware-configuration.nix
-					./modules/core/core.nix
 				];
 			}
 		) (builtins.readDir ./units);

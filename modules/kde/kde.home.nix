@@ -14,10 +14,10 @@
 						sha256 = "sha256-wIamJFeTaJxZYpXsOr0RCjW6YlSc9v/1KRgXJ+gcztw=";
 					};
 				};
-				profiles.Custom.colorScheme =  "Sweet";
+				profiles.Custom.colorScheme = "Sweet";
 				defaultProfile = "Custom";
 			};
-			plasma = let 
+			plasma = let
 				darkWallpaper = builtins.fetchurl {
 					url = "https://xenia-images.efi.pages.gay/neotheta2.png";
 					sha256 = "sha256-GxGAo7uh717fy1aQREmMfZfuSdN1R0VflM7R3E4azU0=";

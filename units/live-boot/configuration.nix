@@ -1,4 +1,4 @@
-{ pkgs, modulesPath, inputs, ... }:
+{ pkgs, lib, modulesPath, inputs, ... }:
 {
 	imports = [
 		"${modulesPath}/installer/cd-dvd/installation-cd-base.nix"
@@ -19,7 +19,7 @@
 		users = {
 			mutableUsers = false;
 			users.nixos = {
-				password = "nixos";
+				initialPassword = lib.mkForce "nixos";
 				shell = pkgs.zsh;
 			};
 		};

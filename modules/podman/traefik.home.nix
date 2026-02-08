@@ -1,4 +1,7 @@
-{ config, osConfig, myLibs, lib, ... }: {
+{ config, osConfig, lib, ... }:
+let
+	secrets = osConfig.secrets.values;
+in {
 	config.services.podman.containers = let
 		debug = false;
 	in {
@@ -31,8 +34,8 @@
 							http.tls = {
 								certResolver = "duckresolver";
 								domains = [{
-									main = myLibs.impureSopsReading osConfig.sops.secrets.dns.path;
-									sans = "*.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+									main = secrets.dns;
+									sans = "*.${secrets.dns}";
 								}];
 							};
 						};
@@ -42,7 +45,7 @@
 							provider = "duckdns";
 							propagation.delaybeforechecks = 120;
 						};
-						email = myLibs.impureSopsReading osConfig.sops.secrets.secondaryMail.path;
+						email = secrets.secondaryMail;
 						storage = "/letsencrypt/acme.json";
 					};
 					providers.file.filename = "/etc/traefik/dynamic.yml";
@@ -61,10 +64,10 @@
 								accessControlAllowOriginList = "*";
 								accessControlMaxAge = 100;
 								addVaryHeader = true;
-							}; 
+							};
 						};
 						routers = builtins.mapAttrs (name: container: if (builtins.hasAttr "PORT" container.environment) then {
-							rule = "Host(`${name}.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}`)";
+							rule = "Host(`${name}.${secrets.dns}`)";
 							entryPoints = [ "websecure" ];
 							service = name;
 							middlewares = [ "cors-handler" "error-handler" ];
@@ -85,7 +88,7 @@
 			];
 			environment = {
 				PORT = 8080;
-				DUCKDNS_TOKEN = myLibs.impureSopsReading osConfig.sops.secrets.duck.path;
+				DUCKDNS_TOKEN = secrets.duck;
 			};
 			ip4 = "172.18.0.254"; # IMPORTANT: the ip of the domain's dns must be traefik's ip !
 			network = [ "docker-like" ];

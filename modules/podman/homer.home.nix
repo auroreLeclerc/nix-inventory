@@ -1,4 +1,7 @@
-{ myLibs, osConfig, ... }: {
+{ osConfig, ... }:
+let
+	secrets = osConfig.secrets.values;
+in {
 	config.services.podman.containers = let
 		homerConfig = {
 			title = "Laboratoire Maison";
@@ -22,28 +25,28 @@
 					name = "Administration";
 					icon = "fas fa-hammer";
 					items = let
-						piholeEndpoint = "https://pihole.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+						piholeEndpoint = "https://pihole.${secrets.dns}/";
 					in [
 						{
 							name = "Transmission";
 							logo = "assets/transmission.svg";
-  						type = "Transmission";
-							url = "https://transmission.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							type = "Transmission";
+							url = "https://transmission.${secrets.dns}";
 						} {
 							name = "Jackett";
 							logo = "assets/jackett.svg";
-							url = "https://jackett.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							url = "https://jackett.${secrets.dns}";
 						} {
 							name = "Prowlarr";
 							logo = "assets/prowlarr.svg";
 							type = "Prowlarr";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.prowlarr.path;
-							url = "https://prowlarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							apikey = secrets.prowlarr;
+							url = "https://prowlarr.${secrets.dns}";
 						} {
 							name = "Traefik";
 							logo = "assets/traefik.svg";
-  						type = "Traefik";
-							url = "https://traefik.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							type = "Traefik";
+							url = "https://traefik.${secrets.dns}";
 						}	{
 							name = "Pi-hole";
 							logo = "assets/pi.svg";
@@ -55,7 +58,7 @@
 							name = "Vaultwarden - Server";
 							logo = "assets/vaultwarden.svg";
 							type = "Vaultwarden";
-							url = "https://vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+							url = "https://vaultwarden.${secrets.dns}/";
 						}
 					];
 				}	{
@@ -66,31 +69,31 @@
 							name = "Jellyfin";
 							logo = "assets/jellyfin.svg";
 							type = "Emby";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.jellyfin.path;
-							url = "https://jellyfin.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							apikey = secrets.jellyfin;
+							url = "https://jellyfin.${secrets.dns}";
 							libraryType = "series";
 						}	{
 							name = "Radarr";
 							logo = "assets/radarr.svg";
 							type = "Radarr";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.radarr.path;
-							url = "https://radarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							apikey = secrets.radarr;
+							url = "https://radarr.${secrets.dns}";
 						}	{
 							name = "Sonarr";
 							logo = "assets/sonarr.svg";
 							type = "Sonarr";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.sonarr.path;
-							url = "https://sonarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							apikey = secrets.sonarr;
+							url = "https://sonarr.${secrets.dns}";
 						}	{
 							name = "Lidarr";
 							logo = "assets/lidarr.svg";
 							type = "Lidarr";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.lidarr.path;
-							url = "https://lidarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							apikey = secrets.lidarr;
+							url = "https://lidarr.${secrets.dns}";
 						} {
 							name = "FileFlows";
 							logo = "assets/fileflows.svg";
-							url = "https://fileflows.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							url = "https://fileflows.${secrets.dns}";
 						}	{
 							name = "Deemix";
 							logo = "assets/deemix.svg";
@@ -98,8 +101,8 @@
 						} {
 							name = "Bazarr";
 							logo = "assets/bazarr.svg";
-							url = "https://bazarr.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-						}	
+							url = "https://bazarr.${secrets.dns}";
+						}
 					];
 				} {
 					name = "Documents";
@@ -108,27 +111,27 @@
 						{
 							name = "Reactive Resume";
 							logo = "assets/resume.svg";
-							url = "https://reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+							url = "https://reactive-resume.${secrets.dns}";
 						}	{
 							name = "Miniflux";
-  						type = "Miniflux";
+							type = "Miniflux";
 							logo = "assets/miniflux.svg";
-  						apikey = myLibs.impureSopsReading osConfig.sops.secrets.miniflux.path;
-							url = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+							apikey = secrets.miniflux;
+							url = "https://miniflux.${secrets.dns}/";
 						}	{
 							name = "Photoprism";
 							logo = "assets/photoprism.svg";
-							url = "https://photoprism.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+							url = "https://photoprism.${secrets.dns}/";
 						}	{
 							name = "Paperless";
 							logo = "assets/paperless.svg";
 							type = "PaperlessNG";
-							apikey = myLibs.impureSopsReading osConfig.sops.secrets.paperless.path;
-							url = "https://paperless.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+							apikey = secrets.paperless;
+							url = "https://paperless.${secrets.dns}/";
 						} {
 							name = "IT-Tools";
 							logo = "assets/it-tools.svg";
-							url = "https://it-tools.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+							url = "https://it-tools.${secrets.dns}/";
 						}
 					];
 				}
@@ -165,7 +168,7 @@
 				}}:/www/assets/sonarr.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/lidarr.svg";
-					sha256 = "sha256-L1X2lFCgygNiHodVDoHsD2eYxKV4tU5LmIqacjSoNkc==";
+					sha256 = "sha256-L1X2lFCgygNiHodVDoHsD2eYxKV4tU5LmIqacjSoNkc=";
 				}}:/www/assets/lidarr.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jackett.svg";
@@ -201,7 +204,7 @@
 				}}:/www/assets/miniflux.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/reactive-resume.svg";
-					sha256 = "sha256-EuhtOleP7Pim3OFP0ymqkbyDZAVXVUHcqFi31gTVZLI==";
+					sha256 = "sha256-EuhtOleP7Pim3OFP0ymqkbyDZAVXVUHcqFi31gTVZLI=";
 				}}:/www/assets/resume.svg"
 				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/deezer.svg";

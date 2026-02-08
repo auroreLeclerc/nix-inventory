@@ -1,4 +1,7 @@
-{ osConfig, config, myLibs, ... }: {
+{ osConfig, config, ... }:
+let
+	secrets = osConfig.secrets.values;
+in {
 	imports = [
 		./podman.home.nix
 		./homer.home.nix
@@ -11,7 +14,7 @@
 				driver = "overlay";
 				rootless_storage_path = "/run/media/dawn/cache/podman";
 			};
-			containers = let 
+			containers = let
 				lscr = {
 					PUID = 0;
 					PGID = 0;
@@ -22,7 +25,7 @@
 					image = "lscr.io/linuxserver/wireguard:latest";
 					addCapabilities = [ "NET_ADMIN" ];
 					environment = {
-						SERVERURL = myLibs.impureSopsReading osConfig.sops.secrets.ip.path;
+						SERVERURL = secrets.ip;
 						PEERS = "exelo,taya,fdeity";
 						PEERDNS = config.services.podman.containers.pihole.ip4;
 						PERSITENTKEEPALIVE_PEERS = "all";
@@ -147,7 +150,7 @@
 					image = "docker.io/vaultwarden/server:latest";
 					environment = {
 						PORT = 80;
-						DOMAIN = "https://vaultwarden.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/";
+						DOMAIN = "https://vaultwarden.${secrets.dns}/";
 						SIGNUPS_ALLOWED = "false";
 					};
 					volumes = [ "/run/media/dawn/cubus/vaultwarden/data:/data" ];
@@ -163,7 +166,7 @@
 						CREATE_ADMIN = 1;
 						ADMIN_USERNAME = "admin";
 						ADMIN_PASSWORD = "adminadmin";
-						BASE_URL = "https://miniflux.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						BASE_URL = "https://miniflux.${secrets.dns}";
 					};
 					extraPodmanArgs = [ "--health-cmd '/usr/bin/miniflux -healthcheck auto'" ];
 					network = [ "docker-like" ];
@@ -186,7 +189,7 @@
 						PORT = 443;
 						TOKEN = "chrome_token";
 						HEALTH = "true";
-						PROXY_HOST = "chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						PROXY_HOST = "chrome.${secrets.dns}";
 						PROXY_PORT = 443;
 						PROXY_SSL = "true";
 					};
@@ -198,10 +201,10 @@
 					environment = {
 						PORT = 3000;
 						NODE_ENV = "production";
-						PUBLIC_URL = "https://reactive-resume.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
-						STORAGE_URL = "https://minio.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}/default";
+						PUBLIC_URL = "https://reactive-resume.${secrets.dns}";
+						STORAGE_URL = "https://minio.${secrets.dns}/default";
 						CHROME_TOKEN = "chrome_token";
-						CHROME_URL = "wss://chrome.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						CHROME_URL = "wss://chrome.${secrets.dns}";
 						DATABASE_URL = "postgresql://postgres:postgres@postgre:5432/resume";
 						ACCESS_TOKEN_SECRET = "access_token_secret";
 						REFRESH_TOKEN_SECRET = "refresh_token_secret";
@@ -256,7 +259,7 @@
 					environment = {
 						PORT = 2342;
 						PHOTOPRISM_AUTH_MODE = "public";
-						PHOTOPRISM_SITE_URL = "https://photoprism.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						PHOTOPRISM_SITE_URL = "https://photoprism.${secrets.dns}";
 						PHOTOPRISM_DISABLE_TLS = true;
 						PHOTOPRISM_DATABASE_SERVER = "mariadb:3306";
 						PHOTOPRISM_DATABASE_NAME = "photoprism";
@@ -320,7 +323,7 @@
 						PAPERLESS_TIME_ZONE = lscr.TZ;
 						PAPERLESS_OCR_LANGUAGE = "fra";
 						PAPERLESS_APP_TITLE = "Sans-papier";
-						PAPERLESS_URL = "https://paperless.${myLibs.impureSopsReading osConfig.sops.secrets.dns.path}";
+						PAPERLESS_URL = "https://paperless.${secrets.dns}";
 						PAPERLESS_REDIS = "redis://redis:6379";
 						PAPERLESS_DBHOST = "postgres";
 						PAPERLESS_DBUSER = "postgres";

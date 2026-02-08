@@ -1,5 +1,7 @@
 { pkgs, lib, myLibs, config, ... }:
-{
+let
+	secrets = config.secrets.values;
+in {
 	imports = [ ./sddm.nix ./fprintd.nix ];
 	services = {
 		desktopManager.plasma6.enable = true; # Enable the KDE Plasma Desktop Environment.
@@ -38,7 +40,7 @@
 	users.users.dawn.extraGroups = [ "networkmanager" ];
 
 	fileSystems."/run/media/dawn/bellum" = let
-		ip = myLibs.impureSopsReading config.sops.secrets.ip.path;
+		ip = secrets.ip;
 		isIp = ip != "";
 		ssh = /home/dawn/.ssh/bellum;
 		isSsh = isIp && (myLibs.consoleWarn (builtins.pathExists ssh) "SSH credentials are missing");
