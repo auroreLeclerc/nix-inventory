@@ -63,6 +63,7 @@ in {
 		enable = true;
 		dates = "weekly";
 		flake = "github:auroreLeclerc/nix-inventory/";
+		flags = [ "--upgrade-all" "--impure" ];
 	};
 
 	# Enable CUPS to print documents.
