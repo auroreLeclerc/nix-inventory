@@ -1,4 +1,4 @@
-{ ... }: {
+{ lib, osConfig, ... }: {
 	imports = [ ./podman.home.nix ];
 	config = {
 		services.podman = {
@@ -13,7 +13,6 @@
 				scrutiny = {
 					image = "ghcr.io/analogj/scrutiny:master-omnibus	";
 					ports = [ "3002:8080" ];
-					addCapabilities = [ "SYS_RAWIO" ];
 					volumes = [
 						"/run/udev:/run/udev:ro"
 						"/home/dawn/tmp:/opt/scrutiny/config"
@@ -45,6 +44,9 @@
 				ollama = {
 					image = "docker.io/ollama/ollama:rocm";
 					ports = [ "11434:11434" ];
+					environment = lib.mkIf osConfig.networking.hostName == "exelo" {
+						HSA_OVERRIDE_GFX_VERSION = "11.0.2";
+					};
 					devices = [
 						"/dev/dri:/dev/dri"
 						"/dev/kfd:/dev/kfd"

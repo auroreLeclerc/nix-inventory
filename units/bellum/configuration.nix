@@ -25,10 +25,10 @@
 			enable = true;
 			allowedUDPPorts = [ 51820 ];
 		};
-		nat = {
-			enable = true;
-			externalInterface = "enp10s0";
-		};
+		# nat = {
+		# 	enable = true;
+		# 	externalInterface = "enp10s0";
+		# };
 	};
 
 	services = {

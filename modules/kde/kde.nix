@@ -18,14 +18,20 @@
 	environment = {
 		systemPackages = (
 			with pkgs.kdePackages; [
-				plasma-welcome kcrash drkonqi kate koi yakuake wacomtablet plasma-disks /*plasma-vault*/ kcalc discover filelight
-				ghostwriter isoimagewriter k3b kcolorchooser kolourpaint kweather plasma-browser-integration akregator
-				kalarm kteatime kasts ktrip partitionmanager kontact korganizer ktimer arianna
+				plasma-welcome kcrash drkonqi kate koi yakuake wacomtablet plasma-disks kcalc discover filelight
+				ghostwriter isoimagewriter kcolorchooser kolourpaint kweather plasma-browser-integration
+				kteatime partitionmanager korganizer ktimer arianna
+				/* kalarm akregator k3b kasts ktrip kontact */
 			]
 			) ++ (
-			with pkgs; [ nil bash-language-server strawberry papirus-icon-theme gnome-firmware vlc wireguard-tools poppler-utils ]
+			with pkgs; [
+				nil bash-language-server strawberry papirus-icon-theme gnome-firmware vlc wireguard-tools poppler-utils
+				mission-center
+			]
 		);
-		plasma6.excludePackages = with pkgs.kdePackages; [ elisa oxygen kmahjongg kmines kpat ksudoku ktorrent ];
+		plasma6.excludePackages = with pkgs.kdePackages; [
+			elisa oxygen kmahjongg kmines kpat ksudoku ktorrent kwalletmanager plasma-systemmonitor
+		];
 	};
 	programs.kdeconnect.enable = true;
 

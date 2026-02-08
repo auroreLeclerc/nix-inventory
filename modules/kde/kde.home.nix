@@ -17,9 +17,21 @@
 				profiles.Custom.colorScheme =  "Sweet";
 				defaultProfile = "Custom";
 			};
-			plasma = {
+			plasma = let 
+				darkWallpaper = builtins.fetchurl {
+					url = "https://xenia-images.efi.pages.gay/neotheta2.png";
+					sha256 = "sha256-GxGAo7uh717fy1aQREmMfZfuSdN1R0VflM7R3E4azU0=";
+				};
+				lightWallpaper = builtins.fetchurl {
+					url = "https://xenia-images.efi.pages.gay/flyinghyena1.jpeg";
+					sha256 = "sha256-Fe9bpTAYy8h26HG4WDOMwSl5oS56kHve5QXCrrhtlbU=";
+				};
+			in {
 				enable = true;
+				# overrideConfig = true;
 				workspace = {
+					wallpaper = lightWallpaper;
+					wallpaperFillMode = "preserveAspectCrop";
 					iconTheme = "Papirus";
 					cursor = {
 						theme = "catppuccin-mocha-mauve-cursors";
@@ -149,6 +161,7 @@
 											label = "VRAM";
 										}
 									];
+									textOnlySensors = [ "gpu/all/temperature" ];
 								};
 							} {
 								systemMonitor = {
@@ -162,11 +175,14 @@
 										}) (builtins.length colors.CPU)
 									;
 									totalSensors = [ "cpu/all/usage" ];
+									textOnlySensors = [ "cpu/all/maximumTemperature" ];
 								};
 							} {
 								systemMonitor = {
 									displayStyle = "org.kde.ksysguard.horizontalbars";
-									sensors = assert builtins.isList colors.RAM; [
+									sensors =
+										assert builtins.isList colors.RAM;
+									[
 										{
 											name = "memory/physical/used";
 											color = builtins.elemAt colors.RAM 0;
@@ -182,7 +198,10 @@
 								systemMonitor = {
 									title = "I/O";
 									displayStyle = "org.kde.ksysguard.linechart";
-									sensors = assert builtins.isList colors.NETWORK; assert builtins.isList colors.STORAGE;[
+									sensors =
+										assert builtins.isList colors.NETWORK;
+										assert builtins.isList colors.STORAGE;
+									[
 										{
 											name = "disk/all/read";
 											color = builtins.elemAt colors.STORAGE 0;
@@ -234,6 +253,7 @@
 						powerProfile = "performance";
 						powerButtonAction = "showLogoutScreen";
 						whenLaptopLidClosed = "lockScreen";
+						whenSleepingEnter = "standby";
 					};
 					battery = {
 						autoSuspend = {
@@ -245,8 +265,9 @@
 							idleTimeoutWhenLocked = 60;
 						};
 						powerProfile = "balanced";
-						powerButtonAction = "sleep";
+						powerButtonAction = "showLogoutScreen";
 						whenLaptopLidClosed = "sleep";
+						whenSleepingEnter = "standbyThenHibernate";
 					};
 					lowBattery = {
 						autoSuspend = {
@@ -259,8 +280,9 @@
 						};
 						displayBrightness = 50;
 						powerProfile = "powerSaving";
-						powerButtonAction = "sleep";
+						powerButtonAction = "showLogoutScreen";
 						whenLaptopLidClosed = "sleep";
+						whenSleepingEnter = "hybridSleep";
 					};
 				};
 				input.keyboard.numlockOnStartup = "on";
@@ -304,14 +326,8 @@
 						};
 						Wallpaper =  {
 							enabled = true;
-							dark = builtins.fetchurl {
-								url = "https://xenia-images.efi.pages.gay/neotheta2.png";
-								sha256 = "sha256-GxGAo7uh717fy1aQREmMfZfuSdN1R0VflM7R3E4azU0=";
-							};
-							light =  builtins.fetchurl {
-								url = "https://xenia-images.efi.pages.gay/flyinghyena1.jpeg";
-								sha256 = "sha256-Fe9bpTAYy8h26HG4WDOMwSl5oS56kHve5QXCrrhtlbU=";
-							};
+							dark = darkWallpaper;
+							light = lightWallpaper;
 						};
 					};
 					kteatimerc = {
@@ -338,6 +354,11 @@
 						};
 						"Event/popup" = {
 							Action = "Popup";
+						};
+					};
+					plasmanotifyrc = {
+						DoNotDisturb = {
+							WhenFullscreen = false;
 						};
 					};
 				};
