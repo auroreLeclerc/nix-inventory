@@ -1,11 +1,11 @@
-{ lib, ... } : let
+{ lib, nixos-infra, ... } : let
 	const = import ./const.nix;
 in {
 	inherit const;
 	impureSopsReading = (location:
 		assert builtins.isString location;
 		if lib.inPureEvalMode then
-			builtins.trace "💁🏻‍♀️ No impure flag, can't eval secrets." ""
+			builtins.abort "🙅🏻‍♀️ Impure reading in pure eval mode won't work."
 		else if ! builtins.pathExists const.AGE_KEY_FILE then
 			builtins.trace "💁🏻‍♀️ No sops age keys found, can't eval secrets." ""
 		else if ! builtins.pathExists location then
@@ -16,10 +16,7 @@ in {
 	checkSupportedVersion = (version:
 		assert builtins.isString version;
 		let
-			infra = import (builtins.fetchurl { # FIXME: how to update the SRI sha256 each 6months
-				url = "https://raw.githubusercontent.com/NixOS/infra/refs/heads/main/channels.nix";
-				sha256 = "144rk6bgax7885p6f3qcd9ca4cyrp1bq72y4700znk88s9wkvl1y";
-			});
+			infra = import "${nixos-infra}/channels.nix";
 		in {
 			"rolling" = builtins.trace "💁🏻‍♀️ You sure about that ?" true;
 			"stable" = true;

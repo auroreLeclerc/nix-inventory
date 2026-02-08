@@ -33,10 +33,10 @@ in {
 					} // lscr;
 					volumes = [ "/run/media/dawn/cubus/wireguard/:/config" ];
 					ports = [ "51820:51820/udp" ];
-					# extraPodmanArgs = [
-					# 	"--sysctl net.ipv4.conf.all.src_valid_mark=1"
-					# 	"--sysctl net.ipv4.ip_forward=1"
-					# ];
+					extraPodmanArgs = [
+						"--sysctl net.ipv4.conf.all.src_valid_mark=1"
+						"--sysctl net.ipv4.ip_forward=1"
+					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};

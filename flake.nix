@@ -20,11 +20,18 @@
 			url = "github:nix-community/nix-index-database";
     	inputs.nixpkgs.follows = "nixpkgs";
 		};
+		nixos-infra = {
+			url = "github:NixOS/infra";
+			flake = false;
+		};
 	};
 	outputs = { self, nixpkgs, home-manager, catppuccin, ... } @ inputs:
 	let
 		pkgs = nixpkgs.legacyPackages.x86_64-linux;
-		myLibs = import ./lib/default.nix { lib = nixpkgs.lib; };
+		myLibs = import ./lib/default.nix {
+			lib = nixpkgs.lib;
+			nixos-infra = inputs.nixos-infra;
+		};
 		check = myLibs.checkSupportedVersion nixpkgs.lib.trivial.release;
 		unstablePkgs = import inputs.unstableNixpkgs {
 			system = "x86_64-linux";
