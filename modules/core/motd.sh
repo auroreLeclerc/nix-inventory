@@ -24,37 +24,28 @@ else
 		containers=$(($(echo "$containers_list" | wc -l) - 1))
 		healthy=$(echo "$containers_list" | grep -c '(healthy)')
 		unhealthy=$(echo "$containers_list" | grep -c '(unhealthy)')
-		echo "Containers  Running : $containers ($healthy 󱐮 and $unhealthy 󱐯)"
+		declared=$(cat "$HOME/.config/podman/nix-declared-containers")
+		echo "Containers  Running : $containers/$declared ($healthy 󱐮 and $unhealthy 󱐯)"
 	fi
 	if [ -f /etc/systemd/system/zfs-mount.service ]; then
 		result=''
 		for pool in $(zpool list -H -o name); do
-			health=$(zpool list -H -o health "$pool")
+			health=$(zpool list -H -o health "e$pool")
 			result+="$pool "
 			case $health in
-				ONLINE)
-					result+='󱘩'
-				;;
-				DEGRADED)
-					result+='󱤢'
-				;;
-				FAULTED)
-					result+='󱘵'
-				;;
-				OFFLINE)
-					result+='󱘱'
-				;;
-				UNAVAIL|SUSPENDED)
-					result+='󱤡'
-				;;
-				REMOVED)
-					result+='󱘰'
-				;;
+				ONLINE)							result+='󱘩';;
+				DEGRADED)						result+='󱤢';;
+				FAULTED)						result+='󱘵';;
+				OFFLINE)						result+='󱘱';;
+				UNAVAIL|SUSPENDED)	result+='󱤡';;
+				REMOVED)						result+='󱘰';;
 			esac
 			result+=' ; '
 		done
 		if [ -n "$result" ]; then
 			echo "ZFS : ${result::-2}"
+		else 
+			echo 'ZFS : ∅' 
 		fi
 	fi
 	current_kernel=$(readlink /run/booted-system/kernel | grep -Eo 'linux-[[:digit:]]+\.[[:digit:]]+\.[[:digit:]]+')

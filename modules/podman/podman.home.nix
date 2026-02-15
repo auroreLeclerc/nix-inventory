@@ -1,6 +1,8 @@
-{ pkgs, osConfig, lib, ... }: {
+{ pkgs, osConfig, lib, config, ... }: {
 	config = {
 		home.packages = lib.mkIf osConfig.services.desktopManager.plasma6.enable (with pkgs; [ podman-desktop podman-compose ]);
+		home.file.".config/podman/nix-declared-containers".text =
+			builtins.toString (builtins.length (builtins.attrNames config.services.podman.containers));
 		services.podman = {
 			enable = true;
 			autoUpdate = {
