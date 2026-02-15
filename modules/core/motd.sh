@@ -30,7 +30,7 @@ else
 	if [ -f /etc/systemd/system/zfs-mount.service ]; then
 		result=''
 		for pool in $(zpool list -H -o name); do
-			health=$(zpool list -H -o health "e$pool")
+			health=$(zpool list -H -o health "$pool")
 			result+="$pool "
 			case $health in
 				ONLINE)							result+='󱘩';;
