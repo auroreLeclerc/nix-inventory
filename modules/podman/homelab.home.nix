@@ -1,4 +1,4 @@
-{ osConfig, config, ... }:
+{ osConfig, config, lib, ... }:
 let
 	secrets = osConfig.secrets.values;
 in {
@@ -134,13 +134,25 @@ in {
 					autoUpdate = "registry";
 				};
 				lidarr = {
-					image = "docker.io/youegraillot/lidarr-on-steroids";
+					image = "lscr.io/linuxserver/lidarr:latest";
 					environment = {
 						PORT = 8686;
 					} // lscr;
 					volumes = [
 						"/run/media/dawn/cubus/lidarr:/config"
 						"/run/media/dawn/bellum/new_Deezer:/music"
+						"/run/media/dawn/eox/downloads:/downloads"
+					];
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
+				deemix = {
+					image = "ghcr.io/bambanah/deemix:latest";
+					environment = {
+						PORT = 6595;
+					} // lscr;
+					volumes = [
+						"/run/media/dawn/cubus/deemix:/config"
 						"/run/media/dawn/bellum/new_Deezer:/downloads"
 					];
 					network = [ "docker-like" ];
@@ -349,6 +361,16 @@ in {
 						"/run/media/dawn/bellum/Multimédia/:/media"
 					];
 					devices = [ "/dev/dri:/dev/dri" ];
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
+				};
+				scrutiny = {
+					image = "ghcr.io/analogj/scrutiny:master-omnibus";
+					addCapabilities = [ "SYS_RAWIO" ];
+					extraPodmanArgs = [ "--group-add=keep-groups" ];
+					environment.PORT = 8080;
+					volumes = [ "/run/udev:/run/udev:ro" ];
+					devices = builtins.map (letter: "/dev/sd${letter}") (lib.stringToCharacters "abcdefghijklmn");
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};

@@ -10,23 +10,6 @@
 				influxdb2_data = {};
 			};
 			containers = {
-				scrutiny = {
-					image = "ghcr.io/analogj/scrutiny:master-omnibus	";
-					ports = [ "3002:8080" ];
-					volumes = [
-						"/run/udev:/run/udev:ro"
-						"/home/dawn/tmp:/opt/scrutiny/config"
-						"influxdb2_data:/opt/scrutiny/influxdb"
-					];
-					devices = [
-						"/dev/sda"
-						"/dev/sdb"
-						"/dev/sdc"
-						"/dev/sdd"
-					];
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
-				};
 				deemix = {
 					image = "ghcr.io/bambanah/deemix:latest";
 					ports = [ "6595:6595" ];

@@ -47,6 +47,11 @@ in {
 							logo = "assets/traefik.svg";
 							type = "Traefik";
 							url = "https://traefik.${secrets.dns}";
+						} {
+							name = "Scrutiny";
+							logo = "assets/scrutiny.svg";
+							type = "Scrutiny";
+							url = "https://scrutiny.${secrets.dns}";
 						}	{
 							name = "Pi-hole";
 							logo = "assets/pi.svg";
@@ -97,7 +102,7 @@ in {
 						}	{
 							name = "Deemix";
 							logo = "assets/deemix.svg";
-							url = "http://localhost:6595/";
+							url = "https://deemix.${secrets.dns}";
 						} {
 							name = "Bazarr";
 							logo = "assets/bazarr.svg";
@@ -226,6 +231,10 @@ in {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/fileflows.svg";
 					sha256 = "sha256-G6O5PLpMRwVS5GSOs0EBAFqI0jBdzTbszQVnhL7xVh4=";
 				}}:/www/assets/fileflows.svg"
+				"${builtins.fetchurl {
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/scrutiny.svg";
+					sha256 = "1ly8d0rzjgmii336lxc1b65vl54043a4mkka0pnzp69m7dih0fcf";
+				}}:/www/assets/scrutiny.svg"
 			];
 			environment = {
 				PORT = 8080;
