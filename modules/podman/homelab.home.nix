@@ -134,7 +134,7 @@ in {
 					autoUpdate = "registry";
 				};
 				lidarr = {
-					image = "lscr.io/linuxserver/lidarr:latest";
+					image = "lscr.io/linuxserver/lidarr:nightly";
 					environment = {
 						PORT = 8686;
 					} // lscr;
