@@ -153,9 +153,8 @@ in {
 						YUBAL_SCHEDULER_CRON = "@weekly";
 						YUBAL_DOWNLOAD_UGC = false;
 						YUBAL_TZ = lscr.TZ;
-						YUBAL_PUID = lscr.PUID;
-						YUBAL_PGID = lscr.PGID;
 					};
+					extraPodmanArgs = [ "--user 0:0" ];
 					volumes = [
 						"/run/media/dawn/bellum/new_Music:/app/data"
 						"/run/media/dawn/cubus/yubal:/app/config"
