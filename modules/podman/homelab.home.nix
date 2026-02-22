@@ -140,23 +140,26 @@ in {
 					} // lscr;
 					volumes = [
 						"/run/media/dawn/cubus/lidarr:/config"
-						"/run/media/dawn/bellum/new_Deezer:/music"
+						"/run/media/dawn/bellum/new_Music:/music"
 						"/run/media/dawn/eox/downloads:/downloads"
 					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
-				deemix = {
-					image = "ghcr.io/bambanah/deemix:latest";
+				yubal = {
+					image = "ghcr.io/guillevc/yubal:latest";
 					environment = {
-						PORT = 6595;
-					} // lscr;
+						PORT = 8000;
+						YUBAL_SCHEDULER_CRON = "@weekly";
+						YUBAL_DOWNLOAD_UGC = false;
+						YUBAL_TZ = lscr.TZ;
+						YUBAL_PUID = lscr.PUID;
+						YUBAL_PGID = lscr.PGID;
+					};
 					volumes = [
-						"/run/media/dawn/cubus/deemix:/config"
-						"/run/media/dawn/bellum/new_Deezer:/downloads"
+						"/run/media/dawn/bellum/new_Music:/app/data"
+						"/run/media/dawn/cubus/yubal:/app/config"
 					];
-					network = [ "docker-like" ];
-					autoUpdate = "registry";
 				};
 				vaultwarden = {
 					image = "docker.io/vaultwarden/server:latest";

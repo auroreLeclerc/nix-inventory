@@ -14,9 +14,6 @@
 				"zswap.shrinker_enabled=1"
   		];
 		};
-		services.udev.extraRules = ''
-			SUBSYSTEM=="block", KERNEL=="sd[a-z]", GROUP="smart", MODE="0660"
-		'';
 		users = {
 			users.dawn = {
 				description = "Aurore";
