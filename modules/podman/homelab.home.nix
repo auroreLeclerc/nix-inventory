@@ -150,7 +150,6 @@ in {
 					image = "ghcr.io/guillevc/yubal:latest";
 					environment = {
 						PORT = 8000;
-						YUBAL_HOST = "127.0.0.1";
 						YUBAL_SCHEDULER_CRON = "@weekly";
 						YUBAL_DOWNLOAD_UGC = false;
 						YUBAL_TZ = lscr.TZ;
@@ -160,6 +159,8 @@ in {
 						"/run/media/dawn/bellum/new_Music:/app/data"
 						"/run/media/dawn/cubus/yubal:/app/config"
 					];
+					network = [ "docker-like" ];
+					autoUpdate = "registry";
 				};
 				vaultwarden = {
 					image = "docker.io/vaultwarden/server:latest";
