@@ -150,6 +150,7 @@ in {
 					image = "ghcr.io/guillevc/yubal:latest";
 					environment = {
 						PORT = 8000;
+						YUBAL_HOST = "127.0.0.1";
 						YUBAL_SCHEDULER_CRON = "@weekly";
 						YUBAL_DOWNLOAD_UGC = false;
 						YUBAL_TZ = lscr.TZ;
