@@ -1,4 +1,4 @@
-{ osConfig, config, lib, ... }:
+{ osConfig, config, ... }:
 let
 	secrets = osConfig.secrets.values;
 in {
@@ -57,6 +57,8 @@ in {
 					image = "lscr.io/linuxserver/sonarr:latest";
 					environment = {
 						PORT = 8989;
+						SONARR__AUTH__METHOD = "External";
+						SONARR__AUTH__APIKEY = osConfig.secrets.values.sonarr;
 					} // lscr;
 					volumes = [
 						"/run/media/dawn/cubus/sonarr:/config"
@@ -70,6 +72,8 @@ in {
 					image = "lscr.io/linuxserver/radarr:latest";
 					environment = {
 						PORT = 7878;
+						RADARR__AUTH__METHOD = "External";
+						RADARR__AUTH__APIKEY = osConfig.secrets.values.radarr;
 					} // lscr;
 					volumes = [
 						"/run/media/dawn/cubus/radarr:/config"
@@ -93,6 +97,8 @@ in {
 					image = "lscr.io/linuxserver/prowlarr:latest";
 					environment = {
 						PORT = 9696;
+						PROWLARR__AUTH__METHOD = "External";
+						PROWLARR__AUTH__APIKEY = osConfig.secrets.values.prowlarr;
 					} // lscr;
 					volumes = [ "/run/media/dawn/cubus/prowlarr:/config" ];
 					network = [ "docker-like" ];
@@ -137,6 +143,8 @@ in {
 					image = "lscr.io/linuxserver/lidarr:nightly";
 					environment = {
 						PORT = 8686;
+						LIDARR__AUTH__METHOD = "External";
+						LIDARR__AUTH__APIKEY = osConfig.secrets.values.lidarr;
 					} // lscr;
 					volumes = [
 						"/run/media/dawn/cubus/lidarr:/config"
@@ -152,6 +160,7 @@ in {
 						PORT = 8000;
 						YUBAL_SCHEDULER_CRON = "@weekly";
 						YUBAL_DOWNLOAD_UGC = false;
+						YUBAL_LOG_LEVEL = "WARNING";
 						YUBAL_TZ = lscr.TZ;
 					};
 					extraPodmanArgs = [ "--user 0:0" ];
@@ -368,13 +377,15 @@ in {
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};
-				scrutiny = {
-					image = "ghcr.io/analogj/scrutiny:master-omnibus";
-					addCapabilities = [ "SYS_RAWIO" ];
-					extraPodmanArgs = [ "--group-add=keep-groups" ];
-					environment.PORT = 8080;
-					volumes = [ "/run/udev:/run/udev:ro" ];
-					devices = builtins.map (letter: "/dev/sd${letter}") (lib.stringToCharacters "abcdefghijklmn");
+				nextcloud = {
+					image = "lscr.io/linuxserver/nextcloud:latest";
+					environment = {
+						PORT = 443;
+					} // lscr;
+					volumes = [
+						"/run/media/dawn/cubus/nextcloud/:/config"
+						"/run/media/dawn/bellum/new_Music/:/data"
+					];
 					network = [ "docker-like" ];
 					autoUpdate = "registry";
 				};

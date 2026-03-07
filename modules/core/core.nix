@@ -1,6 +1,11 @@
-{ pkgs, inputs, lib, ... }:
+{ pkgs, inputs, lib, config, ... }:
 let
 	motd = pkgs.writeShellScriptBin "motd" (builtins.readFile ./motd.sh);
+	bellum-sync = pkgs.writeShellScriptBin "bellum-sync" ''
+		set -euo pipefail
+		BELLUM="${config.secrets.values.ip}"
+		${builtins.readFile ./rsync.sh}
+	'';
 in
 {
 	imports = [ ./user.nix ./sops.nix ];
@@ -32,7 +37,7 @@ in
 		environment.systemPackages = (with pkgs; [
 			nano nanorc wget openssl curl age htop parted jq fastfetch cowsay lolcat p7zip
 			unzip unrar file ffmpeg pciutils openseachest sg3_utils
-		]) ++ [ motd ];
+		]) ++ [ motd ]++ lib.optionals (!builtins.elem config.networking.hostName [ "bellum" "nixos" ]) [ bellum-sync ];
 		programs.zsh.enable = true;
 	};
 }

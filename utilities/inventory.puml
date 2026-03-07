@@ -25,6 +25,7 @@ folder "modules" {
    component "vscode.home.nix" as 26e1d38b688c4a1832d0935e5d29e980
    folder "core" {
       component "user.nix" as e48a789aa9c3b1358cf051feee2e878a
+      artifact "rsync.sh" as f1915d7cb258223e3cd4fe7b5279354e
       component "core.home.nix" as d418baa43b11df0205fd0d8001cf7901
       artifact "zshrc.sh" as 7eb8b1eccd344747a8b685427d1c8d47
       artifact "motd.sh" as c82c7c2583c0b9ccbee6e5f55451c0f6
@@ -105,6 +106,7 @@ c02ddfafd82173da6d07e50463b65eac --> 388345b0335603b7af9674ffccc65ed6
 cc648f4643baab83856cbb1aee4c03ef --> 07bb30b5069aacb10b5677e227bfbeb4
 d418baa43b11df0205fd0d8001cf7901 --> 7eb8b1eccd344747a8b685427d1c8d47
 6aafb3be03e9429fda102521e26edd7b --> c82c7c2583c0b9ccbee6e5f55451c0f6
+6aafb3be03e9429fda102521e26edd7b --> f1915d7cb258223e3cd4fe7b5279354e
 6aafb3be03e9429fda102521e26edd7b --> e48a789aa9c3b1358cf051feee2e878a
 6aafb3be03e9429fda102521e26edd7b --> 20147c29130fca277ea17de5d4ba1678
 20147c29130fca277ea17de5d4ba1678 --> fedff914d02561f998eabdacb5cefebd
