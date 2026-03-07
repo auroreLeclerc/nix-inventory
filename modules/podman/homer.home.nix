@@ -132,6 +132,11 @@ in {
 							name = "IT-Tools";
 							logo = "assets/it-tools.svg";
 							url = "https://it-tools.${secrets.dns}/";
+						} {
+							name = "Nextcloud";
+							type = "Nextcloud";
+							logo = "assets/nextcloud.svg";
+							url = "https://nextcloud.${secrets.dns}/";
 						}
 					];
 				}
@@ -207,10 +212,6 @@ in {
 					sha256 = "sha256-EuhtOleP7Pim3OFP0ymqkbyDZAVXVUHcqFi31gTVZLI=";
 				}}:/www/assets/resume.svg"
 				"${builtins.fetchurl {
-					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/deezer.svg";
-					sha256 = "sha256-0End70IeMHnSXZ4sPjowZAAAgvj1QnKtrY5VD0Gk5cE=";
-				}}:/www/assets/deemix.svg"
-				"${builtins.fetchurl {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/photoprism.svg";
 					sha256 = "sha256-caAQMpjc7zzoyifC0zdb2AgE95Yu/nSEggWUS9zF8AE=";
 				}}:/www/assets/photoprism.svg"
@@ -230,6 +231,10 @@ in {
 					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/youtube-music.svg";
 					sha256 = "1r4m7p9p5jzaa05xbjbs17pxsbh745j0k5d93ipmcsx90s2vv4ix";
 				}}:/www/assets/yubal.svg"
+				"${builtins.fetchurl {
+					url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/nextcloud.svg";
+					sha256 = "1lz6ri26s64jxzgirns3sgvq1djwrxzrd3kjdhnv4k67qz008949";
+				}}:/www/assets/nextcloud.svg"
 			];
 			environment = {
 				PORT = 8080;
