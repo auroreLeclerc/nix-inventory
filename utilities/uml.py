@@ -83,7 +83,7 @@ class UML():
         modules: dict[Path, list[Path]] = {}
         with open(self.__DIR_PATH/".."/".gitignore", "r", encoding="utf-8") as gitignore:
             ignores = gitignore.read().split()
-            ignores.extend(["units", "utilities", ".puml", ".svg", ".md", "LICENSE", ".shellcheckrc", ".git"])
+            ignores.extend(["units", "utilities", ".puml", ".svg", ".md", "LICENSE", ".shellcheckrc", ".pre-commit-config.yaml", ".git"])
             for module in reading_dir.iterdir():
                 if not any(ignore in str(module.resolve()) for ignore in ignores):
                     if module.is_file():
@@ -121,7 +121,8 @@ class UML():
                     MaterialColors.GRAY.value[2],
                     MaterialColors.GREEN.value[2],
                     MaterialColors.PURPLE.value[2],
-                    MaterialColors.ORANGE.value[2]
+                    MaterialColors.ORANGE.value[2],
+                    MaterialColors.AMBER.value[2],
                 ]
                 assert len(colors) >= units_number, units_number
                 return colors

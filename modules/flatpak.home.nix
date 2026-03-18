@@ -1,10 +1,13 @@
 { pkgs, ... }:
 {
-	services.flatpak = {
-		enable = true;
-		update.auto.enable = true;
-		uninstallUnmanaged = true;
-		packages = [];
-	};
-	home.packages = with pkgs; [ flatpak appimage-run ];
+  services.flatpak = {
+    enable = true;
+    update.auto.enable = true;
+    uninstallUnmanaged = true;
+    packages = [ ];
+  };
+  home.packages = with pkgs; [
+    flatpak
+    appimage-run
+  ];
 }

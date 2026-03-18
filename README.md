@@ -10,6 +10,12 @@ Inventaire de mes configurations NixOS personnelles
 sudo nixos-rebuild switch --flake github:auroreLeclerc/nix-inventory/#exelo --upgrade-all --impure
 ```
 
+## Appliquer la configuration Darwin
+
+```bash
+darwin-rebuild switch --flake github:auroreLeclerc/nix-inventory/#work
+```
+
 ## Construire une image live-boot
 
 ```bash
@@ -26,3 +32,4 @@ nix build github:auroreLeclerc/nix-inventory/#nixosConfigurations.live-boot.conf
 | kimado | AMD Athlon 300U | Old Main |
 | midna | Intel Celeron N4020 | Multimédia |
 | live-boot | N/A | live-boot |
+| work | Apple Silicon | Work |
