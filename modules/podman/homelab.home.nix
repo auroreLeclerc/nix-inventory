@@ -409,8 +409,19 @@ in
               "/run/media/dawn/cubus/nextcloud/:/config"
               "/run/media/dawn/bellum/new_Music/:/data"
             ];
+            extraPodmanArgs = [
+              "--userns=keep-id:uid=33,gid=33" # https://github.com/eriksjolund/podman-detect-option
+            ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
+          };
+          changedetection = {
+            image = "lscr.io/linuxserver/changedetection.io:latest";
+            environment = {
+              PORT = 5000;
+              BASE_URL = "https://changedetection.${secrets.dns}";
+            };
+            volumes = [ "/run/media/dawn/cubus/changedetection:/config" ];
           };
         };
     };
