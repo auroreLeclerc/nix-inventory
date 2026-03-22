@@ -400,13 +400,14 @@ in
             autoUpdate = "registry";
           };
           nextcloud = {
-            image = "lscr.io/linuxserver/nextcloud:latest";
+            image = "docker.io/library/nextcloud:latest";
             environment = {
-              PORT = 443;
-            }
-            // lscr;
+              PORT = 80;
+              APACHE_DISABLE_REWRITE_IP = 1;
+              TRUSTED_PROXIES = "172.18.0.254";
+            };
             volumes = [
-              "/run/media/dawn/cubus/nextcloud/:/config"
+              "/run/media/dawn/cubus/nextcloud/:/var/www/html"
               "/run/media/dawn/bellum/new_Music/:/data"
             ];
             extraPodmanArgs = [
@@ -419,9 +420,12 @@ in
             image = "lscr.io/linuxserver/changedetection.io:latest";
             environment = {
               PORT = 5000;
+              LOGGER_LEVEL = "INFO";
               BASE_URL = "https://changedetection.${secrets.dns}";
             };
             volumes = [ "/run/media/dawn/cubus/changedetection:/config" ];
+            network = [ "docker-like" ];
+            autoUpdate = "registry";
           };
         };
     };

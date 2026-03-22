@@ -160,6 +160,11 @@ in
                 logo = "assets/nextcloud.svg";
                 url = "https://nextcloud.${secrets.dns}/";
               }
+              {
+                name = "Change Detection";
+                logo = "assets/changedetection.svg";
+                url = "https://changedetection.${secrets.dns}/";
+              }
             ];
           }
         ];
@@ -302,6 +307,12 @@ in
               sha256 = "1lz6ri26s64jxzgirns3sgvq1djwrxzrd3kjdhnv4k67qz008949";
             }
           }:/www/assets/nextcloud.svg"
+          "${
+            builtins.fetchurl {
+              url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/changedetection.svg";
+              sha256 = "0qbmyynl9hlgms2wqvhxfqmv5j3r2rwaamn2x07w01d52zzjdy6w";
+            }
+          }:/www/assets/changedetection.svg"
         ];
         environment = {
           PORT = 8080;

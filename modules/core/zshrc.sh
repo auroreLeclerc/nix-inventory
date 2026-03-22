@@ -10,12 +10,12 @@ else
 	# shellcheck disable=SC1090
 	source ~/.p10k.zsh
 	case "$HOST" in
-		bellum)       icon='󱉽' ;;
-		exelo)        icon='󰶓' ;;
-		fierce-deity) icon='󰸿' ;;
-		midna)        icon='󰧔' ;;
-		kimado)       icon='' ;;
-		work)         icon='󱖋' ;;
+		bellum)       icon='' ;;
+		exelo)        icon='' ;;
+		fierce-deity) icon='󰖺' ;;
+		midna)        icon='󰟴' ;;
+		kimado)       icon='󱍔' ;;
+		work)         icon='' ;;
 		*)            icon='󰜗' ;;
 	esac
 	# shellcheck disable=SC2034
