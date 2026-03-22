@@ -1,5 +1,5 @@
 # shellcheck shell=bash
-if [[ "$SSH_TTY" ]] || [[ -z "$DISPLAY" ]] || [[ "$TERM_PROGRAM" == 'vscode' ]] || ((! ${+functions[p10k]} )); then
+if [[ ( -z "$SSH_TTY" && -z "$DISPLAY" ) || "$TERM_PROGRAM" == 'vscode' ]] || ((! ${+functions[p10k]} )); then
 	(( ${+functions[powerlevel10k_plugin_unload]} )) && powerlevel10k_plugin_unload
 	autoload -Uz promptinit
 	promptinit
