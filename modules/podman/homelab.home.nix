@@ -408,7 +408,6 @@ in
             };
             volumes = [
               "/run/media/dawn/cubus/nextcloud/:/var/www/html"
-              "/run/media/dawn/bellum/new_Music/:/data"
             ];
             extraPodmanArgs = [
               "--userns=keep-id:uid=33,gid=33" # https://github.com/eriksjolund/podman-detect-option
