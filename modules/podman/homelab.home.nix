@@ -400,7 +400,7 @@ in
             autoUpdate = "registry";
           };
           nextcloud = {
-            image = "lscr.io/library/nextcloud:latest";
+            image = "lscr.io/linuxserver/nextcloud:latest";
             environment = {
               PORT = 80;
             }
