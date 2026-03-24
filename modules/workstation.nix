@@ -27,8 +27,7 @@
         wineWowPackages.stable
         winetricks
         calibre
-        unixODBC
-        sqlite
+        imagemagick
       ])
       ++ (with unstablePkgs; [
         sublime3

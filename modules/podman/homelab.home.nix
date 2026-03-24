@@ -21,7 +21,7 @@ in
       };
       containers =
         let
-          lscr = {
+          lsio = {
             PUID = 0;
             PGID = 0;
             TZ = "Europe/Paris";
@@ -38,7 +38,7 @@ in
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
             }
-            // lscr;
+            // lsio;
             volumes = [ "/run/media/dawn/cubus/wireguard/:/config" ];
             ports = [ "51820:51820/udp" ];
             extraPodmanArgs = [
@@ -53,7 +53,7 @@ in
             environment = {
               PORT = 9091;
             }
-            // lscr;
+            // lsio;
             volumes = [
               "/run/media/dawn/cubus/transmission:/config"
               "/run/media/dawn/eox/downloads:/downloads"
@@ -69,7 +69,7 @@ in
               SONARR__AUTH__METHOD = "External";
               SONARR__AUTH__APIKEY = osConfig.secrets.values.sonarr;
             }
-            // lscr;
+            // lsio;
             volumes = [
               "/run/media/dawn/cubus/sonarr:/config"
               "/run/media/dawn/eox/downloads:/downloads"
@@ -85,7 +85,7 @@ in
               RADARR__AUTH__METHOD = "External";
               RADARR__AUTH__APIKEY = osConfig.secrets.values.radarr;
             }
-            // lscr;
+            // lsio;
             volumes = [
               "/run/media/dawn/cubus/radarr:/config"
               "/run/media/dawn/eox/downloads:/downloads"
@@ -100,7 +100,7 @@ in
               PORT = 9117;
               AUTO_UPDATE = true;
             }
-            // lscr;
+            // lsio;
             volumes = [ "/run/media/dawn/cubus/jackett:/config" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
@@ -112,7 +112,7 @@ in
               PROWLARR__AUTH__METHOD = "External";
               PROWLARR__AUTH__APIKEY = osConfig.secrets.values.prowlarr;
             }
-            // lscr;
+            // lsio;
             volumes = [ "/run/media/dawn/cubus/prowlarr:/config" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
@@ -122,7 +122,7 @@ in
             environment = {
               PORT = 6767;
             }
-            // lscr;
+            // lsio;
             volumes = [
               "/run/media/dawn/cubus/bazarr:/config"
               "/run/media/dawn/bellum/Multimédia/Films:/movies"
@@ -141,7 +141,7 @@ in
                 "ghcr.io/intro-skipper/intro-skipper-docker-mod"
               ];
             }
-            // lscr;
+            // lsio;
             volumes = [
               "/run/media/dawn/bellum/Multimédia/Films:/data/movies:ro"
               "/run/media/dawn/bellum/Multimédia/Séries:/data/tvshows:ro"
@@ -161,7 +161,7 @@ in
               LIDARR__AUTH__METHOD = "External";
               LIDARR__AUTH__APIKEY = osConfig.secrets.values.lidarr;
             }
-            // lscr;
+            // lsio;
             volumes = [
               "/run/media/dawn/cubus/lidarr:/config"
               "/run/media/dawn/bellum/new_Music:/music"
@@ -177,7 +177,7 @@ in
               YUBAL_SCHEDULER_CRON = "@weekly";
               YUBAL_DOWNLOAD_UGC = false;
               YUBAL_LOG_LEVEL = "WARNING";
-              YUBAL_TZ = lscr.TZ;
+              YUBAL_TZ = lsio.TZ;
             };
             extraPodmanArgs = [ "--user 0:0" ];
             volumes = [
@@ -290,7 +290,7 @@ in
               ];
             environment = {
               PORT = 80;
-              inherit (lscr) TZ;
+              inherit (lsio) TZ;
               FTLCONF_webserver_api_password = "";
               FTLCONF_dns_listeningMode = "all";
               FTLCONF_dns_upstreams = "9.9.9.10;149.112.112.10;2620:fe::10;2620:fe::fe:10";
@@ -314,7 +314,7 @@ in
               PHOTOPRISM_SITE_DESCRIPTION = "UwU";
               PHOTOPRISM_SITE_AUTHOR = "Aurore";
               PHOTOPRISM_DEFAULT_LOCALE = "fr";
-              PHOTOPRISM_DEFAULT_TIMEZONE = lscr.TZ;
+              PHOTOPRISM_DEFAULT_TIMEZONE = lsio.TZ;
               PHOTOPRISM_FFMPEG_ENCODER = "vaapi";
             };
             devices = [
@@ -364,9 +364,9 @@ in
             ];
             environment = {
               PORT = 8000;
-              USERMAP_UID = lscr.PUID;
-              USERMAP_GID = lscr.PGID;
-              PAPERLESS_TIME_ZONE = lscr.TZ;
+              USERMAP_UID = lsio.PUID;
+              USERMAP_GID = lsio.PGID;
+              PAPERLESS_TIME_ZONE = lsio.TZ;
               PAPERLESS_OCR_LANGUAGE = "fra";
               PAPERLESS_APP_TITLE = "Sans-papier";
               PAPERLESS_URL = "https://paperless.${secrets.dns}";
@@ -389,7 +389,7 @@ in
             environment = {
               PORT = 5000;
             }
-            // lscr;
+            // lsio;
             volumes = [
               "/run/media/dawn/cubus/fileflows/:/app/Data"
               "/run/media/dawn/slowcache/:/temp"
@@ -400,17 +400,14 @@ in
             autoUpdate = "registry";
           };
           nextcloud = {
-            image = "docker.io/library/nextcloud:latest";
+            image = "lscr.io/library/nextcloud:latest";
             environment = {
               PORT = 80;
-              APACHE_DISABLE_REWRITE_IP = 1;
-              TRUSTED_PROXIES = "172.18.0.254";
-            };
+            }
+            // lsio;
             volumes = [
-              "/run/media/dawn/cubus/nextcloud/:/var/www/html"
-            ];
-            extraPodmanArgs = [
-              "--userns=keep-id:uid=33,gid=33" # https://github.com/eriksjolund/podman-detect-option
+              "/run/media/dawn/cubus/nextcloud/:/config"
+              "/run/media/dawn/bellum/new_Music/:/data"
             ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
