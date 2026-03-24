@@ -402,9 +402,14 @@ in
           nextcloud = {
             image = "lscr.io/linuxserver/nextcloud:latest";
             environment = {
+              PUID = 1000;
+              PGID = 1000;
+              inherit (lsio) TZ;
               PORT = 80;
-            }
-            // lsio;
+            };
+            extraPodmanArgs = [
+              "--userns keep-id:uid=1000,gid=1000" # https://github.com/eriksjolund/podman-detect-option
+            ];
             volumes = [
               "/run/media/dawn/cubus/nextcloud/:/config"
               "/run/media/dawn/bellum/new_Music/:/data"
