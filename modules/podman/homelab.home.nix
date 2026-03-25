@@ -293,7 +293,7 @@ in
               inherit (lsio) TZ;
               FTLCONF_webserver_api_password = "";
               FTLCONF_dns_listeningMode = "all";
-              FTLCONF_dns_upstreams = "9.9.9.10;149.112.112.10;2620:fe::10;2620:fe::fe:10";
+              FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11";
             };
             ip4 = "172.18.0.253";
             network = [ "docker-like" ];
