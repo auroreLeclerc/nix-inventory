@@ -78,6 +78,7 @@ in
     ];
   };
   programs.kdeconnect.enable = true;
+  programs.fuse.userAllowOther = true;
 
   users.users.dawn.extraGroups = [ "networkmanager" ];
 
@@ -96,6 +97,9 @@ in
         "x-systemd.mount-timeout=10"
         "_netdev"
         "IdentityFile=${ssh}"
+        "uid=1000"
+        "gid=100"
+        "allow_other"
       ];
     };
 }

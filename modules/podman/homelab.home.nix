@@ -407,9 +407,9 @@ in
               inherit (lsio) TZ;
               PORT = 80;
             };
-            extraPodmanArgs = [
-              "--userns keep-id:uid=1000,gid=1000" # https://github.com/eriksjolund/podman-detect-option
-            ];
+            # extraPodmanArgs = [
+            #   "--userns keep-id:uid=1000,gid=1000" # https://github.com/eriksjolund/podman-detect-option
+            # ];
             volumes = [
               "/run/media/dawn/cubus/nextcloud/:/config"
               "/run/media/dawn/bellum/new_Music/:/data"
