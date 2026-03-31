@@ -13,7 +13,7 @@
     {
       home-manager.users.dawn = {
         imports = [
-          ../../modules/kde/kde.home.nix
+          ../../modules/kde/kde-desktop.home.nix
           ../../modules/vscode.home.nix
           ../../modules/flatpak.home.nix
           ../../modules/podman/workbench.home.nix

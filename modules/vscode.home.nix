@@ -77,5 +77,6 @@
     gcc
     gopls
     delve
+    pre-commit
   ];
 }

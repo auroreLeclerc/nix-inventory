@@ -13,7 +13,7 @@
       home-manager.users.dawn = {
         imports = [
           ../../modules/firefox.home.nix
-          ../../modules/kde/kde.home.nix
+          ../../modules/kde/kde-desktop.home.nix
         ];
       };
     }

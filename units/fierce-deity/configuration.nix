@@ -17,7 +17,7 @@
         imports = [
           ../../modules/podman/workbench.home.nix
           ../../modules/firefox.home.nix
-          ../../modules/kde/kde.home.nix
+          ../../modules/kde/kde-desktop.home.nix
           ../../modules/flatpak.home.nix
         ];
       };

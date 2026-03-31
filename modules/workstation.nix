@@ -24,20 +24,16 @@
         signal-desktop
         tor-browser
         sirikali
-        wineWowPackages.stable
-        winetricks
+        wineWow64Packages.waylandFull
         calibre
         imagemagick
       ])
       ++ (with unstablePkgs; [
+        winetricks
         sublime3
         google-chrome
       ])
     # ventoy-full-qt https://github.com/ventoy/Ventoy/issues/3224
     ;
-    environment.unixODBCDrivers = with pkgs.unixODBCDrivers; [
-      sqlite
-      psql
-    ];
   };
 }
