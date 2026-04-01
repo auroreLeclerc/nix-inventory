@@ -56,7 +56,7 @@ class UML():
     def __get_modules(self, component_path: Path):
         modules: list[Path] = []
         with open(component_path, "r", encoding="utf-8") as file:
-            for module in re.findall(r"\.{1,2}\/\S*\.\w*", file.read()):
+            for module in re.findall(r"\.{1,2}/[^\s()]+\.(?:nix|json|yaml|yml|toml|lock|sh|sql)", file.read()):
                 module_path = Path(component_path.parent/module)
                 if module_path.exists():
                     modules.append(module_path)
@@ -64,7 +64,7 @@ class UML():
                     if "./units/${unit}/configuration.nix" in str(module_path):
                         for unit in Path(component_path.parent/"units").iterdir():
                             modules.append(unit/"configuration.nix")
-                    elif "./units/${unit}/hardware-configuration.nix" in str(module_path):
+                    elif "${unit}" in str(module_path) or "${name}" in str(module_path):
                         self.__logger.info(module_path)
                     else:
                         self.__logger.error(module_path)

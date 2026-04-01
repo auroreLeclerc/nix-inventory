@@ -33,7 +33,7 @@
         in
         {
           enable = true;
-          overrideConfig = true;
+          # overrideConfig = true;
           workspace = {
             wallpaper = lightWallpaper;
             wallpaperFillMode = "preserveAspectCrop";

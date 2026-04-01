@@ -5,6 +5,7 @@
 {
   imports = [
     ../../modules/kde/mobile.nix
+    ../../modules/mrchromebox.nix
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     {
       home-manager.users.dawn = {
