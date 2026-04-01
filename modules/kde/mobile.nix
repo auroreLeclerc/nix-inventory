@@ -10,28 +10,19 @@
     defaultSession = lib.mkForce "plasma-mobile";
   };
   environment = {
-    systemPackages = lib.mkForce (
+    systemPackages =
       (with pkgs.kdePackages; [
         plasma-mobile
-        plasma-nano
+        # plasma-nano
         keysmith
         koko
         spacebar
         calindori
-        yakuake
-        kcalc
-        filelight
-        plasma-browser-integration
-        koi
       ])
       ++ (with pkgs; [
         maliit-framework
         maliit-keyboard
-        vlc
-        strawberry
-        papirus-icon-theme
-      ])
-    );
+      ]);
     plasma6.excludePackages = with pkgs.kdePackages; [
       spacebar
       calindori
