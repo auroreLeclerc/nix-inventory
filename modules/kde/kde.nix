@@ -62,13 +62,9 @@ in
   };
   programs.kdeconnect.enable = true;
 
-  systemd.tmpfiles.rules = [
-    "d /run/media/dawn/bellum 0755 dawn users -"
-  ];
-
   users.users.dawn.extraGroups = [ "networkmanager" ];
 
-  fileSystems."/run/media/dawn/bellum" =
+  fileSystems."/home/dawn/bellum" =
     let
       inherit (secrets) ip;
       isIp = ip != "";

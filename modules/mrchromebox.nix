@@ -4,6 +4,12 @@ let
     name = "mrchromebox-firmware-util";
     unshareUser = false;
     unsharePid = false;
+    unshareIpc = false;
+    unshareNet = false;
+    unshareUts = false;
+    unshareCgroup = false;
+    dieWithParent = false;
+    privateTmp = false;
     targetPkgs =
       pkgs: with pkgs; [
         curl
