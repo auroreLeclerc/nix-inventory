@@ -36,34 +36,17 @@ in
         kate
         koi
         yakuake
-        wacomtablet
         plasma-disks
         kcalc
-        discover
         filelight
-        ghostwriter
-        isoimagewriter
-        kcolorchooser
-        kolourpaint
-        kweather
         plasma-browser-integration
-        kteatime
         partitionmanager
-        korganizer
-        ktimer
-        arianna
-        # kalarm akregator k3b kasts ktrip kontact
       ])
       ++ (with pkgs; [
         nil
         bash-language-server
-        strawberry
         papirus-icon-theme
-        gnome-firmware
-        vlc
         wireguard-tools
-        poppler-utils
-        mission-center
       ]);
     plasma6.excludePackages = with pkgs.kdePackages; [
       elisa
@@ -78,7 +61,10 @@ in
     ];
   };
   programs.kdeconnect.enable = true;
-  programs.fuse.userAllowOther = true;
+
+  systemd.tmpfiles.rules = [
+    "d /run/media/dawn/bellum 0755 dawn users -"
+  ];
 
   users.users.dawn.extraGroups = [ "networkmanager" ];
 
@@ -97,9 +83,6 @@ in
         "x-systemd.mount-timeout=10"
         "_netdev"
         "IdentityFile=${ssh}"
-        "uid=1000"
-        "gid=100"
-        "allow_other"
       ];
     };
 }

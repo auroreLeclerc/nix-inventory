@@ -258,7 +258,26 @@
         packages = [
           downloadsort
           foldersorter
-        ];
+        ]
+        ++ (with pkgs.kdePackages; [
+          wacomtablet
+          discover
+          ghostwriter
+          isoimagewriter
+          kcolorchooser
+          kolourpaint
+          korganizer
+          arianna
+          kteatime
+          kweather
+          ktimer
+        ])
+        ++ (with pkgs; [
+          strawberry
+          gnome-firmware
+          vlc
+          mission-center
+        ]);
         file = {
           kteatime = {
             source = "${pkgs.kdePackages.kteatime}/share/applications/org.kde.kteatime.desktop";

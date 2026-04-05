@@ -2,6 +2,8 @@
 let
   mrchromebox-firmware-util = pkgs.buildFHSEnv {
     name = "mrchromebox-firmware-util";
+    unshareUser = false;
+    unsharePid = false;
     targetPkgs =
       pkgs: with pkgs; [
         curl

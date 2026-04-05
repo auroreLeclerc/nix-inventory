@@ -33,7 +33,7 @@
         "nix.serverPath" = "nixd";
         "nix.serverSettings.nixd" = {
           formatting.command = [ "nixfmt" ];
-          nixpkgs.expr = "import <nixpkgs> { }";
+          nixpkgs.expr = "(builtins.getFlake (builtins.toString ./.)).inputs.nixpkgs.legacyPackages.x86_64-linux";
           options = {
             nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.exelo.options";
             home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.exelo.options.home-manager.users.type.getSubOptions []";

@@ -4,7 +4,7 @@
 { inputs, ... }:
 {
   imports = [
-    ../../modules/kde/mobile.nix
+    ../../modules/kde/kde-mobile.nix
     ../../modules/mrchromebox.nix
     inputs.nixos-hardware.nixosModules.common-cpu-intel
     {

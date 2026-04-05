@@ -117,6 +117,15 @@ in
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
+          flaresolverr = {
+            image = "ghcr.io/flaresolverr/flaresolverr:latest";
+            environment = {
+              inherit (lsio) TZ;
+              LANG = "fr_FR";
+            };
+            network = [ "docker-like" ];
+            autoUpdate = "registry";
+          };
           bazarr = {
             image = "lscr.io/linuxserver/bazarr:latest";
             environment = {

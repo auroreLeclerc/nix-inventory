@@ -1,4 +1,4 @@
-{ config, ... }:
+{ config, pkgs, ... }:
 {
   boot = {
     supportedFilesystems = [ "zfs" ];
@@ -27,4 +27,8 @@
       monthly = 24;
     };
   };
+  environment.systemPackages = with pkgs; [
+    openseachest
+    sg3_utils
+  ];
 }

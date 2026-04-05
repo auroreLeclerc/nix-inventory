@@ -75,13 +75,6 @@ in
         ]
         ++ [ motd ]
       )
-      ++ lib.optionals (config.services.zfs.autoScrub.enable or false) (
-        with pkgs;
-        [
-          openseachest
-          sg3_utils
-        ]
-      )
       ++ lib.optionals (
         !builtins.elem config.networking.hostName [
           "bellum"

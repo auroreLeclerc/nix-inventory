@@ -43,13 +43,14 @@ folder "modules" {
    folder "kde" {
       component "fprintd.nix" as 0fb371a9afb97f3c276f57e82617e12d
       component "sddm.nix" as 5ebad3bd91a08cf55c56e207db927f8e
-      component "mobile.nix" as 8d2c80d6e09dc0fe9680025161c2f7f7
+      component "kde-mobile.nix" as 18d186ad4f28f362efc2bad2fd9eec32
       component "kde.nix" as 33998a49668889da1de8827630f29048
       component "kde-desktop.home.nix" as a09ad47e2deefc393199f1a87fc15ebc
       collections "kde_colors.json" as 8793297d8d93dce13e504e1e7639726f
       component "kde.home.nix" as 34f24b42df06d195232b3481cc71827b
       artifact "foldersorter.sh" as ad183a934b3ffac1938f0162d6a8a65b
    }
+   component "mrchromebox.nix" as 7e0ba3ed68e4fdeef382e76ae539c3cc
    component "distrobox.home.nix" as 08a37044eaabd670e65176777f006d8e
    component "virtualbox.nix" as f7eeddc94c5ed65950560d6b5663fd1f
    component "zfs.nix" as 7b8930c15c58c8623b34b42b22de824e
@@ -90,7 +91,8 @@ c4bab5bd2a813b4140b129fe0e3fb658 -[#EEEEEE]-> 6a6caf7642ae4a75b6d8c64ecf6400b9
 1396d7d4092f9152f5759496564121cd -[#CE93D8]-> a09ad47e2deefc393199f1a87fc15ebc
 20a158b77d6ce48a8335b7e769c66846 -[#FFCC80]-> 7b8930c15c58c8623b34b42b22de824e
 20a158b77d6ce48a8335b7e769c66846 -[#FFCC80]-> 0413db864cd167d08bd86e74c14f26a4
-63f8d8e44685a13b538d30e2a0812668 -[#FFE082]-> 8d2c80d6e09dc0fe9680025161c2f7f7
+63f8d8e44685a13b538d30e2a0812668 -[#FFE082]-> 18d186ad4f28f362efc2bad2fd9eec32
+63f8d8e44685a13b538d30e2a0812668 -[#FFE082]-> 7e0ba3ed68e4fdeef382e76ae539c3cc
 63f8d8e44685a13b538d30e2a0812668 -[#FFE082]-> 38cffe16d01eb2da09feac707c1aaa76
 63f8d8e44685a13b538d30e2a0812668 -[#FFE082]-> 34f24b42df06d195232b3481cc71827b
 3cfc5eb99249add5b61f5348132a1e77 --> 68e512ab9f77fd39f3722c23b9768434
@@ -113,7 +115,7 @@ d418baa43b11df0205fd0d8001cf7901 --> 7eb8b1eccd344747a8b685427d1c8d47
 6aafb3be03e9429fda102521e26edd7b --> e48a789aa9c3b1358cf051feee2e878a
 6aafb3be03e9429fda102521e26edd7b --> 20147c29130fca277ea17de5d4ba1678
 20147c29130fca277ea17de5d4ba1678 --> fedff914d02561f998eabdacb5cefebd
-8d2c80d6e09dc0fe9680025161c2f7f7 --> 33998a49668889da1de8827630f29048
+18d186ad4f28f362efc2bad2fd9eec32 --> 33998a49668889da1de8827630f29048
 33998a49668889da1de8827630f29048 --> 5ebad3bd91a08cf55c56e207db927f8e
 33998a49668889da1de8827630f29048 --> 0fb371a9afb97f3c276f57e82617e12d
 a09ad47e2deefc393199f1a87fc15ebc --> 34f24b42df06d195232b3481cc71827b

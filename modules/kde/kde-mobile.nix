@@ -23,21 +23,6 @@
         maliit-framework
         maliit-keyboard
       ]);
-    plasma6.excludePackages = with pkgs.kdePackages; [
-      spacebar
-      calindori
-      keysmith
-      plasma-dialer
-      elisa
-      oxygen
-      kmahjongg
-      kmines
-      kpat
-      ksudoku
-      ktorrent
-      kwalletmanager
-      plasma-systemmonitor
-    ];
   };
   hardware.sensor.iio.enable = true;
 }
