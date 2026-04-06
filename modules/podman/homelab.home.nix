@@ -113,6 +113,7 @@ in
               PROWLARR__AUTH__APIKEY = osConfig.secrets.values.prowlarr;
             }
             // lsio;
+            extraPodmanArgs = [ "--dns ${config.services.podman.containers.pihole.ip4}" ];
             volumes = [ "/run/media/dawn/cubus/prowlarr:/config" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";

@@ -13,7 +13,6 @@
     systemPackages =
       (with pkgs.kdePackages; [
         plasma-mobile
-        # plasma-nano
         keysmith
         koko
         spacebar

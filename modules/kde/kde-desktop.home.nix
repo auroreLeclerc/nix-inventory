@@ -271,6 +271,7 @@
           kteatime
           kweather
           ktimer
+          dolphin-plugins
         ])
         ++ (with pkgs; [
           strawberry
