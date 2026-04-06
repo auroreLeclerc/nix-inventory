@@ -52,6 +52,7 @@ in
             image = "lscr.io/linuxserver/transmission:latest";
             environment = {
               PORT = 9091;
+              HEALTHCHECK_PATH = "/transmission/web/";
             }
             // lsio;
             volumes = [
@@ -59,6 +60,7 @@ in
               "/run/media/dawn/eox/downloads:/downloads"
               "/run/media/dawn/eox/watchdir:/watch"
             ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:9091/transmission/web/ '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -66,6 +68,7 @@ in
             image = "lscr.io/linuxserver/sonarr:latest";
             environment = {
               PORT = 8989;
+              HEALTHCHECK_PATH = "/ping";
               SONARR__AUTH__METHOD = "External";
               SONARR__AUTH__APIKEY = osConfig.secrets.values.sonarr;
             }
@@ -75,6 +78,7 @@ in
               "/run/media/dawn/eox/downloads:/downloads"
               "/run/media/dawn/bellum/Multimédia/Séries:/tv"
             ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:8989/ping '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -82,6 +86,7 @@ in
             image = "lscr.io/linuxserver/radarr:latest";
             environment = {
               PORT = 7878;
+              HEALTHCHECK_PATH = "/ping";
               RADARR__AUTH__METHOD = "External";
               RADARR__AUTH__APIKEY = osConfig.secrets.values.radarr;
             }
@@ -91,6 +96,7 @@ in
               "/run/media/dawn/eox/downloads:/downloads"
               "/run/media/dawn/bellum/Multimédia/Films:/movies"
             ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:7878/ping '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -109,11 +115,15 @@ in
             image = "lscr.io/linuxserver/prowlarr:latest";
             environment = {
               PORT = 9696;
+              HEALTHCHECK_PATH = "/ping";
               PROWLARR__AUTH__METHOD = "External";
               PROWLARR__AUTH__APIKEY = osConfig.secrets.values.prowlarr;
             }
             // lsio;
-            extraPodmanArgs = [ "--dns ${config.services.podman.containers.pihole.ip4}" ];
+            extraPodmanArgs = [
+              "--dns ${config.services.podman.containers.pihole.ip4}"
+              "--health-cmd 'curl -f http://localhost:9696/ping '"
+            ];
             volumes = [ "/run/media/dawn/cubus/prowlarr:/config" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
@@ -122,8 +132,11 @@ in
             image = "ghcr.io/flaresolverr/flaresolverr:latest";
             environment = {
               inherit (lsio) TZ;
+              PORT = 8191;
+              HEALTHCHECK_PATH = "/health";
               LANG = "fr_FR";
             };
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:8191/health '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -145,6 +158,7 @@ in
             image = "lscr.io/linuxserver/jellyfin:latest";
             environment = {
               PORT = 8096;
+              HEALTHCHECK_PATH = "/health";
               DOCKER_MODS = [
                 # "linuxserver/mods:jellyfin-amd"
                 "linuxserver/mods:jellyfin-opencl-intel"
@@ -168,6 +182,7 @@ in
             image = "lscr.io/linuxserver/lidarr:nightly";
             environment = {
               PORT = 8686;
+              HEALTHCHECK_PATH = "/ping";
               LIDARR__AUTH__METHOD = "External";
               LIDARR__AUTH__APIKEY = osConfig.secrets.values.lidarr;
             }
@@ -177,6 +192,7 @@ in
               "/run/media/dawn/bellum/new_Music:/music"
               "/run/media/dawn/eox/downloads:/downloads"
             ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:8686/ping '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -201,10 +217,12 @@ in
             image = "docker.io/vaultwarden/server:latest";
             environment = {
               PORT = 80;
+              HEALTHCHECK_PATH = "/alive";
               DOMAIN = "https://vaultwarden.${secrets.dns}/";
               SIGNUPS_ALLOWED = "false";
             };
             volumes = [ "/run/media/dawn/cubus/vaultwarden/data:/data" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:80/alive '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -229,9 +247,11 @@ in
             exec = "server /data";
             environment = {
               PORT = 9000;
+              HEALTHCHECK_PATH = "/minio/health/live";
               MINIO_ROOT_USER = "minioadmin";
               MINIO_ROOT_PASSWORD = "minioadmin";
             };
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:9000/minio/health/live '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -305,6 +325,7 @@ in
               FTLCONF_dns_listeningMode = "all";
               FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11";
             };
+            extraPodmanArgs = [ "--health-cmd 'dig +norecurse +retry=0 @127.0.0.1 pi.hole '" ];
             ip4 = "172.18.0.253";
             network = [ "docker-like" ];
             autoUpdate = "registry";
@@ -314,6 +335,7 @@ in
             image = "docker.io/photoprism/photoprism:latest";
             environment = {
               PORT = 2342;
+              HEALTHCHECK_PATH = "/api/v1/status";
               PHOTOPRISM_AUTH_MODE = "public";
               PHOTOPRISM_SITE_URL = "https://photoprism.${secrets.dns}";
               PHOTOPRISM_DISABLE_TLS = true;
@@ -336,6 +358,7 @@ in
               "/run/media/dawn/cubus/photoprism/import/:/photoprism/import"
               "/run/media/dawn/cubus/photoprism:/photoprism/storage"
             ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:2342/api/v1/status '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -351,6 +374,7 @@ in
             };
             extraPodmanArgs = [
               "--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
+              "--health-cmd 'healthcheck.sh --connect --innodb_initialized'"
             ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
@@ -360,6 +384,7 @@ in
             volumes = [ "/run/media/dawn/cubus/redis:/data" ];
             extraPodmanArgs = [
               "--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
+              "--health-cmd 'redis-cli ping '"
             ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
@@ -416,10 +441,9 @@ in
               PGID = 1000;
               inherit (lsio) TZ;
               PORT = 80;
+              HEALTHCHECK_PATH = "/status.php";
             };
-            # extraPodmanArgs = [
-            #   "--userns keep-id:uid=1000,gid=1000" # https://github.com/eriksjolund/podman-detect-option
-            # ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:80/status.php '" ];
             volumes = [
               "/run/media/dawn/cubus/nextcloud/:/config"
               "/run/media/dawn/bellum/new_Music/:/data"

@@ -104,9 +104,20 @@ in
                     name: container:
                     if (builtins.hasAttr "PORT" container.environment) then
                       {
-                        loadBalancer.servers = [
-                          { url = "http://${name}:${builtins.toString container.environment.PORT}"; }
-                        ];
+                        loadBalancer = {
+                          servers = [
+                            { url = "http://${name}:${builtins.toString container.environment.PORT}"; }
+                          ];
+                          healthCheck =
+                            if (builtins.hasAttr "HEALTHCHECK_PATH" container.environment) then
+                              {
+                                path = container.environment.HEALTHCHECK_PATH;
+                                interval = container.environment.HEALTHCHECK_INTERVAL or "30s";
+                                timeout = container.environment.HEALTHCHECK_TIMEOUT or "5s";
+                              }
+                            else
+                              null;
+                        };
                       }
                     else
                       null
