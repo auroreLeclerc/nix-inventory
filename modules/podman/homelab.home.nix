@@ -280,7 +280,7 @@ in
             autoUpdate = "registry";
           };
           postgres = {
-            image = "docker.io/bitnami/postgresql:18";
+            image = "docker.io/bitnami/postgresql:latest";
             user = 1000;
             group = 1000;
             volumes = [
