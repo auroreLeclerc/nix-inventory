@@ -283,11 +283,13 @@ in
             image = "docker.io/bitnami/postgresql:18";
             user = 1000;
             group = 1000;
-            volumes = [ "/run/media/dawn/cubus/postgres/:/bitnami/postgresql" ];
+            volumes = [
+              "/run/media/dawn/cubus/postgres/:/bitnami/postgresql"
+              "${./init-db.sql}:/docker-entrypoint-initdb.d/init-db.sql:ro"
+            ];
             environment = {
               POSTGRESQL_USERNAME = "postgres";
               POSTGRESQL_PASSWORD = "postgres";
-              POSTGRESQL_DATABASE = "postgres";
             };
             extraPodmanArgs = [
               "--health-cmd 'pg_isready -U postgres -d postgres'"
