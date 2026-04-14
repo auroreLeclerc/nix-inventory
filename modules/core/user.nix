@@ -23,15 +23,24 @@
         ];
       };
       users = {
-        users.dawn = {
-          description = "Aurore";
-          initialPassword = "dawn";
-          isNormalUser = true;
-          shell = pkgs.zsh;
-          extraGroups = [ "wheel" ];
-          linger = config.networking.hostName == "bellum";
+        users = {
+          dawn = {
+            description = "Aurore";
+            initialPassword = "dawn";
+            isNormalUser = true;
+            shell = pkgs.zsh;
+            extraGroups = [ "wheel" ];
+            linger = config.networking.hostName == "bellum";
+          };
+          containers = {
+            uid = 100999;
+            group = "containers";
+            isSystemUser = true;
+            description = "Podman containers user";
+          };
         };
-        groups.smart = {
+        groups.containers = {
+          gid = 100999;
           members = [ "dawn" ];
         };
       };

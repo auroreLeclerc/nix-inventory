@@ -22,8 +22,8 @@ in
       containers =
         let
           lsio = {
-            PUID = 0;
-            PGID = 0;
+            PUID = 1000;
+            PGID = 1000;
             TZ = "Europe/Paris";
           };
         in
@@ -198,6 +198,8 @@ in
           };
           yubal = {
             image = "ghcr.io/guillevc/yubal:latest";
+            user = 1000;
+            group = 1000;
             environment = {
               PORT = 8000;
               YUBAL_SCHEDULER_CRON = "@weekly";
@@ -205,7 +207,6 @@ in
               YUBAL_LOG_LEVEL = "WARNING";
               YUBAL_TZ = lsio.TZ;
             };
-            extraPodmanArgs = [ "--user 0:0" ];
             volumes = [
               "/run/media/dawn/bellum/new_Music:/app/data"
               "/run/media/dawn/cubus/yubal:/app/config"
@@ -241,73 +242,61 @@ in
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
-          minio = {
-            # Storage (for image uploads)
-            image = "docker.io/minio/minio:latest";
-            exec = "server /data";
-            environment = {
-              PORT = 9000;
-              HEALTHCHECK_PATH = "/minio/health/live";
-              MINIO_ROOT_USER = "minioadmin";
-              MINIO_ROOT_PASSWORD = "minioadmin";
-            };
-            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:9000/minio/health/live '" ];
-            network = [ "docker-like" ];
-            autoUpdate = "registry";
-          };
-          chrome = {
-            # Chrome Browser (for printing and previews)
+          printer = {
             image = "ghcr.io/browserless/chromium:latest";
             environment = {
-              PORT = 443;
-              TOKEN = "chrome_token";
-              HEALTH = "true";
-              PROXY_HOST = "chrome.${secrets.dns}";
-              PROXY_PORT = 443;
-              PROXY_SSL = "true";
+              PORT = 3000;
+              HEALTH = true;
+              CONCURRENT = 20;
+              QUEUED = 10;
             };
+            extraPodmanArgs = [
+              "--health-cmd 'curl -f http://localhost:3000/pressure'"
+              "--health-interval 10s"
+              "--health-retries 5"
+              "--health-timeout 5s"
+            ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
           reactive-resume = {
             image = "docker.io/amruthpillai/reactive-resume:latest";
+            user = 1000;
+            group = 1000;
             environment = {
               PORT = 3000;
-              NODE_ENV = "production";
-              PUBLIC_URL = "https://reactive-resume.${secrets.dns}";
-              STORAGE_URL = "https://minio.${secrets.dns}/default";
-              CHROME_TOKEN = "chrome_token";
-              CHROME_URL = "wss://chrome.${secrets.dns}";
+              inherit (lsio) TZ;
+              PRINTER_ENDPOINT = "ws://printer:3000";
               DATABASE_URL = "postgresql://postgres:postgres@postgre:5432/resume";
-              ACCESS_TOKEN_SECRET = "access_token_secret";
-              REFRESH_TOKEN_SECRET = "refresh_token_secret";
-              MAIL_FROM = "noreply@localhost.gay";
-              STORAGE_ENDPOINT = "minio";
-              STORAGE_PORT = 9000;
-              STORAGE_BUCKET = "default";
-              STORAGE_ACCESS_KEY = "minioadmin";
-              STORAGE_SECRET_KEY = "minioadmin";
-              STORAGE_USE_SSL = false;
-              STORAGE_SKIP_BUCKET_CHECK = false;
             };
+            extraPodmanArgs = [
+              "--health-cmd 'curl -f http://localhost:3000/api/health'"
+              "--health-interval 10s"
+              "--health-retries 5"
+              "--health-timeout 5s"
+            ];
+            volumes = [ "/run/media/dawn/cubus/reactive-resume/:/app/data" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
           postgres = {
-            image = "localhost/homemanager/postgres";
-            volumes = [ "/run/media/dawn/cubus/postgres/:/var/lib/postgresql" ];
+            image = "docker.io/bitnami/postgresql:18";
+            user = 1000;
+            group = 1000;
+            volumes = [ "/run/media/dawn/cubus/postgres/:/bitnami/postgresql" ];
             environment = {
-              POSTGRES_PASSWORD = "postgres";
+              POSTGRESQL_USERNAME = "postgres";
+              POSTGRESQL_PASSWORD = "postgres";
+              POSTGRESQL_DATABASE = "postgres";
             };
             extraPodmanArgs = [
-              "--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
               "--health-cmd 'pg_isready -U postgres -d postgres'"
               "--health-interval 10s"
               "--health-retries 5"
               "--health-timeout 5s"
             ];
             network = [ "docker-like" ];
-            autoUpdate = "local";
+            autoUpdate = "registry";
           };
           pihole = {
             image = "docker.io/pihole/pihole:latest";
@@ -363,29 +352,29 @@ in
             autoUpdate = "registry";
           };
           mariadb = {
-            image = "docker.io/library/mariadb:lts";
-            volumes = [ "/run/media/dawn/cubus/mariadb:/var/lib/mysql" ];
+            image = "docker.io/bitnami/mariadb:latest";
+            user = 1000;
+            group = 1000;
+            volumes = [ "/run/media/dawn/cubus/mariadb:/bitnami/mariadb" ];
             environment = {
-              MARIADB_AUTO_UPGRADE = true;
               MARIADB_DATABASE = "photoprism";
               MARIADB_USER = "photoprism";
               MARIADB_PASSWORD = "insecure";
               MARIADB_ROOT_PASSWORD = "insecure";
             };
-            extraPodmanArgs = [
-              "--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
-              "--health-cmd 'healthcheck.sh --connect --innodb_initialized'"
-            ];
+            extraPodmanArgs = [ "--health-cmd 'healthcheck.sh --connect --innodb_initialized'" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
           redis = {
-            image = "docker.io/library/redis:8";
-            volumes = [ "/run/media/dawn/cubus/redis:/data" ];
-            extraPodmanArgs = [
-              "--userns keep-id:uid=999,gid=999" # https://github.com/eriksjolund/podman-detect-option
-              "--health-cmd 'redis-cli ping '"
-            ];
+            image = "docker.io/bitnami/redis:latest";
+            user = 1000;
+            group = 1000;
+            volumes = [ "/run/media/dawn/cubus/redis:/bitnami/redis/data" ];
+            environment = {
+              ALLOW_EMPTY_PASSWORD = "yes";
+            };
+            extraPodmanArgs = [ "--health-cmd 'redis-cli ping '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -437,12 +426,10 @@ in
           nextcloud = {
             image = "lscr.io/linuxserver/nextcloud:latest";
             environment = {
-              PUID = 1000;
-              PGID = 1000;
-              inherit (lsio) TZ;
               PORT = 80;
               HEALTHCHECK_PATH = "/status.php";
-            };
+            }
+            // lsio;
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:80/status.php '" ];
             volumes = [
               "/run/media/dawn/cubus/nextcloud/:/config"
