@@ -266,8 +266,10 @@ in
             environment = {
               PORT = 3000;
               inherit (lsio) TZ;
+              APP_URL = "https://reactive-resume.${secrets.dns}";
+              AUTH_SECRET = "admin";
               PRINTER_ENDPOINT = "ws://printer:3000";
-              DATABASE_URL = "postgresql://postgres:postgres@postgre:5432/resume";
+              DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/resume";
             };
             extraPodmanArgs = [
               "--health-cmd 'curl -f http://localhost:3000/api/health'"
