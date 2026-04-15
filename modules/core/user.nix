@@ -34,7 +34,8 @@
           };
           containers = {
             uid = 100999;
-            isNormalUser = true;
+            isSystemUser = true;
+            group = [ "users" ];
             description = "Podman containers user";
           };
         };
