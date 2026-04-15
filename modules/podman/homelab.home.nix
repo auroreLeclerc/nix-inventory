@@ -23,7 +23,7 @@ in
         let
           lsio = {
             PUID = 1000;
-            PGID = 1000;
+            PGID = 0;
             TZ = "Europe/Paris";
           };
         in
@@ -199,7 +199,7 @@ in
           yubal = {
             image = "ghcr.io/guillevc/yubal:latest";
             user = 1000;
-            group = 1000;
+            group = 0;
             environment = {
               PORT = 8000;
               YUBAL_SCHEDULER_CRON = "@weekly";
@@ -262,7 +262,7 @@ in
           reactive-resume = {
             image = "docker.io/amruthpillai/reactive-resume:latest";
             user = 1000;
-            group = 1000;
+            group = 0;
             environment = {
               PORT = 3000;
               inherit (lsio) TZ;

@@ -34,14 +34,9 @@
           };
           containers = {
             uid = 100999;
-            group = "containers";
             isSystemUser = true;
             description = "Podman containers user";
           };
-        };
-        groups.containers = {
-          gid = 100999;
-          members = [ "dawn" ];
         };
       };
       swapDevices = lib.mkIf (ramSize > 0) [
