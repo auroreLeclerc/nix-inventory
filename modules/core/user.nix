@@ -35,7 +35,7 @@
           containers = {
             uid = 100999;
             isSystemUser = true;
-            group = [ "users" ];
+            group = "users";
             description = "Podman containers user";
           };
         };
