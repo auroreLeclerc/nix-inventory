@@ -282,6 +282,7 @@ in
           postgres = {
             image = "docker.io/bitnami/postgresql:latest";
             user = 1000;
+            group = 0;
             volumes = [
               "/run/media/dawn/cubus/postgres/:/bitnami/postgresql"
               "${./init-db.sql}:/docker-entrypoint-initdb.d/init-db.sql:ro"
@@ -355,6 +356,7 @@ in
           mariadb = {
             image = "docker.io/bitnami/mariadb:latest";
             user = 1000;
+            group = 0;
             volumes = [ "/run/media/dawn/cubus/mariadb:/bitnami/mariadb" ];
             environment = {
               MARIADB_DATABASE = "photoprism";
@@ -369,6 +371,7 @@ in
           redis = {
             image = "docker.io/bitnami/redis:latest";
             user = 1000;
+            group = 0;
             volumes = [ "/run/media/dawn/cubus/redis:/bitnami/redis/data" ];
             environment = {
               ALLOW_EMPTY_PASSWORD = "yes";
