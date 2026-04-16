@@ -267,7 +267,7 @@ in
               PORT = 3000;
               inherit (lsio) TZ;
               APP_URL = "https://reactive-resume.${secrets.dns}";
-              AUTH_SECRET = "";
+              AUTH_SECRET = "NmQRQHGiCKAuerFZct6LM1xRPysr3rYd6TXLqzjclTc=";
               PRINTER_ENDPOINT = "ws://printer:3000";
               DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/resume";
             };
