@@ -248,7 +248,7 @@ in
             autoUpdate = "registry";
           };
           reactive-resume = {
-            image = "docker.io/amruthpillai/reactive-resume:latest";
+            image = "docker.io/amruthpillai/reactive-resume:v5";
             user = 1000;
             group = 0;
             environment = {

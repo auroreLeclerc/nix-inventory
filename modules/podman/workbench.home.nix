@@ -49,7 +49,7 @@
           autoUpdate = "registry";
         };
         reactive-resume = {
-          image = "docker.io/amruthpillai/reactive-resume:latest";
+          image = "docker.io/amruthpillai/reactive-resume:v4.5.6";
           ports = [ "3000:3000" ];
           environment = {
             PORT = 3000;
