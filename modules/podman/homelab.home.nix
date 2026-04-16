@@ -244,9 +244,6 @@ in
           };
           printer = {
             image = "docker.io/chromedp/headless-shell:latest";
-            environment = {
-              PORT = 9222;
-            };
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
