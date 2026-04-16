@@ -259,7 +259,7 @@ in
               inherit (lsio) TZ;
               APP_URL = "https://reactive-resume.${secrets.dns}";
               AUTH_SECRET = "NmQRQHGiCKAuerFZct6LM1xRPysr3rYd6TXLqzjclTc=";
-              PRINTER_ENDPOINT = "https://printer.${secrets.dns}";
+              PRINTER_ENDPOINT = "http://printer:9222";
               DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/resume";
             };
             extraPodmanArgs = [
