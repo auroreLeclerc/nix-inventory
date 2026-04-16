@@ -247,8 +247,6 @@ in
             environment = {
               PORT = 3000;
               HEALTH = true;
-              CONCURRENT = 20;
-              QUEUED = 10;
             };
             extraPodmanArgs = [
               "--health-cmd 'curl -f http://localhost:3000/pressure'"
@@ -268,7 +266,7 @@ in
               inherit (lsio) TZ;
               APP_URL = "https://reactive-resume.${secrets.dns}";
               AUTH_SECRET = "NmQRQHGiCKAuerFZct6LM1xRPysr3rYd6TXLqzjclTc=";
-              PRINTER_ENDPOINT = "ws://printer:3000";
+              PRINTER_ENDPOINT = "wss://printer:3000";
               DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/resume";
             };
             extraPodmanArgs = [
