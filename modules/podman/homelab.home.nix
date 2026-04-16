@@ -243,17 +243,10 @@ in
             autoUpdate = "registry";
           };
           printer = {
-            image = "ghcr.io/browserless/chromium:latest";
+            image = "docker.io/chromedp/headless-shell:latest";
             environment = {
-              PORT = 3000;
-              HEALTH = true;
+              PORT = 9222;
             };
-            extraPodmanArgs = [
-              "--health-cmd 'curl -f http://localhost:3000/pressure'"
-              "--health-interval 10s"
-              "--health-retries 5"
-              "--health-timeout 5s"
-            ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -266,7 +259,7 @@ in
               inherit (lsio) TZ;
               APP_URL = "https://reactive-resume.${secrets.dns}";
               AUTH_SECRET = "NmQRQHGiCKAuerFZct6LM1xRPysr3rYd6TXLqzjclTc=";
-              PRINTER_ENDPOINT = "wss://printer.${secrets.dns}";
+              PRINTER_ENDPOINT = "https://printer.${secrets.dns}";
               DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/resume";
             };
             extraPodmanArgs = [
