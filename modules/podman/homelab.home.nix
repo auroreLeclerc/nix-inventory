@@ -426,6 +426,10 @@ in
             volumes = [
               "/run/media/dawn/cubus/nextcloud/:/config"
               "/run/media/dawn/bellum/new_Music/:/data"
+              "${builtins.toFile "php-fpm-run" ''
+                #!/usr/bin/with-contenv bash
+                exec /usr/sbin/php-fpm83 -F -R
+              ''}:/etc/s6-overlay/s6-rc.d/svc-php-fpm/run:ro"
             ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
@@ -436,7 +440,8 @@ in
               PORT = 5000;
               LOGGER_LEVEL = "INFO";
               BASE_URL = "https://changedetection.${secrets.dns}";
-            };
+            }
+            // lsio;
             volumes = [ "/run/media/dawn/cubus/changedetection:/config" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
