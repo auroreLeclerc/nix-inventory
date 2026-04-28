@@ -169,7 +169,7 @@ in
             volumes = [
               "/run/media/dawn/bellum/Multimédia/Films:/data/movies:ro"
               "/run/media/dawn/bellum/Multimédia/Séries:/data/tvshows:ro"
-              "/run/media/dawn/bellum/new_Deezer:/data/music:ro"
+              "/run/media/dawn/bellum/new_Music:/data/music:ro"
               "/run/media/dawn/cubus/jellyfin:/config"
               "/run/media/dawn/cache/jellyfin:/config/cache"
             ];
