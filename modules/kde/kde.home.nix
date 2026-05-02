@@ -174,14 +174,14 @@
             }
           ];
         };
-        apply-icc = pkgs.writeShellScript "apply-icc" (
+        apply-icc = pkgs.writeShellScriptBin "apply-icc" (
           builtins.toString (
             builtins.map (script-line: (builtins.attrValues script-line)) (
               builtins.map (
                 displays:
                 (builtins.mapAttrs (
                   screen-id: profile:
-                  "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.${screen-id}.iccprofile='${profile}'\n"
+                  "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.${screen-id}.iccprofile.'${profile}'\n"
                 ))
                   displays
               ) hostDisplays.${osConfig.networking.hostName} or [ ]
