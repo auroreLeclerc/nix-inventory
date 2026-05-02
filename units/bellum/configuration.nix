@@ -44,7 +44,8 @@ in
     fail2ban = {
       enable = true;
       maxretry = 1;
-      bantime = "8760h";
+      bantime = "4w";
+      bantime-increment.enable = true;
       ignoreIP =
         let
           inherit (secrets) ip;
