@@ -198,6 +198,8 @@ in
           };
           yubal = {
             image = "ghcr.io/guillevc/yubal:latest";
+            user = 0;
+            group = 0;
             environment = {
               PORT = 8000;
               YUBAL_SCHEDULER_CRON = "@weekly";
@@ -214,6 +216,8 @@ in
           };
           vaultwarden = {
             image = "docker.io/vaultwarden/server:latest";
+            user = 0;
+            group = 0;
             environment = {
               PORT = 80;
               HEALTHCHECK_PATH = "/alive";
@@ -247,6 +251,8 @@ in
           };
           reactive-resume = {
             image = "docker.io/amruthpillai/reactive-resume:v5";
+            user = 0;
+            group = 0;
             environment = {
               PORT = 3000;
               inherit (lsio) TZ;
@@ -267,6 +273,8 @@ in
           };
           postgres = {
             image = "docker.io/bitnami/postgresql:latest";
+            user = 0;
+            group = 0;
             volumes = [
               "/run/media/dawn/cubus/postgres/:/bitnami/postgresql"
               "${./init-db.sql}:/docker-entrypoint-initdb.d/init-db.sql:ro"
@@ -308,6 +316,8 @@ in
           photoprism = {
             # https://dl.photoprism.app/podman/docker-compose.yml
             image = "docker.io/photoprism/photoprism:latest";
+            user = 0;
+            group = 0;
             environment = {
               PORT = 2342;
               HEALTHCHECK_PATH = "/api/v1/status";
@@ -339,6 +349,8 @@ in
           };
           mariadb = {
             image = "docker.io/bitnami/mariadb:latest";
+            user = 0;
+            group = 0;
             volumes = [ "/run/media/dawn/cubus/mariadb:/bitnami/mariadb" ];
             environment = {
               MARIADB_DATABASE = "photoprism";
@@ -352,6 +364,8 @@ in
           };
           redis = {
             image = "docker.io/bitnami/redis:latest";
+            user = 0;
+            group = 0;
             volumes = [ "/run/media/dawn/cubus/redis:/bitnami/redis/data" ];
             environment = {
               ALLOW_EMPTY_PASSWORD = "yes";
@@ -362,6 +376,8 @@ in
           };
           paperless = {
             image = "ghcr.io/paperless-ngx/paperless-ngx:latest";
+            user = 0;
+            group = 0;
             volumes = [
               "/run/media/dawn/cubus/paperless/data:/usr/src/paperless/data"
               "/run/media/dawn/cubus/paperless/media:/usr/src/paperless/media"
