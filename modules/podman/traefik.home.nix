@@ -21,8 +21,7 @@ in
       };
       traefik = {
         image = "docker.io/library/traefik:latest";
-        user = 0;
-        group = 0;
+        userNS = "keep-id:uid=999,gid=999";
         volumes =
           let
             traefikConfig = {
