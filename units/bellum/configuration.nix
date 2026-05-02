@@ -43,14 +43,13 @@ in
   services = {
     fail2ban = {
       enable = true;
-      maxretry = 5;
-      bantime = "730h";
+      maxretry = 1;
+      bantime = "8760h";
       ignoreIP =
         let
           inherit (secrets) ip;
-          isIp = ip != "";
         in
-        lib.mkIf isIp [ ip ];
+        lib.mkIf (ip != "") [ ip ];
     };
     openssh = {
       enable = true;

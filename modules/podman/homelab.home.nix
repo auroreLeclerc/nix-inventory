@@ -341,7 +341,7 @@ in
           };
           mariadb = {
             image = "docker.io/library/mariadb:lts";
-            userNS = "keep-id:uid=999,gid=999";
+            userNS = "keep-id:uid=999,gid=999"; # https://github.com/eriksjolund/podman-detect-option
             volumes = [ "/run/media/dawn/cubus/mariadb:/var/lib/mysql" ];
             environment = {
               MARIADB_AUTO_UPGRADE = true;
