@@ -12,7 +12,6 @@
     in
     lib.mkIf config.users.mutableUsers {
       boot = {
-        # Use the systemd-boot EFI boot loader.
         loader = {
           systemd-boot.enable = true;
           efi.canTouchEfiVariables = true;
@@ -31,12 +30,6 @@
             shell = pkgs.zsh;
             extraGroups = [ "wheel" ];
             linger = config.networking.hostName == "bellum";
-          };
-          containers = {
-            uid = 100999;
-            isSystemUser = true;
-            group = "users";
-            description = "Podman containers user";
           };
         };
       };

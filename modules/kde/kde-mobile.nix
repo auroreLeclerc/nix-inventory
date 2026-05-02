@@ -23,5 +23,6 @@
         maliit-keyboard
       ]);
   };
+  documentation.enable = false;
   hardware.sensor.iio.enable = true;
 }

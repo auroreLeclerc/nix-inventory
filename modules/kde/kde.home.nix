@@ -1,5 +1,6 @@
 {
   pkgs,
+  osConfig,
   ...
 }:
 {
@@ -159,32 +160,66 @@
           };
         };
     };
-    home = {
-      file = {
-        xeniaSplashScreen = {
-          source = builtins.fetchTarball {
-            url = "https://github.com/astro-cyberpaws/xenia-kde6/releases/latest/download/xenia.tar.gz";
-            sha256 = "08810rnv9ib3ixqdi8sd95ilng3r4s22q4xymvl7kdydnchligcc";
+    home =
+      let
+        hostDisplays = {
+          exelo = [
+            {
+              "eDP-1" = ./icc/AMD-Framework-13.icm;
+            }
+          ];
+          fierce-deity = [
+            {
+              "HDMI-A-1" = ./icc/Samsung-C27F39xF.icm;
+            }
+          ];
+        };
+        apply-icc = pkgs.writeShellScript "apply-icc" (
+          builtins.toString (
+            builtins.map (script-line: (builtins.attrValues script-line)) (
+              builtins.map (
+                displays:
+                (builtins.mapAttrs (
+                  screen-id: profile:
+                  "${pkgs.kdePackages.libkscreen}/bin/kscreen-doctor output.${screen-id}.iccprofile='${profile}'\n"
+                ))
+                  displays
+              ) hostDisplays.${osConfig.networking.hostName} or [ ]
+            )
+          )
+        );
+      in
+      {
+        packages = [ apply-icc ];
+        file = {
+          xeniaSplashScreen = {
+            source = builtins.fetchTarball {
+              url = "https://github.com/astro-cyberpaws/xenia-kde6/releases/latest/download/xenia.tar.gz";
+              sha256 = "08810rnv9ib3ixqdi8sd95ilng3r4s22q4xymvl7kdydnchligcc";
+            };
+            target = ".local/share/plasma/look-and-feel/xenia";
           };
-          target = ".local/share/plasma/look-and-feel/xenia";
-        };
-        icon = {
-          # https://github.com/NixOS/nixpkgs/issues/163080
-          source = builtins.fetchurl {
-            url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/d6f42c40-e039-4006-8991-a518b74c7506/upset/w=512";
-            sha256 = "sha256-CQqqRFv24uagiQaAdTOdJPjkj59mn+WyDuNJyE/FADA=";
+          icon = {
+            # https://github.com/NixOS/nixpkgs/issues/163080
+            source = builtins.fetchurl {
+              url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/d6f42c40-e039-4006-8991-a518b74c7506/upset/w=512";
+              sha256 = "sha256-CQqqRFv24uagiQaAdTOdJPjkj59mn+WyDuNJyE/FADA=";
+            };
+            target = ".face.icon";
           };
-          target = ".face.icon";
-        };
-        yakuake = {
-          source = "${pkgs.kdePackages.yakuake}/share/applications/org.kde.yakuake.desktop";
-          target = ".config/autostart/org.kde.yakuake.desktop";
-        };
-        koi = {
-          source = "${pkgs.kdePackages.koi}/share/applications/local.KoiDbusInterface.desktop";
-          target = ".config/autostart/local.KoiDbusInterface.desktop";
+          yakuake = {
+            source = "${pkgs.kdePackages.yakuake}/share/applications/org.kde.yakuake.desktop";
+            target = ".config/autostart/org.kde.yakuake.desktop";
+          };
+          koi = {
+            source = "${pkgs.kdePackages.koi}/share/applications/local.KoiDbusInterface.desktop";
+            target = ".config/autostart/local.KoiDbusInterface.desktop";
+          };
+          apply-icc = {
+            source = "${apply-icc}/bin/apply-icc";
+            target = ".config/plasma-workspace/env/apply-icc.sh";
+          };
         };
       };
-    };
   };
 }

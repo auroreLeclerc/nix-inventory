@@ -22,7 +22,7 @@ in
       containers =
         let
           lsio = {
-            PUID = 1000;
+            PUID = 0;
             PGID = 0;
             TZ = "Europe/Paris";
           };
@@ -198,8 +198,6 @@ in
           };
           yubal = {
             image = "ghcr.io/guillevc/yubal:latest";
-            user = 1000;
-            group = 0;
             environment = {
               PORT = 8000;
               YUBAL_SCHEDULER_CRON = "@weekly";
@@ -249,8 +247,6 @@ in
           };
           reactive-resume = {
             image = "docker.io/amruthpillai/reactive-resume:v5";
-            user = 1000;
-            group = 0;
             environment = {
               PORT = 3000;
               inherit (lsio) TZ;
@@ -271,8 +267,6 @@ in
           };
           postgres = {
             image = "docker.io/bitnami/postgresql:latest";
-            user = 1000;
-            group = 0;
             volumes = [
               "/run/media/dawn/cubus/postgres/:/bitnami/postgresql"
               "${./init-db.sql}:/docker-entrypoint-initdb.d/init-db.sql:ro"
@@ -345,8 +339,6 @@ in
           };
           mariadb = {
             image = "docker.io/bitnami/mariadb:latest";
-            user = 1000;
-            group = 0;
             volumes = [ "/run/media/dawn/cubus/mariadb:/bitnami/mariadb" ];
             environment = {
               MARIADB_DATABASE = "photoprism";
@@ -360,8 +352,6 @@ in
           };
           redis = {
             image = "docker.io/bitnami/redis:latest";
-            user = 1000;
-            group = 0;
             volumes = [ "/run/media/dawn/cubus/redis:/bitnami/redis/data" ];
             environment = {
               ALLOW_EMPTY_PASSWORD = "yes";
@@ -426,10 +416,6 @@ in
             volumes = [
               "/run/media/dawn/cubus/nextcloud/:/config"
               "/run/media/dawn/bellum/new_Music/:/data"
-              "${builtins.toFile "php-fpm-run" ''
-                #!/usr/bin/with-contenv bash
-                exec /usr/sbin/php-fpm83 -F -R
-              ''}:/etc/s6-overlay/s6-rc.d/svc-php-fpm/run:ro"
             ];
             network = [ "docker-like" ];
             autoUpdate = "registry";

@@ -19,15 +19,6 @@
   config = {
     networking.hostName = "midna"; # Define your hostname.
 
-    # Disable documentation to save disk space (eMMC 32GB)
-    documentation = {
-      enable = false;
-      doc.enable = false;
-      info.enable = false;
-      man.enable = false;
-      nixos.enable = false;
-    };
-
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
     # on your system were taken. It‘s perfectly fine and recommended to leave

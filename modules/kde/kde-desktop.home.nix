@@ -8,6 +8,7 @@
 {
   imports = [ ./kde.home.nix ];
   config = {
+    manual.html.enable = true;
     programs = {
       plasma = {
         desktop.widgets = [
