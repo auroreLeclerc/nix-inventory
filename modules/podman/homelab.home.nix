@@ -215,14 +215,14 @@ in
           };
           vaultwarden = {
             image = "docker.io/vaultwarden/server:latest";
-            userNS = "keep-id:uid=999,gid=999";
+            # userNS = "keep-id:uid=999,gid=999";
             environment = {
               PORT = 80;
               HEALTHCHECK_PATH = "/alive";
               DOMAIN = "https://vaultwarden.${secrets.dns}/";
               SIGNUPS_ALLOWED = "false";
             };
-            volumes = [ "/run/media/dawn/cubus/vaultwarden/data:/data" ];
+            volumes = [ "/run/media/dawn/cubus/vaultwarden:/data" ];
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:80/alive '" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
@@ -324,11 +324,11 @@ in
               PHOTOPRISM_SITE_AUTHOR = "Aurore";
               PHOTOPRISM_DEFAULT_LOCALE = "fr";
               PHOTOPRISM_DEFAULT_TIMEZONE = lsio.TZ;
-              PHOTOPRISM_FFMPEG_ENCODER = "vaapi";
+              PHOTOPRISM_FFMPEG_ENCODER = "intel";
+              PHOTOPRISM_INIT = "intel";
             };
             devices = [
               "/dev/dri:/dev/dri"
-              "/dev/kfd:/dev/kfd"
             ];
             volumes = [
               "/run/media/dawn/bellum/Dawn/Images/DCIM/:/photoprism/originals:ro"
@@ -413,11 +413,14 @@ in
           };
           nextcloud = {
             image = "lscr.io/linuxserver/nextcloud:latest";
+            userNS = "keep-id:uid=999,gid=999";
             environment = {
+              PUID = 999;
+              PGID = 999;
+              inherit (lsio) TZ;
               PORT = 80;
               HEALTHCHECK_PATH = "/status.php";
-            }
-            // lsio;
+            };
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:80/status.php '" ];
             volumes = [
               "/run/media/dawn/cubus/nextcloud/:/config"
