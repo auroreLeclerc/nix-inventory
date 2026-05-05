@@ -19,13 +19,11 @@ let
 
     NETWORK_FRIENDS="${config.services.podman.networks.friends.subnet}"
     PIHOLE="${config.services.podman.containers.pihole.ip4}"
-    TRAEFIK="172.18.0.254"
-    FRIENDS_RANGE="10.13.13.5-10.13.13.254"
+    FRIENDS_RANGE="10.13.13.5-10.13.13.254" friends >= 5
 
     # friends: authorisation
     iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$NETWORK_FRIENDS" -j RETURN
     iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$PIHOLE" -j RETURN
-    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d $TRAEFIK -j RETURN
 
     # friends: block LAN/RFC1918
     iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d 192.168.0.0/16 -j DROP
@@ -81,6 +79,7 @@ in
             ];
             devices = [ "/dev/dri:/dev/dri" ];
             extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
+            ip4 = "172.19.0.67";
             network = [ "friends" ];
             autoUpdate = "registry";
           };
@@ -89,7 +88,7 @@ in
             addCapabilities = [ "NET_ADMIN" ];
             environment = {
               SERVERURL = secrets.ip;
-              PEERS = "exelo,taya,fdeity,caza";
+              PEERS = "exelo,taya,fdeity,caza,paillettes"; # Must follow iptables custom repartition
               PEERDNS = config.services.podman.containers.pihole.ip4;
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
