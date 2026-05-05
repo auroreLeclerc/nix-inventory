@@ -33,6 +33,7 @@ in
             addCapabilities = [ "NET_ADMIN" ];
             environment = {
               SERVERPORT = 51821;
+              SERVERURL = secrets.ip;
               PEERS = "caza,paillette";
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
