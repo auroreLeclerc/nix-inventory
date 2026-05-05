@@ -32,7 +32,10 @@ in
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedUDPPorts = [ 51820 ];
+      allowedUDPPorts = [
+        51820
+        51821
+      ];
     };
     nat = {
       enable = true;
