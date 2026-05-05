@@ -138,7 +138,10 @@ in
           DUCKDNS_TOKEN = secrets.duck;
         };
         ip4 = "172.18.0.254"; # IMPORTANT: the ip of the domain's dns must be traefik's ip !
-        network = [ "docker-like" ];
+        network = [
+          "docker-like"
+          "friends"
+        ];
         autoUpdate = "registry";
       };
       error-pages = {

@@ -23,17 +23,25 @@
         enable = true;
         onCalendar = "weekly";
       };
-      networks.docker-like = {
-        description = "Main network";
-        driver = "bridge";
-        subnet = "172.18.0.0/24";
-        gateway = "172.18.0.1";
-      };
-      networks.integration = {
-        description = "CI/CD network";
-        driver = "bridge";
-        subnet = "172.16.0.0/24";
-        gateway = "172.16.0.1";
+      networks = {
+        docker-like = {
+          description = "Main network";
+          driver = "bridge";
+          subnet = "172.18.0.0/24";
+          gateway = "172.18.0.1";
+        };
+        networks.friends = {
+          description = "Network for friends (WIP)";
+          driver = "bridge";
+          subnet = "172.19.0.0/24";
+          gateway = "172.19.0.1";
+        };
+        integration = {
+          description = "CI/CD network";
+          driver = "bridge";
+          subnet = "172.16.0.0/24";
+          gateway = "172.16.0.1";
+        };
       };
       builds = {
         postgres = {
