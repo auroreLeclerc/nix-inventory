@@ -137,8 +137,10 @@ in
           PORT = 8080;
           DUCKDNS_TOKEN = secrets.duck;
         };
-        ip4 = "172.18.0.254"; # IMPORTANT: the ip of the domain's dns must be traefik's ip !
-        network = [ "docker-like" ];
+        extraPodmanArgs = [
+          "--network=docker-like:ip=172.18.0.254"
+          "--network=friends"
+        ];
         autoUpdate = "registry";
       };
       error-pages = {
@@ -147,7 +149,10 @@ in
           PORT = lib.mkIf debug 8080;
           TEMPLATE_NAME = "connection";
         };
-        network = [ "docker-like" ];
+        network = [
+          "docker-like"
+          "friends"
+        ];
         autoUpdate = "registry";
       };
     };

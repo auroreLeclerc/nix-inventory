@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+# shellcheck shell=bash
+
 source /etc/os-release
 if [[ $(date +%s) -gt $(date -d "$SUPPORT_END" +%s) ]]; then
 	cowsay -f dragon-and-cow "$PRETTY_NAME has reached EOL"

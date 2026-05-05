@@ -1,10 +1,44 @@
 {
   osConfig,
   config,
+  pkgs,
   ...
 }:
 let
   secrets = osConfig.secrets.values;
+  custom-nac = pkgs.writeShellScript "wireguard-acl.sh" ''
+    echo "[CUSTOM_NAC] START"
+
+    iptables -N CUSTOM_NAC 2>/dev/null || iptables -F CUSTOM_NAC
+    iptables -C FORWARD -i wg0 -j CUSTOM_NAC 2>/dev/null || iptables -I FORWARD -i wg0 -j CUSTOM_NAC
+    iptables -A CUSTOM_NAC -m state --state RELATED,ESTABLISHED -j RETURN
+
+    iptables -A CUSTOM_NAC -s 10.13.13.2 -j RETURN  # exelo
+    iptables -A CUSTOM_NAC -s 10.13.13.3 -j RETURN  # taya
+    iptables -A CUSTOM_NAC -s 10.13.13.4 -j RETURN  # fdeity
+
+    NETWORK_FRIENDS="${config.services.podman.networks.friends.subnet}"
+    PIHOLE="${config.services.podman.containers.pihole.ip4}"
+    TRAEFIK="172.18.0.254"
+    FRIENDS_RANGE="10.13.13.5-10.13.13.254"  # peers friends >4
+
+    # friends
+    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$NETWORK_FRIENDS" -j RETURN
+    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$PIHOLE" -j RETURN
+    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d $TRAEFIK -j RETURN
+
+    # friends: block LAN/RFC1918
+    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d 192.168.0.0/16 -j DROP
+    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d 10.0.0.0/8 -j DROP
+    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d 172.16.0.0/12 -j DROP
+    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d 212.27.38.253 -j DROP
+
+    # friends: internet
+    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -j RETURN
+
+    iptables -A CUSTOM_NAC -j DROP
+    echo "[CUSTOM_NAC] FINISHED"
+  '';
 in
 {
   imports = [
@@ -28,30 +62,10 @@ in
           };
         in
         {
-          wireguard-friends = {
-            image = "lscr.io/linuxserver/wireguard:latest";
-            addCapabilities = [ "NET_ADMIN" ];
-            environment = {
-              SERVERPORT = 51821;
-              SERVERURL = secrets.ip;
-              PEERS = "caza";
-              PERSITENTKEEPALIVE_PEERS = "all";
-              LOG_CONFS = false;
-            }
-            // lsio;
-            volumes = [ "/run/media/dawn/cubus/wireguard-friends/:/config" ];
-            ports = [ "51821:51820/udp" ];
-            extraPodmanArgs = [
-              "--sysctl net.ipv4.conf.all.src_valid_mark=1"
-              "--sysctl net.ipv4.ip_forward=1"
-            ];
-            network = [ "friends" ];
-            autoUpdate = "registry";
-          };
           jellyfin-friends = {
             image = "lscr.io/linuxserver/jellyfin:latest";
-            ip4 = "172.19.0.67";
             environment = {
+              PORT = 8096;
               HEALTHCHECK_PATH = "/health";
               DOCKER_MODS = [
                 "linuxserver/mods:jellyfin-opencl-intel"
@@ -76,19 +90,25 @@ in
             addCapabilities = [ "NET_ADMIN" ];
             environment = {
               SERVERURL = secrets.ip;
-              PEERS = "exelo,taya,fdeity";
+              PEERS = "exelo,taya,fdeity,caza";
               PEERDNS = config.services.podman.containers.pihole.ip4;
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
             }
             // lsio;
-            volumes = [ "/run/media/dawn/cubus/wireguard/:/config" ];
+            volumes = [
+              "/run/media/dawn/cubus/wireguard/:/config"
+              "${custom-nac}:/custom-cont-init.d/custom-nac.sh:ro"
+            ];
             ports = [ "51820:51820/udp" ];
             extraPodmanArgs = [
               "--sysctl net.ipv4.conf.all.src_valid_mark=1"
               "--sysctl net.ipv4.ip_forward=1"
             ];
-            network = [ "docker-like" ];
+            network = [
+              "docker-like"
+              "friends"
+            ];
             autoUpdate = "registry";
           };
           transmission = {
