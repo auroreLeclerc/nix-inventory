@@ -28,6 +28,48 @@ in
           };
         in
         {
+          wireguard-friends = {
+            image = "lscr.io/linuxserver/wireguard:latest";
+            addCapabilities = [ "NET_ADMIN" ];
+            environment = {
+              SERVERURL = secrets.ip;
+              PEERS = "caza,paillette";
+              PERSITENTKEEPALIVE_PEERS = "all";
+              LOG_CONFS = false;
+            }
+            // lsio;
+            volumes = [ "/run/media/dawn/cubus/wireguard-friends/:/config" ];
+            ports = [ "51820:51820/udp" ];
+            extraPodmanArgs = [
+              "--sysctl net.ipv4.conf.all.src_valid_mark=1"
+              "--sysctl net.ipv4.ip_forward=1"
+            ];
+            network = [ "friends" ];
+            autoUpdate = "registry";
+          };
+          jellyfin-friends = {
+            image = "lscr.io/linuxserver/jellyfin:latest";
+            ip4 = "172.19.0.67";
+            environment = {
+              HEALTHCHECK_PATH = "/health";
+              DOCKER_MODS = [
+                "linuxserver/mods:jellyfin-opencl-intel"
+                "ghcr.io/intro-skipper/intro-skipper-docker-mod"
+              ];
+            }
+            // lsio;
+            volumes = [
+              "/run/media/dawn/bellum/Multimédia/Films:/data/movies:ro"
+              "/run/media/dawn/bellum/Multimédia/Séries:/data/tvshows:ro"
+              "/run/media/dawn/bellum/new_Music:/data/music:ro"
+              "/run/media/dawn/cubus/jellyfin-friends:/config"
+              "/run/media/dawn/cache/jellyfin-friends:/config/cache"
+            ];
+            devices = [ "/dev/dri:/dev/dri" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
+            network = [ "friends" ];
+            autoUpdate = "registry";
+          };
           wireguard = {
             image = "lscr.io/linuxserver/wireguard:latest";
             addCapabilities = [ "NET_ADMIN" ];
@@ -46,25 +88,6 @@ in
               "--sysctl net.ipv4.ip_forward=1"
             ];
             network = [ "docker-like" ];
-            autoUpdate = "registry";
-          };
-          wireguard-friends = {
-            image = "lscr.io/linuxserver/wireguard:latest";
-            addCapabilities = [ "NET_ADMIN" ];
-            environment = {
-              SERVERURL = secrets.ip;
-              PEERS = "caza";
-              PERSITENTKEEPALIVE_PEERS = "all";
-              LOG_CONFS = false;
-            }
-            // lsio;
-            volumes = [ "/run/media/dawn/cubus/wireguard-friends/:/config" ];
-            ports = [ "51820:51820/udp" ];
-            extraPodmanArgs = [
-              "--sysctl net.ipv4.conf.all.src_valid_mark=1"
-              "--sysctl net.ipv4.ip_forward=1"
-            ];
-            network = [ "friends" ];
             autoUpdate = "registry";
           };
           transmission = {
@@ -195,29 +218,6 @@ in
             devices = [ "/dev/dri:/dev/dri" ];
             extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
             network = [ "docker-like" ];
-            autoUpdate = "registry";
-          };
-          jellyfin-friends = {
-            image = "lscr.io/linuxserver/jellyfin:latest";
-            environment = {
-              PORT = 8096;
-              HEALTHCHECK_PATH = "/health";
-              DOCKER_MODS = [
-                "linuxserver/mods:jellyfin-opencl-intel"
-                "ghcr.io/intro-skipper/intro-skipper-docker-mod"
-              ];
-            }
-            // lsio;
-            volumes = [
-              "/run/media/dawn/bellum/Multimédia/Films:/data/movies:ro"
-              "/run/media/dawn/bellum/Multimédia/Séries:/data/tvshows:ro"
-              "/run/media/dawn/bellum/new_Music:/data/music:ro"
-              "/run/media/dawn/cubus/jellyfin-friends:/config"
-              "/run/media/dawn/cache/jellyfin-friends:/config/cache"
-            ];
-            devices = [ "/dev/dri:/dev/dri" ];
-            extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
-            network = [ "friends" ];
             autoUpdate = "registry";
           };
           lidarr = {
