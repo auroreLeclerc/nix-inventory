@@ -19,7 +19,7 @@ let
 
     NETWORK_FRIENDS="${config.services.podman.networks.friends.subnet}"
     PIHOLE="${config.services.podman.containers.pihole.ip4}"
-    FRIENDS_RANGE="10.13.13.5-10.13.13.254" friends >= 5
+    FRIENDS_RANGE="10.13.13.5-10.13.13.254"  # friends >= 5
 
     # friends: authorisation
     iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$NETWORK_FRIENDS" -j RETURN
