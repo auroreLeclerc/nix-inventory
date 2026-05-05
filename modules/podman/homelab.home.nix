@@ -34,13 +34,13 @@ in
             environment = {
               SERVERPORT = 51821;
               SERVERURL = secrets.ip;
-              PEERS = "caza,paillette";
+              PEERS = "caza";
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
             }
             // lsio;
             volumes = [ "/run/media/dawn/cubus/wireguard-friends/:/config" ];
-            ports = [ "51821:51821/udp" ];
+            ports = [ "51821:51820/udp" ];
             extraPodmanArgs = [
               "--sysctl net.ipv4.conf.all.src_valid_mark=1"
               "--sysctl net.ipv4.ip_forward=1"
