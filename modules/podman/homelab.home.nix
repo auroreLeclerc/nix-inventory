@@ -8,6 +8,7 @@ let
   secrets = osConfig.secrets.values;
   custom-nac = pkgs.writeShellScript "custom-nac.sh" ''
     set -e
+    trap 'echo "CUSTOM_NAC Failed"; kill 1' ERR
 
     iptables -N CUSTOM_NAC 2>/dev/null || iptables -F CUSTOM_NAC
     iptables -C FORWARD -i wg0 -j CUSTOM_NAC 2>/dev/null || iptables -I FORWARD -i wg0 -j CUSTOM_NAC
