@@ -6,8 +6,8 @@
 }:
 let
   secrets = osConfig.secrets.values;
-  custom-nac = pkgs.writeShellScript "wireguard-acl.sh" ''
-    echo "[CUSTOM_NAC] START"
+  custom-nac = pkgs.writeShellScript "custom-nac.sh" ''
+    set -e
 
     iptables -N CUSTOM_NAC 2>/dev/null || iptables -F CUSTOM_NAC
     iptables -C FORWARD -i wg0 -j CUSTOM_NAC 2>/dev/null || iptables -I FORWARD -i wg0 -j CUSTOM_NAC
@@ -20,9 +20,9 @@ let
     NETWORK_FRIENDS="${config.services.podman.networks.friends.subnet}"
     PIHOLE="${config.services.podman.containers.pihole.ip4}"
     TRAEFIK="172.18.0.254"
-    FRIENDS_RANGE="10.13.13.5-10.13.13.254"  # peers friends >4
+    FRIENDS_RANGE="10.13.13.5-10.13.13.254"
 
-    # friends
+    # friends: authorisation
     iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$NETWORK_FRIENDS" -j RETURN
     iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$PIHOLE" -j RETURN
     iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d $TRAEFIK -j RETURN
@@ -37,7 +37,6 @@ let
     iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -j RETURN
 
     iptables -A CUSTOM_NAC -j DROP
-    echo "[CUSTOM_NAC] FINISHED"
   '';
 in
 {
@@ -104,10 +103,8 @@ in
             extraPodmanArgs = [
               "--sysctl net.ipv4.conf.all.src_valid_mark=1"
               "--sysctl net.ipv4.ip_forward=1"
-            ];
-            network = [
-              "docker-like"
-              "friends"
+              "--network=docker-like:ip=172.18.0.2"
+              "--network=friends:ip=172.19.0.2"
             ];
             autoUpdate = "registry";
           };
