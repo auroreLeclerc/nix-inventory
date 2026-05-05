@@ -58,7 +58,7 @@ in
               LOG_CONFS = false;
             }
             // lsio;
-            volumes = [ "/run/media/dawn/cubus/wireguard-wip/:/config" ];
+            volumes = [ "/run/media/dawn/cubus/wireguard-friends/:/config" ];
             ports = [ "51820:51820/udp" ];
             extraPodmanArgs = [
               "--sysctl net.ipv4.conf.all.src_valid_mark=1"
