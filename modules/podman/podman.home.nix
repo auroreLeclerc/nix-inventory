@@ -30,7 +30,7 @@
           subnet = "172.18.0.0/24";
           gateway = "172.18.0.1";
         };
-        networks.friends = {
+        friends = {
           description = "Network for friends (WIP)";
           driver = "bridge";
           subnet = "172.19.0.0/24";
