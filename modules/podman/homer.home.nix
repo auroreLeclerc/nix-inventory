@@ -165,6 +165,11 @@ in
                 logo = "assets/changedetection.svg";
                 url = "https://changedetection.${secrets.dns}/";
               }
+              {
+                name = "Logseq";
+                logo = "assets/logseq.svg";
+                url = "https://logseq.${secrets.dns}/";
+              }
             ];
           }
         ];
@@ -312,7 +317,13 @@ in
               url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/changedetection.svg";
               sha256 = "0qbmyynl9hlgms2wqvhxfqmv5j3r2rwaamn2x07w01d52zzjdy6w";
             }
-          }:/www/assets/changedetection.svg"
+          }:/www/assets/logseq.svg"
+          "${
+            builtins.fetchurl {
+              url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/logseq.svg";
+              sha256 = "0frwgk5a2cv7d1c43yi65kwczfrq9nspcanm7l73dsqxnsvciwqj";
+            }
+          }:/www/assets/logseq.svg"
         ];
         environment = {
           PORT = 8080;

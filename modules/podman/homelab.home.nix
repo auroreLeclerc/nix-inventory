@@ -258,12 +258,13 @@ in
           };
           yubal = {
             image = "ghcr.io/guillevc/yubal:latest";
-            userNS = "keep-id:uid=999,gid=999";
             environment = {
               PORT = 8000;
               YUBAL_SCHEDULER_CRON = "@weekly";
               YUBAL_DOWNLOAD_UGC = false;
               YUBAL_LOG_LEVEL = "WARNING";
+              inherit (lsio) PUID;
+              inherit (lsio) GUID;
               YUBAL_TZ = lsio.TZ;
             };
             volumes = [
@@ -498,6 +499,14 @@ in
             }
             // lsio;
             volumes = [ "/run/media/dawn/cubus/changedetection:/config" ];
+            network = [ "docker-like" ];
+            autoUpdate = "registry";
+          };
+          logseq = {
+            image = "ghcr.io/logseq/logseq-webapp:latest";
+            environment = {
+              PORT = 3000;
+            };
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };

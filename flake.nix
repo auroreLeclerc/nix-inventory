@@ -163,5 +163,22 @@
           deadnix
         ];
       };
+
+      apps.x86_64-linux =
+        let
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          mkApp = name: runtimeInputs: text: {
+            type = "app";
+            program = "${pkgs.writeShellApplication { inherit name runtimeInputs text; }}/bin/${name}";
+          };
+        in
+        {
+          lint = mkApp "lint" [ pkgs.statix ] "statix check";
+          fix = mkApp "fix" [ pkgs.statix ] "statix fix";
+          pre-commit-install = mkApp "pre-commit-install" [
+            pkgs.pre-commit
+          ] "pre-commit install --install-hooks";
+          pre-commit-run = mkApp "pre-commit-run" [ pkgs.pre-commit ] "pre-commit run --all-files";
+        };
     };
 }
