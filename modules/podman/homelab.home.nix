@@ -505,7 +505,7 @@ in
           logseq = {
             image = "ghcr.io/logseq/logseq-webapp:latest";
             environment = {
-              PORT = 3000;
+              PORT = 3001;
             };
             network = [ "docker-like" ];
             autoUpdate = "registry";
