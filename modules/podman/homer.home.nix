@@ -317,7 +317,7 @@ in
               url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/changedetection.svg";
               sha256 = "0qbmyynl9hlgms2wqvhxfqmv5j3r2rwaamn2x07w01d52zzjdy6w";
             }
-          }:/www/assets/logseq.svg"
+          }:/www/assets/changedetection.svg"
           "${
             builtins.fetchurl {
               url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/logseq.svg";
