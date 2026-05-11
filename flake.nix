@@ -167,18 +167,21 @@
       apps.x86_64-linux =
         let
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          mkApp = name: runtimeInputs: text: {
+          mkApp = name: description: runtimeInputs: text: {
             type = "app";
             program = "${pkgs.writeShellApplication { inherit name runtimeInputs text; }}/bin/${name}";
+            meta.description = description;
           };
         in
         {
-          lint = mkApp "lint" [ pkgs.statix ] "statix check";
-          fix = mkApp "fix" [ pkgs.statix ] "statix fix";
-          pre-commit-install = mkApp "pre-commit-install" [
+          lint = mkApp "lint" "Check nix files with statix" [ pkgs.statix ] "statix check";
+          fix = mkApp "fix" "Fix nix files with statix" [ pkgs.statix ] "statix fix";
+          pre-commit-install = mkApp "pre-commit-install" "Install pre-commit hooks" [
             pkgs.pre-commit
           ] "pre-commit install --install-hooks";
-          pre-commit-run = mkApp "pre-commit-run" [ pkgs.pre-commit ] "pre-commit run --all-files";
+          pre-commit-run = mkApp "pre-commit-run" "Run pre-commit on all files" [
+            pkgs.pre-commit
+          ] "pre-commit run --all-files";
         };
     };
 }

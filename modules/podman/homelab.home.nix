@@ -264,7 +264,7 @@ in
               YUBAL_DOWNLOAD_UGC = false;
               YUBAL_LOG_LEVEL = "WARNING";
               inherit (lsio) PUID;
-              inherit (lsio) GUID;
+              inherit (lsio) PGID;
               YUBAL_TZ = lsio.TZ;
             };
             volumes = [
