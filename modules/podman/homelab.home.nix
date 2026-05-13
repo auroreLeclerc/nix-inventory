@@ -518,7 +518,7 @@ in
               "${
                 builtins.toFile "scrutiny.json" (
                   builtins.toJSON {
-                    influxdb = {
+                    web.influxdb = {
                       scheme = "http";
                       host = "influxdb";
                       port = 8086;
