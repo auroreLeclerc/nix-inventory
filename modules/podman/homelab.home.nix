@@ -258,13 +258,12 @@ in
           };
           yubal = {
             image = "ghcr.io/guillevc/yubal:latest";
+            userNS = "keep-id:uid=999,gid=999";
             environment = {
               PORT = 8000;
               YUBAL_SCHEDULER_CRON = "@weekly";
               YUBAL_DOWNLOAD_UGC = false;
               YUBAL_LOG_LEVEL = "WARNING";
-              inherit (lsio) PUID;
-              inherit (lsio) PGID;
               YUBAL_TZ = lsio.TZ;
             };
             volumes = [
@@ -505,8 +504,37 @@ in
           logseq = {
             image = "ghcr.io/logseq/logseq-webapp:latest";
             environment = {
-              PORT = 3001;
+              PORT = 80;
             };
+            network = [ "docker-like" ];
+            autoUpdate = "registry";
+          };
+          scrutiny = {
+            image = "ghcr.io/analogj/scrutiny:latest-web";
+            environment = {
+              PORT = 8080;
+            };
+            volumes = [
+              "${
+                builtins.toFile "scrutiny.json" (
+                  builtins.toJSON {
+                    influxdb = {
+                      scheme = "http";
+                      host = "influxdb";
+                      port = 8086;
+                    };
+                  }
+                )
+              }:/opt/scrutiny/config/scrutiny.yaml"
+              "/run/media/dawn/cubus/scrutiny:/opt/scrutiny/config"
+            ];
+            ports = [ "127.0.0.1:8080:8080" ];
+            network = [ "docker-like" ];
+            autoUpdate = "registry";
+          };
+          influxdb = {
+            image = "docker.io/library/influxdb:2";
+            volumes = [ "/run/media/dawn/cubus/influxdb:/var/lib/influxdb2" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
