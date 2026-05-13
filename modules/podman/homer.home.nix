@@ -170,6 +170,11 @@ in
                 logo = "assets/logseq.svg";
                 url = "https://logseq.${secrets.dns}/";
               }
+              {
+                name = "Scrutiny";
+                logo = "assets/scrutiny.svg";
+                url = "https://scrutiny.${secrets.dns}/";
+              }
             ];
           }
         ];
@@ -324,6 +329,12 @@ in
               sha256 = "0frwgk5a2cv7d1c43yi65kwczfrq9nspcanm7l73dsqxnsvciwqj";
             }
           }:/www/assets/logseq.svg"
+          "${
+            builtins.fetchurl {
+              url = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/scrutiny.svg";
+              sha256 = "1ly8d0rzjgmii336lxc1b65vl54043a4mkka0pnzp69m7dih0fcf";
+            }
+          }:/www/assets/scrutiny.svg"
         ];
         environment = {
           PORT = 8080;
