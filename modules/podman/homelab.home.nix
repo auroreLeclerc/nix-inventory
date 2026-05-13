@@ -526,7 +526,6 @@ in
                   }
                 )
               }:/opt/scrutiny/config/scrutiny.yaml"
-              "/run/media/dawn/cubus/scrutiny:/opt/scrutiny/config"
             ];
             ports = [ "127.0.0.1:8080:8080" ];
             network = [ "docker-like" ];
