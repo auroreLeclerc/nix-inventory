@@ -32,64 +32,8 @@
       enable = true;
       settings = {
         api.endpoint = "http://127.0.0.1:8080";
-        devices = [
-          {
-            device = "/dev/sda";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdb";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdc";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdd";
-            type = "ata";
-          }
-          {
-            device = "/dev/sde";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdf";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdg";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdh";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdi";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdj";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdk";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdl";
-            type = "ata";
-          }
-          {
-            device = "/dev/sdm";
-            type = "ata";
-          }
-          {
-            device = "/dev/nvme0";
-            type = "ata";
-          }
-        ];
+        host.id = config.hostName;
+        log.level = "DEBUG";
       };
     };
   };

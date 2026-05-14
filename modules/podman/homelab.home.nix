@@ -523,6 +523,7 @@ in
                       host = "influxdb";
                       port = 8086;
                     };
+                    log.level = "DEBUG";
                   }
                 )
               }:/opt/scrutiny/config/scrutiny.yaml"
