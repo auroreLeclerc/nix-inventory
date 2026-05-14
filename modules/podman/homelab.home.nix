@@ -526,7 +526,8 @@ in
                     log.level = "DEBUG";
                   }
                 )
-              }:/opt/scrutiny/config/scrutiny.yaml"
+              }:/opt/scrutiny/config/scrutiny.yaml:ro"
+              "/run/media/dawn/cubus/scrutiny:/opt/scrutiny/config/"
             ];
             ports = [ "127.0.0.1:8080:8080" ];
             network = [ "docker-like" ];
