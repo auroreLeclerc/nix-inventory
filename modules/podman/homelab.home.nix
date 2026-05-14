@@ -523,6 +523,65 @@ in
                       host = "influxdb";
                       port = 8086;
                     };
+                    devices = [
+                      {
+                        device = "/dev/sda";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdb";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdc";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdd";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sde";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdf";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdg";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdh";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdi";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdj";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdk";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdl";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/sdm";
+                        type = "auto";
+                      }
+                      {
+                        device = "/dev/nvme0";
+                        type = "auto";
+                      }
+                    ];
+
                   }
                 )
               }:/opt/scrutiny/config/scrutiny.yaml"
@@ -533,6 +592,7 @@ in
           };
           influxdb = {
             image = "docker.io/library/influxdb:2";
+            userNS = "keep-id:uid=999,gid=999";
             volumes = [ "/run/media/dawn/cubus/influxdb:/var/lib/influxdb2" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
