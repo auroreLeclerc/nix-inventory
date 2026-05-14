@@ -527,7 +527,7 @@ in
                   }
                 )
               }:/opt/scrutiny/config/scrutiny.yaml:ro"
-              "/run/media/dawn/cubus/scrutiny:/opt/scrutiny/config/"
+              "/run/media/dawn/cubus/scrutiny/scrutiny.db:/opt/scrutiny/config/scrutiny.db"
             ];
             ports = [ "127.0.0.1:8080:8080" ];
             network = [ "docker-like" ];
