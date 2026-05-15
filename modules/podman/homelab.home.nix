@@ -362,10 +362,10 @@ in
               FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11";
               FTLCONF_dns_rateLimit_count = 0;
               FTLCONF_dns_rateLimit_interval = 0;
-              FTLCONF_webserver_allow_destructive = false;
+              FTLCONF_webserver_api_allow_destructive = false;
               FTLCONF_misc_readOnly = true;
             };
-            extraPodmanArgs = [ "--health-cmd 'dig +norecurse +retry=0 @127.0.0.1 pi.hole '" ];
+            extraPodmanArgs = [ "--health-cmd 'dig +norecurse +retry=0 @127.0.0.1 pi.hole ' --hostname 'OwO'" ];
             ip4 = "172.18.0.253";
             network = [ "docker-like" ];
             autoUpdate = "registry";
