@@ -20,6 +20,10 @@
     };
     nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
     sops-nix.url = "github:Mic92/sops-nix";
+    jovian-nixos = {
+      url = "github:Jovian-Experiments/Jovian-NixOS";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";

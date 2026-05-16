@@ -45,11 +45,6 @@
       fsType = "ext4";
       options = [ "nofail" ];
     };
-    "/run/media/dawn/crayk" = {
-      device = "/dev/disk/by-uuid/17e3a856-eafa-43b6-b14a-ad4af890a2f9";
-      fsType = "ext4";
-      options = [ "nofail" ];
-    };
     "/run/media/dawn/eox" = {
       device = "/dev/disk/by-uuid/681c9d69-4c9e-47eb-b217-a542afdf783c";
       fsType = "ext4";

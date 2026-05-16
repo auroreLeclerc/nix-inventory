@@ -47,8 +47,8 @@
           };
           kscreenlocker = {
             appearance.wallpaper = builtins.fetchurl {
-              url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/524746ff-5a2e-4cce-8121-c3b2f13fb224/complete-screen7/w=2256";
-              sha256 = "sha256-K4YqRpyc1floZ4LGMuvQMeeGUYzLjAsqasYmGWiGP9U=";
+              url = "https://publish-01.obsidian.md/access/d32b95288f15249fa01b04513b6b05f3/Art%20files/Celeste/Complete%20screens/complete-screen7.png";
+              sha256 = "10rsb73gpcx5fr69rwb5bswwn4iccfbjyh0ri2s1qdhsgprg4izr";
             };
             lockOnResume = true;
           };
@@ -202,8 +202,8 @@
           icon = {
             # https://github.com/NixOS/nixpkgs/issues/163080
             source = builtins.fetchurl {
-              url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/d6f42c40-e039-4006-8991-a518b74c7506/upset/w=512";
-              sha256 = "sha256-CQqqRFv24uagiQaAdTOdJPjkj59mn+WyDuNJyE/FADA=";
+              url = "https://publish-01.obsidian.md/access/d32b95288f15249fa01b04513b6b05f3/Art%20files/Celeste/portraits/badeline/07upset.gif";
+              sha256 = "0c00qm7whjg31srfb7v6ky7y9y14klrpb006i6hfdqpnbd2al2h9";
             };
             target = ".face.icon";
           };

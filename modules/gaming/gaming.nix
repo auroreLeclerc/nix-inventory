@@ -2,6 +2,7 @@
   unstablePkgs,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
@@ -39,25 +40,7 @@
 
   specialisation."Steam Deck (Gamescope)".configuration =
     let
-      decky-loader =
-        import
-          (builtins.fetchurl {
-            url = "https://raw.githubusercontent.com/Jovian-Experiments/Jovian-NixOS/refs/heads/development/pkgs/decky-loader/default.nix";
-            sha256 = "0afjb8jcqb4kx4sld3b0jpxfxwvs9y3d5lhkdvavhw5ajzx1m5bh";
-          })
-          {
-            inherit lib;
-            inherit (pkgs)
-              fetchFromGitHub
-              nodejs
-              pnpm_9
-              fetchPnpmDeps
-              pnpmConfigHook
-              python3
-              coreutils
-              psmisc
-              ;
-          };
+      inherit (inputs.jovian-nixos.legacyPackages.${pkgs.system}) decky-loader;
     in
     {
       home-manager.users.dawn = {

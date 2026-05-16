@@ -46,8 +46,8 @@
       displayManager.lightdm = {
         enable = true;
         background = builtins.fetchurl {
-          url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/983670de-d8f0-4afe-8503-443708773491/maddy/w=2256";
-          sha256 = "sha256-pHLwF6f5qswN448Nj0QWuDhA+u41nC+nT9tsDmRSKAA=";
+          url = "https://publish-01.obsidian.md/access/d32b95288f15249fa01b04513b6b05f3/Art%20files/Celeste/extra/Maddy.png";
+          sha256 = "084ln86mh1ib0mwrylk7kpfkkcvdn0am0m8xlxymlyza3ah7immz";
         };
       };
     };

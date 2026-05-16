@@ -53,8 +53,8 @@
                 plasmusicToolbar = {
                   panelIcon = {
                     icon = builtins.fetchurl {
-                      url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/f50a4ba8-e3d6-4a76-8259-12aba129b9eb/ots/w=512";
-                      sha256 = "sha256-6Fhb/6/VdiVWk3TVoVg2l3E4++zQfoQhn8JDyichTz0=";
+                      url = "https://publish-01.obsidian.md/access/d32b95288f15249fa01b04513b6b05f3/Art%20files/Celeste/promo/ots.png";
+                      sha256 = "14yiswvfsszi38k7sc8bqclhhbm8kbnzzb0ybxqq1p2cqsn6ncvb";
                     };
                     albumCover = {
                       useAsIcon = true;

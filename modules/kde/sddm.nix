@@ -33,8 +33,8 @@
     sddm = {
       inherit (config.services.displayManager.sddm) enable;
       background = builtins.fetchurl {
-        url = "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/5d3b0bc1-03d4-4c56-b04d-70f7fe07d603/complete-screen8/w=2256";
-        sha256 = "sha256-D5o0TmE9rGey35Uljjo9JtG5XGsY4TgkKxqmQWDiVvA=";
+        url = "https://publish-01.obsidian.md/access/d32b95288f15249fa01b04513b6b05f3/Art%20files/Celeste/Complete%20screens/complete-screen8.png";
+        sha256 = "0rdxhwyg8rf31dwnzkpf1y0l0l40ni15x6icb3w9kj5xsbnmr9lp";
       };
       loginBackground = true;
     };
