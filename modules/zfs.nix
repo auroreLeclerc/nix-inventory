@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  unstablePkgs,
+  ...
+}:
 {
   boot = {
     supportedFilesystems = [ "zfs" ];
@@ -30,6 +35,7 @@
     };
     scrutiny.collector = {
       enable = true;
+      package = unstablePkgs.scrutiny-collector;
       settings.api.endpoint = "http://127.0.0.1:8080";
     };
   };

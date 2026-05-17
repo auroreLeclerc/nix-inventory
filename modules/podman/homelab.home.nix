@@ -2,6 +2,7 @@
   osConfig,
   config,
   pkgs,
+  unstablePkgs,
   ...
 }:
 let
@@ -514,7 +515,7 @@ in
             autoUpdate = "registry";
           };
           scrutiny = {
-            image = "ghcr.io/analogj/scrutiny:v${pkgs.scrutiny.version}-web";
+            image = "ghcr.io/analogj/scrutiny:v${unstablePkgs.scrutiny.version}-web";
             environment = {
               PORT = 8080;
             };
