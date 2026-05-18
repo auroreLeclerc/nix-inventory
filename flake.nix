@@ -32,6 +32,10 @@
       url = "github:NixOS/infra";
       flake = false;
     };
+    mrchromebox-scripts = {
+      url = "github:MrChromebox/scripts";
+      flake = false;
+    };
   };
   outputs =
     { nixpkgs, ... }@inputs:

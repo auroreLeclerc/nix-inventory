@@ -61,6 +61,22 @@
         "type": "github"
       }
     },
+    "mrchromebox-scripts": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1779061886,
+        "narHash": "sha256-pFMDeGy0mCxo/wtK4Glvuue62NdzmLokKFtpyXVz4tQ=",
+        "owner": "MrChromebox",
+        "repo": "scripts",
+        "rev": "40a7f742a1ec45e0c6db0645e4a885fd18019b97",
+        "type": "github"
+      },
+      "original": {
+        "owner": "MrChromebox",
+        "repo": "scripts",
+        "type": "github"
+      }
+    },
     "nix-darwin": {
       "inputs": {
         "nixpkgs": [
@@ -248,6 +264,7 @@
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
         "jovian-nixos": "jovian-nixos",
+        "mrchromebox-scripts": "mrchromebox-scripts",
         "nix-darwin": "nix-darwin",
         "nix-flatpak": "nix-flatpak",
         "nix-index-database": "nix-index-database",

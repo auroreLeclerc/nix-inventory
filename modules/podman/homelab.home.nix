@@ -528,6 +528,7 @@ in
                       host = "influxdb";
                       port = 8086;
                     };
+                    log.level = "WARN";
                   }
                 )
               }:/opt/scrutiny/config/scrutiny.yaml:ro"

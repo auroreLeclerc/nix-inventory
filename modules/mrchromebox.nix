@@ -1,18 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
   mrchromebox-firmware-util = pkgs.buildFHSEnv {
     name = "mrchromebox-firmware-util";
-    unshareUser = false;
-    unsharePid = false;
-    unshareIpc = false;
-    unshareNet = false;
-    unshareUts = false;
-    unshareCgroup = false;
-    dieWithParent = false;
-    privateTmp = false;
     targetPkgs =
       pkgs: with pkgs; [
-        curl
         cacert
         dmidecode
         flashrom
@@ -35,7 +26,11 @@ let
         zlib
         stdenv.cc.cc.lib
       ];
-    runScript = pkgs.writeShellScript "mrchromebox" "cd; curl -LOf https://mrchromebox.tech/firmware-util.sh && sudo bash firmware-util.sh";
+    runScript = pkgs.writeShellScript "mrchromebox" ''
+      export script_dir="${inputs.mrchromebox-scripts}"
+      export use_local="y"
+      bash ${inputs.mrchromebox-scripts}/firmware-util.sh
+    '';
   };
 in
 {
