@@ -34,7 +34,6 @@ in
         kcrash
         drkonqi
         kate
-        koi
         yakuake
         plasma-disks
         kcalc

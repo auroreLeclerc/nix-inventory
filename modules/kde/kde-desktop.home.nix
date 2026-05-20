@@ -272,6 +272,7 @@
           kteatime
           kweather
           ktimer
+          koi
           dolphin-plugins
         ])
         ++ (with pkgs; [
@@ -281,6 +282,10 @@
           mission-center
         ]);
         file = {
+          koi = {
+            source = "${pkgs.kdePackages.koi}/share/applications/local.KoiDbusInterface.desktop";
+            target = ".config/autostart/local.KoiDbusInterface.desktop";
+          };
           kteatime = {
             source = "${pkgs.kdePackages.kteatime}/share/applications/org.kde.kteatime.desktop";
             target = ".config/autostart/org.kde.kteatime.desktop";

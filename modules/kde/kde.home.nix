@@ -211,10 +211,6 @@
             source = "${pkgs.kdePackages.yakuake}/share/applications/org.kde.yakuake.desktop";
             target = ".config/autostart/org.kde.yakuake.desktop";
           };
-          koi = {
-            source = "${pkgs.kdePackages.koi}/share/applications/local.KoiDbusInterface.desktop";
-            target = ".config/autostart/local.KoiDbusInterface.desktop";
-          };
           apply-icc = {
             source = "${apply-icc}/bin/apply-icc";
             target = ".config/plasma-workspace/env/apply-icc.sh";

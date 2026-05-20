@@ -10,19 +10,13 @@
     defaultSession = lib.mkForce "plasma-mobile";
   };
   environment = {
-    systemPackages =
-      (with pkgs.kdePackages; [
-        plasma-mobile
-        keysmith
-        koko
-        spacebar
-        calindori
-      ])
-      ++ (with pkgs; [
-        maliit-framework
-        maliit-keyboard
-      ]);
+    systemPackages = with pkgs; [
+      kdePackages.plasma-mobile
+      maliit-framework
+      maliit-keyboard
+    ];
   };
   documentation.enable = false;
+  programs.kdeconnect.enable = lib.mkForce false;
   hardware.sensor.iio.enable = true;
 }
