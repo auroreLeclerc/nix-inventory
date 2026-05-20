@@ -40,7 +40,7 @@
 
   specialisation."Steam Deck (Gamescope)".configuration =
     let
-      inherit (inputs.jovian-nixos.legacyPackages.${pkgs.system}) decky-loader;
+      inherit (inputs.jovian-nixos.legacyPackages.${pkgs.stdenv.hostPlatform.system}) decky-loader;
     in
     {
       home-manager.users.dawn = {
