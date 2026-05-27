@@ -50,13 +50,13 @@ class UML():
 
     @property
     def __logger(self):
-        logging.basicConfig(level=logging.ERROR)
+        logging.basicConfig(level=logging.WARNING)
         return logging.getLogger(self.__class__.__name__)
 
     def __get_modules(self, component_path: Path):
         modules: list[Path] = []
         with open(component_path, "r", encoding="utf-8") as file:
-            for module in re.findall(r"\.{1,2}/[^\s()]+\.(?:nix|json|yaml|yml|toml|lock|sh|sql)", file.read()):
+            for module in re.findall(r"\.{1,2}/[^\s(){}$;]+\.\w{2,4}", file.read()):
                 module_path = Path(component_path.parent/module)
                 if module_path.exists():
                     modules.append(module_path)
@@ -85,6 +85,7 @@ class UML():
             ignores = gitignore.read().split()
             ignores.extend(["units", "utilities", ".puml", ".svg", ".md", "LICENSE", ".shellcheckrc", ".pre-commit-config.yaml", ".git"])
             for module in reading_dir.iterdir():
+                self.__logger.info(module.resolve())
                 if not any(ignore in str(module.resolve()) for ignore in ignores):
                     if module.is_file():
                         elm: PumlElement
@@ -145,8 +146,12 @@ class UML():
             modules = self.__discover_modules(file, Path(self.__DIR_PATH)/"..")
 
             # --- Relation Declaration
+            file.write(f"{self.__md5_from(self.__DIR_PATH/".."/"flake.nix")} - {self.__md5_from(self.__DIR_PATH/".."/"flake.lock")}\n")
+            file.write(f"{self.__md5_from(self.__DIR_PATH/".."/"flake.nix")} - {self.__md5_from(self.__DIR_PATH/".."/".sops.yaml")}\n")
+
             colors = give_me_colors(len(units))
             for unit, unit_modules in units.items():
+                file.write(f"{self.__md5_from(self.__DIR_PATH/".."/"flake.nix")} -[{colors[0]}]-> {self.__md5_from(unit)}\n")
                 for module in unit_modules:
                     file.write(f"{self.__md5_from(unit)} -[{colors[0]}]-> {self.__md5_from(module)}\n")
                 colors.pop(0)
@@ -154,10 +159,6 @@ class UML():
             for module, sub_modules in modules.items():
                 for sub_module in sub_modules:
                     file.write(f"{self.__md5_from(module)} --> {self.__md5_from(sub_module)}\n")
-                
-            
-            file.write(f"{self.__md5_from(self.__DIR_PATH/".."/"flake.nix")} - {self.__md5_from(self.__DIR_PATH/".."/"flake.lock")}\n")
-            file.write(f"{self.__md5_from(self.__DIR_PATH/".."/"flake.nix")} - {self.__md5_from(self.__DIR_PATH/".."/".sops.yaml")}\n")
 
             # --- End
             file.write("@enduml\n")
