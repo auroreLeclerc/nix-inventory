@@ -4,6 +4,7 @@ from io import TextIOWrapper
 import subprocess
 import re
 import logging
+import json
 from enum import Enum
 from urllib import request
 from pathlib import Path
@@ -77,7 +78,7 @@ class UML():
     def __discover_modules(
         self,
         file: TextIOWrapper,
-        reading_dir = Path(__DIR_PATH)/".."/"modules",
+        reading_dir = Path(__DIR_PATH)/"..",
         t = ""
     ):
         modules: dict[Path, list[Path]] = {}
@@ -112,25 +113,38 @@ class UML():
                     self.__logger.debug(module)
         return modules
 
+    def __discover_flakes(
+        self,
+        file: TextIOWrapper,
+        reading_file = Path(__DIR_PATH)/".."/"flake.lock",
+        t = ""
+    ):
+        inputs: list[str] = []
+        with open(reading_file, "r", encoding="utf-8") as flake:
+            flakes = json.load(flake)
+            for key in flakes["nodes"]["root"]["inputs"]:
+                file.write(f"{t}{PumlElement.CLOUD.value} \"{key}\" as {md5(key.encode("utf-8")).hexdigest()}\n")
+                inputs.append(key)
+        return inputs
 
     def __init__(self):
         with open(self.__OUT_PATH, "w", encoding="utf-8") as file:
             def give_me_colors(units_number: int):
                 colors = [
-                    MaterialColors.YELLOW.value[2],
-                    MaterialColors.LIGHT_BLUE.value[2],
-                    MaterialColors.GRAY.value[2],
-                    MaterialColors.GREEN.value[2],
+                    MaterialColors.LIIME.value[2],
+                    MaterialColors.PINK.value[2],
                     MaterialColors.PURPLE.value[2],
+                    MaterialColors.BLUE.value[2],
+                    MaterialColors.GREEN.value[2],
                     MaterialColors.ORANGE.value[2],
-                    MaterialColors.AMBER.value[2],
+                    MaterialColors.BROWN.value[2],
                 ]
                 assert len(colors) >= units_number, units_number
                 return colors
 
             # --- Start
             file.write("@startuml inventory\n")
-            file.write("!theme amiga\n")
+            file.write("!theme mono\n")
 
             # --- Component Declaration
             units: dict[Path, list[Path]] = {}
@@ -143,22 +157,26 @@ class UML():
                 colors.pop(0)
             file.write("}\n")
                 
-            modules = self.__discover_modules(file, Path(self.__DIR_PATH)/"..")
+            flakes = self.__discover_flakes(file)
+            modules = self.__discover_modules(file)
 
             # --- Relation Declaration
             file.write(f"{self.__md5_from(self.__DIR_PATH/".."/"flake.nix")} - {self.__md5_from(self.__DIR_PATH/".."/"flake.lock")}\n")
             file.write(f"{self.__md5_from(self.__DIR_PATH/".."/"flake.nix")} - {self.__md5_from(self.__DIR_PATH/".."/".sops.yaml")}\n")
 
+            for flake in flakes:
+                file.write(f"{md5(flake.encode("utf-8")).hexdigest()} --> {self.__md5_from(self.__DIR_PATH/".."/"flake.lock")}\n")
+
             colors = give_me_colors(len(units))
             for unit, unit_modules in units.items():
                 file.write(f"{self.__md5_from(self.__DIR_PATH/".."/"flake.nix")} -[{colors[0]}]-> {self.__md5_from(unit)}\n")
                 for module in unit_modules:
-                    file.write(f"{self.__md5_from(unit)} -[{colors[0]}]-> {self.__md5_from(module)}\n")
+                    file.write(f"{self.__md5_from(unit)} <-[{colors[0]}]- {self.__md5_from(module)}\n")
                 colors.pop(0)
 
             for module, sub_modules in modules.items():
                 for sub_module in sub_modules:
-                    file.write(f"{self.__md5_from(module)} --> {self.__md5_from(sub_module)}\n")
+                    file.write(f"{self.__md5_from(module)} <-- {self.__md5_from(sub_module)}\n")
 
             # --- End
             file.write("@enduml\n")
