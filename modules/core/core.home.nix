@@ -2,7 +2,7 @@
   pkgs,
   lib,
   osConfig,
-  unstablePkgs,
+  # unstablePkgs,
   isDarwin,
   ...
 }:
@@ -66,7 +66,7 @@ in
         };
         localVariables = lib.mkIf adbEnabled {
           "CHROME_EXECUTABLE" = "${pkgs.chromium}/bin/chromium-browser";
-          "CAPACITOR_ANDROID_STUDIO_PATH" = unstablePkgs.android-studio;
+          # "CAPACITOR_ANDROID_STUDIO_PATH" = unstablePkgs.android-studio;
           "JAVA_HOME" = pkgs.jdk;
           "ANDROID_HOME" = "/home/dawn/Android/Sdk/";
           "ELECTRON_SKIP_BINARY_DOWNLOAD" = 1;

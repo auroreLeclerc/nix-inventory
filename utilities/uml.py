@@ -131,20 +131,20 @@ class UML():
         with open(self.__OUT_PATH, "w", encoding="utf-8") as file:
             def give_me_colors(units_number: int):
                 colors = [
-                    MaterialColors.LIIME.value[2],
-                    MaterialColors.PINK.value[2],
-                    MaterialColors.PURPLE.value[2],
-                    MaterialColors.BLUE.value[2],
-                    MaterialColors.GREEN.value[2],
-                    MaterialColors.ORANGE.value[2],
-                    MaterialColors.BROWN.value[2],
+                    MaterialColors.LIIME.value[6],
+                    MaterialColors.PINK.value[6],
+                    MaterialColors.PURPLE.value[6],
+                    MaterialColors.BLUE.value[6],
+                    MaterialColors.GREEN.value[6],
+                    MaterialColors.ORANGE.value[6],
+                    MaterialColors.BROWN.value[6],
                 ]
                 assert len(colors) >= units_number, units_number
                 return colors
 
             # --- Start
             file.write("@startuml inventory\n")
-            file.write("!theme mono\n")
+            file.write("!theme crt-amber\n")
 
             # --- Component Declaration
             units: dict[Path, list[Path]] = {}

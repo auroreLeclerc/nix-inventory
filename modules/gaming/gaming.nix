@@ -27,7 +27,8 @@
       celeste64
       freeciv_qt
       ryubing
-      shipwright
+      # dusklight
+      # shipwright
     ]);
   hardware = {
     xone.enable = true;
