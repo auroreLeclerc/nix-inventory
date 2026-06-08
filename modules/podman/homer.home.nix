@@ -107,7 +107,7 @@ in
               items =
                 let
                   keys = builtins.attrNames widgets;
-                  values = builtins.attrNames widgets;
+                  values = builtins.attrValues widgets;
                   size = builtins.length keys;
                 in
                 builtins.genList (i: {
