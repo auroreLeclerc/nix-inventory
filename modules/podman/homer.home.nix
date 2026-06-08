@@ -11,10 +11,10 @@ in
     let
       homerConfig = {
         title = "Laboratoire Maison";
-        subtitle = "OwO";
+        subtitle = builtins.currentSystem;
         logo = "assets/logo.webp";
         # header = true;
-        # footer = false;
+        footer = false;
         columns = "auto";
         connectivityCheck = false;
         defaults = {
@@ -102,9 +102,17 @@ in
           in
           [
             {
-              name = "Bruh";
+              name = "Everyone is Here!";
               icon = "fas fa-briefcase";
-              items = widgets;
+              items =
+                let
+                  keys = builtins.attrNames widgets;
+                  values = builtins.attrNames widgets;
+                  size = builtins.length keys;
+                in
+                builtins.genList (i: {
+                  ${builtins.elemAt keys i} = builtins.elemAt values i;
+                }) size;
             }
           ];
       };
