@@ -18,34 +18,49 @@ in
           "Administration" = [
             {
               Transmission = {
-                type = "transmission";
-                url = "https://transmission.${secrets.dns}";
+                icon = "transmission";
+                widget = {
+                  type = "transmission";
+                  url = "https://transmission.${secrets.dns}";
+                };
               };
             }
             {
               Jackett = {
-                type = "jackett";
-                url = "https://jackett.${secrets.dns}";
+                icon = "jackett";
+                widget = {
+                  type = "jackett";
+                  url = "https://jackett.${secrets.dns}";
+                };
               };
             }
             {
               Prowlarr = {
-                type = "prowlarr";
-                key = secrets.prowlarr;
-                url = "https://prowlarr.${secrets.dns}";
+                icon = "prowlarr";
+                widget = {
+                  type = "prowlarr";
+                  key = secrets.prowlarr;
+                  url = "https://prowlarr.${secrets.dns}";
+                };
               };
             }
             {
               Traefik = {
-                type = "traefik";
-                url = "https://traefik.${secrets.dns}";
+                icon = "traefik";
+                widget = {
+                  type = "traefik";
+                  url = "https://traefik.${secrets.dns}";
+                };
               };
             }
             {
               Pihole = {
-                type = "pihole";
-                url = "https://pihole.${secrets.dns}/";
-                version = 6;
+                icon = "pihole";
+                widget = {
+                  type = "pihole";
+                  url = "https://pihole.${secrets.dns}/";
+                  version = 6;
+                };
               };
             }
             {
@@ -60,32 +75,44 @@ in
           "Multimédia" = [
             {
               Jellyfin = {
-                type = "jellyfin";
-                url = "https://jellyfin.${secrets.dns}";
-                key = secrets.jellyfin;
-                version = 2;
-                enableBlocks = true;
+                icon = "jellyfin";
+                widget = {
+                  type = "jellyfin";
+                  url = "https://jellyfin.${secrets.dns}";
+                  key = secrets.jellyfin;
+                  version = 2;
+                  enableBlocks = true;
+                };
               };
             }
             {
               Radarr = {
-                type = "radarr";
-                url = "https://radarr.${secrets.dns}";
-                key = secrets.radarr;
+                icon = "radarr";
+                widget = {
+                  type = "radarr";
+                  url = "https://radarr.${secrets.dns}";
+                  key = secrets.radarr;
+                };
               };
             }
             {
               Sonarr = {
-                type = "sonarr";
-                url = "https://sonarr.${secrets.dns}";
-                key = secrets.sonarr;
+                icon = "sonarr";
+                widget = {
+                  type = "sonarr";
+                  url = "https://sonarr.${secrets.dns}";
+                  key = secrets.sonarr;
+                };
               };
             }
             {
               Lidarr = {
-                type = "lidarr";
-                url = "https://lidarr.${secrets.dns}";
-                key = secrets.lidarr;
+                icon = "lidarr";
+                widget = {
+                  type = "lidarr";
+                  url = "https://lidarr.${secrets.dns}";
+                  key = secrets.lidarr;
+                };
               };
             }
             {
@@ -96,14 +123,20 @@ in
             }
             {
               Fileflows = {
-                type = "fileflows";
-                url = "https://fileflows.${secrets.dns}";
+                icon = "fileflows";
+                widget = {
+                  type = "fileflows";
+                  url = "https://fileflows.${secrets.dns}";
+                };
               };
             }
             {
               Bazarr = {
-                type = "bazarr";
-                url = "https://bazarr.${secrets.dns}";
+                icon = "bazarr";
+                widget = {
+                  type = "bazarr";
+                  url = "https://bazarr.${secrets.dns}";
+                };
               };
             }
           ];
@@ -118,22 +151,31 @@ in
             }
             {
               Miniflux = {
-                type = "miniflux";
-                url = "https://miniflux.${secrets.dns}/";
-                key = secrets.miniflux;
+                icon = "miniflux";
+                widget = {
+                  type = "miniflux";
+                  url = "https://miniflux.${secrets.dns}/";
+                  key = secrets.miniflux;
+                };
               };
             }
             {
               Photoprism = {
-                type = "photoprism";
-                url = "https://photoprism.${secrets.dns}/";
+                icon = "photoprism";
+                widget = {
+                  type = "photoprism";
+                  url = "https://photoprism.${secrets.dns}/";
+                };
               };
             }
             {
               Paperless = {
-                type = "paperlessngx";
-                url = "https://paperless.${secrets.dns}/";
-                key = secrets.paperless;
+                icon = "paperlessngx";
+                widget = {
+                  type = "paperlessngx";
+                  url = "https://paperless.${secrets.dns}/";
+                  key = secrets.paperless;
+                };
               };
             }
             {
@@ -144,14 +186,20 @@ in
             }
             {
               Nextcloud = {
-                type = "nextcloud";
-                url = "https://nextcloud.${secrets.dns}/";
+                icon = "nextcloud";
+                widget = {
+                  type = "nextcloud";
+                  url = "https://nextcloud.${secrets.dns}/";
+                };
               };
             }
             {
               Changedetection = {
-                type = "changedetectionio";
-                url = "https://changedetection.${secrets.dns}/";
+                icon = "changedetectionio";
+                widget = {
+                  type = "changedetectionio";
+                  url = "https://changedetection.${secrets.dns}/";
+                };
               };
             }
             {
@@ -162,8 +210,11 @@ in
             }
             {
               Scrutiny = {
-                type = "scrutiny";
-                url = "https://scrutiny.${secrets.dns}/";
+                icon = "scrutiny";
+                widget = {
+                  type = "scrutiny";
+                  url = "https://scrutiny.${secrets.dns}/";
+                };
               };
             }
           ];
@@ -174,7 +225,7 @@ in
       homepage = {
         image = "ghcr.io/gethomepage/homepage:latest";
         volumes = [
-          "${builtins.toFile "homePageSettings.json" (builtins.toJSON homePageSettings)}:/app/config/settings.yml"
+          "${builtins.toFile "homePageSettings.json" (builtins.toJSON homePageSettings)}:/app/config/settings.yaml"
           "${builtins.toFile "homePageServices.json" (builtins.toJSON homePageServices)}:/app/config/services.yaml"
           "${
             builtins.fetchurl {
