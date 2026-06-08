@@ -33,31 +33,31 @@ in
               [
                 {
                   name = "Transmission";
-                  logo = "assets/transmission.svg";
+                  logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/transmission.svg";
                   type = "Transmission";
                   url = "https://transmission.${secrets.dns}";
                 }
                 {
                   name = "Jackett";
-                  logo = "assets/jackett.svg";
+                  logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jackett.svg";
                   url = "https://jackett.${secrets.dns}";
                 }
                 {
                   name = "Prowlarr";
-                  logo = "assets/prowlarr.svg";
+                  logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/prowlarr.svg";
                   type = "Prowlarr";
                   apikey = secrets.prowlarr;
                   url = "https://prowlarr.${secrets.dns}";
                 }
                 {
                   name = "Traefik";
-                  logo = "assets/traefik.svg";
+                  logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik.svg";
                   type = "Traefik";
                   url = "https://traefik.${secrets.dns}";
                 }
                 {
                   name = "Pi-hole";
-                  logo = "assets/pi.svg";
+                  logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pi.svg";
                   type = "PiHole";
                   endpoint = piholeEndpoint;
                   apiVersion = 6;
@@ -65,7 +65,7 @@ in
                 }
                 {
                   name = "Vaultwarden - Server";
-                  logo = "assets/vaultwarden.svg";
+                  logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/vaultwarden.svg";
                   type = "Vaultwarden";
                   url = "https://vaultwarden.${secrets.dns}/";
                 }
@@ -77,7 +77,7 @@ in
             items = [
               {
                 name = "Jellyfin";
-                logo = "assets/jellyfin.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellyfin.svg";
                 type = "Emby";
                 apikey = secrets.jellyfin;
                 url = "https://jellyfin.${secrets.dns}";
@@ -85,38 +85,38 @@ in
               }
               {
                 name = "Radarr";
-                logo = "assets/radarr.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/radarr.svg";
                 type = "Radarr";
                 apikey = secrets.radarr;
                 url = "https://radarr.${secrets.dns}";
               }
               {
                 name = "Sonarr";
-                logo = "assets/sonarr.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/sonarr.svg";
                 type = "Sonarr";
                 apikey = secrets.sonarr;
                 url = "https://sonarr.${secrets.dns}";
               }
               {
                 name = "Lidarr";
-                logo = "assets/lidarr.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/lidarr.svg";
                 type = "Lidarr";
                 apikey = secrets.lidarr;
                 url = "https://lidarr.${secrets.dns}";
               }
               {
                 name = "Yubal";
-                logo = "assets/yubal.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/yubal.svg";
                 url = "https://yubal.${secrets.dns}";
               }
               {
                 name = "FileFlows";
-                logo = "assets/fileflows.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/fileflows.svg";
                 url = "https://fileflows.${secrets.dns}";
               }
               {
                 name = "Bazarr";
-                logo = "assets/bazarr.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/bazarr.svg";
                 url = "https://bazarr.${secrets.dns}";
               }
             ];
@@ -127,52 +127,52 @@ in
             items = [
               {
                 name = "Reactive Resume";
-                logo = "assets/resume.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/resume.svg";
                 url = "https://reactive-resume.${secrets.dns}";
               }
               {
                 name = "Miniflux";
                 type = "Miniflux";
-                logo = "assets/miniflux.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/miniflux.svg";
                 apikey = secrets.miniflux;
                 url = "https://miniflux.${secrets.dns}/";
               }
               {
                 name = "Photoprism";
-                logo = "assets/photoprism.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/photoprism.svg";
                 url = "https://photoprism.${secrets.dns}/";
               }
               {
                 name = "Paperless";
-                logo = "assets/paperless.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/paperless.svg";
                 type = "PaperlessNG";
                 apikey = secrets.paperless;
                 url = "https://paperless.${secrets.dns}/";
               }
               {
                 name = "IT-Tools";
-                logo = "assets/it-tools.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/it-tools.svg";
                 url = "https://it-tools.${secrets.dns}/";
               }
               {
                 name = "Nextcloud";
                 type = "Nextcloud";
-                logo = "assets/nextcloud.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/nextcloud.svg";
                 url = "https://nextcloud.${secrets.dns}/";
               }
               {
                 name = "Change Detection";
-                logo = "assets/changedetection.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/changedetection.svg";
                 url = "https://changedetection.${secrets.dns}/";
               }
               {
                 name = "Logseq";
-                logo = "assets/logseq.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/logseq.svg";
                 url = "https://logseq.${secrets.dns}/";
               }
               {
                 name = "Scrutiny";
-                logo = "assets/scrutiny.svg";
+                logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/scrutiny.svg";
                 url = "https://scrutiny.${secrets.dns}/";
               }
             ];

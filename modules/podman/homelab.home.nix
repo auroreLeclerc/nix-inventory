@@ -42,7 +42,7 @@ in
 {
   imports = [
     ./podman.home.nix
-    ./homepage.home.nix
+    ./homer.home.nix
     ./traefik.home.nix
     ./ci-cd.home.nix
   ];
