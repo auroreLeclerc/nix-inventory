@@ -11,7 +11,7 @@ in
     let
       homerConfig = {
         title = "Laboratoire Maison";
-        subtitle = "Nix language evaluator v${builtins.nixVersion} with Nix${builtins.langVersion}";
+        subtitle = "Nix language evaluator v${builtins.nixVersion} with Nix${builtins.toString builtins.langVersion}";
         logo = "assets/logo.webp";
         # header = true;
         footer = false;
@@ -108,7 +108,7 @@ in
                 let
                   values = builtins.attrValues widgets;
                 in
-                builtins.genList (i: builtins.elemAt values i) builtins.length values;
+                builtins.genList (i: builtins.elemAt values i) (builtins.length values);
             }
           ];
       };
