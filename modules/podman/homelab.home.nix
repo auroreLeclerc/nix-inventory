@@ -354,7 +354,6 @@ in
               PORT = 80;
               inherit (lsio) TZ;
               FTLCONF_webserver_api_password = "";
-              # FTLCONF_dns_listeningMode = "ALL";
               FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11";
               FTLCONF_dns_rateLimit_count = 0;
               FTLCONF_dns_rateLimit_interval = 0;
@@ -536,6 +535,22 @@ in
             image = "docker.io/library/influxdb:2";
             userNS = "keep-id:uid=999,gid=999";
             volumes = [ "/run/media/dawn/cubus/influxdb:/var/lib/influxdb2" ];
+            network = [ "docker-like" ];
+            autoUpdate = "registry";
+          };
+          vllm = {
+            image = "docker.io/intel/vllm:latest";
+            devices = [ "/dev/dri:/dev/dri" ];
+            extraPodmanArgs = [ "--shm-size 10g" ];
+            network = [ "docker-like" ];
+            autoUpdate = "registry";
+          };
+          open-webui = {
+            image = "ghcr.io/open-webui/open-webui:main";
+            volumes = [ "/run/media/dawn/cubus/open-webui:/app/backend/data" ];
+            environment = {
+              PORT = 3000;
+            };
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
