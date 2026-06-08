@@ -1,6 +1,7 @@
 {
   osConfig,
   config,
+  lib,
   ...
 }:
 let
@@ -108,7 +109,13 @@ in
                 let
                   values = builtins.attrValues widgets;
                 in
-                builtins.genList (i: builtins.elemAt values i) (builtins.length values);
+                builtins.genList (
+                  i:
+                  let
+                    value = builtins.elemAt values i;
+                  in
+                  lib.mkIf (value != null) value
+                ) (builtins.length values);
             }
           ];
       };
