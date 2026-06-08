@@ -10,10 +10,9 @@ in
         description = "OwO";
         favicon = "/images/icon.webp";
         color = "violet";
-        background = "/images/dark.png";
-        cardBlur = "md";
+        background = "/images/light.png";
+        cardBlur = "3xl";
         language = "fr";
-        headerStyle = "boxedWidgets";
       };
       homePageServices = [
         {
@@ -239,6 +238,15 @@ in
           ];
         }
       ];
+      homePageWidgets = [
+        { logo = { }; }
+        {
+          openmeteo = {
+            latitude = 49.8934486;
+            longitude = 2.2954818;
+          };
+        }
+      ];
     in
     {
       homepage = {
@@ -246,6 +254,7 @@ in
         volumes = [
           "${builtins.toFile "homePageSettings.json" (builtins.toJSON homePageSettings)}:/app/config/settings.yaml"
           "${builtins.toFile "homePageServices.json" (builtins.toJSON homePageServices)}:/app/config/services.yaml"
+          "${builtins.toFile "homePageWidgets.json" (builtins.toJSON homePageWidgets)}:/app/config/widgets.yaml"
           "${
             builtins.fetchurl {
               url = "https://xenia-images.efi.pages.gay/chimmie_egg-wallpaper_light.png";
