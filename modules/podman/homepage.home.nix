@@ -197,7 +197,7 @@ in
         ];
         environment = {
           PORT = 3000;
-          HOMEPAGE_ALLOWED_HOSTS = "https://homepage.${secrets.dns}/";
+          HOMEPAGE_ALLOWED_HOSTS = "homepage.${secrets.dns}";
         };
         network = [ "docker-like" ];
         autoUpdate = "registry";
