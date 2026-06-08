@@ -11,7 +11,7 @@ in
     let
       homerConfig = {
         title = "Laboratoire Maison";
-        subtitle = builtins.currentSystem;
+        subtitle = "Nix language evaluator v${builtins.nixVersion} with Nix${builtins.langVersion}";
         logo = "assets/logo.webp";
         # header = true;
         footer = false;
@@ -103,16 +103,12 @@ in
           [
             {
               name = "Everyone is Here!";
-              icon = "fas fa-briefcase";
+              icon = "fa-solid fa-dragon";
               items =
                 let
-                  keys = builtins.attrNames widgets;
                   values = builtins.attrValues widgets;
-                  size = builtins.length keys;
                 in
-                builtins.genList (i: {
-                  ${builtins.elemAt keys i} = builtins.elemAt values i;
-                }) size;
+                builtins.genList (i: builtins.elemAt values i) builtins.length values;
             }
           ];
       };
