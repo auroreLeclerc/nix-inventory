@@ -55,8 +55,8 @@
           kwin.nightLight = {
             enable = true;
             location = {
-              latitude = "49.892";
-              longitude = "2.299";
+              latitude = "49.8934486";
+              longitude = "2.2954818";
             };
             mode = "location";
             temperature.night = 2600;
@@ -123,8 +123,8 @@
             };
             koirc = {
               General = {
-                latitude = 49.892;
-                longitude = 2.299;
+                latitude = 49.8934486;
+                longitude = 2.2954818;
                 notify = 2;
                 schedule = 2;
                 schedule-type = "sun";

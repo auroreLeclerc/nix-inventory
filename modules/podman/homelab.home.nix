@@ -42,7 +42,7 @@ in
 {
   imports = [
     ./podman.home.nix
-    ./homer.home.nix
+    ./homepage.home.nix
     ./traefik.home.nix
     ./ci-cd.home.nix
   ];
@@ -303,11 +303,6 @@ in
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
-          printer = {
-            image = "docker.io/chromedp/headless-shell:latest";
-            network = [ "docker-like" ];
-            autoUpdate = "registry";
-          };
           reactive-resume = {
             image = "docker.io/amruthpillai/reactive-resume:v5";
             userNS = "keep-id:uid=999,gid=999";
@@ -316,14 +311,14 @@ in
               inherit (lsio) TZ;
               APP_URL = "https://reactive-resume.${secrets.dns}";
               AUTH_SECRET = "NmQRQHGiCKAuerFZct6LM1xRPysr3rYd6TXLqzjclTc=";
-              PRINTER_ENDPOINT = "http://printer:9222";
               DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/resume";
+              FLAG_ALLOW_UNSAFE_AI_BASE_URL = false;
             };
             extraPodmanArgs = [
-              "--health-cmd 'curl -f http://localhost:3000/api/health'"
-              "--health-interval 10s"
-              "--health-retries 5"
-              "--health-timeout 5s"
+              "--health-cmd 'node -e fetch('http://127.0.0.1:3000/api/health').then((r) => { if (!r.ok) process.exit(1); }).catch(() => process.exit(1));'"
+              "--health-interval 30s"
+              "--health-timeout 10s"
+              "--health-retries 3"
             ];
             volumes = [ "/run/media/dawn/cubus/reactive-resume/:/app/data" ];
             network = [ "docker-like" ];
