@@ -7,11 +7,13 @@ in
     let
       homePageSettings = {
         title = "Laboratoire Maison";
-        description = "A description of my awesome homepage";
-        favicon = "/images/icon.png";
+        description = "OwO";
+        favicon = "/images/icon.webp";
         color = "violet";
         background = "/images/dark.png";
+        cardBlur = "md";
         language = "fr";
+        headerStyle = "boxedWidgets";
       };
       homePageServices = [
         {
@@ -19,6 +21,7 @@ in
             {
               Transmission = {
                 icon = "transmission";
+                href = "https://transmission.${secrets.dns}";
                 widget = {
                   type = "transmission";
                   url = "https://transmission.${secrets.dns}";
@@ -28,6 +31,7 @@ in
             {
               Jackett = {
                 icon = "jackett";
+                href = "https://jackett.${secrets.dns}";
                 widget = {
                   type = "jackett";
                   url = "https://jackett.${secrets.dns}";
@@ -37,6 +41,7 @@ in
             {
               Prowlarr = {
                 icon = "prowlarr";
+                href = "https://prowlarr.${secrets.dns}";
                 widget = {
                   type = "prowlarr";
                   key = secrets.prowlarr;
@@ -46,7 +51,8 @@ in
             }
             {
               Traefik = {
-                icon = "traefik";
+                icon = "traefik-proxy";
+                href = "https://traefik.${secrets.dns}";
                 widget = {
                   type = "traefik";
                   url = "https://traefik.${secrets.dns}";
@@ -55,7 +61,8 @@ in
             }
             {
               Pihole = {
-                icon = "pihole";
+                icon = "pi-hole";
+                href = "https://pihole.${secrets.dns}";
                 widget = {
                   type = "pihole";
                   url = "https://pihole.${secrets.dns}/";
@@ -76,6 +83,7 @@ in
             {
               Jellyfin = {
                 icon = "jellyfin";
+                href = "https://jellyfin.${secrets.dns}";
                 widget = {
                   type = "jellyfin";
                   url = "https://jellyfin.${secrets.dns}";
@@ -88,6 +96,7 @@ in
             {
               Radarr = {
                 icon = "radarr";
+                href = "https://radarr.${secrets.dns}";
                 widget = {
                   type = "radarr";
                   url = "https://radarr.${secrets.dns}";
@@ -98,6 +107,7 @@ in
             {
               Sonarr = {
                 icon = "sonarr";
+                href = "https://sonarr.${secrets.dns}";
                 widget = {
                   type = "sonarr";
                   url = "https://sonarr.${secrets.dns}";
@@ -108,6 +118,7 @@ in
             {
               Lidarr = {
                 icon = "lidarr";
+                href = "https://lidarr.${secrets.dns}";
                 widget = {
                   type = "lidarr";
                   url = "https://lidarr.${secrets.dns}";
@@ -124,6 +135,7 @@ in
             {
               Fileflows = {
                 icon = "fileflows";
+                href = "https://fileflows.${secrets.dns}";
                 widget = {
                   type = "fileflows";
                   url = "https://fileflows.${secrets.dns}";
@@ -133,6 +145,7 @@ in
             {
               Bazarr = {
                 icon = "bazarr";
+                href = "https://bazarr.${secrets.dns}";
                 widget = {
                   type = "bazarr";
                   url = "https://bazarr.${secrets.dns}";
@@ -152,6 +165,7 @@ in
             {
               Miniflux = {
                 icon = "miniflux";
+                href = "https://miniflux.${secrets.dns}";
                 widget = {
                   type = "miniflux";
                   url = "https://miniflux.${secrets.dns}/";
@@ -162,6 +176,7 @@ in
             {
               Photoprism = {
                 icon = "photoprism";
+                href = "https://photoprism.${secrets.dns}";
                 widget = {
                   type = "photoprism";
                   url = "https://photoprism.${secrets.dns}/";
@@ -170,9 +185,10 @@ in
             }
             {
               Paperless = {
-                icon = "paperlessngx";
+                icon = "paperless-ngx";
+                href = "https://paperless.${secrets.dns}";
                 widget = {
-                  type = "paperlessngx";
+                  type = "paperless";
                   url = "https://paperless.${secrets.dns}/";
                   key = secrets.paperless;
                 };
@@ -187,6 +203,7 @@ in
             {
               Nextcloud = {
                 icon = "nextcloud";
+                href = "https://nextcloud.${secrets.dns}";
                 widget = {
                   type = "nextcloud";
                   url = "https://nextcloud.${secrets.dns}/";
@@ -195,9 +212,10 @@ in
             }
             {
               Changedetection = {
-                icon = "changedetectionio";
+                icon = "changedetection";
+                href = "https://changedetectionio.${secrets.dns}";
                 widget = {
-                  type = "changedetectionio";
+                  type = "changedetection";
                   url = "https://changedetection.${secrets.dns}/";
                 };
               };
@@ -211,6 +229,7 @@ in
             {
               Scrutiny = {
                 icon = "scrutiny";
+                href = "https://scrutiny.${secrets.dns}";
                 widget = {
                   type = "scrutiny";
                   url = "https://scrutiny.${secrets.dns}/";
@@ -241,10 +260,10 @@ in
           }:/app/public/images/dark.png"
           "${
             builtins.fetchurl {
-              url = "https://xenia-images.efi.pages.gay/neotheta_sigil.png";
-              sha256 = "0y4liw0p4cydl44hqm3db5vcpn0fwxxyks92s6mlqwjhzbaqlsj2";
+              url = "https://xenia-images.efi.pages.gay/jd-laclede1.webp";
+              sha256 = "1vzkkxfd0hbpbz97xc24v2ykhwn9ci2vhxzvs8lwknh8lrw5qlhm";
             }
-          }:/app/public/images/icon.png"
+          }:/app/public/images/icon.webp"
         ];
         environment = {
           PORT = 3000;
