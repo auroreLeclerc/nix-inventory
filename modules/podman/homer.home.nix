@@ -1,7 +1,6 @@
 {
   osConfig,
   config,
-  lib,
   ...
 }:
 let
@@ -114,7 +113,7 @@ in
                   let
                     value = builtins.elemAt values i;
                   in
-                  lib.mkIf (value != null) value
+                  if (value != null) then value else { }
                 ) (builtins.length values);
             }
           ];
