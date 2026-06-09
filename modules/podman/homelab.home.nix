@@ -541,7 +541,10 @@ in
           vllm = {
             image = "docker.io/intel/vllm:latest";
             devices = [ "/dev/dri:/dev/dri" ];
-            extraPodmanArgs = [ "--shm-size 10g" ];
+            extraPodmanArgs = [
+              "--shm-size 10g"
+              "--model google/gemma-4-12B-it-qat-w4a16-ct"
+            ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
