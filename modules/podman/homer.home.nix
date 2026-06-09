@@ -46,7 +46,6 @@ in
               jellyfin = {
                 type = "Emby";
                 apikey = secrets.jellyfin;
-                url = "https://jellyfin.${secrets.dns}";
                 libraryType = "series";
               };
               radarr = {
@@ -72,11 +71,11 @@ in
               nextcloud = {
                 type = "Nextcloud";
               };
-              pihole = {
+              pi-hole = {
                 type = "PiHole";
-                endpoint = "https://pihole.${secrets.dns}/";
+                endpoint = "https://pi-hole.${secrets.dns}/";
                 apiVersion = 6;
-                url = "https://pihole.${secrets.dns}/admin";
+                url = "https://pi-hole.${secrets.dns}/admin";
               };
             };
             widgets = builtins.mapAttrs (
@@ -88,7 +87,6 @@ in
                     let # https://dashboardicons.com/
                       exceptions = {
                         yubal = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/yubal.svg";
-                        pi-hole = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/pi-hole.svg";
                         traefik = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik-proxy.svg";
                       };
                     in
@@ -140,7 +138,7 @@ in
               items = [
                 widgets.traefik
                 widgets.scrutiny
-                widgets.pihole
+                widgets.pi-hole
                 widgets.it-tools
                 # widgets.flaresolverr
               ];

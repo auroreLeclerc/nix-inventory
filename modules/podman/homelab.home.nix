@@ -20,7 +20,7 @@ let
     iptables -A CUSTOM_NAC -s 10.13.13.4 -j RETURN  # fdeity
 
     NETWORK_FRIENDS="${config.services.podman.networks.friends.subnet}"
-    PIHOLE="${config.services.podman.containers.pihole.ip4}"
+    PIHOLE="${config.services.podman.containers.pi-hole.ip4}"
     FRIENDS_RANGE="10.13.13.5-10.13.13.254"  # friends >= 5
 
     # friends: authorisation
@@ -91,7 +91,7 @@ in
             environment = {
               SERVERURL = secrets.ip;
               PEERS = "exelo,taya,fdeity,caza,paillettes"; # Must follow iptables custom repartition
-              PEERDNS = config.services.podman.containers.pihole.ip4;
+              PEERDNS = config.services.podman.containers.pi-hole.ip4;
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
             }
@@ -182,7 +182,7 @@ in
             }
             // lsio;
             extraPodmanArgs = [
-              "--dns ${config.services.podman.containers.pihole.ip4}"
+              "--dns ${config.services.podman.containers.pi-hole.ip4}"
               "--health-cmd 'curl -f http://localhost:9696/ping '"
             ];
             volumes = [ "/run/media/dawn/cubus/prowlarr:/config" ];
@@ -341,7 +341,7 @@ in
             network = [ "docker-like" ];
             autoUpdate = "local";
           };
-          pihole = {
+          pi-hole = {
             image = "docker.io/pihole/pihole:latest";
             volumes =
               let
