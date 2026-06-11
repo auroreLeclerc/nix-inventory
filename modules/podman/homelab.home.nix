@@ -538,13 +538,10 @@ in
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
-          vllm = {
-            image = "docker.io/intel/vllm:latest";
+          llama-cpp = {
+            image = "ghcr.io/ggml-org/llama.cpp:full-intel";
             devices = [ "/dev/dri:/dev/dri" ];
-            extraPodmanArgs = [
-              "-t"
-              "--shm-size 10g"
-            ];
+            volumes = [ "/run/media/dawn/cubus/llama-cpp:/models" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -552,7 +549,20 @@ in
             image = "ghcr.io/open-webui/open-webui:main";
             volumes = [ "/run/media/dawn/cubus/open-webui:/app/backend/data" ];
             environment = {
-              PORT = 3000;
+              PORT = 8080;
+              DEFAULT_LOCALE = "fr";
+              ENABLE_CALENDAR = false;
+              ENABLE_FOLDERS = false;
+              ENABLE_AUTOMATIONS = false;
+              ENABLE_ADMIN_CHAT_ACCESS = false;
+              ENABLE_ADMIN_ANALYTICS = false;
+              DOCKER = true;
+              GLOBAL_LOG_LEVEL = "WARNING";
+              OPENAI_API_BASE_URL = "http://llama-cpp:8080/v1";
+              ENABLE_CODE_EXECUTION = false;
+              ENABLE_CODE_INTERPRETER = false;
+              ENABLE_DIRECT_CONNECTIONS = false;
+              ENABLE_AUTOCOMPLETE_GENERATION = false;
             };
             network = [ "docker-like" ];
             autoUpdate = "registry";
