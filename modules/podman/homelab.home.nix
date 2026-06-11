@@ -551,18 +551,8 @@ in
             environment = {
               PORT = 8080;
               DEFAULT_LOCALE = "fr";
-              ENABLE_CALENDAR = false;
-              ENABLE_FOLDERS = false;
-              ENABLE_AUTOMATIONS = false;
-              ENABLE_ADMIN_CHAT_ACCESS = false;
-              ENABLE_ADMIN_ANALYTICS = false;
-              DOCKER = true;
               GLOBAL_LOG_LEVEL = "WARNING";
               OPENAI_API_BASE_URL = "http://llama-cpp:8080/v1";
-              ENABLE_CODE_EXECUTION = false;
-              ENABLE_CODE_INTERPRETER = false;
-              ENABLE_DIRECT_CONNECTIONS = false;
-              ENABLE_AUTOCOMPLETE_GENERATION = false;
             };
             network = [ "docker-like" ];
             autoUpdate = "registry";
