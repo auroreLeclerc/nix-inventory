@@ -360,7 +360,9 @@ in
               FTLCONF_webserver_api_allow_destructive = false;
               FTLCONF_misc_readOnly = true;
             };
-            extraPodmanArgs = [ "--health-cmd 'dig +norecurse +retry=0 @127.0.0.1 pi.hole ' --hostname 'OwO'" ];
+            extraPodmanArgs = [
+              "--health-cmd 'dig +norecurse +retry=0 @127.0.0.1 pi.hole ' --hostname '${osConfig.networking.hostName}'"
+            ];
             ip4 = "172.18.0.253";
             network = [ "docker-like" ];
             autoUpdate = "registry";

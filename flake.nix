@@ -175,6 +175,7 @@
       apps.x86_64-linux =
         let
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          ryubingCanary = pkgs.callPackage "./modules/gaming/${"ryubing-canary.nix"}" { };
           mkApp = name: description: runtimeInputs: text: {
             type = "app";
             program = "${pkgs.writeShellApplication { inherit name runtimeInputs text; }}/bin/${name}";
@@ -190,6 +191,9 @@
           pre-commit-run = mkApp "pre-commit-run" "Run pre-commit on all files" [
             pkgs.pre-commit
           ] "pre-commit run --all-files";
+          fetch-ryubing-canary-deps =
+            mkApp "fetch-ryubing-canary-deps" "Regenerate ryubing-canary-deps.json" [ ]
+              "exec ${ryubingCanary.passthru.fetch-deps} \"$PWD/modules/gaming/ryubing-canary-deps.json\"";
         };
     };
 }
