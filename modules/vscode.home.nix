@@ -31,27 +31,33 @@
         "diffEditor.ignoreTrimWhitespace" = false;
         "nix.enableLanguageServer" = true;
         "nix.serverPath" = "nixd";
-        "nix.serverSettings.nixd" = {
-          formatting.command = [ "nixfmt" ];
-          nixpkgs.expr = "(builtins.getFlake (builtins.toString ./.)).inputs.nixpkgs.legacyPackages.x86_64-linux";
-          options = {
-            nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.exelo.options";
-            home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.exelo.options.home-manager.users.type.getSubOptions []";
+        "nix.serverSettings" = {
+          nixd = {
+            formatting.command = [ "nixfmt" ];
+            nixpkgs.expr = "(builtins.getFlake (builtins.toString ./.)).inputs.nixpkgs.legacyPackages.x86_64-linux";
+            options = {
+              nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.exelo.options";
+              home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.exelo.options.home-manager.users.type.getSubOptions []";
+            };
           };
         };
         "redhat.telemetry.enabled" = false;
-        "sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
-        "sonarlint.disableTelemetry" = true;
+        # "sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
+        # "sonarlint.disableTelemetry" = true;
         "python.languageServer" = "Jedi";
         "git.autofetch" = true;
         "git.enableSmartCommit" = true;
         "git.confirmSync" = false;
-        "[css].editor.defaultFormatter" = "stylelint.vscode-stylelint";
+        "[css]" = {
+          "editor.defaultFormatter" = "stylelint.vscode-stylelint";
+        };
         "java.debug.settings.vmArgs" = "-ea";
         "java.jdt.ls.java.home" = pkgs.jdk17;
-        "go.alternateTools.dlv" = pkgs.delve;
-        "go.alternateTools.go" = pkgs.go;
-        "go.alternateTools.gopls" = pkgs.gopls;
+        "go.alternateTools" = {
+          dlv = "${pkgs.delve}/bin/dlv";
+          go = "${pkgs.go}/bin/go";
+          gopls = "${pkgs.gopls}/bin/gopls";
+        };
       };
     };
   };
