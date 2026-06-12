@@ -175,7 +175,7 @@
       apps.x86_64-linux =
         let
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          ryubingCanary = pkgs.callPackage "./modules/gaming/${"ryubing-canary.nix"}" { };
+          ryubingCanary = pkgs.callPackage ./modules/gaming/ryubing-canary.nix { };
           mkApp = name: description: runtimeInputs: text: {
             type = "app";
             program = "${pkgs.writeShellApplication { inherit name runtimeInputs text; }}/bin/${name}";

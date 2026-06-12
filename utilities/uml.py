@@ -59,6 +59,8 @@ class UML():
         with open(component_path, "r", encoding="utf-8") as file:
             for module in re.findall(r"\.{1,2}/[^\s(){}$;]+\.\w{2,4}", file.read()):
                 module_path = Path(component_path.parent/module)
+                if str(component_path).endswith("flake.nix") and str(module_path).endswith("ryubing-canary.nix"):
+                    continue
                 if module_path.exists():
                     modules.append(module_path)
                 else:
