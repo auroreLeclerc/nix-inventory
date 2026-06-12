@@ -86,7 +86,7 @@
               powerProfile = "balanced";
               powerButtonAction = "showLogoutScreen";
               whenLaptopLidClosed = "sleep";
-              whenSleepingEnter = "standbyThenHibernate";
+              whenSleepingEnter = "hybridSleep";
             };
             lowBattery = {
               autoSuspend = {
@@ -100,8 +100,8 @@
               displayBrightness = 50;
               powerProfile = "powerSaving";
               powerButtonAction = "showLogoutScreen";
-              whenLaptopLidClosed = "sleep";
-              whenSleepingEnter = "hybridSleep";
+              whenLaptopLidClosed = "hibernate";
+              whenSleepingEnter = "standbyThenHibernate";
             };
           };
           input.keyboard.numlockOnStartup = "on";
