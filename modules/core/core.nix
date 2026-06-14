@@ -66,6 +66,7 @@ in
         unrar
         file
         ffmpeg
+        vulkan-tools
       ])
       ++ lib.optionals (!isDarwin) (
         with pkgs;

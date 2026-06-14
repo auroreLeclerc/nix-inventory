@@ -540,10 +540,22 @@ in
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
-          llama-cpp = {
-            image = "ghcr.io/ggml-org/llama.cpp:full-intel";
+          ramalama = {
+            image = "quay.io/ramalama/ramalama:latest";
             devices = [ "/dev/dri:/dev/dri" ];
-            volumes = [ "/run/media/dawn/cubus/llama-cpp:/models" ];
+            volumes = [
+              "${
+                builtins.fetchurl {
+                  url = "https://huggingface.co/unsloth/gemma-4-E4B-it-qat-mobile-GGUF/resolve/main/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf";
+                  sha256 = "0k8qb0psxis3j1nk1ps2vwc5dqg97690msc78313jq79vybdsnps";
+                }
+              }:/mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf"
+              # "${builtins.fetchurl {
+              #   url = "https://huggingface.co/unsloth/gemma-4-E4B-it-qat-mobile-GGUF/resolve/main/mmproj-BF16.gguf";
+              #   sha256 = "1ydapqcd72p5gpvn8pzp3y73dc1byqpdih85m3nmiml2gyiaz6vw";
+              # }}:/mnt/models/mmproj-BF16.gguf"
+            ];
+            exec = "llama-server --host 0.0.0.0 --port 11434 --model /mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf --no-warmup --alias unsloth/gemma-4-E4B-it-qat-mobile-GGUF --ctx-size 4096 --temp 0.8 --cache-reuse 256 --flash-attn on -ngl 999 --threads 4 --log-colors on"; # --mmproj /mnt/models/mmproj-BF16.gguf
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -554,7 +566,7 @@ in
               PORT = 8080;
               DEFAULT_LOCALE = "fr";
               GLOBAL_LOG_LEVEL = "WARNING";
-              OPENAI_API_BASE_URL = "http://llama-cpp:8080/v1";
+              OPENAI_API_BASE_URL = "http://ramalama:11434/v1";
             };
             network = [ "docker-like" ];
             autoUpdate = "registry";
