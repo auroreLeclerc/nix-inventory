@@ -77,7 +77,7 @@
             import inputs.unstableNixpkgs {
               inherit system;
               config = {
-                allowUnfree = builtins.trace "NixOS ${nixpkgs.lib.trivial.codeName}		${nixpkgs.lib.trivial.version}" check;
+                allowUnfree = builtins.trace "NixOS ${nixpkgs.lib.trivial.codeName}  ${nixpkgs.lib.trivial.version}" check;
                 android_sdk.accept_license = check;
               };
             };

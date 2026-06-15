@@ -12,9 +12,8 @@ in
     let
       homerConfig = {
         title = "Laboratoire Maison";
-        subtitle = "Nix language evaluator v${builtins.nixVersion} with Nix${builtins.toString builtins.langVersion}";
+        subtitle = lib.trivial.version;
         logo = "assets/logo.webp";
-        # header = true;
         footer = false;
         columns = "auto";
         connectivityCheck = false;

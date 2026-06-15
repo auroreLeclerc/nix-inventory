@@ -39,7 +39,7 @@ in
         "steam-unwrapped"
         "steam-run"
         "unrar"
-        "xow_dongle-firmware"
+        "xone-dongle-firmware"
         "android-studio"
       ];
     fonts.packages = with pkgs; [
