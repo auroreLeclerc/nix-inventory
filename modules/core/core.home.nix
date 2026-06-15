@@ -2,7 +2,7 @@
   pkgs,
   lib,
   osConfig,
-  # unstablePkgs,
+  config,
   isDarwin,
   ...
 }:
@@ -15,7 +15,6 @@ let
         mail = "";
         name = "";
       };
-  adbEnabled = !isDarwin && osConfig.programs.adb.enable;
 in
 {
   config = {
@@ -35,6 +34,7 @@ in
       };
       zsh = {
         enable = true;
+        dotDir = "${config.xdg.configHome}/zsh";
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
@@ -63,13 +63,6 @@ in
             "macos"
             "brew"
           ];
-        };
-        localVariables = lib.mkIf adbEnabled {
-          "CHROME_EXECUTABLE" = "${pkgs.chromium}/bin/chromium-browser";
-          # "CAPACITOR_ANDROID_STUDIO_PATH" = unstablePkgs.android-studio;
-          "JAVA_HOME" = pkgs.jdk;
-          "ANDROID_HOME" = "/home/dawn/Android/Sdk/";
-          "ELECTRON_SKIP_BINARY_DOWNLOAD" = 1;
         };
         initContent = builtins.readFile ./zshrc.sh;
       };

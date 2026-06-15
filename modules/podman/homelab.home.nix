@@ -66,10 +66,7 @@ in
             environment = {
               PORT = 8096;
               HEALTHCHECK_PATH = "/health";
-              DOCKER_MODS = [
-                "linuxserver/mods:jellyfin-opencl-intel"
-                "ghcr.io/intro-skipper/intro-skipper-docker-mod"
-              ];
+              DOCKER_MODS = "linuxserver/mods:jellyfin-opencl-intel ghcr.io/intro-skipper/intro-skipper-docker-mod";
             }
             // lsio;
             volumes = [
@@ -220,11 +217,7 @@ in
             environment = {
               PORT = 8096;
               HEALTHCHECK_PATH = "/health";
-              DOCKER_MODS = [
-                # "linuxserver/mods:jellyfin-amd"
-                "linuxserver/mods:jellyfin-opencl-intel"
-                "ghcr.io/intro-skipper/intro-skipper-docker-mod"
-              ];
+              DOCKER_MODS = "linuxserver/mods:jellyfin-opencl-intel ghcr.io/intro-skipper/intro-skipper-docker-mod";
             }
             // lsio;
             volumes = [
@@ -555,7 +548,7 @@ in
               #   sha256 = "1ydapqcd72p5gpvn8pzp3y73dc1byqpdih85m3nmiml2gyiaz6vw";
               # }}:/mnt/models/mmproj-BF16.gguf"
             ];
-            exec = "llama-server --host 0.0.0.0 --model /mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf --no-warmup --alias unsloth/gemma-4-E4B-it-qat-mobile-GGUF --ctx-size 4096 --temp 0.8 --cache-reuse 256 --flash-attn on -ngl 999 --threads 4 --log-colors on"; # --mmproj /mnt/models/mmproj-BF16.gguf
+            exec = "llama-server --host 0.0.0.0 --model /mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf --no-warmup --alias unsloth/gemma-4-E4B-it-qat-mobile-GGUF --ctx-size 4096 --temp 0.8 --cache-reuse 256 --flash-attn on -ngl 999 --threads 4 --log-colors on --parallel 1"; # --mmproj /mnt/models/mmproj-BF16.gguf
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };

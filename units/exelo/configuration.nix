@@ -6,7 +6,6 @@
   imports = [
     ../../modules/kde/kde.nix
     ../../modules/workstation.nix
-    ../../modules/android-studio.nix
     ../../modules/gaming/gaming.nix
     ../../modules/virtualbox.nix
     inputs.nixos-hardware.nixosModules.framework-13-7040-amd
@@ -15,6 +14,7 @@
         imports = [
           ../../modules/kde/kde-desktop.home.nix
           ../../modules/vscode.home.nix
+          ../../modules/android-studio.home.nix
           ../../modules/flatpak.home.nix
           ../../modules/podman/workbench.home.nix
           ../../modules/distrobox.home.nix

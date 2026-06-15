@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  programs.vscode = {
+  programs.vscodium = {
     enable = true;
     package = pkgs.vscodium;
     profiles.default = {
@@ -68,7 +68,7 @@
   home.packages = with pkgs; [
     nodejs
     electron
-    nixfmt-rfc-style
+    nixfmt
     nixd
     statix
     deadnix
@@ -84,5 +84,6 @@
     gopls
     delve
     pre-commit
+    android-tools
   ];
 }

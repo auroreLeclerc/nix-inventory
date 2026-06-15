@@ -1,6 +1,4 @@
 {
-  lib,
-  osConfig,
   ...
 }:
 {
@@ -26,25 +24,6 @@
             PUID = 0;
             PGID = 0;
           };
-          network = [ "docker-like" ];
-          autoUpdate = "registry";
-        };
-        ollama = {
-          image = "docker.io/ollama/ollama:rocm";
-          ports = [ "11434:11434" ];
-          environment = lib.mkIf (osConfig.networking.hostName == "exelo") {
-            HSA_OVERRIDE_GFX_VERSION = "11.0.2";
-          };
-          devices = [
-            "/dev/dri:/dev/dri"
-            "/dev/kfd:/dev/kfd"
-          ];
-          network = [ "docker-like" ];
-          autoUpdate = "registry";
-        };
-        open-webui = {
-          image = "ghcr.io/open-webui/open-webui:main";
-          ports = [ "3001:8080" ];
           network = [ "docker-like" ];
           autoUpdate = "registry";
         };

@@ -24,6 +24,7 @@
     }
   ];
   config = {
+    boot.zfs.forceImportRoot = false; # to be removed after 26.11
     users = {
       mutableUsers = false;
       users.nixos = {
@@ -32,7 +33,7 @@
       };
     };
 
-    networking.wireless.enable = false;
+    # networking.wireless.enable = false;
 
     nixpkgs.config.pulseaudio = true;
     services.xserver = {

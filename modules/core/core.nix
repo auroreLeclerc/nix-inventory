@@ -40,6 +40,7 @@ in
         "steam-run"
         "unrar"
         "xow_dongle-firmware"
+        "android-studio"
       ];
     fonts.packages = with pkgs; [
       noto-fonts

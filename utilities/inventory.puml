@@ -53,7 +53,6 @@ folder "modules" {
       component "options.nix" as 5848394a22810cc53c46e95e7599ef76
    }
    component "flatpak.home.nix" as 6a6caf7642ae4a75b6d8c64ecf6400b9
-   component "android-studio.nix" as a8adb1966bc91fc715175dff4a1585e7
    component "firefox.home.nix" as 38cffe16d01eb2da09feac707c1aaa76
    folder "kde" {
       component "fprintd.nix" as 0fb371a9afb97f3c276f57e82617e12d
@@ -74,6 +73,7 @@ folder "modules" {
    component "virtualbox.nix" as f7eeddc94c5ed65950560d6b5663fd1f
    component "zfs.nix" as 7b8930c15c58c8623b34b42b22de824e
    component "workstation.nix" as 5a0152e173cf79e753b825a5923741a1
+   component "android-studio.home.nix" as 2a70a34da6b56bf1fac621912d2a3870
    folder "podman" {
       component "podman.home.nix" as dcbc3ce626c4baff59d73eac162ff6c2
       component "homer.home.nix" as 4413af3c64ebf6b78c14f507383344d2
@@ -103,11 +103,11 @@ collections "flake.lock" as acf05e6b4d5a2b6e0e87b24127cf384a
 3cfc5eb99249add5b61f5348132a1e77 -[#C0CA33]-> 946f41d7a0edfc2e0c01ee5a09a8c817
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 33998a49668889da1de8827630f29048
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 5a0152e173cf79e753b825a5923741a1
-946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- a8adb1966bc91fc715175dff4a1585e7
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- cc648f4643baab83856cbb1aee4c03ef
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- f7eeddc94c5ed65950560d6b5663fd1f
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- a09ad47e2deefc393199f1a87fc15ebc
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 26e1d38b688c4a1832d0935e5d29e980
+946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 2a70a34da6b56bf1fac621912d2a3870
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 6a6caf7642ae4a75b6d8c64ecf6400b9
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- d5572bc49194fd8103bc4b027c081b12
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 08a37044eaabd670e65176777f006d8e

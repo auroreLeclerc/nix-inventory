@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, config, ... }:
 {
   programs = {
     firefoxpwa = {
@@ -8,6 +8,7 @@
     };
     firefox = {
       enable = true;
+      configPath = "${config.xdg.configHome}/mozilla/firefox";
       nativeMessagingHosts = [ pkgs.kdePackages.plasma-browser-integration ];
       languagePacks = [
         "fr"

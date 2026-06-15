@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  osConfig,
   config,
   ...
 }:
@@ -293,10 +292,6 @@
           foldersorter = {
             source = "${downloadsort}/bin/downloadsort";
             target = ".config/plasma-workspace/env/downloadsort.sh";
-          };
-          adb = lib.mkIf osConfig.programs.adb.enable {
-            source = "${pkgs.android-tools}/bin/adb";
-            target = "Android/Sdk/platform-tools/adb";
           };
           css = lib.mkIf config.programs.vscode.enable {
             source = builtins.fetchurl {

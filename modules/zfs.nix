@@ -8,6 +8,7 @@
   boot = {
     supportedFilesystems = [ "zfs" ];
     zfs = {
+      forceImportRoot = false;
       requestEncryptionCredentials = false;
       extraPools =
         {
@@ -42,6 +43,5 @@
   environment.systemPackages = with pkgs; [
     openseachest
     sg3_utils
-    scrutiny-collector
   ];
 }
