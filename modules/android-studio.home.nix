@@ -19,7 +19,7 @@
         chromium
         jdk
         git-repo
-        android-studio
+        # android-studio
       ];
       file.adb = {
         source = "${pkgs.android-tools}/bin/adb";

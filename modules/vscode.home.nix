@@ -52,7 +52,7 @@
           "editor.defaultFormatter" = "stylelint.vscode-stylelint";
         };
         "java.debug.settings.vmArgs" = "-ea";
-        "java.jdt.ls.java.home" = pkgs.jdk17;
+        "java.jdt.ls.java.home" = pkgs.jdk;
         "go.alternateTools" = {
           dlv = "${pkgs.delve}/bin/dlv";
           go = "${pkgs.go}/bin/go";
@@ -76,7 +76,7 @@
     python3
     graphviz
     sops
-    jdk17
+    jdk
     shellcheck
     libcap
     go
