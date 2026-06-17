@@ -28,7 +28,10 @@
             initialPassword = "dawn";
             isNormalUser = true;
             shell = pkgs.zsh;
-            extraGroups = [ "wheel" ];
+            extraGroups = [
+              "wheel"
+              "networkmanager"
+            ];
             linger = config.networking.hostName == "bellum";
           };
         };

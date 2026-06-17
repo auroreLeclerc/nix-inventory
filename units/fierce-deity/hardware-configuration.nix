@@ -19,11 +19,10 @@
         "usbhid"
         "usb_storage"
         "sd_mod"
-        "sr_mod"
       ];
       kernelModules = [ ];
-      luks.devices."luks-a9f364e5-9001-4a2a-88d1-ee36356ea91d".device =
-        "/dev/disk/by-uuid/a9f364e5-9001-4a2a-88d1-ee36356ea91d";
+      luks.devices."luks-12214e0e-76be-472c-9ab4-aa416d9daba5".device =
+        "/dev/disk/by-uuid/12214e0e-76be-472c-9ab4-aa416d9daba5";
     };
     kernelModules = [ "kvm-amd" ];
     extraModulePackages = [ ];
@@ -31,11 +30,11 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/c5da878a-7edb-43d9-9b0e-3cd3c5eedaaf";
+      device = "/dev/disk/by-uuid/luks-12214e0e-76be-472c-9ab4-aa416d9daba5";
       fsType = "ext4";
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/B8B7-B686";
+      device = "/dev/disk/by-uuid/2276-BBB6";
       fsType = "vfat";
       options = [
         "fmask=0077"
