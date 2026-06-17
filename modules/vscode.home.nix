@@ -58,6 +58,7 @@
           go = "${pkgs.go}/bin/go";
           gopls = "${pkgs.gopls}/bin/gopls";
         };
+        "network.meteredConnection" = "off";
       };
     };
   };

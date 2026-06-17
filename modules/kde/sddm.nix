@@ -36,7 +36,7 @@
         url = "https://publish-01.obsidian.md/access/d32b95288f15249fa01b04513b6b05f3/Art%20files/Celeste/Complete%20screens/complete-screen8.png";
         sha256 = "0rdxhwyg8rf31dwnzkpf1y0l0l40ni15x6icb3w9kj5xsbnmr9lp";
       };
-      loginBackground = true;
+      userIcon = true;
     };
   };
 }

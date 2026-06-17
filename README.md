@@ -7,7 +7,7 @@ Inventaire de mes configurations NixOS personnelles
 ## Appliquer une configuration
 
 ```bash
-sudo nixos-rebuild switch --flake github:auroreLeclerc/nix-inventory/#exelo --upgrade-all --impure
+sudo nixos-rebuild switch --flake github:auroreLeclerc/nix-inventory/#exelo --impure
 ```
 
 ## Appliquer la configuration Darwin

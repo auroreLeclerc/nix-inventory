@@ -36,6 +36,10 @@
       url = "github:MrChromebox/scripts";
       flake = false;
     };
+    ryubing-canary-src = {
+      url = "git+https://git.ryujinx.app/projects/Ryubing.git?ref=master&shallow=1";
+      flake = false;
+    };
   };
   outputs =
     { nixpkgs, ... }@inputs:
@@ -175,7 +179,9 @@
       apps.x86_64-linux =
         let
           pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          ryubingCanary = pkgs.callPackage ./modules/gaming/ryubing-canary.nix { };
+          ryubingCanary = pkgs.callPackage ./modules/gaming/ryubing-canary.nix {
+            ryubingCanarySrc = inputs.ryubing-canary-src;
+          };
           mkApp = name: description: runtimeInputs: text: {
             type = "app";
             program = "${pkgs.writeShellApplication { inherit name runtimeInputs text; }}/bin/${name}";

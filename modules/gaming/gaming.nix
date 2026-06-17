@@ -26,7 +26,7 @@
       discord
       celeste64
       freeciv_qt
-      (pkgs.callPackage ./ryubing-canary.nix { })
+      (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
       # dusklight
       # shipwright
     ]);

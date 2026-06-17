@@ -175,9 +175,9 @@
           ];
         };
         apply-icc = pkgs.writeShellScriptBin "apply-icc" (
-          builtins.toString (
-            builtins.map (script-line: (builtins.attrValues script-line)) (
-              builtins.map (
+          toString (
+            map (script-line: (builtins.attrValues script-line)) (
+              map (
                 displays:
                 (builtins.mapAttrs (
                   screen-id: profile:
@@ -193,7 +193,7 @@
         packages = [ apply-icc ];
         file = {
           xeniaSplashScreen = {
-            source = builtins.fetchTarball {
+            source = fetchTarball {
               url = "https://github.com/astro-cyberpaws/xenia-kde6/releases/latest/download/xenia.tar.gz";
               sha256 = "08810rnv9ib3ixqdi8sd95ilng3r4s22q4xymvl7kdydnchligcc";
             };

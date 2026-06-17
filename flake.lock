@@ -161,11 +161,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1781168557,
-        "narHash": "sha256-LOnLQ2tpYF9gqIDDr3+j3DbpJJr/QCH6zPRT2GzEUOE=",
+        "lastModified": 1781622756,
+        "narHash": "sha256-JrPh4M6S7aPsEE9tOENuZrxC6o2szSLlK+t4+nLke9s=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "6358ff76821101c178e3ab4919a62799bfe3652e",
+        "rev": "08018c72174a4df5657f8d94178ac69fb9c243e5",
         "type": "github"
       },
       "original": {
@@ -285,8 +285,27 @@
         "nixos-infra": "nixos-infra",
         "nixpkgs": "nixpkgs_3",
         "plasma-manager": "plasma-manager",
+        "ryubing-canary-src": "ryubing-canary-src",
         "sops-nix": "sops-nix",
         "unstableNixpkgs": "unstableNixpkgs"
+      }
+    },
+    "ryubing-canary-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1781565644,
+        "narHash": "sha256-lMXeXGuvE7/H5+BOtzZcxp7/37w9cruqo4ZwnOkrsQc=",
+        "ref": "master",
+        "rev": "6d67a86efd6597fcf87830132111f5fa54ddeb03",
+        "shallow": true,
+        "type": "git",
+        "url": "https://git.ryujinx.app/projects/Ryubing.git"
+      },
+      "original": {
+        "ref": "master",
+        "shallow": true,
+        "type": "git",
+        "url": "https://git.ryujinx.app/projects/Ryubing.git"
       }
     },
     "sops-nix": {
@@ -309,11 +328,11 @@
     },
     "unstableNixpkgs": {
       "locked": {
-        "lastModified": 1781074563,
-        "narHash": "sha256-md8WlXOlfnIeHeOScMTTHFyf2d6iaTwPl2apR5EQ3P4=",
+        "lastModified": 1781577229,
+        "narHash": "sha256-lrp67w8AulE9Ks53n27I45ADSzbOCn4H+CNW1Ck8B+8=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "9ae611a455b90cf061d8f332b977e387bda8e1ca",
+        "rev": "567a49d1913ce81ac6e9582e3553dd90a955875f",
         "type": "github"
       },
       "original": {
