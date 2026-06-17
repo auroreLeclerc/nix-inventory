@@ -30,7 +30,7 @@
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/luks-12214e0e-76be-472c-9ab4-aa416d9daba5";
+      device = "/dev/mapper/luks-12214e0e-76be-472c-9ab4-aa416d9daba5";
       fsType = "ext4";
     };
     "/boot" = {
