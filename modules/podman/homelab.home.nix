@@ -49,7 +49,7 @@ in
     services.podman = {
       settings.storage.storage = {
         driver = "overlay";
-        # rootless_storage_path = "/run/media/dawn/cache/podman";
+        # rootless_storage_path = "/run/media/dawn/kohga/podman";
       };
       containers =
         let
@@ -73,7 +73,7 @@ in
               "/run/media/dawn/bellum/Multimédia/Séries:/data/tvshows:ro"
               "/run/media/dawn/bellum/new_Music:/data/music:ro"
               "/run/media/dawn/cubus/jellyfin-friends:/config"
-              "/run/media/dawn/cache/jellyfin-friends:/config/cache"
+              "/run/media/dawn/kohga/jellyfin-friends:/config/cache"
             ];
             devices = [ "/dev/dri:/dev/dri" ];
             extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
@@ -224,7 +224,7 @@ in
               "/run/media/dawn/bellum/Multimédia/Séries:/data/tvshows:ro"
               "/run/media/dawn/bellum/new_Music:/data/music:ro"
               "/run/media/dawn/cubus/jellyfin:/config"
-              "/run/media/dawn/cache/jellyfin:/config/cache"
+              "/run/media/dawn/kohga/jellyfin:/config/cache"
             ];
             devices = [ "/dev/dri:/dev/dri" ];
             extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
@@ -457,7 +457,7 @@ in
             // lsio;
             volumes = [
               "/run/media/dawn/cubus/fileflows/:/app/Data"
-              "/run/media/dawn/slowcache/:/temp"
+              "/run/media/dawn/kohga/:/temp"
               "/run/media/dawn/bellum/Multimédia/:/media"
             ];
             devices = [ "/dev/dri:/dev/dri" ];

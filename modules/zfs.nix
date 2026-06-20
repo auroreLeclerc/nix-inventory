@@ -14,6 +14,7 @@
           "bellum" = [
             "cubus"
             "bellum"
+            "kohga"
           ];
           "fierce-deity" = [ "odolwa" ];
         }
