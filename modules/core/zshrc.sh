@@ -5,11 +5,11 @@ if [[ ( -z "$SSH_TTY" && -z "$DISPLAY" ) || "$TERM_PROGRAM" == 'vscode' ]] || ((
 	autoload -Uz promptinit
 	promptinit
 	prompt redhat
-elif [[ ! -f ~/.p10k.zsh ]]; then
+elif [[ ! -f "$XDG_CONFIG_HOME/zsh/.p10k.zsh" ]]; then
 	p10k configure
 else
 	# shellcheck disable=SC1090
-	source ~/.p10k.zsh
+	source "$XDG_CONFIG_HOME/zsh/.p10k.zsh"
 	case "$HOST" in
 		bellum)       icon='󰼁' ;;
 		exelo)        icon='' ;;
