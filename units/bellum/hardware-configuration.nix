@@ -13,27 +13,26 @@
   boot = {
     initrd = {
       availableKernelModules = [
-        "mpt3sas"
         "xhci_pci"
         "ahci"
+        "mpt3sas"
         "nvme"
         "usbhid"
         "usb_storage"
         "sd_mod"
       ];
-      # kernelModules = [ "amdgpu" ];
     };
-    kernelModules = [ "kvm-amd" ];
+    kernelModules = [ ];
     extraModulePackages = [ ];
   };
 
   fileSystems = {
     "/" = {
-      device = "/dev/disk/by-uuid/26833b48-9554-4709-85c1-89110160b348";
+      device = "/dev/disk/by-uuid/96d398e3-b08b-44d0-b2ce-85efe2225f04";
       fsType = "ext4";
     };
     "/boot" = {
-      device = "/dev/disk/by-uuid/5362-62E3";
+      device = "/dev/disk/by-uuid/F031-03AC";
       fsType = "vfat";
       options = [
         "fmask=0077"
@@ -47,16 +46,6 @@
     };
     "/run/media/dawn/eox" = {
       device = "/dev/disk/by-uuid/681c9d69-4c9e-47eb-b217-a542afdf783c";
-      fsType = "ext4";
-      options = [ "nofail" ];
-    };
-    "/run/media/dawn/cache" = {
-      device = "/dev/disk/by-uuid/b908576d-b3d2-42cf-acc8-320042a86737";
-      fsType = "ext4";
-      options = [ "nofail" ];
-    };
-    "/run/media/dawn/slowcache" = {
-      device = "/dev/disk/by-uuid/19477eb3-300f-4e7c-9992-164fbe1f66a4";
       fsType = "ext4";
       options = [ "nofail" ];
     };
