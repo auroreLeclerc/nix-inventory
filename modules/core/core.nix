@@ -31,18 +31,18 @@ in
       };
       nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     };
-    # nixpkgs.config.allowUnfree = true;
-    nixpkgs.config.allowUnfreePredicate =
-      pkg:
-      builtins.elem (lib.getName pkg) [
-        "steam"
-        "steam-original"
-        "steam-unwrapped"
-        "steam-run"
-        "unrar"
-        "xone-dongle-firmware"
-        "android-studio"
-      ];
+    nixpkgs.config.allowUnfree = true;
+    # nixpkgs.config.allowUnfreePredicate =
+    #   pkg:
+    #   builtins.elem (lib.getName pkg) [
+    #     "steam"
+    #     "steam-original"
+    #     "steam-unwrapped"
+    #     "steam-run"
+    #     "unrar"
+    #     "xone-dongle-firmware"
+    #     "android-studio"
+    #   ];
     fonts.packages = with pkgs; [
       noto-fonts
       noto-fonts-color-emoji

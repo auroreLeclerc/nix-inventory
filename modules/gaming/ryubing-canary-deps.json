@@ -611,8 +611,8 @@
   },
   {
     "pname": "Ryujinx.Graphics.Vulkan.MoltenVK",
-    "version": "1.4.2-ryujinx.3",
-    "hash": "sha256-onBk16LKxb+4xL/QgqXcO1z2CstRC8DnFyBf13IaoZE="
+    "version": "1.4.2-ryujinx.4",
+    "hash": "sha256-P92DpCwWgUrpYc0DM+J4s3IqtweCxcr0IRMtCsW+xBc="
   },
   {
     "pname": "Ryujinx.LibHac",

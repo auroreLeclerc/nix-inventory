@@ -2,7 +2,6 @@
   osConfig,
   config,
   pkgs,
-  unstablePkgs,
   ...
 }:
 let
@@ -50,7 +49,7 @@ in
     services.podman = {
       settings.storage.storage = {
         driver = "overlay";
-        rootless_storage_path = "/run/media/dawn/cache/podman";
+        # rootless_storage_path = "/run/media/dawn/cache/podman";
       };
       containers =
         let
@@ -504,7 +503,7 @@ in
             autoUpdate = "registry";
           };
           scrutiny = {
-            image = "ghcr.io/analogj/scrutiny:v${unstablePkgs.scrutiny.version}-web";
+            image = "ghcr.io/analogj/scrutiny:v${pkgs.scrutiny-collector.version}-web";
             environment = {
               PORT = 8080;
             };

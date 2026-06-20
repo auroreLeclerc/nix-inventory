@@ -1,7 +1,6 @@
 {
   config,
   pkgs,
-  unstablePkgs,
   ...
 }:
 {
@@ -36,7 +35,7 @@
     };
     scrutiny.collector = {
       enable = true;
-      package = unstablePkgs.scrutiny-collector;
+      package = pkgs.scrutiny-collector;
       settings.api.endpoint = "http://127.0.0.1:8080";
     };
   };

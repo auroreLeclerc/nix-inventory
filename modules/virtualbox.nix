@@ -1,6 +1,5 @@
 {
   pkgs,
-  unstablePkgs,
   ...
 }:
 {
@@ -12,7 +11,7 @@
         tor
         nmap
         torsocks
-        unstablePkgs.wpscan
+        wpscan
         nikto
         kdePackages.konversation
       ];

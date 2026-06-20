@@ -1,6 +1,5 @@
 {
   pkgs,
-  unstablePkgs,
   ...
 }:
 {
@@ -27,8 +26,6 @@
         wineWow64Packages.waylandFull
         calibre
         imagemagick
-      ])
-      ++ (with unstablePkgs; [
         winetricks
         sublime3
         google-chrome

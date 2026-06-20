@@ -1,5 +1,4 @@
 {
-  unstablePkgs,
   pkgs,
   lib,
   inputs,
@@ -8,28 +7,25 @@
 {
   programs.steam = {
     enable = true;
-    extraCompatPackages = [ unstablePkgs.proton-ge-bin ];
+    extraCompatPackages = [ pkgs.proton-ge-bin ];
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
-  environment.systemPackages =
-    (with pkgs; [
-      bottles
-      dolphin-emu-primehack
-      dolphin-emu
-      azahar
-      ppsspp
-      itch
-      xrgears
-      archipelago
-    ])
-    ++ (with unstablePkgs; [
-      discord
-      celeste64
-      freeciv_qt
-      (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
-      # dusklight
-      # shipwright
-    ]);
+  environment.systemPackages = with pkgs; [
+    bottles
+    dolphin-emu-primehack
+    dolphin-emu
+    azahar
+    ppsspp
+    itch
+    xrgears
+    archipelago
+    discord
+    celeste64
+    freeciv_qt
+    # dusklight
+    # shipwright
+    (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
+  ];
   hardware = {
     xone.enable = true;
     graphics = {

@@ -20,8 +20,8 @@ cloud "nixos-hardware" as 3c0f1db40a310a702a9b828cb9545d9d
 cloud "nixos-infra" as 893dc6e74cf718e9c1cfcb32c8d5d894
 cloud "nixpkgs" as 68b00da0eb30d2acc9c57208a4f921c1
 cloud "plasma-manager" as 54b08b4e1bef9ee237b8534e35ffafe7
+cloud "ryubing-canary-src" as ade47647d2e1a23c11ab12cc56dc071d
 cloud "sops-nix" as 42dd56042980b2d7b007b97c364885a2
-cloud "unstableNixpkgs" as 9b11274384f118496cd781bc9932ccef
 component "flake.nix" as 3cfc5eb99249add5b61f5348132a1e77
 folder "lib" {
    component "const.nix" as 42685639631220987acd22a87135e57c
@@ -98,8 +98,8 @@ collections "flake.lock" as acf05e6b4d5a2b6e0e87b24127cf384a
 893dc6e74cf718e9c1cfcb32c8d5d894 --> acf05e6b4d5a2b6e0e87b24127cf384a
 68b00da0eb30d2acc9c57208a4f921c1 --> acf05e6b4d5a2b6e0e87b24127cf384a
 54b08b4e1bef9ee237b8534e35ffafe7 --> acf05e6b4d5a2b6e0e87b24127cf384a
+ade47647d2e1a23c11ab12cc56dc071d --> acf05e6b4d5a2b6e0e87b24127cf384a
 42dd56042980b2d7b007b97c364885a2 --> acf05e6b4d5a2b6e0e87b24127cf384a
-9b11274384f118496cd781bc9932ccef --> acf05e6b4d5a2b6e0e87b24127cf384a
 3cfc5eb99249add5b61f5348132a1e77 -[#C0CA33]-> 946f41d7a0edfc2e0c01ee5a09a8c817
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 33998a49668889da1de8827630f29048
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 5a0152e173cf79e753b825a5923741a1
