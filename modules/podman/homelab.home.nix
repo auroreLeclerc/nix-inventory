@@ -457,7 +457,7 @@ in
             // lsio;
             volumes = [
               "/run/media/dawn/cubus/fileflows/:/app/Data"
-              "/run/media/dawn/kohga/:/temp"
+              "/run/media/dawn/kohga/fileflows/:/temp"
               "/run/media/dawn/bellum/Multimédia/:/media"
             ];
             devices = [ "/dev/dri:/dev/dri" ];
