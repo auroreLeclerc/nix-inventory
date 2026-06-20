@@ -35,6 +35,9 @@ in
       zsh = {
         enable = true;
         dotDir = "${config.xdg.configHome}/zsh";
+        localVariables = {
+          XDG_CONFIG_HOME = config.xdg.configHome;
+        };
         enableCompletion = true;
         autosuggestion.enable = true;
         syntaxHighlighting.enable = true;
