@@ -106,7 +106,7 @@ in
                       {
                         loadBalancer = {
                           servers = [
-                            { url = "http://${name}:${builtins.toString container.environment.PORT}"; }
+                            { url = "http://${name}:${toString container.environment.PORT}"; }
                           ];
                           healthCheck =
                             if (builtins.hasAttr "HEALTHCHECK_PATH" container.environment) then

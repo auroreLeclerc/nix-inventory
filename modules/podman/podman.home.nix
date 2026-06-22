@@ -14,7 +14,7 @@
         podman-compose
       ]
     );
-    home.file.".config/podman/nix-declared-containers".text = builtins.toString (
+    home.file.".config/podman/nix-declared-containers".text = toString (
       builtins.length (builtins.attrNames config.services.podman.containers)
     );
     services.podman = {
@@ -47,7 +47,7 @@
         postgres = {
           file = builtins.toFile "PostgresContainerfile" ''
             FROM docker.io/pgautoupgrade/pgautoupgrade:latest
-            COPY ${builtins.baseNameOf (builtins.toFile "init-db.sql" (builtins.readFile ./init-db.sql))} /docker-entrypoint-initdb.d/
+            COPY ${baseNameOf (builtins.toFile "init-db.sql" (builtins.readFile ./init-db.sql))} /docker-entrypoint-initdb.d/
           '';
         };
       };

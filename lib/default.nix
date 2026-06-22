@@ -12,7 +12,7 @@ in
     location:
     assert builtins.isString location;
     if lib.inPureEvalMode then
-      builtins.abort "🙅🏻‍♀️ Impure reading in pure eval mode won't work."
+      abort "🙅🏻‍♀️ Impure reading in pure eval mode won't work."
     else if !builtins.pathExists const.AGE_KEY_FILE then
       builtins.trace "💁🏻‍♀️ No sops age keys found, can't eval secrets." ""
     else if !builtins.pathExists location then
@@ -29,7 +29,7 @@ in
       "rolling" = builtins.trace "💁🏻‍♀️ You sure about that ?" true;
       "stable" = true;
       "deprecated" = builtins.trace "🙎🏻‍♀️ Nixos ${version} is deprecated !" true;
-      "unmaintained" = builtins.abort "🙅🏻‍♀️ Nixos ${version} is End Of Life !";
+      "unmaintained" = abort "🙅🏻‍♀️ Nixos ${version} is End Of Life !";
     }
     .${infra.channels."nixos-${version}".status};
   consoleWarn =

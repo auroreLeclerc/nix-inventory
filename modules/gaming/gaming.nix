@@ -92,13 +92,11 @@
           steamdeck = pkgs.writeShellScriptBin "steamdeck" (builtins.readFile ./gamescope.sh);
         in
         {
-          systemPackages =
-            with pkgs;
-            [ mangohud ]
-            ++ [
-              steamdeck
-              decky-loader
-            ];
+          systemPackages = [
+            pkgs.mangohud
+            steamdeck
+            decky-loader
+          ];
           loginShellInit = ''
             [[ "$(tty)" = "/dev/tty1" ]] && steamdeck
           '';

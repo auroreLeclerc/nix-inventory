@@ -105,6 +105,7 @@
                 useGlobalPkgs = true;
                 useUserPackages = true;
                 backupFileExtension = "backup";
+                overwriteBackup = true;
                 sharedModules = [
                   inputs.catppuccin.homeModules.catppuccin
                   ./modules/core/core.home.nix
