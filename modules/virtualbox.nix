@@ -4,7 +4,7 @@
 }:
 {
   config = {
-    specialisation."Virtualbox".configuration = {
+    specialisation."CTF & VirtualBox".configuration = {
       virtualisation.virtualbox.host.enable = true;
       users.extraGroups.vboxusers.members = [ "dawn" ];
       environment.systemPackages = with pkgs; [

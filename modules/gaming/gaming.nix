@@ -36,7 +36,7 @@
     };
   };
 
-  specialisation."ValveSoftware/gamescope".configuration =
+  specialisation."ValveSoftware Gamescope".configuration =
     let
       inherit (inputs.jovian-nixos.legacyPackages.${pkgs.stdenv.hostPlatform.system}) decky-loader;
     in
