@@ -4,7 +4,7 @@
 }:
 {
   config = {
-    specialisation."Capture The Flag".configuration = {
+    specialisation."Virtualbox".configuration = {
       virtualisation.virtualbox.host.enable = true;
       users.extraGroups.vboxusers.members = [ "dawn" ];
       environment.systemPackages = with pkgs; [

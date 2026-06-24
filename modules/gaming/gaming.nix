@@ -22,6 +22,7 @@
     discord
     celeste64
     freeciv_qt
+    supertuxkart
     # dusklight
     # shipwright
     (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
@@ -35,7 +36,7 @@
     };
   };
 
-  specialisation."Steam Deck (Gamescope)".configuration =
+  specialisation."ValveSoftware/gamescope".configuration =
     let
       inherit (inputs.jovian-nixos.legacyPackages.${pkgs.stdenv.hostPlatform.system}) decky-loader;
     in
