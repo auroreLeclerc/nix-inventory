@@ -575,16 +575,6 @@
     "hash": "sha256-rbZ5GckH4mNCCpL8UmU8REMb1CUuO+vbpZME47Cv/ak="
   },
   {
-    "pname": "OpenTK.redist.glfw",
-    "version": "3.4.0.44",
-    "hash": "sha256-xQW/0y8lg3HO1fCOVTHBJESfYOViX6YzK6F/LfWGGtU="
-  },
-  {
-    "pname": "OpenTK.Windowing.GraphicsLibraryFramework",
-    "version": "4.9.4",
-    "hash": "sha256-WpUczvbGBTkMn3HR+ansIrzDz8nhtaSZPIDZ9wxrrqw="
-  },
-  {
     "pname": "Projektanker.Icons.Avalonia",
     "version": "9.6.2",
     "hash": "sha256-BMbZQ2Hj80Yxcx8mNZ8+A4fxyB/Sa0QhFX5gC6jAueA="
