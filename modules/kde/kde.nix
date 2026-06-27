@@ -13,19 +13,9 @@ in
     ./sddm.nix
     ./fprintd.nix
   ];
-  services = {
-    desktopManager.plasma6.enable = true; # Enable the KDE Plasma Desktop Environment.
-    pulseaudio.enable = false; # Enable sound with pipewire.
-    pipewire = {
-      enable = true;
-      alsa.enable = true;
-      alsa.support32Bit = true;
-      pulse.enable = true;
-    };
-  };
+  services.desktopManager.plasma6.enable = true; # Enable the KDE Plasma Desktop Environment.
   #	services.printing.enable = true; # Enable CUPS to print documents.
   hardware.bluetooth.enable = true;
-  security.rtkit.enable = true; # https://nixos.wiki/wiki/PipeWire
 
   environment = {
     systemPackages =
