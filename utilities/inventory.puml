@@ -17,7 +17,6 @@ cloud "nix-darwin" as 07549ad6481db65484f8bd557d27cf39
 cloud "nix-flatpak" as 6f38dd1fc9fd6fc6cb05ab538f2850fb
 cloud "nix-index-database" as 90da05a3ffbe9bdf693fb18bf75048f0
 cloud "nixos-hardware" as 3c0f1db40a310a702a9b828cb9545d9d
-cloud "nixos-infra" as 893dc6e74cf718e9c1cfcb32c8d5d894
 cloud "nixpkgs" as 68b00da0eb30d2acc9c57208a4f921c1
 cloud "plasma-manager" as 54b08b4e1bef9ee237b8534e35ffafe7
 cloud "ryubing-canary-src" as ade47647d2e1a23c11ab12cc56dc071d
@@ -55,7 +54,6 @@ folder "modules" {
    component "flatpak.home.nix" as 6a6caf7642ae4a75b6d8c64ecf6400b9
    component "firefox.home.nix" as 38cffe16d01eb2da09feac707c1aaa76
    folder "kde" {
-      component "fprintd.nix" as 0fb371a9afb97f3c276f57e82617e12d
       component "sddm.nix" as 5ebad3bd91a08cf55c56e207db927f8e
       component "kde-mobile.nix" as 18d186ad4f28f362efc2bad2fd9eec32
       component "kde.nix" as 33998a49668889da1de8827630f29048
@@ -95,7 +93,6 @@ collections "flake.lock" as acf05e6b4d5a2b6e0e87b24127cf384a
 6f38dd1fc9fd6fc6cb05ab538f2850fb --> acf05e6b4d5a2b6e0e87b24127cf384a
 90da05a3ffbe9bdf693fb18bf75048f0 --> acf05e6b4d5a2b6e0e87b24127cf384a
 3c0f1db40a310a702a9b828cb9545d9d --> acf05e6b4d5a2b6e0e87b24127cf384a
-893dc6e74cf718e9c1cfcb32c8d5d894 --> acf05e6b4d5a2b6e0e87b24127cf384a
 68b00da0eb30d2acc9c57208a4f921c1 --> acf05e6b4d5a2b6e0e87b24127cf384a
 54b08b4e1bef9ee237b8534e35ffafe7 --> acf05e6b4d5a2b6e0e87b24127cf384a
 ade47647d2e1a23c11ab12cc56dc071d --> acf05e6b4d5a2b6e0e87b24127cf384a
@@ -153,7 +150,6 @@ d418baa43b11df0205fd0d8001cf7901 <-- 7eb8b1eccd344747a8b685427d1c8d47
 20147c29130fca277ea17de5d4ba1678 <-- fedff914d02561f998eabdacb5cefebd
 18d186ad4f28f362efc2bad2fd9eec32 <-- 33998a49668889da1de8827630f29048
 33998a49668889da1de8827630f29048 <-- 5ebad3bd91a08cf55c56e207db927f8e
-33998a49668889da1de8827630f29048 <-- 0fb371a9afb97f3c276f57e82617e12d
 a09ad47e2deefc393199f1a87fc15ebc <-- 34f24b42df06d195232b3481cc71827b
 a09ad47e2deefc393199f1a87fc15ebc <-- 8793297d8d93dce13e504e1e7639726f
 a09ad47e2deefc393199f1a87fc15ebc <-- ad183a934b3ffac1938f0162d6a8a65b
