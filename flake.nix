@@ -2,7 +2,6 @@
   description = "nix-inventory";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
-    # unstableNixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     catppuccin.url = "github:catppuccin/nix/release-26.05";
     home-manager = {
@@ -27,10 +26,6 @@
     nix-index-database = {
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-infra = {
-      url = "github:NixOS/infra";
-      flake = false;
     };
     mrchromebox-scripts = {
       url = "github:MrChromebox/scripts";
@@ -73,19 +68,6 @@
         }:
         let
           inherit (meta) system;
-          # mkUnstablePkgs =
-          #   let
-          #     check = myLibs.checkSupportedVersion nixpkgs.lib.trivial.release;
-          #   in
-          #   system:
-          #   import inputs.unstableNixpkgs {
-          #     inherit system;
-          #     config = {
-          #       allowUnfree = builtins.trace "NixOS ${nixpkgs.lib.trivial.codeName}  ${nixpkgs.lib.trivial.version}" check;
-          #       android_sdk.accept_license = check;
-          #     };
-          #   };
-          # unstablePkgs = mkUnstablePkgs system;
         in
         (if isDarwin then inputs.nix-darwin.lib.darwinSystem else lib.nixosSystem) {
           inherit system;
@@ -94,7 +76,6 @@
               inputs
               myLibs
               isDarwin
-              # unstablePkgs
               ;
           };
           modules = [

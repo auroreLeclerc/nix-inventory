@@ -11,7 +11,6 @@ in
 {
   imports = [
     ./sddm.nix
-    ./fprintd.nix
   ];
   services.desktopManager.plasma6.enable = true; # Enable the KDE Plasma Desktop Environment.
   #	services.printing.enable = true; # Enable CUPS to print documents.

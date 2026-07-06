@@ -31,18 +31,14 @@ in
       };
       nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
     };
-    nixpkgs.config.allowUnfree = true;
-    # nixpkgs.config.allowUnfreePredicate =
-    #   pkg:
-    #   builtins.elem (lib.getName pkg) [
-    #     "steam"
-    #     "steam-original"
-    #     "steam-unwrapped"
-    #     "steam-run"
-    #     "unrar"
-    #     "xone-dongle-firmware"
-    #     "android-studio"
-    #   ];
+    nixpkgs = {
+      config.allowUnfree = true;
+      overlays = [
+        (final: _prev: {
+          pnpm_10_29_2 = final.pnpm_10; # https://github.com/NixOS/nixpkgs/issues/536623
+        })
+      ];
+    };
     fonts.packages = with pkgs; [
       noto-fonts
       noto-fonts-color-emoji
@@ -103,6 +99,12 @@ in
       keyMap = "fr";
     };
     services.fwupd.enable = true;
-    security.sudo.package = pkgs.sudo.override { withInsults = true; };
+    security = {
+      sudo.package = pkgs.sudo.override { withInsults = true; };
+      pam.services = {
+        login.fprintAuth = false;
+        sudo.fprintAuth = false;
+      };
+    };
   };
 }

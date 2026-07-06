@@ -132,6 +132,13 @@ in
               ];
             }
             {
+              name = "Fun times";
+              icon = "fa-solid nf-md-cards_playing";
+              items = [
+                widgets.jellyfin
+              ];
+            }
+            {
               name = "Infra";
               icon = "fa-solid fa-bridge";
               items = [

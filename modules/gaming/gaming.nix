@@ -8,6 +8,7 @@
   programs.steam = {
     enable = true;
     extraCompatPackages = [ pkgs.proton-ge-bin ];
+    # extraPackages = [ pkgs.hidapi ];
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
   environment.systemPackages = with pkgs; [
@@ -19,7 +20,7 @@
     itch
     xrgears
     archipelago
-    discord
+    vesktop
     celeste64
     freeciv_qt
     supertuxkart
@@ -85,6 +86,7 @@
         gamescope = {
           enable = true;
           capSysNice = true;
+          # enableWsi = true; # HDR
         };
         steam.gamescopeSession.enable = true;
       };
@@ -99,7 +101,7 @@
             decky-loader
           ];
           loginShellInit = ''
-            [[ "$(tty)" = "/dev/tty1" ]] && steamdeck
+            [[ "$(tty)" = "/dev/tty1" ]] && exec steamdeck
           '';
         };
     };

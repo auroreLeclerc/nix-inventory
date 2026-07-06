@@ -95,7 +95,7 @@
                 config.General.launcherUrls = [
                   "file:///etc/profiles/per-user/dawn/share/applications/firefox.desktop"
                   "file:///run/current-system/sw/share/applications/google-chrome.desktop"
-                  "file:///run/current-system/sw/share/applications/discord.desktop"
+                  "file:///run/current-system/sw/share/applications/vesktop.desktop"
                   "file:///home/dawn/.local/share/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop" # Whatsapp Web
                   "file:///run/current-system/sw/share/applications/steam.desktop"
                   "file:///run/current-system/sw/share/applications/com.usebottles.bottles.desktop"

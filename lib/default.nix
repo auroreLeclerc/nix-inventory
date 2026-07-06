@@ -1,6 +1,5 @@
 {
   lib,
-  nixos-infra,
   ...
 }:
 let
@@ -19,19 +18,6 @@ in
       builtins.trace "💁🏻‍♀️ Secrets aren't decrypted on first run." ""
     else
       (builtins.readFile location);
-  checkSupportedVersion =
-    version:
-    assert builtins.isString version;
-    let
-      infra = import "${nixos-infra}/channels.nix";
-    in
-    {
-      "rolling" = builtins.trace "💁🏻‍♀️ You sure about that ?" true;
-      "stable" = true;
-      "deprecated" = builtins.trace "🙎🏻‍♀️ Nixos ${version} is deprecated !" true;
-      "unmaintained" = abort "🙅🏻‍♀️ Nixos ${version} is End Of Life !";
-    }
-    .${infra.channels."nixos-${version}".status};
   consoleWarn =
     control: log:
     assert builtins.isBool control;

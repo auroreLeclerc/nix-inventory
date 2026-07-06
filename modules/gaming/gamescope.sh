@@ -1,16 +1,23 @@
 # shellcheck shell=bash
 set -xeuo pipefail
 
+# https://github.com/flightlessmango/MangoHud#gamescope
+# https://wiki.nixos.org/wiki/Steam
+
 gamescopeArgs=(
-	--adaptive-sync # VRR support
-	# --hdr-enabled
+	--adaptive-sync # Variable Refresh Rate
+	--xwayland-count 2
 	--mangoapp # performance overlay
 	--rt
 	--steam
+	# --hdr-enabled
+	# --hdr-itm-enabled # SDR->HDR
 )
 steamArgs=(
 	-pipewire-dmabuf
-	-tenfoot
+	-gamepadui
+	-steamdeck
+	-steamos3
 )
 mangoConfig=(
 	cpu_temp
@@ -19,11 +26,12 @@ mangoConfig=(
 	vram
 )
 mangoVars=(
-	MANGOHUD=1
 	MANGOHUD_CONFIG="$(IFS=,; echo "${mangoConfig[*]}")"
 )
+steamVars=(
+	STEAM_MULTIPLE_XWAYLANDS=1
+	STEAM_GAMESCOPE_VRR_SUPPORTED=1
+)
 
-export "${mangoVars[@]}"
+export "${mangoVars[@]}" "${steamVars[@]}"
 exec gamescope "${gamescopeArgs[@]}" -- steam "${steamArgs[@]}"
-
-# https://nixos.wiki/wiki/Steam
