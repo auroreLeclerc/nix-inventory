@@ -97,7 +97,7 @@
         {
           systemPackages = [
             pkgs.mangohud
-            pkgs.python
+            pkgs.python3
             steamdeck
             decky-loader
           ];
