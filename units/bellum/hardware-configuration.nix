@@ -49,6 +49,11 @@
       fsType = "ext4";
       options = [ "nofail" ];
     };
+    "/run/media/dawn/cache" = {
+      device = "/dev/disk/by-uuid/2f248c7e-aa35-4071-b40e-23a3137b10c5";
+      fsType = "ext4";
+      options = [ "nofail" ];
+    };
   };
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
