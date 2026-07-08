@@ -23,7 +23,7 @@
     vesktop
     celeste64
     freeciv_qt
-    supertuxkart
+    mesa-demos
     # dusklight
     # shipwright
     (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
@@ -85,7 +85,7 @@
       programs = {
         gamescope = {
           enable = true;
-          capSysNice = true;
+          capSysNice = false; # https://github.com/NixOS/nixpkgs/issues/523427
           # enableWsi = true; # HDR
         };
         steam.gamescopeSession.enable = true;
@@ -97,7 +97,6 @@
         {
           systemPackages = [
             pkgs.mangohud
-            pkgs.python3
             steamdeck
             decky-loader
           ];

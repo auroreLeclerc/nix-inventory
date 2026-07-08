@@ -8,7 +8,7 @@ gamescopeArgs=(
 	--adaptive-sync # Variable Refresh Rate
 	--xwayland-count 2
 	--mangoapp # performance overlay
-	--rt
+	# --rt https://github.com/NixOS/nixpkgs/issues/523427
 	--steam
 	# --hdr-enabled
 	# --hdr-itm-enabled # SDR->HDR
