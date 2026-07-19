@@ -205,8 +205,8 @@
             target = ".local/share/plasma/look-and-feel/xenia";
           };
           yakuakeLight = {
-            source = "${inputs.materia-kde}/yakuake/skins/materia";
-            target = ".local/share/yakuake/kns_skins/materia";
+            source = "${inputs.materia-kde}/yakuake/skins/materia-light";
+            target = ".local/share/yakuake/kns_skins/materia-light";
           };
           yakuakeDark = {
             source = "${inputs.materia-kde}/yakuake/skins/materia-dark";
