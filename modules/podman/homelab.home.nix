@@ -539,7 +539,7 @@ in
               "${
                 builtins.fetchurl {
                   url = "https://huggingface.co/unsloth/gemma-4-E4B-it-qat-mobile-GGUF/resolve/main/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf";
-                  sha256 = "0k8qb0psxis3j1nk1ps2vwc5dqg97690msc78313jq79vybdsnps";
+                  sha256 = "00xgbz782hp1s1a7b0pqg3ycf3wi2zg31d9h0b0bbyvchqbybpbr";
                 }
               }:/mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf"
               # "${builtins.fetchurl {

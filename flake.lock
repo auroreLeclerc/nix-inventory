@@ -26,11 +26,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783221248,
-        "narHash": "sha256-ESQnuNHEDChsB4IxoLRhscVahqkDWkTb+qdIz8euYt4=",
+        "lastModified": 1784350909,
+        "narHash": "sha256-ZWyzLbS1yKUTeFJLmdVuWNnHttL333/ldJbEE+KzCrM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "af2beae5f0fae0a4310cc0e6aef2572f56090353",
+        "rev": "4ce190229c73d44536caa7072f6308fb2d8feeb3",
         "type": "github"
       },
       "original": {
@@ -48,11 +48,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783158408,
-        "narHash": "sha256-cWhl1TQArZyteLiNgcccosbbTJ6GOxvEbiSXsBPU7N8=",
+        "lastModified": 1784364424,
+        "narHash": "sha256-Q+wMaCtO9j03RndXahlnPS+W1yNMZmpZJXwrXcP9icY=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "db4a6e75522199a0406adb74c1a5e91e53f9296c",
+        "rev": "835c5d5e24107c45eb45cc792d206ec01604b465",
         "type": "github"
       },
       "original": {
@@ -61,14 +61,30 @@
         "type": "github"
       }
     },
+    "materia-kde": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1689408694,
+        "narHash": "sha256-tZWEVq2VYIvsQyFyMp7VVU1INbO7qikpQs4mYwghAVM=",
+        "owner": "PapirusDevelopmentTeam",
+        "repo": "materia-kde",
+        "rev": "6cc4c1867c78b62f01254f6e369ee71dce167a15",
+        "type": "github"
+      },
+      "original": {
+        "owner": "PapirusDevelopmentTeam",
+        "repo": "materia-kde",
+        "type": "github"
+      }
+    },
     "mrchromebox-scripts": {
       "flake": false,
       "locked": {
-        "lastModified": 1783455216,
-        "narHash": "sha256-OEqLXhwgiGFUrfdUEPDjJAnGeH9Jt73X8uQtUt4FDpE=",
+        "lastModified": 1784297940,
+        "narHash": "sha256-lQg9/c54/aS4a6CxmabjSZDVVDP6CAELJUKYyqGgyNY=",
         "owner": "MrChromebox",
         "repo": "scripts",
-        "rev": "8205ba76e375a990f057903a4f24facce8865266",
+        "rev": "9df80d51c3dd8d85452123301dc4a258fa45790f",
         "type": "github"
       },
       "original": {
@@ -84,11 +100,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783395956,
-        "narHash": "sha256-AAbexQvDoK+6GFJdhY6kqjA+6ECKRkidgWxkn4gMwAA=",
+        "lastModified": 1784362797,
+        "narHash": "sha256-EP9b9b+OXDxHBPefFwMYCIaLq0fn3UkmrbfzbLUT7kQ=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "d5bd9cd77aea4c0a8f49e7fd85545671a208ed15",
+        "rev": "b4cccbd4bc299c1f71ae185b79c3cf99aa82805c",
         "type": "github"
       },
       "original": {
@@ -143,11 +159,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1783414108,
-        "narHash": "sha256-RY8e+gR2/DhXsYDxGDL6Hhe9+POD9u4+llwxMBqMQDs=",
+        "lastModified": 1784440659,
+        "narHash": "sha256-Q5kNLlWngt7TaIIZoxDKWMHjiSaNRVqr70FqWCRRfr4=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "96d6de10eb281b98f5cfcd1841394c03da5df77c",
+        "rev": "4f8d52a3598b0dc7db7a5e7b419e3edd9d1ecfdb",
         "type": "github"
       },
       "original": {
@@ -161,11 +177,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1783370751,
-        "narHash": "sha256-E+3MIMvKuo9k+K+qLQ9YXzsBzkgHuyVLnsEbN2DFfuc=",
+        "lastModified": 1784310968,
+        "narHash": "sha256-rkSPTePrKqs4dg+i7ZFCq93+HrClac6oSwXX927SVjA=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "662bd6e312d2c8b212e32cb377abaee190749320",
+        "rev": "779c32a00155994c86cde8213a8dd4df139d4355",
         "type": "github"
       },
       "original": {
@@ -203,11 +219,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1783389287,
-        "narHash": "sha256-0xIy4dVLqq47rA+mRy0hXDfjhQd4E5PoIns/RmB7nR4=",
+        "lastModified": 1784280462,
+        "narHash": "sha256-DtoqIqM7VkR6NxAkcLpMwmi02USwWb3JdmNGLyhthc0=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "0ad6f47ea4fe188f4bc8f0380f93ae8523337c6c",
+        "rev": "293d6abedf0478e681a4dfcfcb35b30fc796a32f",
         "type": "github"
       },
       "original": {
@@ -261,6 +277,7 @@
         "catppuccin": "catppuccin",
         "home-manager": "home-manager",
         "jovian-nixos": "jovian-nixos",
+        "materia-kde": "materia-kde",
         "mrchromebox-scripts": "mrchromebox-scripts",
         "nix-darwin": "nix-darwin",
         "nix-flatpak": "nix-flatpak",

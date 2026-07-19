@@ -11,6 +11,14 @@
     # extraPackages = [ pkgs.hidapi ];
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+      kdePackages.xdg-desktop-portal-kde
+    ];
+    xdgOpenUsePortal = true;
+  };
   environment.systemPackages = with pkgs; [
     bottles
     dolphin-emu-primehack
@@ -42,6 +50,7 @@
       inherit (inputs.jovian-nixos.legacyPackages.${pkgs.stdenv.hostPlatform.system}) decky-loader;
     in
     {
+      boot.kernelPackages = pkgs.linuxPackages_xanmod;
       home-manager.users.dawn = {
         home.file = {
           cef = {

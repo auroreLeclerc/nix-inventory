@@ -1,6 +1,7 @@
 {
   pkgs,
   osConfig,
+  inputs,
   ...
 }:
 {
@@ -13,13 +14,12 @@
       konsole = {
         enable = true;
         customColorSchemes = {
-          Sweet = builtins.fetchurl {
-            url = "https://raw.githubusercontent.com/EliverLara/Sweet/refs/heads/nova/kde/konsole/Sweet.colorscheme";
-            sha256 = "sha256-wIamJFeTaJxZYpXsOr0RCjW6YlSc9v/1KRgXJ+gcztw=";
-          };
+          Materia = "${inputs.materia-kde}/konsole/Materia.colorscheme";
+          MateriaDark = "${inputs.materia-kde}/konsole/MateriaDark.colorscheme";
         };
-        profiles.Custom.colorScheme = "Sweet";
-        defaultProfile = "Custom";
+        profiles.light.colorScheme = "Materia";
+        profiles.dark.colorScheme = "MateriaDark";
+        defaultProfile = "dark";
       };
       plasma =
         let
@@ -156,6 +156,11 @@
                 dark = darkWallpaper;
                 light = lightWallpaper;
               };
+              KonsoleProfile = {
+                enabled = false;
+                dark = "dark";
+                light = "light";
+              };
             };
           };
         };
@@ -198,6 +203,14 @@
               sha256 = "08810rnv9ib3ixqdi8sd95ilng3r4s22q4xymvl7kdydnchligcc";
             };
             target = ".local/share/plasma/look-and-feel/xenia";
+          };
+          yakuakeLight = {
+            source = "${inputs.materia-kde}/yakuake/skins/materia";
+            target = ".local/share/yakuake/kns_skins/materia";
+          };
+          yakuakeDark = {
+            source = "${inputs.materia-kde}/yakuake/skins/materia-dark";
+            target = ".local/share/yakuake/kns_skins/materia-dark";
           };
           icon = {
             # https://github.com/NixOS/nixpkgs/issues/163080

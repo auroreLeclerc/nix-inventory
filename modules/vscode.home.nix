@@ -62,7 +62,7 @@
       };
     };
   };
-  catppuccin.vscode.profiles.default = {
+  catppuccin.vscodium.profiles.default = {
     enable = true;
     icons.enable = false;
   };

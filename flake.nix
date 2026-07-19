@@ -35,6 +35,10 @@
       url = "git+https://git.ryujinx.app/projects/Ryubing.git?ref=master&shallow=1";
       flake = false;
     };
+    materia-kde = {
+      url = "github:PapirusDevelopmentTeam/materia-kde";
+      flake = false;
+    };
   };
   outputs =
     { nixpkgs, ... }@inputs:
@@ -72,11 +76,7 @@
         (if isDarwin then inputs.nix-darwin.lib.darwinSystem else lib.nixosSystem) {
           inherit system;
           specialArgs = {
-            inherit
-              inputs
-              myLibs
-              isDarwin
-              ;
+            inherit inputs myLibs isDarwin;
           };
           modules = [
             ./modules/core/core.nix
@@ -96,7 +96,7 @@
                   inputs.nix-flatpak.homeManagerModules.nix-flatpak
                 ];
                 extraSpecialArgs = {
-                  inherit myLibs isDarwin;
+                  inherit myLibs isDarwin inputs;
                 };
               };
             }
