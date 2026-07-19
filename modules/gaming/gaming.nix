@@ -47,7 +47,11 @@
 
   specialisation."ValveSoftware Gamescope".configuration =
     let
-      inherit (inputs.jovian-nixos.legacyPackages.${pkgs.stdenv.hostPlatform.system}) decky-loader;
+      decky-loader = (pkgs.extend inputs.jovian-nixos.overlays.default).decky-loader.overrideAttrs (old: {
+        pnpmDeps = old.pnpmDeps.overrideAttrs {
+          outputHash = "sha256-X1L8JYG5hgYMmfg0aa8XhkRU6/oFrYTPiXDIyq77puE=";
+        };
+      });
     in
     {
       boot.kernelPackages = pkgs.linuxPackages_xanmod;

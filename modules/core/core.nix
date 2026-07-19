@@ -36,6 +36,7 @@ in
       overlays = [
         (final: _prev: {
           pnpm_10_29_2 = final.pnpm_10; # https://github.com/NixOS/nixpkgs/issues/536623
+          pnpm_9 = final.pnpm_10; # decky-loader use insecure
         })
       ];
     };
