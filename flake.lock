@@ -19,6 +19,38 @@
         "type": "github"
       }
     },
+    "catppuccin-konsole": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720277724,
+        "narHash": "sha256-d5+ygDrNl2qBxZ5Cn4U7d836+ZHz77m6/yxTIANd9BU=",
+        "owner": "catppuccin",
+        "repo": "konsole",
+        "rev": "3b64040e3f4ae5afb2347e7be8a38bc3cd8c73a8",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "konsole",
+        "type": "github"
+      }
+    },
+    "catppuccin-yakuake": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1720459684,
+        "narHash": "sha256-90rhnbAD91Vu44MqpGDTH8nigvrnX82MsJxki0EnA9g=",
+        "owner": "catppuccin",
+        "repo": "yakuake",
+        "rev": "3b4fa644a83022b8e920f60f4eaf4aa59f420640",
+        "type": "github"
+      },
+      "original": {
+        "owner": "catppuccin",
+        "repo": "yakuake",
+        "type": "github"
+      }
+    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -26,11 +58,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784350909,
-        "narHash": "sha256-ZWyzLbS1yKUTeFJLmdVuWNnHttL333/ldJbEE+KzCrM=",
+        "lastModified": 1785119570,
+        "narHash": "sha256-Rgs2xKnGLFWQscxUaXX07oyZeuMDOHEbqDOsgliLFGM=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "4ce190229c73d44536caa7072f6308fb2d8feeb3",
+        "rev": "d4fd24667c8cbef124bb70a20380cab75ec8474d",
         "type": "github"
       },
       "original": {
@@ -48,43 +80,27 @@
         ]
       },
       "locked": {
-        "lastModified": 1784364424,
-        "narHash": "sha256-Q+wMaCtO9j03RndXahlnPS+W1yNMZmpZJXwrXcP9icY=",
+        "lastModified": 1786040946,
+        "narHash": "sha256-1X5/h+ZNPX6S116mGTGjVE5xQRj0JqML4vuKracP6HY=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "835c5d5e24107c45eb45cc792d206ec01604b465",
+        "rev": "ebcee4127b51bc6df62ee859fb6539bdfa0e902a",
         "type": "github"
       },
       "original": {
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "type": "github"
-      }
-    },
-    "materia-kde": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1689408694,
-        "narHash": "sha256-tZWEVq2VYIvsQyFyMp7VVU1INbO7qikpQs4mYwghAVM=",
-        "owner": "PapirusDevelopmentTeam",
-        "repo": "materia-kde",
-        "rev": "6cc4c1867c78b62f01254f6e369ee71dce167a15",
-        "type": "github"
-      },
-      "original": {
-        "owner": "PapirusDevelopmentTeam",
-        "repo": "materia-kde",
         "type": "github"
       }
     },
     "mrchromebox-scripts": {
       "flake": false,
       "locked": {
-        "lastModified": 1784297940,
-        "narHash": "sha256-lQg9/c54/aS4a6CxmabjSZDVVDP6CAELJUKYyqGgyNY=",
+        "lastModified": 1785986367,
+        "narHash": "sha256-ZfxNZz2d5WVP/xnyTFvRWoFC9p45Q+fO5iXcC9vAaY8=",
         "owner": "MrChromebox",
         "repo": "scripts",
-        "rev": "9df80d51c3dd8d85452123301dc4a258fa45790f",
+        "rev": "c27fe86c1ea3afe033f42aa1fc2b800e8758bc6b",
         "type": "github"
       },
       "original": {
@@ -100,11 +116,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784362797,
-        "narHash": "sha256-EP9b9b+OXDxHBPefFwMYCIaLq0fn3UkmrbfzbLUT7kQ=",
+        "lastModified": 1785389976,
+        "narHash": "sha256-0tLW8Ff5yt8AH97jw4ZpFJ0OCJ122zIlgWGDmOfU/VU=",
         "owner": "LnL7",
         "repo": "nix-darwin",
-        "rev": "b4cccbd4bc299c1f71ae185b79c3cf99aa82805c",
+        "rev": "15abb8c98f336cd8bd840d71059adebabe60bf04",
         "type": "github"
       },
       "original": {
@@ -159,11 +175,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1784440659,
-        "narHash": "sha256-Q5kNLlWngt7TaIIZoxDKWMHjiSaNRVqr70FqWCRRfr4=",
+        "lastModified": 1785650611,
+        "narHash": "sha256-q4kR7g+pCcz6NASvoVPYu+CWWUurX03wogtBqGmR4h0=",
         "owner": "nix-community",
         "repo": "nix-index-database",
-        "rev": "4f8d52a3598b0dc7db7a5e7b419e3edd9d1ecfdb",
+        "rev": "dbc756c9d7287de19b3e0e38c928c47510d42c3e",
         "type": "github"
       },
       "original": {
@@ -177,11 +193,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1784310968,
-        "narHash": "sha256-rkSPTePrKqs4dg+i7ZFCq93+HrClac6oSwXX927SVjA=",
+        "lastModified": 1785232496,
+        "narHash": "sha256-65EQYIRRpTdpH8lUiB6Mvo5uBkG60aBIzAJuALfx+O0=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "779c32a00155994c86cde8213a8dd4df139d4355",
+        "rev": "2e790b0a6be8ec2b76174ac0931b8ff11919ec98",
         "type": "github"
       },
       "original": {
@@ -219,11 +235,11 @@
     },
     "nixpkgs_3": {
       "locked": {
-        "lastModified": 1784280462,
-        "narHash": "sha256-DtoqIqM7VkR6NxAkcLpMwmi02USwWb3JdmNGLyhthc0=",
+        "lastModified": 1786089803,
+        "narHash": "sha256-ZuvZfVW2tB5tXYEcpcfhVXB3N4OhdZLOqOviy4OD4b4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "293d6abedf0478e681a4dfcfcb35b30fc796a32f",
+        "rev": "ee48b147c18c7de1e6ec97dc74792be42724bed1",
         "type": "github"
       },
       "original": {
@@ -259,11 +275,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1775856943,
-        "narHash": "sha256-b7Mp7P+q2Md5AGt4rjHfMcBykzMumFTen10ST++AuTU=",
+        "lastModified": 1785762349,
+        "narHash": "sha256-jZhZkzAwc7f3exzcTDJWP2WCAchCv0iNC3UF/QsahdQ=",
         "owner": "nix-community",
         "repo": "plasma-manager",
-        "rev": "a524a6160e6df89f7673ba293cf7d78b559eb1a5",
+        "rev": "a19a2a029fa180911bd89c554dca1616e10f4c1d",
         "type": "github"
       },
       "original": {
@@ -275,9 +291,10 @@
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
+        "catppuccin-konsole": "catppuccin-konsole",
+        "catppuccin-yakuake": "catppuccin-yakuake",
         "home-manager": "home-manager",
         "jovian-nixos": "jovian-nixos",
-        "materia-kde": "materia-kde",
         "mrchromebox-scripts": "mrchromebox-scripts",
         "nix-darwin": "nix-darwin",
         "nix-flatpak": "nix-flatpak",
@@ -292,10 +309,10 @@
     "ryubing-canary-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1783375013,
-        "narHash": "sha256-5pWpXoSaouYYk7dH3fIvy+kBU408jVxoVnr/0aiI9DU=",
+        "lastModified": 1785896444,
+        "narHash": "sha256-Q4z8wbj3O/+0L+zZchCtVIzEVKs4IROfRC10wEZTdGU=",
         "ref": "master",
-        "rev": "6953128ff2f04dadde7449398a66e4635d2f9e7d",
+        "rev": "793ca017ff4f6e48b798a62d2486405bfc42ef39",
         "shallow": true,
         "type": "git",
         "url": "https://git.ryujinx.app/projects/Ryubing.git"

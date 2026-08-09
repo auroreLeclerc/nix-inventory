@@ -35,8 +35,12 @@
       url = "git+https://git.ryujinx.app/projects/Ryubing.git?ref=master&shallow=1";
       flake = false;
     };
-    materia-kde = {
-      url = "github:PapirusDevelopmentTeam/materia-kde";
+    catppuccin-konsole = {
+      url = "github:catppuccin/konsole";
+      flake = false;
+    };
+    catppuccin-yakuake = {
+      url = "github:catppuccin/yakuake";
       flake = false;
     };
   };

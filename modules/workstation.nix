@@ -23,7 +23,8 @@
         signal-desktop
         tor-browser
         sirikali
-        wineWow64Packages.waylandFull
+        wineWow64Packages.full
+        # bottles
         calibre
         imagemagick
         winetricks

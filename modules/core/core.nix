@@ -65,6 +65,7 @@ in
         unrar
         file
         ffmpeg
+        libwebp
       ])
       ++ lib.optionals (!isDarwin) (
         with pkgs;

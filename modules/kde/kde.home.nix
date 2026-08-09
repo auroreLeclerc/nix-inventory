@@ -14,12 +14,20 @@
       konsole = {
         enable = true;
         customColorSchemes = {
-          Materia = "${inputs.materia-kde}/konsole/Materia.colorscheme";
-          MateriaDark = "${inputs.materia-kde}/konsole/MateriaDark.colorscheme";
+          # https://github.com/nix-community/plasma-manager/pull/638
+          # latte = "${inputs.catppuccin-konsole}/themes/catppuccin-latte.colorscheme";
+          # mocha = "${inputs.catppuccin-konsole}/themes/catppuccin-mocha.colorscheme";
         };
-        profiles.light.colorScheme = "Materia";
-        profiles.dark.colorScheme = "MateriaDark";
+        profiles.light = {
+          colorScheme = "latte";
+          font.name = "Hack";
+        };
+        profiles.dark = {
+          colorScheme = "mocha";
+          font.name = "Hack";
+        };
         defaultProfile = "dark";
+        ui.colorScheme = "mocha";
       };
       plasma =
         let
@@ -205,12 +213,12 @@
             target = ".local/share/plasma/look-and-feel/xenia";
           };
           yakuakeLight = {
-            source = "${inputs.materia-kde}/yakuake/skins/materia-light";
-            target = ".local/share/yakuake/kns_skins/materia-light";
+            source = "${inputs.catppuccin-yakuake}/latte";
+            target = ".local/share/yakuake/kns_skins/latte";
           };
           yakuakeDark = {
-            source = "${inputs.materia-kde}/yakuake/skins/materia-dark";
-            target = ".local/share/yakuake/kns_skins/materia-dark";
+            source = "${inputs.catppuccin-yakuake}/mocha";
+            target = ".local/share/yakuake/kns_skins/mocha";
           };
           icon = {
             # https://github.com/NixOS/nixpkgs/issues/163080
