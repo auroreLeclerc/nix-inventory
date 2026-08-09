@@ -43,6 +43,10 @@
       url = "github:catppuccin/yakuake";
       flake = false;
     };
+    xenia-kde6 = {
+      url = "github:astro-cyberpaws/xenia-kde6";
+      flake = false;
+    };
   };
   outputs =
     { nixpkgs, ... }@inputs:
