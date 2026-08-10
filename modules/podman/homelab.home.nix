@@ -439,6 +439,7 @@ in
               PAPERLESS_DBHOST = "postgres";
               PAPERLESS_DBUSER = "postgres";
               PAPERLESS_DBPASS = "postgres";
+              PAPERLESS_SECRET_KEY = "RawcrzB37LUSUaxpdXxSLywHM3IxyXGZzqPvA-Blv83sh9iNM9qUaPd75sMEJur7DIiTdNWL3xOZsNN8a8cTLA";
             };
             network = [ "docker-like" ];
             autoUpdate = "registry";

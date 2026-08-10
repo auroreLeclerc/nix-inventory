@@ -11,6 +11,7 @@
         deemix_data = { };
         scrutiny_data = { };
         influxdb2_data = { };
+        resume_data = { };
       };
       containers = {
         deemix = {
@@ -29,6 +30,7 @@
         };
         reactive-resume = {
           image = "docker.io/amruthpillai/reactive-resume:v4.5.6";
+          volumes = [ "resume_data:/app/data" ];
           ports = [ "3000:3000" ];
           environment = {
             PORT = 3000;
