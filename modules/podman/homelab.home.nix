@@ -17,10 +17,11 @@ let
     iptables -A CUSTOM_NAC -s 10.13.13.2 -j RETURN  # exelo
     iptables -A CUSTOM_NAC -s 10.13.13.3 -j RETURN  # taya
     iptables -A CUSTOM_NAC -s 10.13.13.4 -j RETURN  # fdeity
+    iptables -A CUSTOM_NAC -s 10.13.13.5 -j RETURN  # work
 
     NETWORK_FRIENDS="${config.services.podman.networks.friends.subnet}"
     PIHOLE="${config.services.podman.containers.pi-hole.ip4}"
-    FRIENDS_RANGE="10.13.13.5-10.13.13.254"  # friends >= 5
+    FRIENDS_RANGE="10.13.13.6-10.13.13.254"  # friends >= 6
 
     # friends: authorisation
     iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$NETWORK_FRIENDS" -j RETURN
@@ -86,7 +87,7 @@ in
             addCapabilities = [ "NET_ADMIN" ];
             environment = {
               SERVERURL = secrets.ip;
-              PEERS = "exelo,taya,fdeity,caza,paillettes"; # Must follow iptables custom repartition
+              PEERS = "exelo,taya,fdeity,work,paillettes"; # Must follow iptables custom repartition
               PEERDNS = config.services.podman.containers.pi-hole.ip4;
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
