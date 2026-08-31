@@ -2,6 +2,7 @@
   osConfig,
   config,
   pkgs,
+  inputs,
   ...
 }:
 let
@@ -538,16 +539,8 @@ in
             image = "quay.io/ramalama/ramalama:latest";
             devices = [ "/dev/dri:/dev/dri" ];
             volumes = [
-              "${
-                builtins.fetchurl {
-                  url = "https://huggingface.co/unsloth/gemma-4-E4B-it-qat-mobile-GGUF/resolve/main/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf";
-                  sha256 = "00xgbz782hp1s1a7b0pqg3ycf3wi2zg31d9h0b0bbyvchqbybpbr";
-                }
-              }:/mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf"
-              # "${builtins.fetchurl {
-              #   url = "https://huggingface.co/unsloth/gemma-4-E4B-it-qat-mobile-GGUF/resolve/main/mmproj-BF16.gguf";
-              #   sha256 = "1ydapqcd72p5gpvn8pzp3y73dc1byqpdih85m3nmiml2gyiaz6vw";
-              # }}:/mnt/models/mmproj-BF16.gguf"
+              "${inputs.gemma}/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf:/mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf"
+              "${inputs.gemma}/mmproj-BF16.gguf:/mnt/models/mmproj-BF16.gguf"
             ];
             exec = "llama-server --host 0.0.0.0 --model /mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf --no-warmup --alias unsloth/gemma-4-E4B-it-qat-mobile-GGUF --ctx-size 4096 --temp 0.8 --cache-reuse 256 --flash-attn on -ngl 999 --threads 4 --log-colors on --parallel 1"; # --mmproj /mnt/models/mmproj-BF16.gguf
             network = [ "docker-like" ];

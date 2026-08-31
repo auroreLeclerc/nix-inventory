@@ -47,11 +47,11 @@ in
   };
   programs = {
     konsole = {
-      enable = true;
+      enable = false;
       customColorSchemes = {
         # https://github.com/nix-community/plasma-manager/pull/638
-        # latte = "${inputs.catppuccin-konsole}/themes/catppuccin-latte.colorscheme";
-        # mocha = "${inputs.catppuccin-konsole}/themes/catppuccin-mocha.colorscheme";
+        latte = "${inputs.catppuccin-konsole}/themes/catppuccin-latte.colorscheme";
+        mocha = "${inputs.catppuccin-konsole}/themes/catppuccin-mocha.colorscheme";
       };
       profiles.light = {
         colorScheme = "latte";

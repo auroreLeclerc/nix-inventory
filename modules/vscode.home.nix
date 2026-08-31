@@ -44,6 +44,8 @@
         "redhat.telemetry.enabled" = false;
         # "sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
         # "sonarlint.disableTelemetry" = true;
+        "svelte.enable-ts-plugin" = true;
+        "svelte.editor.defaultFormatter" = "svelte.svelte-vscode";
         "python.languageServer" = "Jedi";
         "git.autofetch" = true;
         "git.enableSmartCommit" = true;

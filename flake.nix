@@ -1,11 +1,11 @@
 {
   description = "nix-inventory";
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-26.05";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     catppuccin.url = "github:catppuccin/nix/release-26.05";
     home-manager = {
-      url = "github:nix-community/home-manager?ref=release-26.05";
+      url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nix-darwin = {
@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
       inputs.home-manager.follows = "home-manager";
     };
-    nix-flatpak.url = "github:gmodena/nix-flatpak/?ref=latest";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/latest";
     sops-nix.url = "github:Mic92/sops-nix";
     jovian-nixos = {
       url = "github:Jovian-Experiments/Jovian-NixOS";
@@ -45,6 +45,10 @@
     };
     xenia-kde6 = {
       url = "github:astro-cyberpaws/xenia-kde6";
+      flake = false;
+    };
+    gemma = {
+      url = "git+https://huggingface.co/unsloth/gemma-4-E4B-it-qat-mobile-GGUF";
       flake = false;
     };
   };
