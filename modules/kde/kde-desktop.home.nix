@@ -300,8 +300,8 @@
           };
           sevenZip = {
             source = builtins.fetchurl {
-              url = "https://github.com/ip7z/7zip/releases/latest/download/7z2601-x64.msi";
-              sha256 = "1wh2rl8vzzpzvsan13sjrciglcg05347gbjc8zgfc25wz3fahzm4";
+              url = "https://github.com/ip7z/7zip/releases/latest/download/7z2603-x64.msi";
+              sha256 = "09ira682bslhs2qw9r3kahd579jnncyl0zx4lpa2v9lqsrj00s60";
             };
             target = "Téléchargements/7-Zip.exe";
           };

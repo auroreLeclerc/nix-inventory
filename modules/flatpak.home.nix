@@ -9,7 +9,10 @@
     enable = true;
     update.auto.enable = true;
     uninstallUnmanaged = true;
-    packages = lib.mkIf osConfig.programs.steam.enable [ "org.DolphinEmu.dolphin-emu" ];
+    packages = [
+      "io.github.ferraridamiano.ConverterNOW"
+    ]
+    ++ lib.optionals osConfig.programs.steam.enable [ "org.DolphinEmu.dolphin-emu" ];
   };
   home.packages = with pkgs; [
     flatpak

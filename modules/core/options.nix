@@ -25,8 +25,6 @@
         dns = mkSecretOption "dns";
         ip = mkSecretOption "ip";
         mail = mkSecretOption "mail";
-        name = mkSecretOption "name";
-        secondaryMail = mkSecretOption "secondaryMail";
         duck = mkSecretOption "duck";
         jellyfin = mkSecretOption "jellyfin";
         radarr = mkSecretOption "radarr";
@@ -45,8 +43,6 @@
       dns = readSecret config.sops.secrets.dns.path;
       ip = readSecret config.sops.secrets.ip.path;
       mail = readSecret config.sops.secrets.mail.path;
-      name = readSecret config.sops.secrets.name.path;
-      secondaryMail = readSecret config.sops.secrets.secondaryMail.path;
       duck = readSecret config.sops.secrets.duck.path;
       jellyfin = readSecret config.sops.secrets.jellyfin.path;
       radarr = readSecret config.sops.secrets.radarr.path;

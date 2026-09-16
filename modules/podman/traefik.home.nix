@@ -56,7 +56,7 @@ in
                   provider = "duckdns";
                   propagation.delaybeforechecks = 120;
                 };
-                email = secrets.secondaryMail;
+                email = secrets.mail;
                 storage = "/letsencrypt/acme.json";
               };
               providers.file.filename = "/etc/traefik/dynamic.yml";

@@ -11,8 +11,6 @@
     defaultSopsFile = ./secrets/secrets.yml;
     secrets = {
       mail = { };
-      secondaryMail = { };
-      name = { };
       ip = { };
       dns = { };
       duck = { };

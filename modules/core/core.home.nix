@@ -6,16 +6,6 @@
   isDarwin,
   ...
 }:
-let
-  secrets =
-    if !isDarwin then
-      osConfig.secrets.values
-    else
-      {
-        mail = "";
-        name = "";
-      };
-in
 {
   config = {
     catppuccin = {
@@ -73,8 +63,8 @@ in
       git = {
         enable = !isDarwin;
         settings = lib.mkIf (osConfig.users.mutableUsers or false) {
-          user.email = secrets.mail;
-          user.name = secrets.name;
+          user.email = "96054190+auroreLeclerc@users.noreply.github.com";
+          user.name = "Aurore Leclerc";
         };
       };
     };
