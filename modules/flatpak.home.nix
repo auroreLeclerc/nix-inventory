@@ -2,6 +2,7 @@
   pkgs,
   lib,
   osConfig,
+  config,
   ...
 }:
 {
@@ -10,7 +11,7 @@
     update.auto.enable = true;
     uninstallUnmanaged = true;
     packages =
-      lib.optionals osConfig.programs.vscodium.enable [
+      lib.optionals config.programs.vscodium.enable [
         "org.raspberrypi.rpi-imager"
         "io.github.ferraridamiano.ConverterNOW"
       ]
