@@ -26,8 +26,7 @@ let
     ];
   };
   apply-icc = pkgs.writeShellScriptBin "apply-icc" (
-    "sleep 3s\n"
-    + toString (
+    toString (
       map (script-line: (builtins.attrValues script-line)) (
         map (
           displays:
@@ -119,7 +118,7 @@ in
           powerProfile = "balanced";
           powerButtonAction = "showLogoutScreen";
           whenLaptopLidClosed = "sleep";
-          whenSleepingEnter = "hybridSleep";
+          whenSleepingEnter = "standby";
         };
         lowBattery = {
           autoSuspend = {
@@ -131,10 +130,11 @@ in
             idleTimeoutWhenLocked = "immediately";
           };
           displayBrightness = 50;
+          keyboardBrightness = 0;
           powerProfile = "powerSaving";
           powerButtonAction = "showLogoutScreen";
           whenLaptopLidClosed = "hibernate";
-          whenSleepingEnter = "standbyThenHibernate";
+          whenSleepingEnter = "hybridSleep";
         };
       };
       input.keyboard.numlockOnStartup = "on";

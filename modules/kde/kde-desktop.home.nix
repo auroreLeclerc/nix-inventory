@@ -8,21 +8,37 @@
     manual.html.enable = true;
     programs = {
       plasma = {
-        desktop.widgets = [
-          {
-            digitalClock = {
-              date.format = "longDate";
+        desktop.widgets =
+          let
+            screenHeight = 1504;
+            screenWidth = 1003;
+          in
+          [
+            {
+              name = "org.kde.plasma.wacomtablet";
               position = {
-                horizontal = 1000;
-                vertical = 500;
+                horizontal = 50;
+                vertical = screenWidth - 400 - 50;
               };
               size = {
+                height = 200;
                 width = 400;
-                height = 400;
               };
-            };
-          }
-        ];
+            }
+            {
+              digitalClock = {
+                date.format = "longDate";
+                position = {
+                  horizontal = screenHeight - 400 - 50;
+                  vertical = screenWidth - 400 - 50;
+                };
+                size = {
+                  width = 400;
+                  height = 400;
+                };
+              };
+            }
+          ];
         panels = [
           {
             location = "top";
