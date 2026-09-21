@@ -78,7 +78,7 @@ in
               "/run/media/dawn/cache/jellyfin-friends:/config/cache"
             ];
             devices = [ "/dev/dri:/dev/dri" ];
-            extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -i http://localhost:8096/health'" ];
             ip4 = "172.19.0.67";
             network = [ "friends" ];
             autoUpdate = "registry";
@@ -229,7 +229,7 @@ in
               "/run/media/dawn/cache/jellyfin:/config/cache"
             ];
             devices = [ "/dev/dri:/dev/dri" ];
-            extraPodmanArgs = [ "--health-cmd 'curl -i http://jellyfin:8096/health'" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -i http://localhost:8096/health'" ];
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };
@@ -307,9 +307,10 @@ in
               AUTH_SECRET = "NmQRQHGiCKAuerFZct6LM1xRPysr3rYd6TXLqzjclTc=";
               DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/resume";
               FLAG_ALLOW_UNSAFE_AI_BASE_URL = false;
+              FLAG_DISABLE_IMAGE_PROCESSING = true;
             };
             extraPodmanArgs = [
-              "--health-cmd 'node -e fetch('http://127.0.0.1:3000/api/health').then((r) => { if (!r.ok) process.exit(1); }).catch(() => process.exit(1));'"
+              "--health-cmd \"fetch('http://127.0.0.1:3000/api/health').then((r) => { if (!r.ok) process.exit(1); }).catch(() => process.exit(1));\""
               "--health-interval 30s"
               "--health-timeout 10s"
               "--health-retries 3"

@@ -26,7 +26,8 @@ let
     ];
   };
   apply-icc = pkgs.writeShellScriptBin "apply-icc" (
-    toString (
+    "sleep 3s\n"
+    + toString (
       map (script-line: (builtins.attrValues script-line)) (
         map (
           displays:
