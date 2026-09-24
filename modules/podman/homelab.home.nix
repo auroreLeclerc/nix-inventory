@@ -130,7 +130,7 @@ in
               HEALTHCHECK_PATH = "/ping";
               SONARR__AUTH__METHOD = "External";
               SONARR__AUTH__APIKEY = osConfig.secrets.values.sonarr;
-              SONARR__AUTH__ALLOWEDHOSTS = "sonarr, *${secrets.dns}";
+              SONARR__SERVER__ALLOWEDHOSTS = "sonarr, *${secrets.dns}";
             }
             // lsio;
             volumes = [
@@ -149,7 +149,7 @@ in
               HEALTHCHECK_PATH = "/ping";
               RADARR__AUTH__METHOD = "External";
               RADARR__AUTH__APIKEY = osConfig.secrets.values.radarr;
-              RADARR__AUTH__ALLOWEDHOSTS = "radarr, *${secrets.dns}";
+              RADARR__SERVER__ALLOWEDHOSTS = "radarr, *${secrets.dns}";
             }
             // lsio;
             volumes = [
@@ -179,7 +179,7 @@ in
               HEALTHCHECK_PATH = "/ping";
               PROWLARR__AUTH__METHOD = "External";
               PROWLARR__AUTH__APIKEY = osConfig.secrets.values.prowlarr;
-              PROWLARR__AUTH__ALLOWEDHOSTS = "prowlarr, *${secrets.dns}";
+              PROWLARR__SERVER__ALLOWEDHOSTS = "prowlarr, *${secrets.dns}";
             }
             // lsio;
             extraPodmanArgs = [
@@ -243,7 +243,7 @@ in
               HEALTHCHECK_PATH = "/ping";
               LIDARR__AUTH__METHOD = "External";
               LIDARR__AUTH__APIKEY = osConfig.secrets.values.lidarr;
-              LIDARR__AUTH__ALLOWEDHOSTS = "lidarr, *${secrets.dns}";
+              LIDARR__SERVER__ALLOWEDHOSTS = "lidarr, *${secrets.dns}";
             }
             // lsio;
             volumes = [
