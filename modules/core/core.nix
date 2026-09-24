@@ -41,6 +41,7 @@ in
       ];
     };
     fonts.packages = with pkgs; [
+      open-sans
       noto-fonts
       noto-fonts-color-emoji
       liberation_ttf
