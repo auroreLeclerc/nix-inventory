@@ -28,7 +28,6 @@ in
               api = {
                 dashboard = true;
                 insecure = true;
-                disabledashboardad = true;
               };
               entrypoints = {
                 web = {
@@ -64,6 +63,8 @@ in
             dynamicConfig = {
               http = {
                 middlewares = {
+                  # https://github.com/traefik/traefik/issues/12536
+                  block-traefik-hub.headers.customResponseHeaders.Content-Security-Policy = "default-src 'self' 'unsafe-inline';";
                   error-handler.errors = {
                     status = [
                       "400-404"
