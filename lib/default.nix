@@ -34,6 +34,6 @@ in
     lib.filterAttrs (
       _: set:
       assert builtins.isAttrs set;
-      set ? discriminant
+      set ? ${discriminant}
     ) setOfSet;
 }
