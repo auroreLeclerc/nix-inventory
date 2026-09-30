@@ -2,6 +2,7 @@
   lib,
   config,
   myLibs,
+  isLinux,
   ...
 }:
 {
@@ -39,7 +40,7 @@
     let
       readSecret = path: myLibs.impureSopsReading path;
     in
-    lib.mkIf (config.users.mutableUsers && !lib.inPureEvalMode) {
+    lib.mkIf (!lib.inPureEvalMode && isLinux) {
       dns = readSecret config.sops.secrets.dns.path;
       ip = readSecret config.sops.secrets.ip.path;
       mail = readSecret config.sops.secrets.mail.path;

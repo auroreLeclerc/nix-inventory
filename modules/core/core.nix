@@ -4,6 +4,7 @@
   lib,
   config,
   isDarwin,
+  isLinux,
   ...
 }:
 let
@@ -15,7 +16,7 @@ let
   '';
 in
 {
-  imports = lib.optionals (!isDarwin) [
+  imports = lib.optionals isLinux [
     ./user.nix
     ./sops.nix
   ];
@@ -89,7 +90,7 @@ in
     networking.networkmanager.enable = true;
     i18n = {
       defaultLocale = "fr_FR.UTF-8";
-      supportedLocales = [
+      supportedLocales = lib.mkForce [
         "C.UTF-8/UTF-8"
         "fr_FR.UTF-8/UTF-8"
         "en_GB.UTF-8/UTF-8"

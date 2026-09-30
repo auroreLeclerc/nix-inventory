@@ -10,7 +10,7 @@
       ramSize = config.hardware.ramSizeGiB;
       swapSize = builtins.ceil (ramSize * 1024 * 0.4);
     in
-    lib.mkIf config.users.mutableUsers {
+    {
       boot = {
         loader = {
           systemd-boot.enable = true;

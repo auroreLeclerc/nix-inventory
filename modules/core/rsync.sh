@@ -72,6 +72,7 @@ case "$ACTION" in
 		sync_folder ~/Games/ "${REMOTE}/Games/" --exclude='*.desktop'
 		sync_folder ~/Images/ "${REMOTE}/Images/"
 		sync_folder ~/Musique/ "${REMOTE}/Musique/"
+		# sync_folder "${REMOTE}/Musique/" ~/Musique/ TODO
 		sync_folder ~/Vidéos/ "${REMOTE}/Vidéos/"
 
 		if [[ "$NO_DOWNLOADS" == false ]]; then
@@ -92,8 +93,6 @@ case "$ACTION" in
 		sync_folder "${REMOTE}/Images/" ~/Images/
 		sync_folder "${REMOTE}/Musique/" ~/Musique/
 		sync_folder "${REMOTE}/Vidéos/" ~/Vidéos/
-
-		# Téléchargements toujours exclu en pull
 
 		echo '📥 Download finished 📥'
 	;;

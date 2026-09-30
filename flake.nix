@@ -58,37 +58,38 @@
       inherit (nixpkgs) lib;
       myLibs = import ./lib/default.nix {
         inherit lib;
-        inherit (inputs) nixos-infra;
       };
 
-      units = builtins.mapAttrs (
+      metaUnits = builtins.mapAttrs (
         name: _:
         let
           metaPath = ./units/${name}/meta.nix;
-          hasMeta = builtins.pathExists metaPath;
         in
-        {
-          system = if hasMeta then (import metaPath).system else "x86_64-linux";
-        }
+        if builtins.pathExists metaPath then
+          import metaPath
+        else
+          {
+            isLinux = true;
+          }
       ) (builtins.readDir ./units);
-
-      filterBySystem = kernel: lib.filterAttrs (_: unit: lib.hasSuffix kernel unit.system) units;
-      linuxUnits = filterBySystem "-linux";
-      darwinUnits = filterBySystem "-darwin";
 
       mkSystem =
         {
           unit,
-          meta,
-          isDarwin,
+          isLinux ? false,
+          isDarwin ? false,
+          isLive ? false,
         }:
-        let
-          inherit (meta) system;
-        in
         (if isDarwin then inputs.nix-darwin.lib.darwinSystem else lib.nixosSystem) {
-          inherit system;
+          system = if isDarwin then "aarch64-darwin" else "x86_64-linux";
           specialArgs = {
-            inherit inputs myLibs isDarwin;
+            inherit
+              inputs
+              myLibs
+              isLinux
+              isDarwin
+              isLive
+              ;
           };
           modules = [
             ./modules/core/core.nix
@@ -108,7 +109,13 @@
                   inputs.nix-flatpak.homeManagerModules.nix-flatpak
                 ];
                 extraSpecialArgs = {
-                  inherit myLibs isDarwin inputs;
+                  inherit
+                    inputs
+                    myLibs
+                    isLinux
+                    isDarwin
+                    isLive
+                    ;
                 };
               };
             }
@@ -123,29 +130,41 @@
                 inputs.nix-index-database.nixosModules.nix-index
                 inputs.home-manager.nixosModules.home-manager
                 inputs.catppuccin.nixosModules.catppuccin
-                inputs.sops-nix.nixosModules.sops
                 ./modules/core/options.nix
+              ]
+              ++ lib.optionals isLinux [
+                inputs.sops-nix.nixosModules.sops
                 ./units/${unit}/hardware-configuration.nix
               ]
           );
         };
     in
     {
-      nixosConfigurations = builtins.mapAttrs (
-        unit: meta:
-        mkSystem {
-          inherit unit meta;
-          isDarwin = false;
-        }
-      ) linuxUnits;
+      nixosConfigurations =
+        let
+          metaLinux = myLibs.filterSetOfSetByNameBool "isLinux" metaUnits;
+          metaLive = myLibs.filterSetOfSetByNameBool "isLive" metaUnits;
+        in
+        builtins.mapAttrs (
+          unit: meta:
+          mkSystem {
+            inherit unit;
+            isLinux = meta ? isLinux;
+            isLive = meta ? isLive;
+          }
+        ) (metaLinux // metaLive);
 
-      darwinConfigurations = builtins.mapAttrs (
-        unit: meta:
-        mkSystem {
-          inherit unit meta;
-          isDarwin = true;
-        }
-      ) darwinUnits;
+      darwinConfigurations =
+        let
+          metaDarwin = myLibs.filterSetOfSetByNameBool "isDarwin";
+        in
+        builtins.mapAttrs (
+          unit: meta:
+          mkSystem {
+            inherit unit;
+            isDarwin = meta ? isDarwin;
+          }
+        ) metaDarwin;
 
       devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
         buildInputs = with nixpkgs.legacyPackages.x86_64-linux; [

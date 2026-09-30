@@ -312,9 +312,10 @@ in
               DATABASE_URL = "postgresql://postgres:postgres@postgres:5432/resume";
               FLAG_ALLOW_UNSAFE_AI_BASE_URL = false;
               FLAG_DISABLE_IMAGE_PROCESSING = true;
+              HEALTHCHECK_PATH = "/api/health";
             };
             extraPodmanArgs = [
-              "--health-cmd \"fetch('http://127.0.0.1:3000/api/health').then((r) => { if (!r.ok) process.exit(1); }).catch(() => process.exit(1));\""
+              "--health-cmd node -e 'fetch(\"http://127.0.0.1:3000/api/health\").then((r) => { if (!r.ok) process.exit(1); }).catch(() => process.exit(1));'"
               "--health-interval 30s"
               "--health-timeout 10s"
               "--health-retries 3"

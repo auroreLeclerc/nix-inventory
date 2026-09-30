@@ -26,4 +26,14 @@ in
       builtins.trace "🙎🏻‍♀️ ${log}" control
     else
       control;
+  filterSetOfSetByNameBool =
+    discriminant:
+    assert builtins.isString discriminant;
+    setOfSet:
+    assert builtins.isAttrs setOfSet;
+    lib.filterAttrs (
+      _: set:
+      assert builtins.isAttrs set;
+      set ? discriminant
+    ) setOfSet;
 }
