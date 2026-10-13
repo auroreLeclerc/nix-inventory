@@ -48,7 +48,7 @@
       flake = false;
     };
     gemma = {
-      url = "git+https://huggingface.co/unsloth/gemma-4-E4B-it-qat-mobile-GGUF";
+      url = "git+https://huggingface.co/unsloth/gemma-3-1b-it-GGUF";
       flake = false;
     };
   };

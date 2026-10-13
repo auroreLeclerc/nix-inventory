@@ -545,10 +545,9 @@ in
             image = "quay.io/ramalama/ramalama:latest";
             devices = [ "/dev/dri:/dev/dri" ];
             volumes = [
-              "${inputs.gemma}/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf:/mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf"
-              "${inputs.gemma}/mmproj-BF16.gguf:/mnt/models/mmproj-BF16.gguf"
+              "${inputs.gemma}/gemma-3-1b-it-IQ4_XS.gguf:/mnt/models/gemma-3-1b-it-IQ4_XS.gguf"
             ];
-            exec = "llama-server --host 0.0.0.0 --model /mnt/models/gemma-4-E4B-it-qat-UD-Q2_K_XL.gguf --no-warmup --alias unsloth/gemma-4-E4B-it-qat-mobile-GGUF --ctx-size 4096 --temp 0.8 --cache-reuse 256 --flash-attn on -ngl 999 --threads 4 --log-colors on --parallel 1"; # --mmproj /mnt/models/mmproj-BF16.gguf
+            exec = "llama-server --host 0.0.0.0 -m /mnt/models/gemma-3-1b-it-IQ4_XS.gguf --no-warmup --alias unsloth/gemma-3-1b-it-GGUF --jinja -c 4096";
             network = [ "docker-like" ];
             autoUpdate = "registry";
           };

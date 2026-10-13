@@ -54,17 +54,17 @@
     "gemma": {
       "flake": false,
       "locked": {
-        "lastModified": 1784291782,
-        "narHash": "sha256-ulqvKoagcJek9uEYMkrLCeyWAcIkrICc4dc5kMWjJLc=",
+        "lastModified": 1746783171,
+        "narHash": "sha256-AuT9xAK6O6o9t8gZZ4GLKWqOFZLdrPjqINLDnJw4mPk=",
         "ref": "refs/heads/main",
-        "rev": "6a6e7121b977cefd85daa8fbc538fa485e7e8b1b",
-        "revCount": 16,
+        "rev": "f0b45be0aac41bd6a100a4b5734cad5f67255bfb",
+        "revCount": 34,
         "type": "git",
-        "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-qat-mobile-GGUF"
+        "url": "https://huggingface.co/unsloth/gemma-3-1b-it-GGUF"
       },
       "original": {
         "type": "git",
-        "url": "https://huggingface.co/unsloth/gemma-4-E4B-it-qat-mobile-GGUF"
+        "url": "https://huggingface.co/unsloth/gemma-3-1b-it-GGUF"
       }
     },
     "home-manager": {
