@@ -8,10 +8,12 @@
   imports = [
     "${modulesPath}/installer/cd-dvd/installation-cd-graphical-calamares-plasma6.nix"
     "${modulesPath}/installer/cd-dvd/channel.nix"
+    ../../modules/kde/sddm.nix
     {
       home-manager.users.nixos = {
         imports = [
           ../../modules/firefox.home.nix
+          ../../modules/kde/kde.home.nix
           {
             config.catppuccin = {
               enable = lib.mkForce true;
@@ -44,7 +46,13 @@
           nil
           bash-language-server
           wireguard-tools
+          openseachest
         ]);
+      plasma6.excludePackages = with pkgs.kdePackages; [
+        elisa
+        qrca
+      ];
     };
+    services.scrutiny.enable = true;
   };
 }

@@ -1,16 +1,14 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 {
   boot.plymouth = {
     enable = true;
-    theme = "blahaj";
-    themePackages = with pkgs; [
-      plymouth-blahaj-theme
-      kdePackages.breeze-plymouth
-    ];
+    theme = lib.mkForce "blahaj";
+    themePackages = [ pkgs.plymouth-blahaj-theme ];
   };
   services = {
     displayManager.sddm = {

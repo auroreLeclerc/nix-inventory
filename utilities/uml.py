@@ -86,7 +86,7 @@ class UML():
         modules: dict[Path, list[Path]] = {}
         with open(self.__DIR_PATH/".."/".gitignore", "r", encoding="utf-8") as gitignore:
             ignores = gitignore.read().split()
-            ignores.extend(["units", "utilities", ".puml", ".svg", ".md", "LICENSE", ".shellcheckrc", ".pre-commit-config.yaml", ".git"])
+            ignores.extend(["units", "utilities", ".puml", ".svg", ".md", "LICENSE", ".shellcheckrc", ".pre-commit-config.yaml", ".git", "/nix/store/"])
             for module in reading_dir.iterdir():
                 self.__logger.info(module.resolve())
                 if not any(ignore in str(module.resolve()) for ignore in ignores):
@@ -147,6 +147,8 @@ class UML():
             # --- Start
             file.write("@startuml inventory\n")
             file.write("!theme crt-amber\n")
+            # file.write("skinparam backgroundcolor transparent\n")
+            # file.write("skinparam monochrome true\n")
 
             # --- Component Declaration
             units: dict[Path, list[Path]] = {}
