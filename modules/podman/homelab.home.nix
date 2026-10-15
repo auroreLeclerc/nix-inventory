@@ -2,7 +2,6 @@
   osConfig,
   config,
   pkgs,
-  inputs,
   ...
 }:
 let
@@ -545,7 +544,12 @@ in
             image = "quay.io/ramalama/ramalama:latest";
             devices = [ "/dev/dri:/dev/dri" ];
             volumes = [
-              "${inputs.gemma}/gemma-3-1b-it-IQ4_XS.gguf:/mnt/models/gemma-3-1b-it-IQ4_XS.gguf"
+              "${
+                builtins.fetchurl {
+                  url = "https://huggingface.co/unsloth/gemma-3-1b-it-GGUF/resolve/main/gemma-3-1b-it-IQ4_XS.gguf";
+                  sha256 = "0sky8c3gghq78l68sv3l3g2brxlgdr243zdyy4s8mwh8xnjwb04z";
+                }
+              }:/mnt/models/gemma-3-1b-it-IQ4_XS.gguf"
             ];
             exec = "llama-server --host 0.0.0.0 -m /mnt/models/gemma-3-1b-it-IQ4_XS.gguf --no-warmup --alias unsloth/gemma-3-1b-it-GGUF --jinja -c 4096";
             network = [ "docker-like" ];

@@ -51,22 +51,6 @@
         "type": "github"
       }
     },
-    "gemma": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1746783171,
-        "narHash": "sha256-AuT9xAK6O6o9t8gZZ4GLKWqOFZLdrPjqINLDnJw4mPk=",
-        "ref": "refs/heads/main",
-        "rev": "f0b45be0aac41bd6a100a4b5734cad5f67255bfb",
-        "revCount": 34,
-        "type": "git",
-        "url": "https://huggingface.co/unsloth/gemma-3-1b-it-GGUF"
-      },
-      "original": {
-        "type": "git",
-        "url": "https://huggingface.co/unsloth/gemma-3-1b-it-GGUF"
-      }
-    },
     "home-manager": {
       "inputs": {
         "nixpkgs": [
@@ -309,7 +293,6 @@
         "catppuccin": "catppuccin",
         "catppuccin-konsole": "catppuccin-konsole",
         "catppuccin-yakuake": "catppuccin-yakuake",
-        "gemma": "gemma",
         "home-manager": "home-manager",
         "jovian-nixos": "jovian-nixos",
         "mrchromebox-scripts": "mrchromebox-scripts",

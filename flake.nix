@@ -47,10 +47,6 @@
       url = "github:astro-cyberpaws/xenia-kde6";
       flake = false;
     };
-    gemma = {
-      url = "git+https://huggingface.co/unsloth/gemma-3-1b-it-GGUF";
-      flake = false;
-    };
   };
   outputs =
     { nixpkgs, ... }@inputs:
@@ -156,7 +152,7 @@
 
       darwinConfigurations =
         let
-          metaDarwin = myLibs.filterSetOfSetByNameBool "isDarwin";
+          metaDarwin = myLibs.filterSetOfSetByNameBool "isDarwin" metaUnits;
         in
         builtins.mapAttrs (
           unit: meta:
