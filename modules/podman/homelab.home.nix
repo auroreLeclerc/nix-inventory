@@ -574,6 +574,8 @@ in
               "--health-retries 3"
               "--health-start-period 10s"
             ];
+            network = [ "docker-like" ];
+            autoUpdate = "registry";
           };
           minecraft-server = {
             image = "docker.io/itzg/minecraft-server:latest";
@@ -586,6 +588,8 @@ in
               TYPE = "NEOFORGE";
             };
             ip4 = "172.18.0.67";
+            network = [ "docker-like" ];
+            autoUpdate = "registry";
           };
         };
     };
