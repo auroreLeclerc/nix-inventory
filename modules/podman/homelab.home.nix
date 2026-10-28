@@ -582,10 +582,12 @@ in
             volumes = [
               "/run/media/dawn/cubus/minecraft-server/data:/data"
               "/run/media/dawn/cubus/minecraft-server/mods:/mods"
+              "/run/media/dawn/cubus/minecraft-server/config:/config"
             ];
             environment = {
               EULA = "TRUE";
               TYPE = "NEOFORGE";
+              CURSEFORGE_FILES = "https://www.curseforge.com/minecraft/modpacks/all-the-mons";
             };
             ip4 = "172.18.0.67";
             network = [ "docker-like" ];
