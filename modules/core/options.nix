@@ -34,6 +34,7 @@
         prowlarr = mkSecretOption "prowlarr";
         miniflux = mkSecretOption "miniflux";
         paperless = mkSecretOption "paperless";
+        dns-friends = mkSecretOption "dns-friends";
       };
   };
   config.secrets.values =
@@ -52,5 +53,6 @@
       prowlarr = readSecret config.sops.secrets.prowlarr.path;
       miniflux = readSecret config.sops.secrets.miniflux.path;
       paperless = readSecret config.sops.secrets.paperless.path;
+      dns-friends = readSecret config.sops.secrets.dns-friends.path;
     };
 }

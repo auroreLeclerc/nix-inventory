@@ -20,6 +20,7 @@
       prowlarr = { };
       miniflux = { };
       paperless = { };
+      dns-friends = { };
     };
   };
 }

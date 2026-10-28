@@ -140,7 +140,6 @@ in
         };
         extraPodmanArgs = [
           "--network=docker-like:ip=172.18.0.254"
-          "--network=friends"
         ];
         autoUpdate = "registry";
       };

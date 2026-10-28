@@ -48,10 +48,6 @@ in
   ];
   config = {
     services.podman = {
-      settings.storage.storage = {
-        driver = "overlay";
-        # rootless_storage_path = "/run/media/dawn/cache/podman";
-      };
       containers =
         let
           lsio = {
@@ -578,6 +574,18 @@ in
               "--health-retries 3"
               "--health-start-period 10s"
             ];
+          };
+          minecraft-server = {
+            image = "docker.io/itzg/minecraft-server:latest";
+            volumes = [
+              "/run/media/dawn/cubus/minecraft-server/data:/data"
+              "/run/media/dawn/cubus/minecraft-server/mods:/mods"
+            ];
+            environment = {
+              EULA = "TRUE";
+              TYPE = "NEOFORGE";
+            };
+            ip4 = "172.18.0.67";
           };
         };
     };
