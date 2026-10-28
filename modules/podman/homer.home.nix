@@ -87,6 +87,7 @@ in
                       exceptions = {
                         yubal = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/yubal.svg";
                         traefik = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik-proxy.svg";
+                        llmfit = "https://raw.githubusercontent.com/AlexsJones/llmfit/refs/heads/main/assets/icon.svg";
                       };
                     in
                     if (builtins.hasAttr name exceptions) then
@@ -167,6 +168,7 @@ in
                 widgets.logseq
                 widgets.reactive-resume
                 widgets.open-webui
+                widgets.llmfit
                 widgets.changedetection
               ];
             }

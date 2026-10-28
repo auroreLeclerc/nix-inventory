@@ -32,7 +32,8 @@
       flake = false;
     };
     ryubing-canary-src = {
-      url = "git+https://git.ryujinx.app/projects/Ryubing.git?ref=master&shallow=1";
+      # url = "git+https://git.ryujinx.app/projects/Ryubing.git?ref=master&shallow=1";
+      url = "git+https://starforgejo.dev/archive/Ryubing?ref=master&shallow=1";
       flake = false;
     };
     catppuccin-konsole = {

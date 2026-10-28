@@ -562,10 +562,22 @@ in
               PORT = 8080;
               DEFAULT_LOCALE = "fr";
               GLOBAL_LOG_LEVEL = "WARNING";
-              OPENAI_API_BASE_URL = "http://ramalama:8080/v1";
+              OPENAI_API_BASE_URL = "http://ramalama:8080/v1"; # default port will be changed to :9931 in a future release https://github.com/ggml-org/llama.cpp/pull/26508
             };
             network = [ "docker-like" ];
             autoUpdate = "registry";
+          };
+          llmfit = {
+            image = "ghcr.io/alexsjones/llmfit:latest";
+            exec = "serve --host 0.0.0.0 --port 8787";
+            environment.PORT = 8787;
+            extraPodmanArgs = [
+              "--health-cmd 'curl -f http://localhost:8787/health '"
+              "--health-interval 15s"
+              "--health-timeout 5s"
+              "--health-retries 3"
+              "--health-start-period 10s"
+            ];
           };
         };
     };

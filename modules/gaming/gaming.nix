@@ -22,6 +22,7 @@
     vesktop
     celeste64
     freeciv_qt
+    uwuify
     mesa-demos
     # dusklight
     # shipwright

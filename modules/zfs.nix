@@ -41,6 +41,7 @@
     };
   };
   environment.systemPackages = with pkgs; [
+    smartmontools
     openseachest
     sg3_utils
   ];

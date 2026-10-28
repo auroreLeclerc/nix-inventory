@@ -83,7 +83,6 @@ in
 
   environment.systemPackages = with pkgs; [
     lm_sensors
-    smartmontools
     intel-gpu-tools
   ]; # TODO: kexec-tools
 
