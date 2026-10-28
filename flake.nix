@@ -192,6 +192,7 @@
           ryubingCanary = pkgs.callPackage ./modules/gaming/ryubing-canary.nix {
             ryubingCanarySrc = inputs.ryubing-canary-src;
           };
+          ryubingLibhac = pkgs.callPackage ./modules/gaming/ryubing-libhac.nix { };
           mkApp = name: description: runtimeInputs: text: {
             type = "app";
             program = "${pkgs.writeShellApplication { inherit name runtimeInputs text; }}/bin/${name}";
@@ -210,6 +211,9 @@
           fetch-ryubing-canary-deps =
             mkApp "fetch-ryubing-canary-deps" "Regenerate ryubing-canary-deps.json" [ ]
               "exec ${ryubingCanary.passthru.fetch-deps} \"$PWD/modules/gaming/ryubing-canary-deps.json\"";
+          fetch-ryubing-libhac-deps =
+            mkApp "fetch-ryubing-libhac-deps" "Regenerate ryubing-libhac-deps.json" [ ]
+              "exec ${ryubingLibhac.passthru.fetch-deps} \"$PWD/modules/gaming/ryubing-libhac-deps.json\"";
         };
     };
 }

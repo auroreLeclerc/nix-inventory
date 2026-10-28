@@ -625,12 +625,6 @@
     "hash": "sha256-JAMc5bpcBORjONj+LEB2Oq8VLR98mnmb2KjNvU0eZq0="
   },
   {
-    "pname": "Ryujinx.LibHac",
-    "version": "0.21.0-alpha.133",
-    "hash": "sha256-VUvyMVNo8ZMzXArGDXPXP7jDGKrz+KE73fTvMOFgtjE=",
-    "url": "https://git.ryujinx.app/api/packages/projects/nuget/package/ryujinx.libhac/0.21.0-alpha.133/ryujinx.libhac.0.21.0-alpha.133.nupkg"
-  },
-  {
     "pname": "Ryujinx.SDL3-CS",
     "version": "2026.707.0",
     "hash": "sha256-XeJuB9Q+RASoHS6V+Q8jwJUyVxaKQs08SQLxX8FSlgc="
