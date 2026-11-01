@@ -29,7 +29,7 @@ let
       in
       i:
       assert (builtins.length roles) < 255 - 2;
-      "-A CUSTOM_NAC -s 10.13.13${toString (i + 2)}/32 ${groups.${builtins.elemAt roles i}}"
+      "-A CUSTOM_NAC -s 10.13.13.${toString (i + 2)}/32 ${groups.${builtins.elemAt roles i}}"
     ) (builtins.length roles)
   );
   custom-nac = pkgs.writeShellScript "custom-nac.sh" ''
