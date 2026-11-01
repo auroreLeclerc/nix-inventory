@@ -90,6 +90,7 @@ let
     EOF
 
     iptables -w -C FORWARD -i wg0 -j CUSTOM_NAC 2>/dev/null || iptables -w -I FORWARD -i wg0 -j CUSTOM_NAC
+    iptables -L CUSTOM_NAC -n --line-numbers
   '';
 in
 {
@@ -633,7 +634,7 @@ in
           minecraft-server = {
             image = "docker.io/itzg/minecraft-server:java21-alpine";
             volumes = [
-              "/run/media/dawn/cubus/minecraft-server/data:/data"
+              "/run/media/dawn/cubus/minecraft-server:/data"
             ];
             environment = {
 
