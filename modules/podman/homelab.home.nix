@@ -34,6 +34,8 @@ let
   ];
   dispatch = builtins.concatStringsSep "\n" (
     builtins.genList (
+      i:
+      assert (builtins.length peers) < 255 - 2;
       let
         groups = {
           admin = "-j ACCEPT";
@@ -41,10 +43,10 @@ let
           minecraft = "-g NAC_MINECRAFT";
           banned = "-j DROP";
         };
+        peer = builtins.elemAt peers i;
       in
-      i:
-      assert (builtins.length peers) < 255 - 2;
-      "-A CUSTOM_NAC -s 10.13.13.${toString (i + 2)}/32 ${groups.${(builtins.elemAt peers i).value}}"
+      assert (builtins.match "[A-Za-z0-9_]+" peer.name) != null;
+      "-A CUSTOM_NAC -s 10.13.13.${toString (i + 2)}/32 -m comment --comment ${peer.name} ${groups.${peer.value}}"
     ) (builtins.length peers)
   );
   custom-nac = pkgs.writeShellScript "custom-nac.sh" ''
@@ -81,7 +83,7 @@ let
     -A NAC_MINECRAFT -j NAC_NO_LAN
     -A NAC_MINECRAFT -j RETURN
 
-    -A CUSTOM_NAC -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
+    -A CUSTOM_NAC -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
     ${dispatch}
     -A CUSTOM_NAC -j DROP
     COMMIT
