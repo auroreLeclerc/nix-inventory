@@ -6,18 +6,33 @@
 }:
 let
   secrets = osConfig.secrets.values;
-  peers = {
-    exelo = "admin";
-    taya = "admin";
-    fdeity = "admin";
-    work = "admin";
-    paillettes = "friends";
-    test = "minecraft";
-  };
+  peers = [
+    {
+      name = "exelo";
+      value = "admin";
+    }
+    {
+      name = "taya";
+      value = "admin";
+    }
+    {
+      name = "fdeity";
+      value = "admin";
+    }
+    {
+      name = "work";
+      value = "admin";
+    }
+    {
+      name = "paillettes";
+      value = "friends";
+    }
+    {
+      name = "test";
+      value = "minecraft";
+    }
+  ];
   dispatch = builtins.concatStringsSep "\n" (
-    let
-      roles = builtins.attrValues peers;
-    in
     builtins.genList (
       let
         groups = {
@@ -28,9 +43,9 @@ let
         };
       in
       i:
-      assert (builtins.length roles) < 255 - 2;
-      "-A CUSTOM_NAC -s 10.13.13.${toString (i + 2)}/32 ${groups.${builtins.elemAt roles i}}"
-    ) (builtins.length roles)
+      assert (builtins.length peers) < 255 - 2;
+      "-A CUSTOM_NAC -s 10.13.13.${toString (i + 2)}/32 ${groups.${(builtins.elemAt peers i).value}}"
+    ) (builtins.length peers)
   );
   custom-nac = pkgs.writeShellScript "custom-nac.sh" ''
     set -Eeuo pipefail
@@ -119,7 +134,7 @@ in
             addCapabilities = [ "NET_ADMIN" ];
             environment = {
               SERVERURL = secrets.ip;
-              PEERS = builtins.concatStringsSep "," (builtins.attrNames peers);
+              PEERS = builtins.concatStringsSep "," (builtins.attrNames (builtins.listToAttrs peers));
               PEERDNS = config.services.podman.containers.pi-hole.ip4;
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
