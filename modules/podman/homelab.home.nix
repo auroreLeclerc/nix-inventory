@@ -28,7 +28,55 @@ let
       value = "friends";
     }
     {
-      name = "test";
+      name = "alfa";
+      value = "minecraft";
+    }
+    {
+      name = "bravo";
+      value = "minecraft";
+    }
+    {
+      name = "charlie";
+      value = "minecraft";
+    }
+    {
+      name = "delta";
+      value = "minecraft";
+    }
+    {
+      name = "echo";
+      value = "minecraft";
+    }
+    {
+      name = "foxtrot";
+      value = "minecraft";
+    }
+    {
+      name = "golf";
+      value = "minecraft";
+    }
+    {
+      name = "hotel";
+      value = "minecraft";
+    }
+    {
+      name = "india";
+      value = "minecraft";
+    }
+    {
+      name = "juliett";
+      value = "minecraft";
+    }
+    {
+      name = "kilo";
+      value = "minecraft";
+    }
+    {
+      name = "lima";
+      value = "minecraft";
+    }
+    {
+      name = "mike";
       value = "minecraft";
     }
   ];
