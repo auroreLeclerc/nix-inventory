@@ -137,7 +137,7 @@ in
             addCapabilities = [ "NET_ADMIN" ];
             environment = {
               SERVERURL = secrets.ip;
-              PEERS = builtins.concatStringsSep "," (builtins.attrNames (builtins.listToAttrs peers));
+              PEERS = builtins.concatStringsSep "," (map (peer: peer.name) peers);
               PEERDNS = config.services.podman.containers.pi-hole.ip4;
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
@@ -153,6 +153,7 @@ in
               "--sysctl net.ipv4.ip_forward=1"
               "--network=admin:ip=172.18.0.252"
               "--network=friends:ip=172.19.0.252"
+              "--network=minecraft:ip=172.21.0.252"
             ];
             autoUpdate = "registry";
           };
