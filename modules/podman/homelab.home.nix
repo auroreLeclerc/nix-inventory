@@ -6,37 +6,73 @@
 }:
 let
   secrets = osConfig.secrets.values;
+  peers = {
+    exelo = "admin";
+    taya = "admin";
+    fdeity = "admin";
+    work = "admin";
+    paillettes = "friends";
+    test = "minecraft";
+  };
+  dispatch = builtins.concatStringsSep "\n" (
+    let
+      roles = builtins.attrValues peers;
+    in
+    builtins.genList (
+      let
+        groups = {
+          admin = "-j ACCEPT";
+          friends = "-g NAC_FRIENDS";
+          minecraft = "-g NAC_MINECRAFT";
+          banned = "-j DROP";
+        };
+      in
+      i:
+      assert (builtins.length roles) < 255 - 2;
+      "-A CUSTOM_NAC -s 10.13.13${toString (i + 2)}/32 ${groups.${builtins.elemAt roles i}}"
+    ) (builtins.length roles)
+  );
   custom-nac = pkgs.writeShellScript "custom-nac.sh" ''
-    set -e
-    trap 'echo "CUSTOM_NAC Failed"; kill 1' ERR
+    set -Eeuo pipefail
+    trap 'echo "CUSTOM_NAC failed (ligne $LINENO)" >&2; kill 1' ERR
 
-    iptables -N CUSTOM_NAC 2>/dev/null || iptables -F CUSTOM_NAC
-    iptables -C FORWARD -i wg0 -j CUSTOM_NAC 2>/dev/null || iptables -I FORWARD -i wg0 -j CUSTOM_NAC
-    iptables -A CUSTOM_NAC -m state --state RELATED,ESTABLISHED -j RETURN
-
-    iptables -A CUSTOM_NAC -s 10.13.13.2 -j RETURN  # exelo
-    iptables -A CUSTOM_NAC -s 10.13.13.3 -j RETURN  # taya
-    iptables -A CUSTOM_NAC -s 10.13.13.4 -j RETURN  # fdeity
-    iptables -A CUSTOM_NAC -s 10.13.13.5 -j RETURN  # work
-
-    NETWORK_FRIENDS="${config.services.podman.networks.friends.subnet}"
+    FRIENDS="${config.services.podman.networks.friends.subnet}"
+    MINECRAFT="${config.services.podman.networks.minecraft.subnet}"
     PIHOLE="${config.services.podman.containers.pi-hole.ip4}"
-    FRIENDS_RANGE="10.13.13.6-10.13.13.254"  # friends >= 6
 
-    # friends: authorisation
-    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$NETWORK_FRIENDS" -j RETURN
-    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d "$PIHOLE" -j RETURN
+    iptables-restore -w --noflush <<EOF
+    *filter
+    :CUSTOM_NAC - [0:0]
+    :NAC_FRIENDS - [0:0]
+    :NAC_MINECRAFT - [0:0]
+    :NAC_NO_LAN - [0:0]
 
-    # friends: block LAN/RFC1918
-    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d 192.168.0.0/16 -j DROP
-    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d 10.0.0.0/8 -j DROP
-    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d 172.16.0.0/12 -j DROP
-    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -d 212.27.38.253 -j DROP
+    -A NAC_NO_LAN -d 10.0.0.0/8 -j DROP
+    -A NAC_NO_LAN -d 172.16.0.0/12 -j DROP
+    -A NAC_NO_LAN -d 192.168.0.0/16 -j DROP
+    -A NAC_NO_LAN -d 100.64.0.0/10 -j DROP
+    -A NAC_NO_LAN -d 169.254.0.0/16 -j DROP
+    -A NAC_NO_LAN -d 212.27.38.253 -j DROP
 
-    # friends: internet
-    iptables -A CUSTOM_NAC -m iprange --src-range $FRIENDS_RANGE -j RETURN
+    -A NAC_FRIENDS -d $PIHOLE -p udp --dport 53 -j RETURN
+    -A NAC_FRIENDS -d $PIHOLE -p tcp --dport 53 -j RETURN
+    -A NAC_FRIENDS -d $FRIENDS -j RETURN
+    -A NAC_FRIENDS -j NAC_NO_LAN
+    -A NAC_FRIENDS -j RETURN
 
-    iptables -A CUSTOM_NAC -j DROP
+    -A NAC_MINECRAFT -d $PIHOLE -p udp --dport 53 -j RETURN
+    -A NAC_MINECRAFT -d $PIHOLE -p tcp --dport 53 -j RETURN
+    -A NAC_MINECRAFT -d $MINECRAFT -p tcp --dport 25565 -j RETURN
+    -A NAC_MINECRAFT -j NAC_NO_LAN
+    -A NAC_MINECRAFT -j RETURN
+
+    -A CUSTOM_NAC -m conntrack --ctstate RELATED,ESTABLISHED -j RETURN
+    ${dispatch}
+    -A CUSTOM_NAC -j DROP
+    COMMIT
+    EOF
+
+    iptables -w -C FORWARD -i wg0 -j CUSTOM_NAC 2>/dev/null || iptables -w -I FORWARD -i wg0 -j CUSTOM_NAC
   '';
 in
 {
@@ -83,7 +119,7 @@ in
             addCapabilities = [ "NET_ADMIN" ];
             environment = {
               SERVERURL = secrets.ip;
-              PEERS = "exelo,taya,fdeity,work,paillettes"; # Must follow iptables custom repartition
+              PEERS = builtins.concatStringsSep "," (builtins.attrNames peers);
               PEERDNS = config.services.podman.containers.pi-hole.ip4;
               PERSITENTKEEPALIVE_PEERS = "all";
               LOG_CONFS = false;
@@ -97,7 +133,7 @@ in
             extraPodmanArgs = [
               "--sysctl net.ipv4.conf.all.src_valid_mark=1"
               "--sysctl net.ipv4.ip_forward=1"
-              "--network=docker-like:ip=172.18.0.252"
+              "--network=admin:ip=172.18.0.252"
               "--network=friends:ip=172.19.0.252"
             ];
             autoUpdate = "registry";
@@ -115,7 +151,7 @@ in
               "/run/media/dawn/eox/watchdir:/watch"
             ];
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:9091/transmission/web/ '" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           sonarr = {
@@ -134,7 +170,7 @@ in
               "/run/media/dawn/bellum/Multimédia/Séries:/tv"
             ];
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:8989/ping '" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           radarr = {
@@ -153,7 +189,7 @@ in
               "/run/media/dawn/bellum/Multimédia/Films:/movies"
             ];
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:7878/ping '" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           jackett = {
@@ -164,7 +200,7 @@ in
             }
             // lsio;
             volumes = [ "/run/media/dawn/cubus/jackett:/config" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           prowlarr = {
@@ -182,7 +218,7 @@ in
               "--health-cmd 'curl -f http://localhost:9696/ping '"
             ];
             volumes = [ "/run/media/dawn/cubus/prowlarr:/config" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           flaresolverr = {
@@ -194,7 +230,7 @@ in
               LANG = "fr_FR";
             };
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:8191/health '" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           bazarr = {
@@ -208,7 +244,7 @@ in
               "/run/media/dawn/bellum/Multimédia/Films:/movies"
               "/run/media/dawn/bellum/Multimédia/Séries:/tv"
             ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           jellyfin = {
@@ -228,7 +264,7 @@ in
             ];
             devices = [ "/dev/dri:/dev/dri" ];
             extraPodmanArgs = [ "--health-cmd 'curl -i http://localhost:8096/health'" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           lidarr = {
@@ -247,7 +283,7 @@ in
               "/run/media/dawn/eox/downloads:/downloads"
             ];
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:8686/ping '" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           yubal = {
@@ -264,7 +300,7 @@ in
               "/run/media/dawn/bellum/new_Music:/app/data"
               "/run/media/dawn/cubus/yubal:/app/config"
             ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           vaultwarden = {
@@ -278,7 +314,7 @@ in
             };
             volumes = [ "/run/media/dawn/cubus/vaultwarden:/data" ];
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:80/alive '" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           miniflux = {
@@ -293,7 +329,7 @@ in
               BASE_URL = "https://miniflux.${secrets.dns}";
             };
             extraPodmanArgs = [ "--health-cmd '/usr/bin/miniflux -healthcheck auto'" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           reactive-resume = {
@@ -316,7 +352,7 @@ in
               "--health-retries 3"
             ];
             volumes = [ "/run/media/dawn/cubus/reactive-resume/:/app/data" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           postgres = {
@@ -333,14 +369,14 @@ in
               "--health-retries 5"
               "--health-timeout 5s"
             ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "local";
           };
           pi-hole = {
             image = "docker.io/pihole/pihole:latest";
             volumes =
               let
-                adlists = "https://raw.githubusercontent.com/StevenBlack/hosts/master/hosts";
+                adlists = "https://raw.githubusercontent.com/StevenBlack/hosts/master/alternates/fakenews-gambling/hosts";
               in
               [
                 "${builtins.toFile "adlists.list" adlists}:/etc/pihole/adlists.list"
@@ -348,7 +384,7 @@ in
             environment = {
               PORT = 80;
               inherit (lsio) TZ;
-              FTLCONF_webserver_api_password = "";
+              FTLCONF_webserver_api_password = "admin";
               FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11";
               FTLCONF_dns_rateLimit_count = 0;
               FTLCONF_dns_rateLimit_interval = 0;
@@ -359,7 +395,7 @@ in
               "--health-cmd 'dig +norecurse +retry=0 @127.0.0.1 pi.hole ' --hostname '${osConfig.networking.hostName}'"
             ];
             ip4 = "172.18.0.253";
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           photoprism = {
@@ -392,7 +428,7 @@ in
               "/run/media/dawn/cubus/photoprism:/photoprism/storage"
             ];
             extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:2342/api/v1/status '" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           mariadb = {
@@ -407,7 +443,7 @@ in
               MARIADB_ROOT_PASSWORD = "insecure";
             };
             extraPodmanArgs = [ "--health-cmd 'healthcheck.sh --connect --innodb_initialized'" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           redis = {
@@ -418,7 +454,7 @@ in
               ALLOW_EMPTY_PASSWORD = "yes";
             };
             extraPodmanArgs = [ "--health-cmd 'redis-cli ping '" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           paperless = {
@@ -444,13 +480,13 @@ in
               PAPERLESS_DBPASS = "postgres";
               PAPERLESS_SECRET_KEY = "RawcrzB37LUSUaxpdXxSLywHM3IxyXGZzqPvA-Blv83sh9iNM9qUaPd75sMEJur7DIiTdNWL3xOZsNN8a8cTLA";
             };
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           it-tools = {
             image = "docker.io/corentinth/it-tools:latest";
             environment.PORT = 80;
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           fileflows = {
@@ -465,7 +501,7 @@ in
               "/run/media/dawn/bellum/Multimédia/:/media"
             ];
             devices = [ "/dev/dri:/dev/dri" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           nextcloud = {
@@ -483,7 +519,7 @@ in
               "/run/media/dawn/cubus/nextcloud/:/config"
               "/run/media/dawn/bellum/new_Music/:/data"
             ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           changedetection = {
@@ -495,7 +531,7 @@ in
             }
             // lsio;
             volumes = [ "/run/media/dawn/cubus/changedetection:/config" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           logseq = {
@@ -503,7 +539,7 @@ in
             environment = {
               PORT = 80;
             };
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           scrutiny = {
@@ -526,14 +562,14 @@ in
               }:/opt/scrutiny/config/scrutiny.yaml:ro"
             ];
             ports = [ "127.0.0.1:8080:8080" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           influxdb = {
             image = "docker.io/library/influxdb:2";
             userNS = "keep-id:uid=999,gid=999";
             volumes = [ "/run/media/dawn/cubus/influxdb:/var/lib/influxdb2" ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           ramalama = {
@@ -548,7 +584,7 @@ in
               }:/mnt/models/gemma-3-1b-it-IQ4_XS.gguf"
             ];
             exec = "llama-server --host 0.0.0.0 -m /mnt/models/gemma-3-1b-it-IQ4_XS.gguf --no-warmup --alias unsloth/gemma-3-1b-it-GGUF --jinja -c 4096";
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           open-webui = {
@@ -560,7 +596,7 @@ in
               GLOBAL_LOG_LEVEL = "WARNING";
               OPENAI_API_BASE_URL = "http://ramalama:8080/v1"; # default port will be changed to :9931 in a future release https://github.com/ggml-org/llama.cpp/pull/26508
             };
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           llmfit = {
@@ -574,23 +610,29 @@ in
               "--health-retries 3"
               "--health-start-period 10s"
             ];
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
           minecraft-server = {
-            image = "docker.io/itzg/minecraft-server:latest";
+            image = "docker.io/itzg/minecraft-server:java21-alpine";
             volumes = [
               "/run/media/dawn/cubus/minecraft-server/data:/data"
-              "/run/media/dawn/cubus/minecraft-server/mods:/mods"
-              "/run/media/dawn/cubus/minecraft-server/config:/config"
             ];
             environment = {
+
               EULA = "TRUE";
-              TYPE = "NEOFORGE";
-              CURSEFORGE_FILES = "https://www.curseforge.com/minecraft/modpacks/all-the-mons";
+              DIFFICULTY = "easy";
+              MODE = "survival";
+              ONLINE_MODE = false;
+              TYPE = "AUTO_CURSEFORGE";
+              CF_PAGE_URL = "https://www.curseforge.com/minecraft/modpacks/all-the-mons/";
+              CF_FILENAME_MATCHER = "1.3.0";
+              INIT_MEMORY = "4G";
+              MAX_MEMORY = "8G";
+              JVM_OPTS = "-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1";
             };
             ip4 = "172.18.0.67";
-            network = [ "docker-like" ];
+            network = [ "admin" ];
             autoUpdate = "registry";
           };
         };

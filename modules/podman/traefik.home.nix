@@ -16,7 +16,7 @@ in
       whoami = lib.mkIf debug {
         image = "docker.io/traefik/whoami:latest";
         environment.PORT = 80;
-        network = [ "docker-like" ];
+        network = [ "admin" ];
         autoUpdate = "registry";
       };
       traefik = {
@@ -139,7 +139,7 @@ in
           DUCKDNS_TOKEN = secrets.duck;
         };
         extraPodmanArgs = [
-          "--network=docker-like:ip=172.18.0.254"
+          "--network=admin:ip=172.18.0.254"
         ];
         autoUpdate = "registry";
       };
@@ -150,7 +150,7 @@ in
           TEMPLATE_NAME = "connection";
         };
         network = [
-          "docker-like"
+          "admin"
           "friends"
         ];
         autoUpdate = "registry";

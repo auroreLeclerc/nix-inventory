@@ -38,14 +38,15 @@
           onCalendar = "weekly";
         };
         networks = {
-          docker-like = {
+          # 172.16.0.0 → 172.31.255.255
+          admin = {
             description = "Main network";
             driver = "bridge";
             subnet = "172.18.0.0/24";
             gateway = "172.18.0.1";
           };
           friends = {
-            description = "Network for friends (WIP)";
+            description = "Network for friends";
             driver = "bridge";
             subnet = "172.19.0.0/24";
             gateway = "172.19.0.1";
@@ -53,8 +54,14 @@
           integration = {
             description = "CI/CD network";
             driver = "bridge";
-            subnet = "172.16.0.0/24";
-            gateway = "172.16.0.1";
+            subnet = "172.20.0.0/24";
+            gateway = "172.20.0.1";
+          };
+          minecraft = {
+            description = "Minecraft network";
+            driver = "bridge";
+            subnet = "172.21.0.0/24";
+            gateway = "172.21.0.1";
           };
         };
         builds = {

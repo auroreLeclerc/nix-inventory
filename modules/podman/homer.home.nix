@@ -203,7 +203,7 @@ in
           PORT = 8080;
           INIT_ASSETS = 0;
         };
-        network = [ "docker-like" ];
+        network = [ "admin" ];
         autoUpdate = "registry";
       };
     };
