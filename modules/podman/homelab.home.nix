@@ -686,7 +686,6 @@ in
               "/run/media/dawn/cubus/minecraft-server:/data"
             ];
             environment = {
-
               EULA = "TRUE";
               DIFFICULTY = "easy";
               MODE = "survival";
@@ -694,9 +693,10 @@ in
               TYPE = "AUTO_CURSEFORGE";
               CF_PAGE_URL = "https://www.curseforge.com/minecraft/modpacks/all-the-mons/";
               CF_FILENAME_MATCHER = "1.3.0";
-              INIT_MEMORY = "4G";
-              MAX_MEMORY = "8G";
-              JVM_OPTS = "-XX:+UseG1GC -XX:+ParallelRefProcEnabled -XX:MaxGCPauseMillis=200 -XX:+UnlockExperimentalVMOptions -XX:+DisableExplicitGC -XX:+AlwaysPreTouch -XX:G1NewSizePercent=30 -XX:G1MaxNewSizePercent=40 -XX:G1HeapRegionSize=8M -XX:G1ReservePercent=20 -XX:G1HeapWastePercent=5 -XX:G1MixedGCCountTarget=4 -XX:InitiatingHeapOccupancyPercent=15 -XX:G1MixedGCLiveThresholdPercent=90 -XX:G1RSetUpdatingPauseTimePercent=5 -XX:SurvivorRatio=32 -XX:+PerfDisableSharedMem -XX:MaxTenuringThreshold=1";
+              RCON_CMDS_STARTUP = "gamerule keepInventory true\ngamerule mobGriefing false";
+              MAX_MEMORY = "12G";
+              USE_AIKAR_FLAGS = true;
+              OPS = "Horror,Mogasdoor";
             };
             ip4 = "172.21.0.67";
             network = [ "minecraft" ];
