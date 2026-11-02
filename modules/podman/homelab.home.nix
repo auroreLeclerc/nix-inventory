@@ -671,7 +671,7 @@ in
             exec = "serve --host 0.0.0.0 --port 8787";
             environment.PORT = 8787;
             extraPodmanArgs = [
-              "--health-cmd 'curl -f http://localhost:8787/health '"
+              "--health-cmd 'curl -f http://localhost:8787/health'"
               "--health-interval 15s"
               "--health-timeout 5s"
               "--health-retries 3"
@@ -697,7 +697,14 @@ in
               MAX_MEMORY = "12G";
               USE_AIKAR_FLAGS = true;
               OPS = "Horror,Mogasdoor";
+              LOG_LEVEL = "warning";
             };
+            extraPodmanArgs = [
+              "--health-cmd 'mc-health"
+              "--health-interval 5s"
+              "--health-retries 20"
+              "--health-start-period 1m"
+            ];
             ip4 = "172.21.0.67";
             network = [ "minecraft" ];
             autoUpdate = "registry";
