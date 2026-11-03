@@ -2,6 +2,7 @@
   description = "nix-inventory";
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixos-hardware.url = "github:NixOS/nixos-hardware/master";
     catppuccin.url = "github:catppuccin/nix/release-26.05";
     home-manager = {
@@ -32,8 +33,11 @@
       flake = false;
     };
     ryubing-canary-src = {
-      # url = "git+https://git.ryujinx.app/projects/Ryubing.git?ref=master&shallow=1";
-      url = "git+https://starforgejo.dev/archive/Ryubing?ref=master&shallow=1";
+      url = "git+https://git.ryujinx.app/projects/Ryubing.git?ref=master&shallow=1";
+      flake = false;
+    };
+    eglantine-src = {
+      url = "github:Djihads80/Eglantine/nx2";
       flake = false;
     };
     catppuccin-konsole = {
@@ -192,7 +196,6 @@
           ryubingCanary = pkgs.callPackage ./modules/gaming/ryubing-canary.nix {
             ryubingCanarySrc = inputs.ryubing-canary-src;
           };
-          ryubingLibhac = pkgs.callPackage ./modules/gaming/ryubing-libhac.nix { };
           mkApp = name: description: runtimeInputs: text: {
             type = "app";
             program = "${pkgs.writeShellApplication { inherit name runtimeInputs text; }}/bin/${name}";
@@ -211,9 +214,6 @@
           fetch-ryubing-canary-deps =
             mkApp "fetch-ryubing-canary-deps" "Regenerate ryubing-canary-deps.json" [ ]
               "exec ${ryubingCanary.passthru.fetch-deps} \"$PWD/modules/gaming/ryubing-canary-deps.json\"";
-          fetch-ryubing-libhac-deps =
-            mkApp "fetch-ryubing-libhac-deps" "Regenerate ryubing-libhac-deps.json" [ ]
-              "exec ${ryubingLibhac.passthru.fetch-deps} \"$PWD/modules/gaming/ryubing-libhac-deps.json\"";
         };
     };
 }

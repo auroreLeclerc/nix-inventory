@@ -27,6 +27,9 @@
     # dusklight
     # shipwright
     (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
+    (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
+      eglantineSrc = inputs.eglantine-src;
+    })
   ];
   hardware = {
     xone.enable = true;
