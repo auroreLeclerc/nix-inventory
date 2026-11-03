@@ -3,6 +3,7 @@
   osConfig,
   lib,
   config,
+  inputs,
   ...
 }:
 {
@@ -24,7 +25,7 @@
         ++ lib.optionals osConfig.services.desktopManager.plasma6.enable (
           with pkgs;
           [
-            podman-desktop
+            inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.podman-desktop # podman 1.28.2 is unsecure
             podman-compose
           ]
         );
