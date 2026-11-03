@@ -43,6 +43,7 @@ eden.overrideAttrs (
     ];
 
     cmakeFlags = oldAttrs.cmakeFlags ++ [
+      (lib.cmakeBool "ENABLE_WERROR" false)
       (lib.cmakeFeature "zstd_CUSTOM_DIR" "${zstdSrc}")
       (lib.cmakeBool "zbic_FORCE_BUNDLED" true)
       (lib.cmakeFeature "zbic_CUSTOM_DIR" "${zbicSrc}")
