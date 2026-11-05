@@ -684,6 +684,7 @@ in
             image = "docker.io/itzg/minecraft-server:java21-alpine";
             volumes = [
               "/run/media/dawn/cubus/minecraft-server:/data"
+              "${builtins.toFile "mods.txt" "https://www.curseforge.com/minecraft/mc-mods/controllable"}:/extras/mods.txt:ro"
             ];
             environment = {
               EULA = "TRUE";
@@ -693,11 +694,12 @@ in
               TYPE = "AUTO_CURSEFORGE";
               CF_PAGE_URL = "https://www.curseforge.com/minecraft/modpacks/all-the-mons/";
               CF_FILENAME_MATCHER = "1.3.0";
+              CURSEFORGE_FILES = "/extras/mods.txt";
               RCON_CMDS_STARTUP = "gamerule keepInventory true";
               MAX_MEMORY = "12G";
               USE_AIKAR_FLAGS = true;
               OPS = "Horror,Mogasdoor";
-              LOG_LEVEL = "warning";
+              LOG_LEVEL = "warn";
             };
             extraPodmanArgs = [
               "--health-cmd 'mc-health"
