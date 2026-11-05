@@ -110,6 +110,23 @@
         "type": "github"
       }
     },
+    "lichii-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793883971,
+        "narHash": "sha256-2IlChNa1wxcOv77btl/hvNiLKAWf8C667LVxmr+Mtfs=",
+        "owner": "zortos293",
+        "repo": "Lichii",
+        "rev": "8813b44794fd3bd1833165f9f8802925a09e3861",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zortos293",
+        "ref": "nx2",
+        "repo": "Lichii",
+        "type": "github"
+      }
+    },
     "mrchromebox-scripts": {
       "flake": false,
       "locked": {
@@ -304,6 +321,24 @@
         "type": "github"
       }
     },
+    "pokedinner-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793814222,
+        "narHash": "sha256-Fcyj5/7M1yzvQmZGIIzfO/4e6k5z93MRcYbTlKIkbP8=",
+        "ref": "master",
+        "rev": "23f383cab532bf3834ea55f3488b48841f3c727b",
+        "shallow": true,
+        "type": "git",
+        "url": "https://git.eden-emu.dev/Franseven/PokeDinner-a-Eglantine-Fork"
+      },
+      "original": {
+        "ref": "master",
+        "shallow": true,
+        "type": "git",
+        "url": "https://git.eden-emu.dev/Franseven/PokeDinner-a-Eglantine-Fork"
+      }
+    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -312,6 +347,7 @@
         "eglantine-src": "eglantine-src",
         "home-manager": "home-manager",
         "jovian-nixos": "jovian-nixos",
+        "lichii-src": "lichii-src",
         "mrchromebox-scripts": "mrchromebox-scripts",
         "nix-darwin": "nix-darwin",
         "nix-flatpak": "nix-flatpak",
@@ -319,6 +355,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "plasma-manager": "plasma-manager",
+        "pokedinner-src": "pokedinner-src",
         "ryubing-canary-src": "ryubing-canary-src",
         "sops-nix": "sops-nix",
         "unstable": "unstable",

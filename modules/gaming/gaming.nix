@@ -29,6 +29,15 @@
     (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
     (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
       eglantineSrc = inputs.eglantine-src;
+      forkName = "eglantine";
+    })
+    (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
+      eglantineSrc = inputs.lichii-src;
+      forkName = "lichii";
+    })
+    (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
+      eglantineSrc = inputs.pokedinner-src;
+      forkName = "pokedinner";
     })
   ];
   hardware = {

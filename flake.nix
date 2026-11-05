@@ -40,6 +40,14 @@
       url = "github:Djihads80/Eglantine/nx2";
       flake = false;
     };
+    lichii-src = {
+      url = "github:zortos293/Lichii/nx2";
+      flake = false;
+    };
+    pokedinner-src = {
+      url = "git+https://git.eden-emu.dev/Franseven/PokeDinner-a-Eglantine-Fork?ref=master&shallow=1";
+      flake = false;
+    };
     catppuccin-konsole = {
       url = "github:catppuccin/konsole";
       flake = false;
