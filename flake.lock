@@ -54,11 +54,11 @@
     "eglantine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1793805435,
-        "narHash": "sha256-xpQ4fkTZIv/LHclAFTqi97vg/F/YNkWwPBZBI5Ymzz8=",
+        "lastModified": 1793835225,
+        "narHash": "sha256-Ur6joil00cdxEKVgiAoknrWWi0ylXuSgNhJAL04jqes=",
         "owner": "Djihads80",
         "repo": "Eglantine",
-        "rev": "35cde43095e073148b89291814a05cf6c22412eb",
+        "rev": "e736dfde9e45bc3640935e373927814883803d95",
         "type": "github"
       },
       "original": {
@@ -209,11 +209,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1793355509,
-        "narHash": "sha256-/Zs18x+IW4LuVH0rKxra0WPRgsk0DQsi0Bwkf8sOC5c=",
+        "lastModified": 1793871777,
+        "narHash": "sha256-DbFyxXHjP4SJDWVVIILkgrUZxj29cDusi8ULXoQGuZ8=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "04c6b94fa104bc23650983a4513aea196794d321",
+        "rev": "d645c71a58dbae3eb17ff551a07aea13a541cb1a",
         "type": "github"
       },
       "original": {
