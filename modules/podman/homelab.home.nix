@@ -697,7 +697,7 @@ in
               TYPE = "AUTO_CURSEFORGE";
               CF_PAGE_URL = "https://www.curseforge.com/minecraft/modpacks/all-the-mons/";
               CF_FILENAME_MATCHER = "1.3.0";
-              CURSEFORGE_FILES = "@/extras/mods.txt";
+              # CURSEFORGE_FILES = "@/extras/mods.txt";
               RCON_CMDS_STARTUP = "gamerule keepInventory true";
               MAX_MEMORY = "12G";
               USE_AIKAR_FLAGS = true;
