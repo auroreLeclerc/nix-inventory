@@ -54,17 +54,34 @@
     "eglantine-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1793835225,
-        "narHash": "sha256-Ur6joil00cdxEKVgiAoknrWWi0ylXuSgNhJAL04jqes=",
+        "lastModified": 1793912333,
+        "narHash": "sha256-MZ9V1rdP9Ad8UFzRzLdzzPAblkLXVDlkGk9bs9gWdkI=",
         "owner": "Djihads80",
         "repo": "Eglantine",
-        "rev": "e736dfde9e45bc3640935e373927814883803d95",
+        "rev": "0ca2032bffc5f1a3fca75427f7d4a4718adda660",
         "type": "github"
       },
       "original": {
         "owner": "Djihads80",
         "ref": "nx2",
         "repo": "Eglantine",
+        "type": "github"
+      }
+    },
+    "frizti-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793921869,
+        "narHash": "sha256-d9zG6LQAe69DIqUb09sjMDBurnO27GvlNPiYZNx55uk=",
+        "owner": "Frizti",
+        "repo": "Lichii",
+        "rev": "765659af4ccb7201d1145c57f3b45ce84653cea0",
+        "type": "github"
+      },
+      "original": {
+        "owner": "Frizti",
+        "ref": "oot-gather-fix",
+        "repo": "Lichii",
         "type": "github"
       }
     },
@@ -97,11 +114,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793804549,
-        "narHash": "sha256-qYZLU2B4dHrDPIJThzDJnavdF1XTDvd1Kw3gbSjN8xE=",
+        "lastModified": 1793955117,
+        "narHash": "sha256-FhaAtAykFOipr3DIBQpxYfo73rMjY3UHuYA6xAs5K6E=",
         "owner": "Jovian-Experiments",
         "repo": "Jovian-NixOS",
-        "rev": "422ba2f963ebb9783a59eb38b5968578e534f5e2",
+        "rev": "6d21db8ad755a73cc5df076e80fa80b714f555a6",
         "type": "github"
       },
       "original": {
@@ -113,11 +130,11 @@
     "lichii-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1793883971,
-        "narHash": "sha256-2IlChNa1wxcOv77btl/hvNiLKAWf8C667LVxmr+Mtfs=",
+        "lastModified": 1793955278,
+        "narHash": "sha256-QiFnFHK8k6n6VW+CiwCEDv34/5tXig2C7mVCE2tFoig=",
         "owner": "zortos293",
         "repo": "Lichii",
-        "rev": "8813b44794fd3bd1833165f9f8802925a09e3861",
+        "rev": "55532f2d814215aaf32a76c214cf129f2cb6282b",
         "type": "github"
       },
       "original": {
@@ -345,6 +362,7 @@
         "catppuccin-konsole": "catppuccin-konsole",
         "catppuccin-yakuake": "catppuccin-yakuake",
         "eglantine-src": "eglantine-src",
+        "frizti-src": "frizti-src",
         "home-manager": "home-manager",
         "jovian-nixos": "jovian-nixos",
         "lichii-src": "lichii-src",

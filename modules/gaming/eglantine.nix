@@ -7,7 +7,6 @@
   sdl3,
   qt6,
   spirv-tools,
-  forkName,
   eglantineSrc,
 }:
 
@@ -33,7 +32,7 @@ let
 in
 eden.overrideAttrs (
   _: oldAttrs: {
-    pname = forkName;
+    pname = "eglantine";
     version = "0-unstable-${eglantineSrc.shortRev or "dirty"}";
     src = eglantineSrc;
 
