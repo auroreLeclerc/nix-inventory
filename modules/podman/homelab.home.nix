@@ -684,7 +684,11 @@ in
             image = "docker.io/itzg/minecraft-server:java21-alpine";
             volumes = [
               "/run/media/dawn/cubus/minecraft-server:/data"
-              "${builtins.toFile "mods.txt" "https://www.curseforge.com/minecraft/mc-mods/controllable"}:/extras/mods.txt:ro"
+              "${builtins.toFile "mods.txt" ''
+                '
+                                https://www.curseforge.com/minecraft/mc-mods/controllable
+                                https://www.curseforge.com/minecraft/mc-mods/framework
+              ''}:/extras/mods.txt:ro"
             ];
             environment = {
               EULA = "TRUE";
