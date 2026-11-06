@@ -32,6 +32,7 @@
     })
     (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
       eglantineSrc = inputs.frizti-src;
+      name = "lichii";
     })
   ];
   hardware = {
