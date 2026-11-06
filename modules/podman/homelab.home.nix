@@ -685,9 +685,8 @@ in
             volumes = [
               "/run/media/dawn/cubus/minecraft-server:/data"
               "${builtins.toFile "mods.txt" ''
-                '
-                                https://www.curseforge.com/minecraft/mc-mods/controllable
-                                https://www.curseforge.com/minecraft/mc-mods/framework
+                https://www.curseforge.com/minecraft/mc-mods/controllable
+                https://www.curseforge.com/minecraft/mc-mods/framework
               ''}:/extras/mods.txt:ro"
             ];
             environment = {
