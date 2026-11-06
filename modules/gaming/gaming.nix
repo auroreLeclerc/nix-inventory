@@ -24,6 +24,7 @@
     freeciv_qt
     uwuify
     mesa-demos
+    prismlauncher
     # dusklight
     # shipwright
     (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
