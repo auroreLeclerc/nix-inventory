@@ -699,7 +699,7 @@ in
               CF_FILENAME_MATCHER = "1.3.0";
               # CURSEFORGE_FILES = "@/extras/mods.txt";
               RCON_CMDS_STARTUP = "gamerule keepInventory true";
-              MAX_MEMORY = "12G";
+              MEMORY = "12G";
               USE_AIKAR_FLAGS = true;
               OPS = "Horror,Mogasdoor";
               LOG_LEVEL = "warn";
