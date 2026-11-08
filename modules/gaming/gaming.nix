@@ -24,12 +24,11 @@
     freeciv_qt
     uwuify
     mesa-demos
-    prismlauncher
     # dusklight
     # shipwright
     (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
     (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
-      eglantineSrc = inputs.pokedinner-src;
+      eglantineSrc = inputs.eglantine-src;
     })
     (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
       eglantineSrc = inputs.frizti-src;

@@ -28,6 +28,10 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    prismix = {
+      url = "git+https://codeberg.org/OliMoli/prismix?ref=main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     mrchromebox-scripts = {
       url = "github:MrChromebox/scripts";
       flake = false;
@@ -38,10 +42,6 @@
     };
     eglantine-src = {
       url = "github:Djihads80/Eglantine/nx2";
-      flake = false;
-    };
-    pokedinner-src = {
-      url = "git+https://git.eden-emu.dev/Franseven/PokeDinner-a-Eglantine-Fork?ref=master&shallow=1";
       flake = false;
     };
     lichii-src = {
@@ -115,6 +115,7 @@
                 overwriteBackup = true;
                 sharedModules = [
                   inputs.catppuccin.homeModules.catppuccin
+                  inputs.prismix.homeModules.default
                   ./modules/core/core.home.nix
                 ]
                 ++ lib.optionals (!isDarwin) [

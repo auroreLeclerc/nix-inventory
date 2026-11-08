@@ -18,6 +18,7 @@
           ../../modules/podman/workbench.home.nix
           ../../modules/firefox.home.nix
           ../../modules/kde/kde-desktop.home.nix
+          ../../modules/gaming/gaming.home.nix
           ../../modules/flatpak.home.nix
         ];
       };

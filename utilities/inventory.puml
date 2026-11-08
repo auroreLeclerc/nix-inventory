@@ -12,8 +12,11 @@ actor "midna" as 63f8d8e44685a13b538d30e2a0812668 #6D4C41
 cloud "catppuccin" as 12675f5ef72f9752f0428f4b3fd9bc4a
 cloud "catppuccin-konsole" as 8b79f1d46ca7c2b570627250bf49da19
 cloud "catppuccin-yakuake" as 16504c79dfcf819ce148dddaa8406835
+cloud "eglantine-src" as 221e74f4f58cad648f90574ff6e453cd
+cloud "frizti-src" as 1a7311daf9aff3fef2a765977336be5b
 cloud "home-manager" as 91cc156d9d7fb35a47477c54bda5fa5d
 cloud "jovian-nixos" as 2da342e9bb69c793f252bbc5711eecb6
+cloud "lichii-src" as bb48c636089fc3aa2d88e61094ea7959
 cloud "mrchromebox-scripts" as 2b3e27c60f0dbb8ce57ffd2f0b51a009
 cloud "nix-darwin" as 07549ad6481db65484f8bd557d27cf39
 cloud "nix-flatpak" as 6f38dd1fc9fd6fc6cb05ab538f2850fb
@@ -21,8 +24,10 @@ cloud "nix-index-database" as 90da05a3ffbe9bdf693fb18bf75048f0
 cloud "nixos-hardware" as 3c0f1db40a310a702a9b828cb9545d9d
 cloud "nixpkgs" as 68b00da0eb30d2acc9c57208a4f921c1
 cloud "plasma-manager" as 54b08b4e1bef9ee237b8534e35ffafe7
+cloud "prismix" as 7278dda08d76dbd729f399da582de718
 cloud "ryubing-canary-src" as ade47647d2e1a23c11ab12cc56dc071d
 cloud "sops-nix" as 42dd56042980b2d7b007b97c364885a2
+cloud "unstable" as a6389c69fe881a8e3b33c8154c3707ee
 cloud "xenia-kde6" as 42d13c84c6fa45be4443cb3dcdc467b1
 component "flake.nix" as 3cfc5eb99249add5b61f5348132a1e77
 folder "lib" {
@@ -31,10 +36,15 @@ folder "lib" {
 }
 collections ".sops.yaml" as 91f6f5e8b87d05d919871a4550a6fc38
 component "shell.nix" as 97c7e481026e36daa7b31230c6c6aadc
+folder ".claude" {
+   collections "settings.local.json" as e175b8ca0ace6c776f388ac22546165f
+}
 folder "modules" {
    folder "gaming" {
+      component "eglantine.nix" as e91a7ee2b5bc1a522a20c281c19fd04a
       component "ryubing-canary.nix" as 5c4f397607cbe3cd18fc1859af683d90
       component "mprisence.home.nix" as c02ddfafd82173da6d07e50463b65eac
+      component "gaming.home.nix" as 8ee04c986def28d839daff8fca5f6427
       collections "ryubing-canary-deps.json" as b6b8592fe06cca741b91f791fa0b43d4
       collections "mprisence.toml" as 388345b0335603b7af9674ffccc65ed6
       artifact "gamescope.sh" as 07bb30b5069aacb10b5677e227bfbeb4
@@ -91,8 +101,11 @@ collections "flake.lock" as acf05e6b4d5a2b6e0e87b24127cf384a
 12675f5ef72f9752f0428f4b3fd9bc4a --> acf05e6b4d5a2b6e0e87b24127cf384a
 8b79f1d46ca7c2b570627250bf49da19 --> acf05e6b4d5a2b6e0e87b24127cf384a
 16504c79dfcf819ce148dddaa8406835 --> acf05e6b4d5a2b6e0e87b24127cf384a
+221e74f4f58cad648f90574ff6e453cd --> acf05e6b4d5a2b6e0e87b24127cf384a
+1a7311daf9aff3fef2a765977336be5b --> acf05e6b4d5a2b6e0e87b24127cf384a
 91cc156d9d7fb35a47477c54bda5fa5d --> acf05e6b4d5a2b6e0e87b24127cf384a
 2da342e9bb69c793f252bbc5711eecb6 --> acf05e6b4d5a2b6e0e87b24127cf384a
+bb48c636089fc3aa2d88e61094ea7959 --> acf05e6b4d5a2b6e0e87b24127cf384a
 2b3e27c60f0dbb8ce57ffd2f0b51a009 --> acf05e6b4d5a2b6e0e87b24127cf384a
 07549ad6481db65484f8bd557d27cf39 --> acf05e6b4d5a2b6e0e87b24127cf384a
 6f38dd1fc9fd6fc6cb05ab538f2850fb --> acf05e6b4d5a2b6e0e87b24127cf384a
@@ -100,8 +113,10 @@ collections "flake.lock" as acf05e6b4d5a2b6e0e87b24127cf384a
 3c0f1db40a310a702a9b828cb9545d9d --> acf05e6b4d5a2b6e0e87b24127cf384a
 68b00da0eb30d2acc9c57208a4f921c1 --> acf05e6b4d5a2b6e0e87b24127cf384a
 54b08b4e1bef9ee237b8534e35ffafe7 --> acf05e6b4d5a2b6e0e87b24127cf384a
+7278dda08d76dbd729f399da582de718 --> acf05e6b4d5a2b6e0e87b24127cf384a
 ade47647d2e1a23c11ab12cc56dc071d --> acf05e6b4d5a2b6e0e87b24127cf384a
 42dd56042980b2d7b007b97c364885a2 --> acf05e6b4d5a2b6e0e87b24127cf384a
+a6389c69fe881a8e3b33c8154c3707ee --> acf05e6b4d5a2b6e0e87b24127cf384a
 42d13c84c6fa45be4443cb3dcdc467b1 --> acf05e6b4d5a2b6e0e87b24127cf384a
 3cfc5eb99249add5b61f5348132a1e77 -[#C0CA33]-> 946f41d7a0edfc2e0c01ee5a09a8c817
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 33998a49668889da1de8827630f29048
@@ -115,6 +130,7 @@ ade47647d2e1a23c11ab12cc56dc071d --> acf05e6b4d5a2b6e0e87b24127cf384a
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- d5572bc49194fd8103bc4b027c081b12
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 08a37044eaabd670e65176777f006d8e
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- c02ddfafd82173da6d07e50463b65eac
+946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 8ee04c986def28d839daff8fca5f6427
 946f41d7a0edfc2e0c01ee5a09a8c817 <-[#C0CA33]- 38cffe16d01eb2da09feac707c1aaa76
 3cfc5eb99249add5b61f5348132a1e77 -[#D81B60]-> 3b86653d51c226dca28a1f37fd2ad83d
 3cfc5eb99249add5b61f5348132a1e77 -[#8E24AA]-> c4bab5bd2a813b4140b129fe0e3fb658
@@ -125,6 +141,7 @@ c4bab5bd2a813b4140b129fe0e3fb658 <-[#8E24AA]- 7b8930c15c58c8623b34b42b22de824e
 c4bab5bd2a813b4140b129fe0e3fb658 <-[#8E24AA]- d5572bc49194fd8103bc4b027c081b12
 c4bab5bd2a813b4140b129fe0e3fb658 <-[#8E24AA]- 38cffe16d01eb2da09feac707c1aaa76
 c4bab5bd2a813b4140b129fe0e3fb658 <-[#8E24AA]- a09ad47e2deefc393199f1a87fc15ebc
+c4bab5bd2a813b4140b129fe0e3fb658 <-[#8E24AA]- 8ee04c986def28d839daff8fca5f6427
 c4bab5bd2a813b4140b129fe0e3fb658 <-[#8E24AA]- 6a6caf7642ae4a75b6d8c64ecf6400b9
 3cfc5eb99249add5b61f5348132a1e77 -[#1E88E5]-> c7d5751343a9ead629f775ba9b9af9cf
 c7d5751343a9ead629f775ba9b9af9cf <-[#1E88E5]- 5ebad3bd91a08cf55c56e207db927f8e
@@ -150,6 +167,8 @@ c7d5751343a9ead629f775ba9b9af9cf <-[#1E88E5]- 34f24b42df06d195232b3481cc71827b
 5c4f397607cbe3cd18fc1859af683d90 <-- b6b8592fe06cca741b91f791fa0b43d4
 c02ddfafd82173da6d07e50463b65eac <-- 388345b0335603b7af9674ffccc65ed6
 cc648f4643baab83856cbb1aee4c03ef <-- 5c4f397607cbe3cd18fc1859af683d90
+cc648f4643baab83856cbb1aee4c03ef <-- e91a7ee2b5bc1a522a20c281c19fd04a
+cc648f4643baab83856cbb1aee4c03ef <-- e91a7ee2b5bc1a522a20c281c19fd04a
 cc648f4643baab83856cbb1aee4c03ef <-- 07bb30b5069aacb10b5677e227bfbeb4
 d418baa43b11df0205fd0d8001cf7901 <-- 7eb8b1eccd344747a8b685427d1c8d47
 6aafb3be03e9429fda102521e26edd7b <-- c82c7c2583c0b9ccbee6e5f55451c0f6
