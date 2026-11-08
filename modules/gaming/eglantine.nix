@@ -7,7 +7,7 @@
   sdl3,
   qt6,
   spirv-tools,
-  fetchpatch,
+  # fetchpatch,
   eglantineSrc,
   name ? "eglantine",
 }:
@@ -53,19 +53,19 @@ eden.overrideAttrs (
       (lib.cmakeFeature "reshade_CUSTOM_DIR" "${reshadeSrc}")
     ];
 
-    patches =
-      (oldAttrs.patches or [ ])
-      ++ (
-        if (name == "lichii") then
-          [
-            (fetchpatch {
-              url = "https://github.com/Frizti/Lichii/commit/c8e8295e22357d5193f105fc023b45b8b1e863d5.patch";
-              hash = "sha256-vX8oedHWLE0GdmGeaRMYqDUw9GmZQbrw/OfP7o2IotE=";
-            })
-          ]
-        else
-          [ ]
-      );
+    # patches =
+    #   (oldAttrs.patches or [ ])
+    #   ++ (
+    #     if (name == "lichii") then
+    #       [
+    #         (fetchpatch {
+    #           url = "https://github.com/Frizti/Lichii/commit/c8e8295e22357d5193f105fc023b45b8b1e863d5.patch";
+    #           hash = "sha256-vX8oedHWLE0GdmGeaRMYqDUw9GmZQbrw/OfP7o2IotE=";
+    #         })
+    #       ]
+    #     else
+    #       [ ]
+    #   );
 
     postInstall = "";
     postConfigure = "";
