@@ -31,7 +31,7 @@
       eglantineSrc = inputs.eglantine-src;
     })
     (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
-      eglantineSrc = inputs.frizti-src;
+      eglantineSrc = inputs.lichii-src;
       name = "lichii";
     })
   ];
