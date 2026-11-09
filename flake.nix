@@ -111,7 +111,6 @@
                 overwriteBackup = true;
                 sharedModules = [
                   inputs.catppuccin.homeModules.catppuccin
-                  inputs.prismix.homeModules.default
                   ./modules/core/core.home.nix
                 ]
                 ++ lib.optionals (!isDarwin) [
