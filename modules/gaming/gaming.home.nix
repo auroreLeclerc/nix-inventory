@@ -23,42 +23,44 @@
       };
     };
   };
-  homefile.minecraft = {
-    source = builtins.toJSON {
-      accounts = [
-        {
-          entitlement = {
-            canPlayMinecraft = true;
-            ownsMinecraft = true;
-          };
-          msa-client-id = "";
-          type = "MSA";
-        }
-        {
-          active = true;
-          profile = {
-            capes = [ ];
-            id = "0c79d88a112537a0a302f01afa6bc94a";
-            name = "Horror";
-            skin = {
-              id = "";
-              url = "";
-              variant = "";
+  home.file.minecraft = {
+    source = builtins.toFile "accounts.json" (
+      builtins.toJSON {
+        accounts = [
+          {
+            entitlement = {
+              canPlayMinecraft = true;
+              ownsMinecraft = true;
             };
-          };
-          type = "Offline";
-          ygg = {
-            extra = {
-              clientToken = "8be89b1112474b5fb8f061699ff41bda";
-              userName = "Horror";
+            msa-client-id = "";
+            type = "MSA";
+          }
+          {
+            active = true;
+            profile = {
+              capes = [ ];
+              id = "0c79d88a112537a0a302f01afa6bc94a";
+              name = "Horror";
+              skin = {
+                id = "";
+                url = "";
+                variant = "";
+              };
             };
-            iat = 1738858981;
-            token = "0";
-          };
-        }
-      ];
-      formatVersion = 3;
-    };
+            type = "Offline";
+            ygg = {
+              extra = {
+                clientToken = "8be89b1112474b5fb8f061699ff41bda";
+                userName = "Horror";
+              };
+              iat = 1738858981;
+              token = "0";
+            };
+          }
+        ];
+        formatVersion = 3;
+      }
+    );
     target = ".local/share/PrismLauncher/accounts.json";
   };
 }
