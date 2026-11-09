@@ -33,7 +33,7 @@ let
     owner = "Cyan4973";
     repo = "xxHash";
     tag = "v0.8.3";
-    hash = "104syb3m147ksf1lad4jqci0gww2xwc7g989v42zsg91x3ghirma";
+    hash = "sha256-quYI3+ghPf0F2QmldxjvgvMHIsOSNEWD0/OQUMfymoA=";
   };
 in
 eden.overrideAttrs (
