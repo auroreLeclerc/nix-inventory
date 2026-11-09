@@ -29,6 +29,12 @@ let
     tag = "v6.8.0";
     hash = "sha256-K6QC7CLqy8M318n9WbuqGvcRF9g9abvDD/xbr7T+nXo=";
   };
+  xxhashSrc = pkgs.fetchFromGitHub {
+    owner = "Cyan4973";
+    repo = "xxHash";
+    tag = "v0.8.3";
+    hash = "104syb3m147ksf1lad4jqci0gww2xwc7g989v42zsg91x3ghirma";
+  };
 in
 eden.overrideAttrs (
   _: oldAttrs: {
@@ -49,6 +55,8 @@ eden.overrideAttrs (
       (lib.cmakeFeature "zbic_CUSTOM_DIR" "${zbicSrc}")
       (lib.cmakeBool "reshade_FORCE_BUNDLED" true)
       (lib.cmakeFeature "reshade_CUSTOM_DIR" "${reshadeSrc}")
+      (lib.cmakeBool "xxhash_FORCE_BUNDLED" true)
+      (lib.cmakeFeature "xxhash_CUSTOM_DIR" "${xxhashSrc}")
     ];
 
     postInstall = "";
