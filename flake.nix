@@ -28,10 +28,6 @@
       url = "github:nix-community/nix-index-database";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    prismix = {
-      url = "git+https://codeberg.org/OliMoli/prismix?ref=main";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     mrchromebox-scripts = {
       url = "github:MrChromebox/scripts";
       flake = false;

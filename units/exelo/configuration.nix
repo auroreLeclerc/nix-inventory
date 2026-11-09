@@ -19,7 +19,6 @@
           ../../modules/podman/workbench.home.nix
           ../../modules/distrobox.home.nix
           ../../modules/gaming/mprisence.home.nix
-          ../../modules/gaming/gaming.home.nix
           ../../modules/firefox.home.nix
         ];
       };

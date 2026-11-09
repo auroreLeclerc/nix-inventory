@@ -71,11 +71,11 @@
     "frizti-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1794102179,
-        "narHash": "sha256-cIKUm9IXt7ZL/f7qcyWQAWuiTA4EkX0IArPB2RvfK8Y=",
+        "lastModified": 1794229454,
+        "narHash": "sha256-+i3/0Ua+XiyU4fzxzNDqD7WNb2Y96A7GtmjHWvz8qrY=",
         "owner": "Frizti",
         "repo": "Lichii",
-        "rev": "18c6280c03aed8e59f2084c849800cf20cc61f82",
+        "rev": "4012e5271e278b21cf8f56b97481dac2b777cd0d",
         "type": "github"
       },
       "original": {
@@ -130,11 +130,11 @@
     "lichii-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1794149598,
-        "narHash": "sha256-IzpPgK/vtYYtZvpVGG3Z1+YboZ4KnbHFfvQiNZnX3Nw=",
+        "lastModified": 1794232513,
+        "narHash": "sha256-9eEqDCQNcL/tMgiXF5NtgJRtxR0+K3lbRJyjd/q9DR4=",
         "owner": "zortos293",
         "repo": "Lichii",
-        "rev": "ad477ef1f4b54ed48db6ce73cc990a141637e55b",
+        "rev": "0ab7736df9dba2b396d2c7a26bd26fbb9b7b0dc0",
         "type": "github"
       },
       "original": {
@@ -243,11 +243,11 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1794051415,
-        "narHash": "sha256-mJok3uMK0awq2MPKdSnvTxm3UD89KD3LclQzASgtY1s=",
+        "lastModified": 1794222723,
+        "narHash": "sha256-jehPADpSIsWnyNHw/s44OHF9l6Y75QmW74sqO9cEe0A=",
         "owner": "NixOS",
         "repo": "nixos-hardware",
-        "rev": "1a8ff4f57ffe1f732beaa1db842247a381ea471d",
+        "rev": "919c16cf46a7acf9b44b2c2444bc39aa094eaa85",
         "type": "github"
       },
       "original": {
@@ -338,27 +338,6 @@
         "type": "github"
       }
     },
-    "prismix": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1793812307,
-        "narHash": "sha256-8mRcDXeKRuPg2G0I34QSjO9kyvVSwPMvjGx3c5LCY0Q=",
-        "ref": "main",
-        "rev": "5795e938a5f1ccc69511dfaa8a6cde04f561337d",
-        "revCount": 36,
-        "type": "git",
-        "url": "https://codeberg.org/OliMoli/prismix"
-      },
-      "original": {
-        "ref": "main",
-        "type": "git",
-        "url": "https://codeberg.org/OliMoli/prismix"
-      }
-    },
     "root": {
       "inputs": {
         "catppuccin": "catppuccin",
@@ -376,7 +355,6 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_3",
         "plasma-manager": "plasma-manager",
-        "prismix": "prismix",
         "ryubing-canary-src": "ryubing-canary-src",
         "sops-nix": "sops-nix",
         "unstable": "unstable",
