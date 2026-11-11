@@ -44,10 +44,6 @@
       url = "github:zortos293/Lichii/nx2";
       flake = false;
     };
-    frizti-src = {
-      url = "github:Frizti/Lichii/oot-gather-fix";
-      flake = false;
-    };
     catppuccin-konsole = {
       url = "github:catppuccin/konsole";
       flake = false;
