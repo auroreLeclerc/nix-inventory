@@ -113,17 +113,17 @@
     "lichii-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1794362920,
-        "narHash": "sha256-XT7nV+tBnMKFSJDfhiWvsCx9DIi6sgAisM1t4rFUizA=",
-        "owner": "Frizti",
-        "repo": "Fritchii",
-        "rev": "4f5c53149b7e17d1c24445f68d79a83a3b2a17f9",
+        "lastModified": 1794601276,
+        "narHash": "sha256-4TvMc0eBnmo5nZFujRbqCEZH2e8sEl+nlcBX2fgj6yM=",
+        "owner": "zortos293",
+        "repo": "Lichii",
+        "rev": "b41fb99cc99e4d3c0a238b338ece0d01293e1282",
         "type": "github"
       },
       "original": {
-        "owner": "Frizti",
-        "ref": "oot-gather-fix",
-        "repo": "Fritchii",
+        "owner": "zortos293",
+        "ref": "nx2",
+        "repo": "Lichii",
         "type": "github"
       }
     },

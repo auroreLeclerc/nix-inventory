@@ -42,7 +42,7 @@
       flake = false;
     };
     lichii-src = {
-      url = "github:Frizti/Fritchii/oot-gather-fix";
+      url = "github:zortos293/Lichii/nx2";
       flake = false;
     };
     catppuccin-konsole = {
