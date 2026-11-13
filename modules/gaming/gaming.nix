@@ -35,14 +35,7 @@
       name = "lichii";
     })
   ];
-  hardware = {
-    xone.enable = true;
-    graphics = {
-      # RADV
-      enable = true;
-      enable32Bit = true;
-    };
-  };
+  hardware.xone.enable = true;
 
   specialisation."ValveSoftware Gamescope".configuration =
     let

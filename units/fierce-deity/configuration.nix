@@ -1,7 +1,7 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ inputs, ... }:
+{ inputs, pkgs, ... }:
 {
   imports = [
     ../../modules/kde/kde.nix
@@ -28,6 +28,25 @@
       hostId = "007f0200";
       hostName = "fierce-deity";
     };
+    hardware.graphics.extraPackages =
+      let
+        amdvlk-run =
+          with inputs.oldpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+          writeShellScriptBin "amdvlk-run" ''
+            export VK_DRIVER_FILES="${amdvlk}/share/vulkan/icd.d/amd_icd64.json:${
+              inputs.oldpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.driversi686Linux.amdvlk
+            }/share/vulkan/icd.d/amd_icd32.json"
+            exec "$@"
+          '';
+      in
+      with inputs.oldpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system};
+      [
+        amdvlk
+        amdvlk-run
+      ];
+    hardware.graphics.extraPackages32 = [
+      inputs.oldpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}.driversi686Linux.amdvlk
+    ];
 
     # This value determines the NixOS release from which the default
     # settings for stateful data, like file locations and database versions
