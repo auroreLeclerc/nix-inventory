@@ -32,9 +32,7 @@
         hostId = "007f0200";
         hostName = "fierce-deity";
       };
-      hardware.graphics.extraPackages = [
-        oldpkgs.amdvlk
-      ];
+      hardware.graphics.extraPackages = [ oldpkgs.amdvlk ];
       hardware.graphics.extraPackages32 = [ oldpkgs.driversi686Linux.amdvlk ];
       environment.systemPackages =
         let
@@ -44,7 +42,6 @@
           '';
         in
         [ amdvlk-run ];
-
       # This value determines the NixOS release from which the default
       # settings for stateful data, like file locations and database versions
       # on your system were taken. It‘s perfectly fine and recommended to leave
