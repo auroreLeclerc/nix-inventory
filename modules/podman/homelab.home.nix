@@ -112,7 +112,7 @@ let
     :NAC_MINECRAFT - [0:0]
     :NAC_NO_LAN - [0:0]
 
-    -A NAC_NO_LAN -d 10.0.0.0/8 -j DROP
+    # -A NAC_NO_LAN -d 10.0.0.0/8 -j DROP
     -A NAC_NO_LAN -d 172.16.0.0/12 -j DROP
     -A NAC_NO_LAN -d 192.168.0.0/16 -j DROP
     -A NAC_NO_LAN -d 100.64.0.0/10 -j DROP
@@ -661,7 +661,7 @@ in
               PORT = 8080;
               DEFAULT_LOCALE = "fr";
               GLOBAL_LOG_LEVEL = "WARNING";
-              OPENAI_API_BASE_URL = "http://ramalama:8080/v1"; # default port will be changed to :9931 in a future release https://github.com/ggml-org/llama.cpp/pull/26508
+              OPENAI_API_BASE_URL = "http://ramalama:9931/v1";
             };
             network = [ "admin" ];
             autoUpdate = "registry";
