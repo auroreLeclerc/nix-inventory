@@ -53,6 +53,9 @@
         "[css]" = {
           "editor.defaultFormatter" = "stylelint.vscode-stylelint";
         };
+        "[json]" = {
+          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+        };
         "java.debug.settings.vmArgs" = "-ea";
         "java.jdt.ls.java.home" = pkgs.jdk;
         "go.alternateTools" = {

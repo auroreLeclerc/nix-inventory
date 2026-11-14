@@ -29,7 +29,6 @@ in
             address = ":443";
             http.tls = {
               certResolver = "duckresolver";
-
               domains =
                 {
                   admin = [
@@ -48,16 +47,16 @@ in
                 .${network};
             };
           };
-          certificatesresolvers.duckresolver.acme = {
-            dnschallenge = {
-              provider = "duckdns";
-              propagation.delaybeforechecks = 120;
-            };
-            email = secrets.mail;
-            storage = "/letsencrypt/acme.json";
-          };
-          providers.file.filename = "/etc/traefik/dynamic.yml";
         };
+        certificatesresolvers.duckresolver.acme = {
+          dnschallenge = {
+            provider = "duckdns";
+            propagation.delaybeforechecks = 120;
+          };
+          email = secrets.mail;
+          storage = "/letsencrypt/acme.json";
+        };
+        providers.file.filename = "/etc/traefik/dynamic.yml";
       };
       dynamicConfig = network: {
         http = {
@@ -133,7 +132,6 @@ in
             };
         };
       };
-
     in
     {
       whoami = lib.mkIf debug {
