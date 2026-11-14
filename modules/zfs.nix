@@ -11,12 +11,12 @@
       requestEncryptionCredentials = false;
       extraPools =
         {
-          "bellum" = [
+          bellum = [
             "cubus"
             "bellum"
             # "kohga"
           ];
-          "fierce-deity" = [ "odolwa" ];
+          fierce-deity = [ "odolwa" ];
         }
         .${config.networking.hostName};
     };
