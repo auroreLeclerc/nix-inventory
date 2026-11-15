@@ -176,7 +176,6 @@ in
             ];
             devices = [ "/dev/dri:/dev/dri" ];
             extraPodmanArgs = [ "--health-cmd 'curl -i http://localhost:8096/health'" ];
-            ip4 = "172.19.0.67";
             network = [ "friends" ];
             autoUpdate = "registry";
           };

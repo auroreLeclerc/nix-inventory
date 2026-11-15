@@ -188,7 +188,7 @@ in
               }
             ];
             friends = [
-              (lib.mkIf true {
+              {
                 name = "Everyone is Here!";
                 icon = "fa-solid fa-dragon";
                 items =
@@ -202,7 +202,7 @@ in
                     in
                     if (value != null) then value else { }
                   ) (builtins.length values);
-              })
+              }
             ];
           }
           .${network};
