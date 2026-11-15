@@ -10,7 +10,7 @@ in
 {
   config.services.podman.containers =
     let
-      debug = true;
+      debug = false;
       traefikConfig = network: {
         log.level = "INFO";
         api = {

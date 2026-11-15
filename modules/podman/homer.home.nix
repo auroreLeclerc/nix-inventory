@@ -95,6 +95,8 @@ in
                         yubal = "https://cdn.jsdelivr.net/gh/selfhst/icons/svg/yubal.svg";
                         traefik = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/traefik-proxy.svg";
                         llmfit = "https://raw.githubusercontent.com/AlexsJones/llmfit/refs/heads/main/assets/icon.svg";
+                        jellyfin-friends = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/jellyfin.svg";
+                        traefik-friends = exceptions.traefik;
                       };
                     in
                     if (builtins.hasAttr name exceptions) then
@@ -114,98 +116,78 @@ in
                 null
             ) config.services.podman.containers;
           in
-          {
-            admin = [
-              (lib.mkIf false {
-                name = "Everyone is Here!";
-                icon = "fa-solid fa-dragon";
-                items =
+          [
+            (lib.mkIf false {
+              name = "Everyone is Here!";
+              icon = "fa-solid fa-dragon";
+              items =
+                let
+                  values = builtins.attrValues widgets;
+                in
+                builtins.genList (
+                  i:
                   let
-                    values = builtins.attrValues widgets;
+                    value = builtins.elemAt values i;
                   in
-                  builtins.genList (
-                    i:
-                    let
-                      value = builtins.elemAt values i;
-                    in
-                    if (value != null) then value else { }
-                  ) (builtins.length values);
-              })
-              {
-                name = "*Arr & Misc";
-                icon = "fa-solid fa-cloud-arrow-down";
-                items = [
-                  widgets.transmission
-                  widgets.lidarr
-                  widgets.sonarr
-                  widgets.radarr
-                  widgets.bazarr
-                  widgets.fileflows
-                  widgets.yubal
-                  widgets.prowlarr
-                  widgets.jackett
-                ];
-              }
-              {
-                name = "Fun times";
-                icon = "fa-solid nf-md-cards_playing";
-                items = [
-                  widgets.jellyfin
-                ];
-              }
-              {
-                name = "Infra";
-                icon = "fa-solid fa-bridge";
-                items = [
-                  widgets.traefik
-                  widgets.scrutiny
-                  widgets.pi-hole
-                  widgets.it-tools
-                  # widgets.flaresolverr
-                ];
-              }
-              {
-                name = "Documents";
-                icon = "fa-solid fa-briefcase";
-                items = [
-                  widgets.paperless
-                  widgets.photoprism
-                  widgets.nextcloud
-                  widgets.vaultwarden
-                ];
-              }
-              {
-                name = "Work";
-                icon = "fa-solid fa-hammer";
-                items = [
-                  widgets.miniflux
-                  widgets.logseq
-                  widgets.reactive-resume
-                  widgets.open-webui
-                  widgets.llmfit
-                  widgets.changedetection
-                ];
-              }
-            ];
-            friends = [
-              {
-                name = "Everyone is Here!";
-                icon = "fa-solid fa-dragon";
-                items =
-                  let
-                    values = builtins.attrValues widgets;
-                  in
-                  builtins.genList (
-                    i:
-                    let
-                      value = builtins.elemAt values i;
-                    in
-                    if (value != null) then value else { }
-                  ) (builtins.length values);
-              }
-            ];
-          }
-          .${network};
+                  if (value != null) then value else { }
+                ) (builtins.length values);
+            })
+            {
+              name = "*Arr & Misc";
+              icon = "fa-solid fa-cloud-arrow-down";
+              items = [
+                widgets.transmission
+                widgets.lidarr
+                widgets.sonarr
+                widgets.radarr
+                widgets.bazarr
+                widgets.fileflows
+                widgets.yubal
+                widgets.prowlarr
+                widgets.jackett
+              ];
+            }
+            {
+              name = "Fun times";
+              icon = "fa-solid nf-md-cards_playing";
+              items = [
+                widgets.jellyfin
+              ];
+            }
+            {
+              name = "Infra";
+              icon = "fa-solid fa-bridge";
+              items = [
+                widgets.traefik
+                widgets.scrutiny
+                widgets.pi-hole
+                widgets.it-tools
+                # widgets.flaresolverr
+              ];
+            }
+            {
+              name = "Documents";
+              icon = "fa-solid fa-briefcase";
+              items = [
+                widgets.paperless
+                widgets.photoprism
+                widgets.nextcloud
+                widgets.vaultwarden
+              ];
+            }
+            {
+              name = "Work";
+              icon = "fa-solid fa-hammer";
+              items = [
+                widgets.miniflux
+                widgets.logseq
+                widgets.reactive-resume
+                widgets.open-webui
+                widgets.llmfit
+                widgets.changedetection
+              ];
+            }
+          ];
       };
       light = builtins.fetchurl {
         url = "https://xenia-images.efi.pages.gay/chimmie_egg-wallpaper_light.png";
