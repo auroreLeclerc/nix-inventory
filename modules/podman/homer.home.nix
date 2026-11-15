@@ -11,6 +11,8 @@ in
   config.services.podman.containers =
     let
       homerConfig = network: {
+        "$schema" =
+          "https://raw.githubusercontent.com/homer-dashboard/homer/main/.schema/config-schema.json";
         title =
           {
             admin = "Laboratoire Maison";
@@ -21,7 +23,7 @@ in
         logo = "assets/logo.png";
         footer = false;
         columns = "auto";
-        connectivityCheck = false;
+        connectivityCheck = true;
         defaults = {
           layout = "list";
           colorTheme = "auto";
@@ -117,21 +119,6 @@ in
             ) config.services.podman.containers;
           in
           [
-            (lib.mkIf false {
-              name = "Everyone is Here!";
-              icon = "fa-solid fa-dragon";
-              items =
-                let
-                  values = builtins.attrValues widgets;
-                in
-                builtins.genList (
-                  i:
-                  let
-                    value = builtins.elemAt values i;
-                  in
-                  if (value != null) then value else { }
-                ) (builtins.length values);
-            })
             {
               name = "*Arr & Misc";
               icon = "fa-solid fa-cloud-arrow-down";
