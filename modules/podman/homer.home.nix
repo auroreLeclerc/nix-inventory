@@ -152,6 +152,7 @@ in
               icon = "fa-solid nf-md-cards_playing";
               items = [
                 widgets.jellyfin
+                widgets.jellyfin-friends
               ];
             }
             {
@@ -159,6 +160,7 @@ in
               icon = "fa-solid fa-bridge";
               items = [
                 widgets.traefik
+                widgets.traefik-friends
                 widgets.scrutiny
                 widgets.pi-hole
                 widgets.it-tools
