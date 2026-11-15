@@ -57,6 +57,10 @@
       url = "github:astro-cyberpaws/xenia-kde6";
       flake = false;
     };
+    bizhawk = {
+      url = "github:TASEmulators/BizHawk/2.11.1";
+      flake = false;
+    };
   };
   outputs =
     { nixpkgs, ... }@inputs:

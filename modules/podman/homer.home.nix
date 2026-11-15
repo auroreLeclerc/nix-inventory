@@ -115,7 +115,11 @@ in
                 }
                 // (if (builtins.hasAttr name customServices) then customServices.${name} else { })
               else
-                null
+                {
+                  inherit name;
+                  logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/i-am-programmer-kawaii-japanese.svg";
+                  class = "navbar-menu";
+                }
             ) config.services.podman.containers;
           in
           [

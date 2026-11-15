@@ -16,10 +16,13 @@
     dolphin-emu
     azahar
     ppsspp
+    (import inputs.bizhawk {
+      system = pkgs.stdenv.hostPlatform.system;
+    }).emuhawk-2_10-bin
     itch
     xrgears
     archipelago
-    vesktop
+    poptracker
     celeste64
     freeciv_qt
     uwuify

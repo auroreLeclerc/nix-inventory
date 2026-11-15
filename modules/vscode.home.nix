@@ -56,6 +56,16 @@
         "[json]" = {
           "editor.defaultFormatter" = "esbenp.prettier-vscode";
         };
+        "json.schemaDownload.trustedDomains" = {
+          "https://developer.microsoft.com/json-schemas/" = true;
+          "https://json-schema.org/" = true;
+          "https://json.schemastore.org/" = true;
+          "https://raw.githubusercontent.com" = true;
+          "https://raw.githubusercontent.com/devcontainers/spec/" = true;
+          "https://raw.githubusercontent.com/microsoft/vscode/" = true;
+          "https://schemastore.azurewebsites.net/" = true;
+          "https://www.schemastore.org/" = true;
+        };
         "java.debug.settings.vmArgs" = "-ea";
         "java.jdt.ls.java.home" = pkgs.jdk;
         "go.alternateTools" = {
