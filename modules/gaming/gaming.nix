@@ -11,33 +11,39 @@
     # extraPackages = [ pkgs.hidapi ];
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
-  environment.systemPackages = with pkgs; [
-    dolphin-emu-primehack
-    dolphin-emu
-    azahar
-    ppsspp
-    (import inputs.bizhawk {
-      system = pkgs.stdenv.hostPlatform.system;
-    }).emuhawk-2_10-bin
-    itch
-    xrgears
-    archipelago
-    poptracker
-    celeste64
-    freeciv_qt
-    uwuify
-    mesa-demos
-    # dusklight
-    # shipwright
-    (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
-    (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
-      eglantineSrc = inputs.eglantine-src;
-    })
-    (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
-      eglantineSrc = inputs.lichii-src;
-      name = "lichii";
-    })
-  ];
+  environment = {
+    systemPackages = with pkgs; [
+      dolphin-emu-primehack
+      dolphin-emu
+      azahar
+      ppsspp
+      (import inputs.bizhawk {
+        system = pkgs.stdenv.hostPlatform.system;
+      }).emuhawk-2_10-bin
+      itch
+      xrgears
+      archipelago
+      poptracker
+      celeste64
+      freeciv_qt
+      uwuify
+      mesa-demos
+      # dusklight
+      # shipwright
+      (pkgs.callPackage ./ryubing-canary.nix { ryubingCanarySrc = inputs.ryubing-canary-src; })
+      (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
+        eglantineSrc = inputs.eglantine-src;
+      })
+      (inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.callPackage ./eglantine.nix {
+        eglantineSrc = inputs.lichii-src;
+        name = "lichii";
+      })
+    ];
+    pathsToLink = [
+      "/share/xdg-desktop-portal"
+      "/share/applications"
+    ];
+  };
   hardware.xone.enable = true;
 
   specialisation."ValveSoftware Gamescope".configuration =
