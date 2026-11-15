@@ -154,9 +154,8 @@ in
           PORT = 8080;
           DUCKDNS_TOKEN = secrets.duck;
         };
-        extraPodmanArgs = [
-          "--network=admin:ip=172.18.0.254"
-        ];
+        extraPodmanArgs = [ "--network=admin:ip=172.18.0.254" ];
+        network = [ "admin" ];
         autoUpdate = "registry";
       };
       traefik-friends = {
@@ -173,6 +172,7 @@ in
         extraPodmanArgs = [
           "--network=friends:ip=172.19.0.254"
         ];
+        network = [ "friends" ];
         autoUpdate = "registry";
       };
       error-pages = {
