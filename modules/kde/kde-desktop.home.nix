@@ -111,15 +111,14 @@
                 config.General.launcherUrls = [
                   "file:///etc/profiles/per-user/dawn/share/applications/firefox.desktop"
                   "file:///run/current-system/sw/share/applications/google-chrome.desktop"
-                  "file:///run/current-system/sw/share/applications/vesktop.desktop"
+                  "file:///etc/profiles/per-user/dawn/share/applications/vesktop.desktop"
                   "file:///home/dawn/.local/share/applications/chrome-hnpfjngllnobngcgfapefoaidbinmjnm-Default.desktop" # Whatsapp Web
                   "file:///run/current-system/sw/share/applications/steam.desktop"
-                  "file:///run/current-system/sw/share/applications/com.usebottles.bottles.desktop"
                   "file:///home/dawn/.local/share/applications/chrome-lgnggepjiihbfdbedefdhcffnmhcahbm-Default.desktop" # Reddit
                   "file:///home/dawn/.local/share/applications/chrome-agimnkijcaahngcdmfeangaknmldooml-Default.desktop" # YouTube
                   "file:///etc/profiles/per-user/dawn/share/applications/codium.desktop"
                   "file:///run/current-system/sw/share/applications/sublime_text.desktop"
-                  "file:///run/current-system/sw/share/applications/org.strawberrymusicplayer.strawberry.desktop"
+                  "file:///etc/profiles/per-user/dawn/share/applications/org.strawberrymusicplayer.strawberry.desktop"
                   "file:///home/dawn/.local/share/applications/chrome-cinhimbnkkaeohfgghhklpknlkffjgod-Default.desktop" # YT Music
                   "file:///run/current-system/sw/share/applications/org.inkscape.Inkscape.desktop"
                   "file:///home/dawn/.local/share/applications/wine/Programs/PhotoFiltre 7/PhotoFiltre 7.desktop"

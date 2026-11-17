@@ -13,19 +13,21 @@ let
     url = "https://xenia-images.efi.pages.gay/flyinghyena1.jpeg";
     sha256 = "sha256-Fe9bpTAYy8h26HG4WDOMwSl5oS56kHve5QXCrrhtlbU=";
   };
-  hostDisplays = {
-    exelo = [
-      {
-        "eDP-1" = ./icc/AMD-Framework-13.icm;
-      }
-    ];
-    fierce-deity = [
-      {
-        "HDMI-A-1" = ./icc/Samsung-C27F39xF.icm;
-      }
-    ];
-  };
   apply-icc = pkgs.writeShellScriptBin "apply-icc" (
+    let
+      hostDisplays = {
+        exelo = [
+          {
+            "eDP-1" = ./icc/AMD-Framework-13.icm;
+          }
+        ];
+        fierce-deity = [
+          {
+            "HDMI-A-1" = ./icc/Samsung-C27F39xF.icm;
+          }
+        ];
+      };
+    in
     toString (
       map (script-line: (builtins.attrValues script-line)) (
         map (
@@ -151,7 +153,7 @@ in
         kdeglobals.General.AccentColor = "#926EE4";
         plasmanotifyrc = {
           DoNotDisturb = {
-            WhenFullscreen = false;
+            WhenFullscreen = true;
           };
         };
         koirc = {
@@ -226,8 +228,13 @@ in
         target = ".config/autostart/org.kde.yakuake.desktop";
       };
       apply-icc = {
-        source = "${apply-icc}/bin/apply-icc";
-        target = ".config/plasma-workspace/env/apply-icc.sh";
+        source = builtins.toFile "icc.desktop" ''
+          [Desktop Entry]
+          Type=Application
+          Name=Apply ICC profile
+          Exec=apply-icc
+        '';
+        target = ".config/autostart/apply-icc.desktop";
       };
     };
   };

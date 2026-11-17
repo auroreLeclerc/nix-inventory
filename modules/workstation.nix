@@ -24,7 +24,6 @@
         tor-browser
         sirikali
         wineWow64Packages.full
-        # bottles
         calibre
         imagemagick
         winetricks

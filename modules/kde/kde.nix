@@ -12,7 +12,11 @@ in
   imports = [
     ./sddm.nix
   ];
-  services.desktopManager.plasma6.enable = true; # Enable the KDE Plasma Desktop Environment.
+  services = {
+    desktopManager.plasma6.enable = true;
+    geoclue2.enable = false;
+  };
+  security.rtkit.enable = true;
   #	services.printing.enable = true; # Enable CUPS to print documents.
   hardware.bluetooth.enable = true;
 
