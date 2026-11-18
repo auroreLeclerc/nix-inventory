@@ -2,6 +2,7 @@
   programs.vesktop = {
     enable = true;
     settings = {
+      hardwareAcceleration = true;
       hardwareVideoAcceleration = true;
       hardwareVideoEncoding = true;
     };
@@ -9,6 +10,7 @@
       autoUpdate = true;
       autoUpdateNotification = true;
       notifyAboutUpdates = true;
+      useQuickCss = false;
       plugins = {
         ClearURLs.enabled = true;
         BlurNSFW.enabled = true;
@@ -20,7 +22,10 @@
         BetterSearch.enabled = true;
         petpet.enabled = true;
         UserMessagesPronouns.enabled = true;
+        PlatformIndicators.enabled = true;
+        LoadingQuotes.enabled = true;
       };
+      themeLinks = [ "https://allpurposemat.codeberg.page/Disblock-Origin/DisblockOrigin.theme.css" ];
     };
   };
   xdg.portal = {
