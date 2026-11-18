@@ -130,11 +130,11 @@
     "lichii-src": {
       "flake": false,
       "locked": {
-        "lastModified": 1794972754,
-        "narHash": "sha256-1JhsmF+3R5y0RVvwQ5l8Mx6bu6cSWGSCSbEzUDFiAiw=",
+        "lastModified": 1794997850,
+        "narHash": "sha256-Y7Zuw7CSXoZs5cAKYOAM/pybji14dGpmFOZwZv9ALyw=",
         "owner": "zortos293",
         "repo": "Lichii",
-        "rev": "e10fe57ba239eccf63393765b96b13105ace6553",
+        "rev": "c5fa54f560d3a0f224eab7a543ad5ce33af9f6ef",
         "type": "github"
       },
       "original": {
