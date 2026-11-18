@@ -17,9 +17,7 @@
         NoTrack.enabled = true;
         WhoReacted.enabled = true;
         BetterGifPicker.enabled = true;
-        AlwaysAnimate.enabled = true;
         BetterSearch.enabled = true;
-        oneko.enabled = true;
         petpet.enabled = true;
         UserMessagesPronouns.enabled = true;
       };

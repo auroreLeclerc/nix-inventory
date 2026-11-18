@@ -33,6 +33,7 @@ in
           light.background-image = "/assets/light.png";
           dark.background-image = "/assets/dark.png";
         };
+        stylesheet = [ "assets/custom.css" ];
         services =
           let
             widgets = builtins.mapAttrs (
@@ -118,7 +119,7 @@ in
                 {
                   inherit name;
                   logo = "https://cdn.jsdelivr.net/gh/homarr-labs/dashboard-icons/svg/i-am-programmer-kawaii-japanese.svg";
-                  class = "navbar-menu";
+                  class = "hide";
                 }
             ) config.services.podman.containers;
           in
@@ -194,6 +195,7 @@ in
         url = "https://xenia-images.efi.pages.gay/chimmie_firefox.png";
         sha256 = "1jbdabykdpr3mmna3clzsa6qxg1z9w9i19nr3a6i4is9hlfj4g6a";
       };
+      css = builtins.toFile "custom.css" ".hide { display: none; }";
     in
     {
       homer = {
@@ -203,6 +205,7 @@ in
           "${light}:/www/assets/light.png"
           "${dark}:/www/assets/dark.png"
           "${logo}:/www/assets/logo.png"
+          "${css}:/www/assets/custom.css"
         ];
         environment = {
           PORT = 8080;
@@ -218,6 +221,7 @@ in
           "${light}:/www/assets/light.png"
           "${dark}:/www/assets/dark.png"
           "${logo}:/www/assets/logo.png"
+          "${css}:/www/assets/custom.css"
         ];
         environment = {
           PORT = 8080;
