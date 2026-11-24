@@ -638,30 +638,44 @@ in
             network = [ "admin" ];
             autoUpdate = "registry";
           };
-          ramalama = {
-            image = "quay.io/ramalama/ramalama:latest";
+          llama-cpp = {
+            image = "ghcr.io/ggml-org/llama.cpp:server-vulkan";
             devices = [ "/dev/dri:/dev/dri" ];
             volumes = [
               "${
                 builtins.fetchurl {
-                  url = "https://huggingface.co/unsloth/gemma-3-1b-it-GGUF/resolve/main/gemma-3-1b-it-IQ4_XS.gguf";
-                  sha256 = "0sky8c3gghq78l68sv3l3g2brxlgdr243zdyy4s8mwh8xnjwb04z";
+                  url = "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF/resolve/main/Mainline_Support/Inkling-2-Mini-UD-Q4_K_XL.gguf_file";
+                  sha256 = "1lrwiw422b2pdsbgsvvidak1vdxxgik265x6jwhrnbh7dxjpchp6";
                 }
-              }:/mnt/models/gemma-3-1b-it-IQ4_XS.gguf"
+              }:/mnt/models/Inkling-2-Mini-UD-Q8_K_XL.gguf"
+              "${
+                builtins.fetchurl {
+                  url = "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF/resolve/main/mmproj-F16.gguf";
+                  sha256 = "0prcz8f8j82s7fq49yl1lsp9hzbas8q2xm3vp9qh6vidxgzpbzrv";
+                }
+              }:/mnt/models/mmproj-F16.gguf"
             ];
-            exec = "llama-server --host 0.0.0.0 -m /mnt/models/gemma-3-1b-it-IQ4_XS.gguf --no-warmup --alias unsloth/gemma-3-1b-it-GGUF --jinja -c 4096";
-            network = [ "admin" ];
-            autoUpdate = "registry";
-          };
-          open-webui = {
-            image = "ghcr.io/open-webui/open-webui:main";
-            volumes = [ "/run/media/dawn/cubus/open-webui:/app/backend/data" ];
             environment = {
-              PORT = 8080;
-              DEFAULT_LOCALE = "fr";
-              GLOBAL_LOG_LEVEL = "WARNING";
-              OPENAI_API_BASE_URL = "http://ramalama:9931/v1";
+              LLAMA_ARG_MODEL = "/models/Inkling-2-Mini-UD-Q4_K_XL.gguf";
+              LLAMA_ARG_MMPROJ = "/models/mmproj-F16.gguf";
+              LLAMA_ARG_MMPROJ_OFFLOAD = false;
+              LLAMA_ARG_N_GPU_LAYERS = "all";
+              LLAMA_ARG_CPU_MOE = true;
+              LLAMA_ARG_FIT_TARGET = 1536;
+              LLAMA_ARG_JINJA = true;
+              LLAMA_ARG_TEMPERATURE = 1.0;
+              LLAMA_ARG_TOP_P = 1.0;
+              LLAMA_ARG_TOP_K = 0;
+              LLAMA_ARG_MIN_P = 0.0;
+              PORT = 9931;
             };
+            extraPodmanArgs = [
+              "--health-cmd 'curl -f http://localhost:8080/health'"
+              "--health-interval 30s"
+              "--health-timeout 5s"
+              "--health-retries 3"
+              "--health-start-period 5m"
+            ];
             network = [ "admin" ];
             autoUpdate = "registry";
           };
@@ -698,7 +712,7 @@ in
               CF_FILENAME_MATCHER = "1.3.0";
               # CURSEFORGE_FILES = "@/extras/mods.txt";
               RCON_CMDS_STARTUP = "gamerule keepInventory true";
-              MEMORY = "12G";
+              MEMORY = "10G";
               USE_AIKAR_FLAGS = true;
               OPS = "Horror,Mogasdoor";
               LOG_LEVEL = "warn";

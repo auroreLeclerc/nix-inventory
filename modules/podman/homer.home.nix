@@ -176,7 +176,7 @@ in
                 widgets.miniflux
                 widgets.logseq
                 widgets.reactive-resume
-                widgets.open-webui
+                widgets.llama-cpp
                 widgets.llmfit
                 widgets.changedetection
               ];
