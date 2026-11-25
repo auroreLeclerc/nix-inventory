@@ -79,8 +79,8 @@ in
                 "HEAD"
                 "OPTIONS"
               ];
-              accessControlAllowHeaders = "*";
-              accessControlAllowOriginList = "*";
+              accessControlAllowHeaders = [ "*" ];
+              accessControlAllowOriginList = [ "*" ];
               accessControlMaxAge = 100;
               addVaryHeader = true;
             };
@@ -146,11 +146,11 @@ in
                           timeout = if timeout != "" then timeout else "5s";
                         }
                       else
-                        null;
+                        null; # HACK: json schema does not allow null
                   };
                 }
               else
-                null
+                null # HACK: json schema does not allow null
             ) config.services.podman.containers)
             // {
               error-handler.loadBalancer.servers = [ { url = "http://error-pages:8080"; } ]; # static
