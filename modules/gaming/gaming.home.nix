@@ -18,12 +18,14 @@
         NoServerEmojis.enabled = true;
         NoTrack.enabled = true;
         WhoReacted.enabled = true;
-        BetterGifPicker.enabled = true;
         BetterSearch.enabled = true;
         petpet.enabled = true;
         UserMessagesPronouns.enabled = true;
         PlatformIndicators.enabled = true;
         LoadingQuotes.enabled = true;
+        AlwaysTrust.enabled = true;
+        FavoriteEmojiFirst.enabled = true;
+        userVoiceShow.enabled = true;
       };
       themeLinks = [ "https://allpurposemat.codeberg.page/Disblock-Origin/DisblockOrigin.theme.css" ];
     };
@@ -32,9 +34,7 @@
     enable = true;
     extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
     config.common = {
-      default = [
-        "kde"
-      ];
+      default = [ "kde" ];
       "org.freedesktop.impl.portal.ScreenCast" = [ "kde" ];
       "org.freedesktop.impl.portal.Screenshot" = [ "kde" ];
       "org.freedesktop.impl.portal.Secret" = [ "none" ];

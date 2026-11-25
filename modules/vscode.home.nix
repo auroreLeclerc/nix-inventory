@@ -44,26 +44,24 @@
         "redhat.telemetry.enabled" = false;
         # "sonarlint.pathToNodeExecutable" = "${pkgs.nodejs}/bin/node";
         # "sonarlint.disableTelemetry" = true;
-        "svelte.enable-ts-plugin" = true;
-        "svelte.editor.defaultFormatter" = "svelte.svelte-vscode";
         "python.languageServer" = "Jedi";
         "git.autofetch" = true;
         "git.enableSmartCommit" = true;
         "git.confirmSync" = false;
         "[css]" = {
-          "editor.defaultFormatter" = "stylelint.vscode-stylelint";
+          editor.defaultFormatter = "stylelint.vscode-stylelint";
         };
         "[json]" = {
-          "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          editor.defaultFormatter = "esbenp.prettier-vscode";
+        };
+        "[jsonc]" = {
+          editor.defaultFormatter = "esbenp.prettier-vscode";
         };
         "json.schemaDownload.trustedDomains" = {
           "https://developer.microsoft.com/json-schemas/" = true;
           "https://json-schema.org/" = true;
           "https://json.schemastore.org/" = true;
           "https://raw.githubusercontent.com" = true;
-          "https://raw.githubusercontent.com/devcontainers/spec/" = true;
-          "https://raw.githubusercontent.com/microsoft/vscode/" = true;
-          "https://schemastore.azurewebsites.net/" = true;
           "https://www.schemastore.org/" = true;
         };
         "java.debug.settings.vmArgs" = "-ea";

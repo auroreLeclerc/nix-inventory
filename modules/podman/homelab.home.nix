@@ -2,6 +2,7 @@
   osConfig,
   config,
   pkgs,
+  myLibs,
   ...
 }:
 let
@@ -112,7 +113,7 @@ let
     :NAC_MINECRAFT - [0:0]
     :NAC_NO_LAN - [0:0]
 
-    # -A NAC_NO_LAN -d 10.0.0.0/8 -j DROP
+    -A NAC_NO_LAN -d 10.0.0.0/8 -j DROP
     -A NAC_NO_LAN -d 172.16.0.0/12 -j DROP
     -A NAC_NO_LAN -d 192.168.0.0/16 -j DROP
     -A NAC_NO_LAN -d 100.64.0.0/10 -j DROP
@@ -175,7 +176,7 @@ in
               "/run/media/dawn/cache/jellyfin-friends:/config/cache"
             ];
             devices = [ "/dev/dri:/dev/dri" ];
-            extraPodmanArgs = [ "--health-cmd 'curl -i http://localhost:8096/health'" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -i http://127.0.0.1:8096/health'" ];
             network = [ "friends" ];
             autoUpdate = "registry";
           };
@@ -216,7 +217,7 @@ in
               "/run/media/dawn/eox/downloads:/downloads"
               "/run/media/dawn/eox/watchdir:/watch"
             ];
-            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:9091/transmission/web/ '" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://127.0.0.1:9091/transmission/web/ '" ];
             network = [ "admin" ];
             autoUpdate = "registry";
           };
@@ -235,7 +236,7 @@ in
               "/run/media/dawn/eox/downloads:/downloads"
               "/run/media/dawn/bellum/Multimédia/Séries:/tv"
             ];
-            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:8989/ping '" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://127.0.0.1:8989/ping '" ];
             network = [ "admin" ];
             autoUpdate = "registry";
           };
@@ -254,7 +255,7 @@ in
               "/run/media/dawn/eox/downloads:/downloads"
               "/run/media/dawn/bellum/Multimédia/Films:/movies"
             ];
-            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:7878/ping '" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://127.0.0.1:7878/ping '" ];
             network = [ "admin" ];
             autoUpdate = "registry";
           };
@@ -281,7 +282,7 @@ in
             // lsio;
             extraPodmanArgs = [
               "--dns ${config.services.podman.containers.pi-hole.ip4}"
-              "--health-cmd 'curl -f http://localhost:9696/ping '"
+              "--health-cmd 'curl -f http://127.0.0.1:9696/ping '"
             ];
             volumes = [ "/run/media/dawn/cubus/prowlarr:/config" ];
             network = [ "admin" ];
@@ -295,7 +296,7 @@ in
               HEALTHCHECK_PATH = "/health";
               LANG = "fr_FR";
             };
-            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:8191/health '" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://127.0.0.1:8191/health '" ];
             network = [ "admin" ];
             autoUpdate = "registry";
           };
@@ -327,9 +328,10 @@ in
               "/run/media/dawn/bellum/new_Music:/data/music:ro"
               "/run/media/dawn/cubus/jellyfin:/config"
               "/run/media/dawn/cache/jellyfin:/config/cache"
+              "${myLibs.const.AVATAR}:/users/horror/profile.gif"
             ];
             devices = [ "/dev/dri:/dev/dri" ];
-            extraPodmanArgs = [ "--health-cmd 'curl -i http://localhost:8096/health'" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -i http://127.0.0.1:8096/health'" ];
             network = [ "admin" ];
             autoUpdate = "registry";
           };
@@ -348,7 +350,7 @@ in
               "/run/media/dawn/bellum/new_Music:/music"
               "/run/media/dawn/eox/downloads:/downloads"
             ];
-            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:8686/ping '" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://127.0.0.1:8686/ping '" ];
             network = [ "admin" ];
             autoUpdate = "registry";
           };
@@ -379,7 +381,7 @@ in
               SIGNUPS_ALLOWED = "false";
             };
             volumes = [ "/run/media/dawn/cubus/vaultwarden:/data" ];
-            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:80/alive '" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://127.0.0.1:80/alive '" ];
             network = [ "admin" ];
             autoUpdate = "registry";
           };
@@ -422,7 +424,7 @@ in
             autoUpdate = "registry";
           };
           postgres = {
-            image = "localhost/homemanager/postgres";
+            image = "127.0.0.1/homemanager/postgres";
             userNS = "keep-id:uid=999,gid=999";
             volumes = [ "/run/media/dawn/cubus/postgres/:/var/lib/postgresql" ];
             environment = {
@@ -451,14 +453,14 @@ in
               PORT = 80;
               inherit (lsio) TZ;
               FTLCONF_webserver_api_password = "admin";
-              FTLCONF_dns_upstreams = "9.9.9.11;149.112.112.11";
+              FTLCONF_dns_upstreams = "94.140.14.14;94.140.15.15"; # 9.9.9.11;149.112.112.11 quad9
               FTLCONF_dns_rateLimit_count = 0;
               FTLCONF_dns_rateLimit_interval = 0;
               FTLCONF_webserver_api_allow_destructive = false;
               FTLCONF_misc_readOnly = true;
             };
             extraPodmanArgs = [
-              "--health-cmd 'dig +norecurse +retry=0 @127.0.0.1 pi.hole ' --hostname '${osConfig.networking.hostName}'"
+              "--health-cmd 'dig +norecurse +retry=0 @127.0.0.1 pi.hole' --hostname '${osConfig.networking.hostName}'"
             ];
             ip4 = "172.18.0.253";
             network = [ "admin" ];
@@ -493,7 +495,7 @@ in
               "/run/media/dawn/cubus/photoprism/import/:/photoprism/import"
               "/run/media/dawn/cubus/photoprism:/photoprism/storage"
             ];
-            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:2342/api/v1/status '" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://127.0.0.1:2342/api/v1/status '" ];
             network = [ "admin" ];
             autoUpdate = "registry";
           };
@@ -580,7 +582,7 @@ in
               PORT = 80;
               HEALTHCHECK_PATH = "/status.php";
             };
-            extraPodmanArgs = [ "--health-cmd 'curl -f http://localhost:80/status.php '" ];
+            extraPodmanArgs = [ "--health-cmd 'curl -f http://127.0.0.1:80/status.php '" ];
             volumes = [
               "/run/media/dawn/cubus/nextcloud/:/config"
               "/run/media/dawn/bellum/new_Music/:/data"
@@ -642,18 +644,18 @@ in
             image = "ghcr.io/ggml-org/llama.cpp:server-vulkan";
             devices = [ "/dev/dri:/dev/dri" ];
             volumes = [
-              "${
-                builtins.fetchurl {
-                  url = "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF/resolve/main/Mainline_Support/Inkling-2-Mini-UD-Q4_K_XL.gguf_file";
-                  sha256 = "1lrwiw422b2pdsbgsvvidak1vdxxgik265x6jwhrnbh7dxjpchp6";
-                }
-              }:/mnt/models/Inkling-2-Mini-UD-Q8_K_XL.gguf"
-              "${
-                builtins.fetchurl {
-                  url = "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF/resolve/main/mmproj-F16.gguf";
-                  sha256 = "0prcz8f8j82s7fq49yl1lsp9hzbas8q2xm3vp9qh6vidxgzpbzrv";
-                }
-              }:/mnt/models/mmproj-F16.gguf"
+              # "${
+              #   builtins.fetchurl {
+              #     url = "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF/resolve/main/Mainline_Support/Inkling-2-Mini-UD-Q4_K_XL.gguf_file";
+              #     sha256 = "1lrwiw422b2pdsbgsvvidak1vdxxgik265x6jwhrnbh7dxjpchp6";
+              #   }
+              # }:/mnt/models/Inkling-2-Mini-UD-Q8_K_XL.gguf"
+              # "${
+              #   builtins.fetchurl {
+              #     url = "https://huggingface.co/unsloth/Inkling-2-Mini-GGUF/resolve/main/mmproj-F16.gguf";
+              #     sha256 = "0prcz8f8j82s7fq49yl1lsp9hzbas8q2xm3vp9qh6vidxgzpbzrv";
+              #   }
+              # }:/mnt/models/mmproj-F16.gguf"
             ];
             environment = {
               LLAMA_ARG_MODEL = "/models/Inkling-2-Mini-UD-Q4_K_XL.gguf";
@@ -663,14 +665,14 @@ in
               LLAMA_ARG_CPU_MOE = true;
               LLAMA_ARG_FIT_TARGET = 1536;
               LLAMA_ARG_JINJA = true;
-              LLAMA_ARG_TEMPERATURE = 1.0;
-              LLAMA_ARG_TOP_P = 1.0;
+              LLAMA_ARG_TEMPERATURE = "1.0";
+              LLAMA_ARG_TOP_P = "1.0";
               LLAMA_ARG_TOP_K = 0;
-              LLAMA_ARG_MIN_P = 0.0;
+              LLAMA_ARG_MIN_P = "0.0";
               PORT = 9931;
             };
             extraPodmanArgs = [
-              "--health-cmd 'curl -f http://localhost:8080/health'"
+              "--health-cmd 'curl -f http://127.0.0.1:8080/health'"
               "--health-interval 30s"
               "--health-timeout 5s"
               "--health-retries 3"
@@ -684,7 +686,7 @@ in
             exec = "serve --host 0.0.0.0 --port 8787";
             environment.PORT = 8787;
             extraPodmanArgs = [
-              "--health-cmd 'curl -f http://localhost:8787/health'"
+              "--health-cmd 'curl -f http://127.0.0.1:8787/health'"
               "--health-interval 15s"
               "--health-timeout 5s"
               "--health-retries 3"

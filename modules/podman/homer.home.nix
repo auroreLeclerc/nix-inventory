@@ -11,8 +11,7 @@ in
   config.services.podman.containers =
     let
       homerConfig = network: {
-        "$schema" =
-          "https://raw.githubusercontent.com/homer-dashboard/homer/main/.schema/config-schema.json";
+        "$schema" = "https://raw.githubusercontent.com/bastienwirtz/homer/main/.schema/config-schema.json";
         title =
           {
             admin = "Laboratoire Maison";

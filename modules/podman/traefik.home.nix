@@ -12,6 +12,7 @@ in
     let
       debug = false;
       traefikConfig = network: {
+        "$schema" = "https://www.schemastore.org/traefik-v3.json";
         log.level = "INFO";
         api = {
           dashboard = true;
@@ -59,6 +60,7 @@ in
         providers.file.filename = "/etc/traefik/dynamic.yml";
       };
       dynamicConfig = network: {
+        "$schema" = "https://www.schemastore.org/traefik-v3-file-provider.json";
         http = {
           middlewares = {
             # https://github.com/traefik/traefik/issues/12536
@@ -114,11 +116,28 @@ in
                       { url = "http://${name}:${toString container.environment.PORT}"; }
                     ];
                     healthCheck =
-                      if (builtins.hasAttr "HEALTHCHECK_PATH" container.environment) then
+                      let
+                        cmd =
+                          let
+                            regex = str: builtins.match "--health-cmd.*127\.0\.0\.1:[0-9]+(/[[:alnum:]/]*).*" str;
+                          in
+                          regex (toString (builtins.filter (item: (regex item != null)) container.extraPodmanArgs));
+                        interval =
+                          let
+                            regex = str: builtins.match "--health-interval[[:space:]]([0-9]+s)" str;
+                          in
+                          regex (toString (builtins.filter (item: (regex item != null)) container.extraPodmanArgs));
+                        timeout =
+                          let
+                            regex = str: builtins.match "--health-timeout[[:space:]]([0-9]+s)" str;
+                          in
+                          regex (toString (builtins.filter (item: (regex item != null)) container.extraPodmanArgs));
+                      in
+                      if cmd != null then
                         {
-                          path = container.environment.HEALTHCHECK_PATH;
-                          interval = container.environment.HEALTHCHECK_INTERVAL or "30s";
-                          timeout = container.environment.HEALTHCHECK_TIMEOUT or "5s";
+                          path = cmd;
+                          interval = if interval != null then interval else "30s";
+                          timeout = if timeout != null then timeout else "5s";
                         }
                       else
                         null;
