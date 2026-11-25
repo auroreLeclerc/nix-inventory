@@ -121,23 +121,29 @@ in
                           let
                             regex = str: builtins.match "--health-cmd.*127\.0\.0\.1:[0-9]+(/[[:alnum:]/]*).*" str;
                           in
-                          regex (toString (builtins.filter (item: (regex item != null)) container.extraPodmanArgs));
+                          toString (
+                            regex (toString (builtins.filter (item: (regex item != null)) container.extraPodmanArgs))
+                          );
                         interval =
                           let
                             regex = str: builtins.match "--health-interval[[:space:]]([0-9]+s)" str;
                           in
-                          regex (toString (builtins.filter (item: (regex item != null)) container.extraPodmanArgs));
+                          toString (
+                            regex (toString (builtins.filter (item: (regex item != null)) container.extraPodmanArgs))
+                          );
                         timeout =
                           let
                             regex = str: builtins.match "--health-timeout[[:space:]]([0-9]+s)" str;
                           in
-                          regex (toString (builtins.filter (item: (regex item != null)) container.extraPodmanArgs));
+                          toString (
+                            regex (toString (builtins.filter (item: (regex item != null)) container.extraPodmanArgs))
+                          );
                       in
-                      if cmd != null then
+                      if cmd != "" then
                         {
                           path = cmd;
-                          interval = if interval != null then interval else "30s";
-                          timeout = if timeout != null then timeout else "5s";
+                          interval = if interval != "" then interval else "30s";
+                          timeout = if timeout != "" then timeout else "5s";
                         }
                       else
                         null;
