@@ -424,7 +424,7 @@ in
             autoUpdate = "registry";
           };
           postgres = {
-            image = "127.0.0.1/homemanager/postgres";
+            image = "localhost/homemanager/postgres";
             userNS = "keep-id:uid=999,gid=999";
             volumes = [ "/run/media/dawn/cubus/postgres/:/var/lib/postgresql" ];
             environment = {
