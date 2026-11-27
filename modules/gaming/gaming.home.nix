@@ -1,4 +1,10 @@
-{ pkgs, ... }: {
+{
+  pkgs,
+  isLinux,
+  lib,
+  ...
+}:
+{
   programs.vesktop = {
     enable = true;
     settings = {
@@ -30,7 +36,7 @@
       themeLinks = [ "https://allpurposemat.codeberg.page/Disblock-Origin/DisblockOrigin.theme.css" ];
     };
   };
-  xdg.portal = {
+  xdg.portal = lib.mkIf isLinux {
     enable = true;
     extraPortals = [ pkgs.kdePackages.xdg-desktop-portal-kde ];
     config.common = {

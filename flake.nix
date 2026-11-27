@@ -114,7 +114,7 @@
                   inputs.catppuccin.homeModules.catppuccin
                   ./modules/core/core.home.nix
                 ]
-                ++ lib.optionals (!isDarwin) [
+                ++ lib.optionals isLinux [
                   inputs.plasma-manager.homeModules.plasma-manager
                   inputs.nix-flatpak.homeManagerModules.nix-flatpak
                 ];
@@ -131,23 +131,26 @@
             }
           ]
           ++ (
-            if isDarwin then
-              [
-                inputs.home-manager.darwinModules.home-manager
-              ]
-            else
-              [
-                inputs.nix-index-database.nixosModules.nix-index
-                inputs.home-manager.nixosModules.home-manager
-                inputs.catppuccin.nixosModules.catppuccin
-                ./modules/core/options.nix
-              ]
-              ++ lib.optionals isLinux [
-                inputs.sops-nix.nixosModules.sops
-                ./units/${unit}/hardware-configuration.nix
-              ]
+            [
+              ./modules/core/options.nix
+            ]
+            ++ lib.optionals isDarwin [
+              inputs.home-manager.darwinModules.home-manager
+              inputs.nix-index-database.darwinModules.nix-index
+            ]
+            ++ lib.optionals isLinux [
+              inputs.home-manager.nixosModules.home-manager
+              inputs.nix-index-database.nixosModules.nix-index
+              inputs.sops-nix.nixosModules.sops
+              inputs.catppuccin.nixosModules.catppuccin
+              ./units/${unit}/hardware-configuration.nix
+            ]
           );
         };
+      forAllSystems = lib.genAttrs [
+        "x86_64-linux"
+        "aarch64-darwin"
+      ];
     in
     {
       nixosConfigurations =
@@ -175,7 +178,6 @@
             isDarwin = meta ? isDarwin;
           }
         ) metaDarwin;
-
       devShells.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.mkShell {
         buildInputs = with nixpkgs.legacyPackages.x86_64-linux; [
           nano
@@ -198,10 +200,11 @@
           deadnix
         ];
       };
-
-      apps.x86_64-linux =
+      # formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.nixfmt);
+      apps = forAllSystems (
+        system:
         let
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          pkgs = nixpkgs.legacyPackages.${system};
           ryubingCanary = pkgs.callPackage ./modules/gaming/ryubing-canary.nix {
             ryubingCanarySrc = inputs.ryubing-canary-src;
           };
@@ -223,6 +226,7 @@
           fetch-ryubing-canary-deps =
             mkApp "fetch-ryubing-canary-deps" "Regenerate ryubing-canary-deps.json" [ ]
               "exec ${ryubingCanary.passthru.fetch-deps} \"$PWD/modules/gaming/ryubing-canary-deps.json\"";
-        };
+        }
+      );
     };
 }

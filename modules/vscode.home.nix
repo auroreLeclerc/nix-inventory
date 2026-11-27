@@ -72,6 +72,7 @@
           gopls = "${pkgs.gopls}/bin/gopls";
         };
         "network.meteredConnection" = "off";
+        "update.mode" = "none";
       };
     };
   };
@@ -93,7 +94,6 @@
       sops
       jdk
       shellcheck
-      libcap
       go
       gcc
       gopls

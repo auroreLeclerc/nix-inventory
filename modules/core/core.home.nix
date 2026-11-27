@@ -4,6 +4,7 @@
   osConfig,
   config,
   isDarwin,
+  isLinux,
   ...
 }:
 {
@@ -48,7 +49,7 @@
             "nvm"
             "emoji"
           ]
-          ++ lib.optionals (!isDarwin) [
+          ++ lib.optionals isLinux [
             "repo"
             "podman"
           ]

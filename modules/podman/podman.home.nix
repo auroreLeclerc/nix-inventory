@@ -12,26 +12,29 @@
       containersNames = builtins.attrNames config.services.podman.containers;
     in
     {
-      home.packages =
-        let
-          quadlets = map (name: "podman-" + name + ".service") containersNames;
-          quadlets-start = pkgs.writeShellScriptBin "quadlets-start" "systemctl --user start ${toString quadlets}";
-          quadlets-stop = pkgs.writeShellScriptBin "quadlets-stop" "systemctl --user stop ${toString quadlets}";
-        in
-        [
-          quadlets-start
-          quadlets-stop
-        ]
-        ++ lib.optionals osConfig.services.desktopManager.plasma6.enable (
-          with pkgs;
+      home = {
+        packages =
+          let
+            quadlets = map (name: "podman-" + name + ".service") containersNames;
+            quadlets-start = pkgs.writeShellScriptBin "quadlets-start" "systemctl --user start ${toString quadlets}";
+            quadlets-stop = pkgs.writeShellScriptBin "quadlets-stop" "systemctl --user stop ${toString quadlets}";
+          in
           [
-            inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.podman-desktop # podman 1.28.2 is unsecure
-            podman-compose
+            quadlets-start
+            quadlets-stop
           ]
-        );
-      home.file.".config/podman/nix-declared-containers".text = toString (
-        builtins.length containersNames
-      );
+          ++ lib.optionals osConfig.services.desktopManager.plasma6.enable (
+            with pkgs;
+            [
+              inputs.unstable.legacyPackages.${pkgs.stdenv.hostPlatform.system}.podman-desktop # podman 1.28.2 is unsecure
+              podman-compose
+            ]
+          );
+        file.containers = {
+          text = toString (builtins.length containersNames);
+          target = ".config/podman/nix-declared-containers";
+        };
+      };
       services.podman = {
         enable = true;
         autoUpdate = {

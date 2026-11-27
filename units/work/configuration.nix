@@ -3,7 +3,10 @@
   imports = [
     {
       home-manager.users.dawn = {
-        imports = [ ];
+        imports = [
+          ../../modules/gaming/gaming.home.nix
+          ../../modules/vscode.home.nix
+        ];
         home.stateVersion = "26.05";
       };
     }
@@ -14,6 +17,6 @@
       name = "auurore";
       home = "/Users/auurore";
     };
-    system.stateVersion = 5;
+    system.stateVersion = 7;
   };
 }

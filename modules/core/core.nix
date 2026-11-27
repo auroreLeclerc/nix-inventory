@@ -3,7 +3,6 @@
   inputs,
   lib,
   config,
-  isDarwin,
   isLinux,
   ...
 }:
@@ -23,6 +22,7 @@ in
   config = {
     time.timeZone = "Europe/Paris";
     nix = {
+      package = pkgs.lixPackageSets.stable.lix;
       settings = {
         auto-optimise-store = true;
         experimental-features = [
@@ -69,13 +69,13 @@ in
         ffmpeg
         libwebp
       ])
-      ++ lib.optionals (!isDarwin) (
+      ++ [ motd ]
+      ++ lib.optionals isLinux (
         with pkgs;
         [
           pciutils
           parted
         ]
-        ++ [ motd ]
       )
       ++ lib.optionals (
         !builtins.elem config.networking.hostName [
@@ -86,7 +86,7 @@ in
       ) [ bellum-sync ];
     programs.zsh.enable = true;
   }
-  // lib.optionalAttrs (!isDarwin) {
+  // lib.optionalAttrs isLinux {
     networking.networkmanager.enable = true;
     i18n = {
       defaultLocale = "fr_FR.UTF-8";
