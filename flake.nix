@@ -114,7 +114,7 @@
                   inputs.catppuccin.homeModules.catppuccin
                   ./modules/core/core.home.nix
                 ]
-                ++ lib.optionals isLinux [
+                ++ lib.optionals (isLinux || isLive) [
                   inputs.plasma-manager.homeModules.plasma-manager
                   inputs.nix-flatpak.homeManagerModules.nix-flatpak
                 ];
@@ -139,11 +139,13 @@
               inputs.nix-index-database.darwinModules.nix-index
             ]
             ++ lib.optionals isLinux [
+              inputs.sops-nix.nixosModules.sops
+              ./units/${unit}/hardware-configuration.nix
+            ]
+            ++ lib.optionals (isLinux || isLive) [
               inputs.home-manager.nixosModules.home-manager
               inputs.nix-index-database.nixosModules.nix-index
-              inputs.sops-nix.nixosModules.sops
               inputs.catppuccin.nixosModules.catppuccin
-              ./units/${unit}/hardware-configuration.nix
             ]
           );
         };

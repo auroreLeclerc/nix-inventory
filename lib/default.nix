@@ -18,14 +18,6 @@ in
       builtins.trace "💁🏻‍♀️ Secrets aren't decrypted on first run." ""
     else
       (builtins.readFile location);
-  consoleWarn =
-    control: log:
-    assert builtins.isBool control;
-    assert builtins.isString log;
-    if !control then # ugly
-      builtins.trace "🙎🏻‍♀️ ${log}" control
-    else
-      control;
   filterSetOfSetByNameBool =
     discriminant:
     assert builtins.isString discriminant;
@@ -36,4 +28,12 @@ in
       assert builtins.isAttrs set;
       set ? ${discriminant}
     ) setOfSet;
+  # removeNullAttrs = set:
+  #   assert builtins.isAttrs set;
+  #   let
+  #     keys = builtins.attrNames set;
+  #     values = builtins.attrValues set;
+  #   in
+  #   removeAttrs set ()
+  # ;
 }

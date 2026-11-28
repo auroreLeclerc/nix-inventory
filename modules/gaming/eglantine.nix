@@ -59,6 +59,7 @@ eden.overrideAttrs (
       (lib.cmakeFeature "xxhash_CUSTOM_DIR" "${xxhashSrc}")
     ];
 
+    patches = [ ];
     postInstall = "";
     postConfigure = "";
     doCheck = false;

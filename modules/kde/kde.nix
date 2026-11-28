@@ -1,7 +1,6 @@
 {
   pkgs,
   lib,
-  myLibs,
   config,
   ...
 }:
@@ -61,7 +60,7 @@ in
       inherit (secrets) ip;
       isIp = ip != "";
       ssh = /home/dawn/.ssh/bellum;
-      isSsh = isIp && (myLibs.consoleWarn (builtins.pathExists ssh) "SSH credentials are missing");
+      isSsh = isIp && (builtins.trace "SSH credentials are missing" (builtins.pathExists ssh));
     in
     lib.mkIf isSsh {
       device = "dawn@${ip}:/run/media/dawn/";
