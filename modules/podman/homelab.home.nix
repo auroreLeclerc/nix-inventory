@@ -453,7 +453,7 @@ in
               PORT = 80;
               inherit (lsio) TZ;
               FTLCONF_webserver_api_password = "admin";
-              FTLCONF_dns_upstreams = "94.140.14.14;94.140.15.15"; # 9.9.9.11;149.112.112.11 quad9
+              FTLCONF_dns_upstreams = "1.1.1.1;1.0.0.1"; # 9.9.9.11;149.112.112.11 quad9
               FTLCONF_dns_rateLimit_count = 0;
               FTLCONF_dns_rateLimit_interval = 0;
               FTLCONF_webserver_api_allow_destructive = false;

@@ -32,6 +32,7 @@
         AlwaysTrust.enabled = true;
         FavoriteEmojiFirst.enabled = true;
         userVoiceShow.enabled = true;
+        SecretRingToneEnabler.enabled = true;
       };
       themeLinks = [ "https://allpurposemat.codeberg.page/Disblock-Origin/DisblockOrigin.theme.css" ];
     };
