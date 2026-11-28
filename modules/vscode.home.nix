@@ -34,9 +34,10 @@
         "nix.serverSettings" = {
           nixd = {
             formatting.command = [ "nixfmt" ];
-            nixpkgs.expr = "(builtins.getFlake (builtins.toString ./.)).inputs.nixpkgs.legacyPackages.x86_64-linux";
+            nixpkgs.expr = "(builtins.getFlake (builtins.toString ./.)).inputs.nixpkgs.legacyPackages.${pkgs.stdenv.hostPlatform.system}";
             options = {
               nixos.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.exelo.options";
+              nix-darwin.expr = "(builtins.getFlake (builtins.toString ./.)).darwinConfigurations.work.options";
               home-manager.expr = "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.exelo.options.home-manager.users.type.getSubOptions []";
             };
           };
